@@ -95,4 +95,3 @@ class Scale:
     ''' Transpose note with scale by intervals, 1 = second, 2 = third...
     '''
     return self.get(self.index(note) + interval)
-

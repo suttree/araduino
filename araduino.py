@@ -10,9 +10,12 @@ from timeline import Hit, Timeline
 
 # Define key and scale
 key = Note(random.choice(Note.NOTES))
-scale = Scale(key, random.choice(['major', 'minor']))
+
+scales = ['major', 'minor', 'melodicminor', 'harmonicminor', 'pentatonicmajor', 'bluesmajor', 'pentatonicminor', 'bluesminor', 'augmented', 'diminished', 'chromatic', 'wholehalf', 'halfwhole', 'wholetone', 'augmentedfifth', 'japanese', 'oriental', 'ionian', 'dorian', 'phrygian', 'lydian', 'mixolydian', 'aeolian', 'locrian']
+scale = Scale(key, random.choice(scales))
 
 print key
+print scale
 
 # Grab progression chords from scale starting at the octave of our key
 progression = Chord.progression(scale, base_octave=key.octave)
@@ -36,13 +39,15 @@ chord = progression[0]
 
 notes = [0, 1, 2]
 
-for i, interval in enumerate([0.2, 0.4, 0.6, 0.8, 0.10]):
+#for i, interval in enumerate([0.2, 0.4, 0.6, 0.8, 0.10]):
+for _ in range(5):
+  random_duration = random.choice([0.2, 0.4, 0,6, 0.6])
   random_note = random.choice(notes)
   random_transpose = random.choice([0, 12, 24])
 
   note = chord.notes[random_note].transpose(random_transpose)
 
-  timeline.add(time + interval, Hit(note, random.choice([1,2,3,4])))
+  timeline.add(time + random_duration, Hit(note, random.choice([1,2,3,4])))
 
 print "Rendering audio..."
 
