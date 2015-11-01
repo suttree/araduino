@@ -26,7 +26,8 @@ class Hit:
     # XXX: Currently only uses a string pluck
     key = (str(self.note), self.length)
     if key not in Hit.cache:
-      Hit.cache[key] = source.pluck(self.note, self.length)
+      #Hit.cache[key] = source.pluck(self.note, self.length)
+      Hit.cache[key] = source.square(self.note, self.length)
     return Hit.cache[key]
 
 

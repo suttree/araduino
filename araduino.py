@@ -1,7 +1,7 @@
 import random
 
-import sys
-sys.path.append('./python-musical')
+import os, sys
+sys.path.append(os.path.join(os.path.dirname(__file__), 'python-musical'))
 
 from musical.theory import Note, Scale, Chord
 from musical.audio import playback
@@ -41,13 +41,13 @@ notes = [0, 1, 2]
 
 #for i, interval in enumerate([0.2, 0.4, 0.6, 0.8, 0.10]):
 for _ in range(5):
-  random_duration = random.choice([0.2, 0.4, 0,6, 0.6])
+  random_duration = random.choice([0.2, 0.4, 0.6])
   random_note = random.choice(notes)
   random_transpose = random.choice([0, 12, 24])
 
   note = chord.notes[random_note].transpose(random_transpose)
 
-  timeline.add(time + random_duration, Hit(note, random.choice([1,2,3,4])))
+  timeline.add(time + random_duration, Hit(note, 2))
 
 print "Rendering audio..."
 
