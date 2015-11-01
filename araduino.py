@@ -1,6 +1,10 @@
 import random
-
 import os, sys
+
+dice_roll = random.choice([1,2,3,4,5,6])
+if dice_roll < 6:
+  sys.exit()
+
 sys.path.append(os.path.join(os.path.dirname(__file__), 'python-musical'))
 
 from musical.theory import Note, Scale, Chord
@@ -39,25 +43,19 @@ chord = progression[0]
 
 notes = [0, 1, 2]
 
-#for i, interval in enumerate([0.2, 0.4, 0.6, 0.8, 0.10]):
-for _ in range(5):
-  random_duration = random.choice([0.2, 0.4, 0.6])
+for i, interval in enumerate([0.8, 0.4, 0.4, 0.2, 0.2]):
   random_note = random.choice(notes)
   random_transpose = random.choice([0, 12, 24])
 
   note = chord.notes[random_note].transpose(random_transpose)
 
-  time = time + random_duration
-  timeline.add(time, Hit(note, 2))
-
+  time = time + interval
+  timeline.add(time, Hit(note, interval))
 
 # Strum out root chord to finish
-timeline.add(time + 0.0, Hit(chord.notes[0], 4.0))
-timeline.add(time + 0.1, Hit(chord.notes[1], 4.0))
-timeline.add(time + 0.2, Hit(chord.notes[2], 4.0))
-#timeline.add(time + 0.3, Hit(chord.notes[1].transpose(12), 4.0))
-#timeline.add(time + 0.4, Hit(chord.notes[2].transpose(12), 4.0))
-#timeline.add(time + 0.5, Hit(chord.notes[0].transpose(12), 4.0))
+timeline.add(time + 0.0, Hit(chord.notes[0], 2.0))
+timeline.add(time + 0.1, Hit(chord.notes[1], 2.0))
+timeline.add(time + 0.2, Hit(chord.notes[2].transpose(12), 2.0))
 
 print "Rendering audio..."
 
