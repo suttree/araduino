@@ -2,8 +2,8 @@ import random
 import os, sys
 
 dice_roll = random.choice([1,2,3,4,5,6])
-#if dice_roll < 6:
-#  sys.exit()
+if dice_roll < 6:
+  sys.exit()
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'python-musical'))
 
