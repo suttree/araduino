@@ -4,12 +4,13 @@ import os, sys
 sys.path.append(os.path.join(os.path.dirname(__file__), 'python-musical'))
 
 from musical.theory import Note, Scale, Chord
-from musical.audio import playback
+from musical.audio import effect, playback
 
 from timeline import Hit, Timeline
 
 # Define key and scale
-key = Note(random.choice(Note.NOTES))
+#key = Note(random.choice(Note.NOTES))
+key = Note((random.choice(Note.NOTES), random.choice([0,1,2,3,4])))
 
 scales = ['major', 'minor', 'melodicminor', 'harmonicminor', 'pentatonicmajor', 'bluesmajor', 'pentatonicminor', 'bluesminor', 'augmented', 'diminished', 'chromatic', 'wholehalf', 'halfwhole', 'wholetone', 'augmentedfifth', 'japanese', 'oriental', 'ionian', 'dorian', 'phrygian', 'lydian', 'mixolydian', 'aeolian', 'locrian']
 scale = Scale(key, random.choice(scales))
@@ -34,7 +35,6 @@ timeline = Timeline()
 #    timeline.add(time + ts, Hit(interval, 1.0))
 #  time += 2.0
 
-# Strum out root chord to finish
 chord = progression[0]
 
 notes = [0, 1, 2]
@@ -47,11 +47,25 @@ for _ in range(5):
 
   note = chord.notes[random_note].transpose(random_transpose)
 
-  timeline.add(time + random_duration, Hit(note, 2))
+  time = time + random_duration
+  timeline.add(time, Hit(note, 2))
+
+
+# Strum out root chord to finish
+timeline.add(time + 0.0, Hit(chord.notes[0], 4.0))
+timeline.add(time + 0.1, Hit(chord.notes[1], 4.0))
+timeline.add(time + 0.2, Hit(chord.notes[2], 4.0))
+#timeline.add(time + 0.3, Hit(chord.notes[1].transpose(12), 4.0))
+#timeline.add(time + 0.4, Hit(chord.notes[2].transpose(12), 4.0))
+#timeline.add(time + 0.5, Hit(chord.notes[0].transpose(12), 4.0))
 
 print "Rendering audio..."
 
 data = timeline.render()
+
+#data = effect.chorus(data, freq=3.14159)
+#data = effect.tremolo(data, freq=3.14159)
+#data = effect.flanger(data, freq=3.14159)
 
 # Reduce volume to 25%
 data = data * 0.25
