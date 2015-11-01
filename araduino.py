@@ -2,8 +2,8 @@ import random
 import os, sys
 
 dice_roll = random.choice([1,2,3,4,5,6])
-if dice_roll < 6:
-  sys.exit()
+#if dice_roll < 6:
+#  sys.exit()
 
 sys.path.append(os.path.join(os.path.dirname(__file__), 'python-musical'))
 
@@ -45,7 +45,7 @@ notes = [0, 1, 2]
 
 for i, interval in enumerate([0.8, 0.4, 0.4, 0.2, 0.2]):
   random_note = random.choice(notes)
-  random_transpose = random.choice([0, 12, 24])
+  random_transpose = random.choice([0, 12, 16])
 
   note = chord.notes[random_note].transpose(random_transpose)
 
@@ -53,9 +53,9 @@ for i, interval in enumerate([0.8, 0.4, 0.4, 0.2, 0.2]):
   timeline.add(time, Hit(note, interval))
 
 # Strum out root chord to finish
-timeline.add(time + 0.0, Hit(chord.notes[0], 2.0))
-timeline.add(time + 0.1, Hit(chord.notes[1], 2.0))
-timeline.add(time + 0.2, Hit(chord.notes[2].transpose(12), 2.0))
+timeline.add(time + 0.0, Hit(chord.notes[2].transpose(12), 0.2))
+timeline.add(time + 0.1, Hit(chord.notes[0], 0.4))
+timeline.add(time + 0.2, Hit(chord.notes[1], 0.4))
 
 print "Rendering audio..."
 

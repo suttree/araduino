@@ -28,7 +28,8 @@ class Hit:
     if key not in Hit.cache:
       #Hit.cache[key] = source.pluck(self.note, self.length)
       #Hit.cache[key] = source.square(self.note, self.length)
-      Hit.cache[key] = source.sine(self.note, self.length)
+      #Hit.cache[key] = source.sine(self.note, self.length)
+      Hit.cache[key] = source.whistle(self.note, self.length)
     return Hit.cache[key]
 
 

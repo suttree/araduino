@@ -68,3 +68,11 @@ def pluck(freq, length, decay=0.998, rate=44100):
   data = numpy.random.random(phase) * 2 - 1
   return ringbuffer(data, length, decay, rate)
 
+def whistle(freq, length, rate=44100, phase = 1.0):
+   ''' Attempting to create a whistle noise for araduino
+   '''
+   #data = numpy.random.random(phase) * 2 - 1
+   data = generate_wave_input(freq, length, rate, phase)
+   return waveforms.chirp(data, length / 10, rate, 0.1)
+   #data = ringbuffer(data, length, 0.998, rate)
+   #return numpy.sin(data)
