@@ -35,7 +35,7 @@ def main(argv):
   #key = Note(random.choice(Note.NOTES))
   key = Note((random.choice(Note.NOTES), random.choice([0,1,2,3])))
 
-  scales = ['major', 'minor', 'melodicminor', 'harmonicminor', 'pentatonicmajor', 'bluesmajor', 'pentatonicminor', 'bluesminor', 'augmented', 'diminished', 'wholehalf', 'halfwhole', 'wholetone', 'augmentedfifth', 'japanese', 'oriental', 'ionian', 'dorian', 'phrygian', 'lydian', 'mixolydian', 'aeolian', 'locrian']
+  scales = ['major', 'minor', 'melodicminor', 'harmonicminor', 'pentatonicmajor', 'bluesmajor', 'pentatonicminor', 'bluesminor', 'augmented', 'diminished', 'wholehalf', 'halfwhole', 'augmentedfifth', 'japanese', 'oriental', 'ionian', 'dorian', 'phrygian', 'lydian', 'mixolydian', 'aeolian', 'locrian']
   scale = Scale(key, random.choice(scales))
 
   print key
@@ -58,30 +58,35 @@ def main(argv):
   #    timeline.add(time + ts, Hit(interval, 1.0))
   #  time += 2.0
 
-  chord = progression[0]
+  # Pick a notes from a chord randomly chosen from a list of notes in this progression
+  chord = progression[ random.choice(range(len(progression)-1)) ]
+  notes = chord.notes
 
-  notes = [0, 1, 2]
-  
   melodies = [
     [0.8, 0.4, 0.4, 0.2, 0.2],
-    [0.2, 0.2, 0.4, 0.4, 0.8],
+    [0.2, 0.2, 0.4, 0.4, 0.8, 0.8],
+    [1.0, 0.4, 0.4, 0.4, 0.8, 0.8],
     [0.2, 0.4, 0.2, 0.4, 0.2],
+    [0.4, 0.4, 0.4, 0.8, 0.8, 1.0, 1.0],
     [0.2, 0.2, 0.4, 0.4, 0.8],
+    [0.4, 0.0, 0.4, 0.0, 0.8, 1.0, 0.2],
   ]
 
-  for i, interval in enumerate(random.choice(melodies)):
-    random_note = random.choice(notes)
-    random_transpose = random.choice([0, 12, 24])
+  random_melody = random.choice(melodies)
+  print random_melody
 
-    note = chord.notes[random_note].transpose(random_transpose)
+  for i, interval in enumerate(random_melody):
+    random_note = random.choice(notes)
+    random_transpose = random.choice([0, 12, 14])
+
+    note = random_note.transpose(random_transpose)
 
     time = time + interval
     timeline.add(time, Hit(note, interval))
 
   # Strum out root chord to finish
-  timeline.add(time + 0.0, Hit(chord.notes[0], 2.0))
-  timeline.add(time + 0.1, Hit(chord.notes[1], 2.0))
-  timeline.add(time + 0.2, Hit(chord.notes[2].transpose(12), 2.0))
+  timeline.add(time, Hit(chord.notes[1], 1.0))
+  timeline.add(time, Hit(chord.notes[2].transpose(12), 1.0))
 
   print "Rendering audio..."
 
