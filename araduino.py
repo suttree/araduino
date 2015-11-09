@@ -61,8 +61,15 @@ def main(argv):
   chord = progression[0]
 
   notes = [0, 1, 2]
+  
+  melodies = [
+    [0.8, 0.4, 0.4, 0.2, 0.2],
+    [0.2, 0.2, 0.4, 0.4, 0.8],
+    [0.2, 0.4, 0.2, 0.4, 0.2],
+    [0.2, 0.2, 0.4, 0.4, 0.8],
+  ]
 
-  for i, interval in enumerate([0.8, 0.4, 0.4, 0.2, 0.2]):
+  for i, interval in enumerate(random.choice(melodies)):
     random_note = random.choice(notes)
     random_transpose = random.choice([0, 12, 24])
 
