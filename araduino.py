@@ -33,7 +33,7 @@ def main(argv):
 
   # Define key and scale
   #key = Note(random.choice(Note.NOTES))
-  key = Note((random.choice(Note.NOTES), random.choice([0,1,2,3,4])))
+  key = Note((random.choice(Note.NOTES), random.choice([0,1,2,3])))
 
   scales = ['major', 'minor', 'melodicminor', 'harmonicminor', 'pentatonicmajor', 'bluesmajor', 'pentatonicminor', 'bluesminor', 'augmented', 'diminished', 'wholehalf', 'halfwhole', 'wholetone', 'augmentedfifth', 'japanese', 'oriental', 'ionian', 'dorian', 'phrygian', 'lydian', 'mixolydian', 'aeolian', 'locrian']
   scale = Scale(key, random.choice(scales))
