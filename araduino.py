@@ -65,9 +65,6 @@ def main(argv):
     [0.1, 0.0, 0.1, 0.0, 0.1, 0.0, 0.2, 0.0, 0.2, 0.0, 0.1, 0.0, 0.1, 0.0, 0.1, 0.0, 0.2, 0.0, 0.2, 0.0],
   ]
 
-  melodies = [
-  ]
-
   random_melody = random.choice(melodies)
   print random_melody
 
