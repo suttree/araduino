@@ -32,8 +32,7 @@ def main(argv):
   from timeline import Hit, Timeline
 
   # Define key and scale
-  #key = Note(random.choice(Note.NOTES))
-  key = Note((random.choice(Note.NOTES), random.choice([0,1,2,3])))
+  key = Note((random.choice(Note.NOTES), random.choice([0,1,2])))
 
   scales = ['major', 'minor', 'melodicminor', 'harmonicminor', 'pentatonicmajor', 'bluesmajor', 'pentatonicminor', 'bluesminor', 'augmented', 'diminished', 'wholehalf', 'halfwhole', 'augmentedfifth', 'japanese', 'oriental', 'ionian', 'dorian', 'phrygian', 'lydian', 'mixolydian', 'aeolian', 'locrian']
   scale = Scale(key, random.choice(scales))
@@ -48,28 +47,20 @@ def main(argv):
 
   timeline = Timeline()
 
-  # Add progression to timeline by arpeggiating chords from the progression
-  #for index in [0, 2, 3, 1]:
-  #  chord = progression[index]
-  #  root, third, fifth = chord.notes
-  #  arpeggio = [root, third, fifth, third]
-  #  for i, interval in enumerate(arpeggio):
-  #    ts = float(i * 2) / len(arpeggio)
-  #    timeline.add(time + ts, Hit(interval, 1.0))
-  #  time += 2.0
-
   # Pick a notes from a chord randomly chosen from a list of notes in this progression
   chord = progression[ random.choice(range(len(progression)-1)) ]
   notes = chord.notes
 
   melodies = [
     [0.8, 0.4, 0.4, 0.2, 0.2],
-    [0.2, 0.2, 0.4, 0.4, 0.8, 0.8],
-    [1.0, 0.4, 0.4, 0.4, 0.8, 0.8],
-    [0.2, 0.4, 0.2, 0.4, 0.2],
-    [0.4, 0.4, 0.4, 0.8, 0.8, 1.0, 1.0],
+    [0.8, 0.4, 0.4, 0.2, 0.2, 0.2, 0.8, 0.4, 0.4, 0.2, 0.2, 0.2],
+    [0.2, 0.2, 0.4, 0.4, 0.2, 0.1, 0.1, 0.0, 0.2, 0.4],
+    [1.0, 0.4, 0.4, 0.4, 0.2],
     [0.2, 0.2, 0.4, 0.4, 0.8],
-    [0.4, 0.0, 0.4, 0.0, 0.8, 1.0, 0.2],
+    [0.4, 0.4, 0.2, 0.4, 0.4, 0.2],
+    [0.1, 0.1, 0.1, 0.2, 0.1, 0.1, 0.1, 0.2],
+    [0.1, 0.1, 0.1, 0.2, 0.1, 0.1, 0.1, 0.2, 0.0, 0.1, 0.1, 0.1, 0.2, 0.1, 0.1, 0.1, 0.2],
+    [0.1, 0.0, 0.1, 0.0, 0.1, 0.0, 0.2, 0.0, 0.2, 0.0, 0.1, 0.0, 0.1, 0.0, 0.1, 0.0, 0.2, 0.0, 0.2, 0.0],
   ]
 
   random_melody = random.choice(melodies)
@@ -77,16 +68,15 @@ def main(argv):
 
   for i, interval in enumerate(random_melody):
     random_note = random.choice(notes)
-    random_transpose = random.choice([0, 12, 14])
+    random_transpose = random.choice([0, 0, 0, 12, 12, 12, 14])
 
     note = random_note.transpose(random_transpose)
 
     time = time + interval
     timeline.add(time, Hit(note, interval))
 
-  # Strum out root chord to finish
-  timeline.add(time, Hit(chord.notes[1], 1.0))
-  timeline.add(time, Hit(chord.notes[2].transpose(12), 1.0))
+  #timeline.add(time, Hit(chord.notes[0], 0.2))
+  #timeline.add(time, Hit(chord.notes[0].transpose(12), 0.2))
 
   print "Rendering audio..."
 
