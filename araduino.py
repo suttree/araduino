@@ -53,6 +53,8 @@ def main(argv):
 
   melodies = [
     [0.8, 0.4, 0.4, 0.2, 0.2],
+    [0.4, 0.0, 0.1, 0.1, 0.2, 0, 0.1, 0.4],
+    [0.1, 0.1, 0.1, 0.0, 0.2, 0.0, 0.1, 0.2, 0.4],
     [0.8, 0.4, 0.4, 0.2, 0.2, 0.2, 0.8, 0.4, 0.4, 0.2, 0.2, 0.2],
     [0.2, 0.2, 0.4, 0.4, 0.2, 0.1, 0.1, 0.0, 0.2, 0.4],
     [1.0, 0.4, 0.4, 0.4, 0.2],
@@ -63,35 +65,38 @@ def main(argv):
     [0.1, 0.0, 0.1, 0.0, 0.1, 0.0, 0.2, 0.0, 0.2, 0.0, 0.1, 0.0, 0.1, 0.0, 0.1, 0.0, 0.2, 0.0, 0.2, 0.0],
   ]
 
+  melodies = [
+  ]
+
   random_melody = random.choice(melodies)
   print random_melody
 
+  last_interval = 0.0
+
   for i, interval in enumerate(random_melody):
     random_note = random.choice(notes)
-    random_transpose = random.choice([0, 0, 0, 12, 12, 12, 14])
+
+    if (last_interval == interval):
+      random_transpose = 0
+    else:
+      random_transpose = random.choice([0, 0, 0, 12])
+
+    last_interval = interval
 
     note = random_note.transpose(random_transpose)
 
     time = time + interval
     timeline.add(time, Hit(note, interval))
 
-  #timeline.add(time, Hit(chord.notes[0], 0.2))
-  #timeline.add(time, Hit(chord.notes[0].transpose(12), 0.2))
-
   print "Rendering audio..."
-
   data = timeline.render()
 
-  #data = effect.chorus(data, freq=3.14159)
-  #data = effect.tremolo(data, freq=3.14159)
-  #data = effect.flanger(data, freq=3.14159)
-
-  # Reduce volume to 25%
-  data = data * 0.25
+  # Reduce volume to 50%
+  data = data * 0.50
 
   print "Playing audio..."
-
-  playback.play(data)
+  for i in range(random.choice([1,2])):
+    playback.play(data)
 
   print "Done!"
 
