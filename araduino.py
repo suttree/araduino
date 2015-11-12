@@ -85,8 +85,13 @@ def main(argv):
 
     note = random_note.transpose(random_transpose)
 
-    timeline.add(time, Hit(note, interval))
-    time = time + interval
+    # favour queued notes, but occasionally overlap them too
+    if (random.choice([1,2,3,4,5,6]) == 6):
+      time = time + interval
+      timeline.add(time, Hit(note, interval))
+    else:
+      timeline.add(time, Hit(note, interval))
+      time = time + interval
 
   print "Rendering audio..."
   data = timeline.render()
