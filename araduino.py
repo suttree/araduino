@@ -32,7 +32,7 @@ def main(argv):
   from timeline import Hit, Timeline
 
   # Define key and scale
-  key = Note((random.choice(Note.NOTES), random.choice([0,1,2])))
+  key = Note((random.choice(Note.NOTES), random.choice([1,2])))
 
   scales = ['major', 'minor', 'melodicminor', 'harmonicminor', 'pentatonicmajor', 'bluesmajor', 'pentatonicminor', 'bluesminor', 'augmented', 'diminished', 'wholehalf', 'halfwhole', 'augmentedfifth', 'japanese', 'oriental', 'ionian', 'dorian', 'phrygian', 'lydian', 'mixolydian', 'aeolian', 'locrian']
   scale = Scale(key, random.choice(scales))
