@@ -32,7 +32,7 @@ def main(argv):
   from timeline import Hit, Timeline
 
   # Define key and scale
-  key = Note((random.choice(Note.NOTES), random.choice([1,2])))
+  key = Note((random.choice(Note.NOTES), random.choice([2,3,3])))
 
   scales = ['major', 'minor', 'melodicminor', 'harmonicminor', 'pentatonicmajor', 'bluesmajor', 'pentatonicminor', 'bluesminor', 'augmented', 'diminished', 'wholehalf', 'halfwhole', 'augmentedfifth', 'japanese', 'oriental', 'ionian', 'phrygian', 'lydian', 'mixolydian', 'aeolian', 'locrian']
   scale = Scale(key, random.choice(scales))
@@ -52,19 +52,19 @@ def main(argv):
   notes = chord.notes
 
   melodies = [
-    [1.0, 0.1, 0.1, 0.2, 0.1, 0.10, 0.1],
-    [0.8, 0.1, 0.1, 0.1, 0.2],
+    [1.0, 0.1, 0.2, 0.1, 0.2, 0.10, 0.1],
+    [0.8, 0.1, 0.1, 0.2],
     [0.8, 0.4, 0.1, 0.2, 0.4, 0.1, 0.2],
     [0.8, 0.4, 0.4, 0.2, 0.2, 0.1, 0.1],
     [0.4, 0.0, 0.1, 0.1, 0.2, 0, 0.1, 0.4],
     [0.1, 0.1, 0.1, 0.0, 0.2, 0.0, 0.1, 0.2, 0.4],
-    [0.8, 0.4, 0.1, 0.4, 0.2, 0.2, 0.1, 0.2, 0.8, 0.1, 0.4, 0.1, 0.4, 0.2, 0.2, 0.2, 0.1],
-    [0.2, 0.2, 0.4, 0.4, 0.2, 0.1, 0.1, 0.0, 0.2, 0.4],
-    [1.0, 0.4, 0.1, 0.4, 0.1, 0.4, 0.2],
-    [0.2, 0.2, 0.4, 0.4, 0.8],
+    [0.8, 0.4, 0.1, 0.4, 0.2, 0.2, 0.1, 0.2, 0.8, 0.1, 0.4, 0.1],
+    [0.2, 0.2, 0.4, 0.2, 0.1, 0.1, 0.0, 0.2],
+    [1.0, 0.1, 0.2, 0.1, 0.2, 0.2],
+    [0.2, 0.1, 0.2, 0.4, 0.1, 0.2, 0.4],
     [0.4, 0.1, 0.4, 0.2, 0.4, 0.1, 0.4, 0.2],
     [0.1, 0.1, 0.1, 0.2, 0.1, 0.1, 0.2],
-    [0.1, 0.1, 0.1, 0.2, 0.1, 0.1, 0.1, 0.2, 0.0, 0.1, 0.2, 0.1, 0.1, 0.1, 0.2],
+    [0.1, 0.1, 0.1, 0.2, 0.1, 0.1, 0.1, 0.2, 0.0],
     [0.1, 0.0, 0.1, 0.0, 0.1, 0.0, 0.2, 0.0, 0.2, 0.0, 0.1, 0.1, 0.3],
   ]
 
