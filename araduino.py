@@ -22,6 +22,7 @@ def main(argv):
 
   dice_roll = random.choice([1,2,3,4,5,6])
   if (dice_roll < 6 and _debug <> 1):
+    print "Going back to sleep"
     sys.exit()
 
   sys.path.append(os.path.join(os.path.dirname(__file__), 'python-musical'))
