@@ -33,9 +33,9 @@ def main(argv):
   from timeline import Hit, Timeline
 
   # Define key and scale
-  key = Note((random.choice(Note.NOTES), random.choice([0,1,2])))
+  key = Note((random.choice(Note.NOTES), random.choice([2,3,3])))
 
-  scales = ['major', 'minor', 'melodicminor', 'harmonicminor', 'pentatonicmajor', 'bluesmajor', 'pentatonicminor', 'bluesminor', 'augmented', 'diminished', 'wholehalf', 'halfwhole', 'augmentedfifth', 'japanese', 'oriental', 'ionian', 'dorian', 'phrygian', 'lydian', 'mixolydian', 'aeolian', 'locrian']
+  scales = ['major', 'minor', 'melodicminor', 'harmonicminor', 'pentatonicmajor', 'bluesmajor', 'pentatonicminor', 'bluesminor', 'augmented', 'diminished', 'wholehalf', 'halfwhole', 'augmentedfifth', 'japanese', 'oriental', 'ionian', 'phrygian', 'lydian', 'mixolydian', 'aeolian', 'locrian']
   scale = Scale(key, random.choice(scales))
 
   print key
@@ -53,44 +53,63 @@ def main(argv):
   notes = chord.notes
 
   melodies = [
-    [0.8, 0.4, 0.4, 0.2, 0.2],
+    [1.0, 0.1, 0.2, 0.1, 0.2, 0.10, 0.1],
+    [0.8, 0.1, 0.1, 0.2],
+    [0.8, 0.4, 0.1, 0.2, 0.4, 0.1, 0.2],
+    [0.8, 0.4, 0.4, 0.2, 0.2, 0.1, 0.1],
     [0.4, 0.0, 0.1, 0.1, 0.2, 0, 0.1, 0.4],
     [0.1, 0.1, 0.1, 0.0, 0.2, 0.0, 0.1, 0.2, 0.4],
-    [0.8, 0.4, 0.4, 0.2, 0.2, 0.2, 0.8, 0.4, 0.4, 0.2, 0.2, 0.2],
-    [0.2, 0.2, 0.4, 0.4, 0.2, 0.1, 0.1, 0.0, 0.2, 0.4],
-    [1.0, 0.4, 0.4, 0.4, 0.2],
-    [0.2, 0.2, 0.4, 0.4, 0.8],
-    [0.4, 0.4, 0.2, 0.4, 0.4, 0.2],
-    [0.1, 0.1, 0.1, 0.2, 0.1, 0.1, 0.1, 0.2],
-    [0.1, 0.1, 0.1, 0.2, 0.1, 0.1, 0.1, 0.2, 0.0, 0.1, 0.1, 0.1, 0.2, 0.1, 0.1, 0.1, 0.2],
-    [0.1, 0.0, 0.1, 0.0, 0.1, 0.0, 0.2, 0.0, 0.2, 0.0, 0.1, 0.0, 0.1, 0.0, 0.1, 0.0, 0.2, 0.0, 0.2, 0.0],
+    [0.8, 0.4, 0.1, 0.4, 0.2, 0.2, 0.1, 0.2, 0.8, 0.1, 0.4, 0.1],
+    [0.2, 0.2, 0.4, 0.2, 0.1, 0.1, 0.0, 0.2],
+    [1.0, 0.1, 0.2, 0.1, 0.2, 0.2],
+    [0.2, 0.1, 0.2, 0.4, 0.1, 0.2, 0.4],
+    [0.4, 0.1, 0.4, 0.2, 0.4, 0.1, 0.4, 0.2],
+    [0.1, 0.1, 0.1, 0.2, 0.1, 0.1, 0.2],
+    [0.1, 0.1, 0.1, 0.2, 0.1, 0.1, 0.1, 0.2, 0.0],
+    [0.1, 0.0, 0.1, 0.0, 0.1, 0.0, 0.2, 0.0, 0.2, 0.0, 0.1, 0.1, 0.3],
   ]
 
   random_melody = random.choice(melodies)
   print random_melody
 
   last_interval = 0.0
+  last_transpose = 0
 
   for i, interval in enumerate(random_melody):
     random_note = random.choice(notes)
 
-    if (last_interval == interval):
-      random_transpose = 0
+    # the first note should be high
+    # identical intervals should often hold the same pitch
+    # otherwise, pick a random pitch
+    if i == 0:
+      random_transpose = random.choice([8, 12])
+    elif (last_interval == interval):
+      if random.choice([0,1,2]) == 2:
+        random_transpose = last_transpose
+      else:
+        random_transpose = 0
     else:
-      random_transpose = random.choice([0, 0, 0, 12])
+      random_transpose = random.choice([0, 2,4,6,8,10,12])
 
     last_interval = interval
+    last_transpose = random_transpose
 
     note = random_note.transpose(random_transpose)
+    #print note
 
-    time = time + interval
-    timeline.add(time, Hit(note, interval))
+    # favour queued notes, but occasionally overlap them too
+    if (random.choice([1,2,3,4,5,6]) > 4):
+      time = time + interval
+      timeline.add(time, Hit(note, interval))
+    else:
+      timeline.add(time, Hit(note, interval))
+      time = time + interval
 
   print "Rendering audio..."
   data = timeline.render()
 
-  # Reduce volume to 50%
-  data = data * 0.50
+  # Reduce volume to 25%
+  data = data * 0.25
 
   print "Playing audio..."
   for i in range(random.choice([1,2])):
