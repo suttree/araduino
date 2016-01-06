@@ -21,7 +21,7 @@ def main(argv):
       _debug = 1
 
   dice_roll = random.choice([1,2,3,4,5,6])
-  if (dice_roll < 6 and _debug <> 1):
+  if (dice_roll < 5 and _debug <> 1):
     print "Going back to sleep"
     sys.exit()
 
@@ -108,8 +108,8 @@ def main(argv):
   print "Rendering audio..."
   data = timeline.render()
 
-  # Reduce volume to 50%
-  data = data * 0.50
+  # Reduce volume to 75%
+  data = data * 0.75
 
   print "Playing audio..."
   for i in range(random.choice([1,2])):
