@@ -20,11 +20,38 @@ def main(argv):
     elif opt == '-d':
       _debug = 1
 
-  dice_roll = random.choice([1,2,3,4,5,6])
+  # Increase change of singing at sunrise/sunset
+  import ephem
+
+  birdcage = ephem.Observer()
+  birdcage.lat = '51.5034070'
+  birdcage.lon = '-0.1275920'
+  birdcage.elevation = 19
+
+  sun = ephem.Sun()
+
+  next_sunrise = birdcage.next_rising(sun)
+  early_next_sunrise = ephem.Date(next_sunrise - 15 * ephem.minute) 
+  late_next_sunrise = ephem.Date(next_sunrise + 15 * ephem.minute) 
+
+  next_sunset = birdcage.next_setting(sun)
+  early_next_sunset = ephem.Date(next_sunset - 15 * ephem.minute) 
+  late_next_sunset = ephem.Date(next_sunset + 15 * ephem.minute) 
+
+  if (birdcage.date > early_next_sunrise and birdcage.late_< next_sunrise):
+    print 'Sunrise roll'
+    dice_roll = random.choice([1,2,3,4,5])
+  elif (birdcage.date > early_next_sunset and birdcage.date < late_next_sunset):
+    print 'Sunset roll'
+    dice_roll = random.choice([1,2,3,4,5])
+  else:
+    dice_roll = random.choice([1,2,3,4,5,6])
+
   if (dice_roll < 5 and _debug <> 1):
     print "Going back to sleep"
     sys.exit()
 
+  # We're alive, import what else we need now
   sys.path.append(os.path.join(os.path.dirname(__file__), 'python-musical'))
 
   from musical.theory import Note, Scale, Chord
