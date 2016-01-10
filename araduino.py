@@ -135,8 +135,8 @@ def main(argv):
   print "Rendering audio..."
   data = timeline.render()
 
-  # Reduce volume to 75%
-  data = data * 0.75
+  # Reduce volume to 95%
+  data = data * 0.95
 
   print "Playing audio..."
   for i in range(random.choice([1,2])):
