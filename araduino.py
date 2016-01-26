@@ -19,9 +19,11 @@ def main(argv):
       sys.exit()
     elif opt == '-d':
       _debug = 1
-    elif opt n ("-s", "--startup"):
+    elif opt in ("-s", "--startup"):
+      import time
+      time.sleep(90)
+      os.system("/usr/bin/tvservice -o")
       _debug = 1
-      system("/usr/bin/tvservice -o")
       
 
   # Increase chance of singing at sunrise/sunset
