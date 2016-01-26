@@ -2,11 +2,11 @@ import os, sys, getopt
 import random
 
 def usage():
-  print "araduino.py -h (help) -d (debug)"
+  print "araduino.py -h (help) -d (debug) -s (startup)"
 
 def main(argv):
   try:
-    opts, args = getopt.getopt(argv, "hd", ['help', 'debug'])
+    opts, args = getopt.getopt(argv, "hds", ['help', 'debug', 'startup'])
   except getopt.GetoptError:
     usage()
     sys.exit(2)
