@@ -19,8 +19,12 @@ def main(argv):
       sys.exit()
     elif opt == '-d':
       _debug = 1
+    elif opt == '-startup':
+      _debug = 1
+      system("/usr/bin/tvservice -o")
+      
 
-  # Increase change of singing at sunrise/sunset
+  # Increase chance of singing at sunrise/sunset
   import ephem
 
   birdcage = ephem.Observer()
