@@ -19,7 +19,7 @@ def main(argv):
       sys.exit()
     elif opt == '-d':
       _debug = 1
-    elif opt == '-startup':
+    elif opt n ("-s", "--startup"):
       _debug = 1
       system("/usr/bin/tvservice -o")
       
@@ -42,7 +42,7 @@ def main(argv):
   early_next_sunset = ephem.Date(next_sunset - 15 * ephem.minute) 
   late_next_sunset = ephem.Date(next_sunset + 15 * ephem.minute) 
 
-  if (birdcage.date > early_next_sunrise and birdcage.late_< next_sunrise):
+  if (birdcage.date > early_next_sunrise and birdcage.date < late_next_sunrise):
     print 'Sunrise roll'
     dice_roll = random.choice([1,2,3,4,5])
   elif (birdcage.date > early_next_sunset and birdcage.date < late_next_sunset):
