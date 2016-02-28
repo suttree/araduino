@@ -125,7 +125,7 @@ def main(argv):
     #print note
 
     # favour queued notes, but occasionally overlap them too
-    if (random.choice([1,2,3,4,5,6]) > 4):
+    if (random.choice([1,2,3,4,5,6]) > 2):
       time = time + interval
       timeline.add(time, Hit(note, interval))
     else:
