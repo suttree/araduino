@@ -2,11 +2,11 @@ import os, sys, getopt
 import random
 
 def usage():
-  print "araduino.py -h (help) -d (debug)"
+  print "araduino.py -h (help) -d (debug) -s (startup)"
 
 def main(argv):
   try:
-    opts, args = getopt.getopt(argv, "hd", ['help', 'debug'])
+    opts, args = getopt.getopt(argv, "hds", ['help', 'debug', 'startup'])
   except getopt.GetoptError:
     usage()
     sys.exit(2)
@@ -19,8 +19,14 @@ def main(argv):
       sys.exit()
     elif opt == '-d':
       _debug = 1
+    elif opt in ("-s", "--startup"):
+      import time
+      time.sleep(90)
+      os.system("/usr/bin/tvservice -o")
+      _debug = 1
+      
 
-  # Increase change of singing at sunrise/sunset
+  # Increase chance of singing at sunrise/sunset
   import ephem
 
   birdcage = ephem.Observer()
@@ -38,7 +44,7 @@ def main(argv):
   early_next_sunset = ephem.Date(next_sunset - 15 * ephem.minute) 
   late_next_sunset = ephem.Date(next_sunset + 15 * ephem.minute) 
 
-  if (birdcage.date > early_next_sunrise and birdcage.late_< next_sunrise):
+  if (birdcage.date > early_next_sunrise and birdcage.date < late_next_sunrise):
     print 'Sunrise roll'
     dice_roll = random.choice([1,2,3,4,5])
   elif (birdcage.date > early_next_sunset and birdcage.date < late_next_sunset):
