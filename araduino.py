@@ -32,18 +32,21 @@ def main(argv):
   birdcage = ephem.Observer()
   birdcage.lat = '51.494036'
   birdcage.lon = '0.072742'
-  birdcage.elevation = 19
+  birdcage.elevation = 4
 
   sun = ephem.Sun()
 
   next_sunrise = birdcage.next_rising(sun)
-  early_next_sunrise = ephem.Date(next_sunrise - 15 * ephem.minute) 
-  late_next_sunrise = ephem.Date(next_sunrise + 15 * ephem.minute) 
+  early_next_sunrise = ephem.Date(next_sunrise - 45 * ephem.minute) 
+  late_next_sunrise = ephem.Date(next_sunrise + 45 * ephem.minute) 
 
   next_sunset = birdcage.next_setting(sun)
-  early_next_sunset = ephem.Date(next_sunset - 15 * ephem.minute) 
-  late_next_sunset = ephem.Date(next_sunset + 15 * ephem.minute) 
+  early_next_sunset = ephem.Date(next_sunset - 45 * ephem.minute) 
+  late_next_sunset = ephem.Date(next_sunset + 45 * ephem.minute) 
 
+  print 'birdcage date'
+  print birdcage.date
+	
   if (birdcage.date > early_next_sunrise and birdcage.date < late_next_sunrise):
     print 'Sunrise roll'
     dice_roll = random.choice([1,2,3,4,5])
@@ -62,7 +65,6 @@ def main(argv):
 
   from musical.theory import Note, Scale, Chord
   from musical.audio import effect, playback
-
   from timeline import Hit, Timeline
 
   # Define key and scale
@@ -100,6 +102,10 @@ def main(argv):
     [0.1, 0.1, 0.1, 0.2, 0.1, 0.1, 0.2],
     [0.1, 0.1, 0.1, 0.2, 0.1, 0.1, 0.1, 0.2, 0.0],
     [0.1, 0.0, 0.1, 0.0, 0.1, 0.0, 0.2, 0.0, 0.2, 0.0, 0.1, 0.1, 0.3],
+    [0.1, 0.2],
+    [0.3, 0.2, 0.1],
+    [0.2, 0.2, 0.2],
+    [0.05, 0.2, 0.1, 0.1, 0.3, 0.5, 0.1, 0.1, 0.1],
   ]
 
   random_melody = random.choice(melodies)
