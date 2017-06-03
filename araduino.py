@@ -30,8 +30,8 @@ def main(argv):
   import ephem
 
   birdcage = ephem.Observer()
-  birdcage.lat = '51.5034070'
-  birdcage.lon = '-0.1275920'
+  birdcage.lat = '51.494036'
+  birdcage.lon = '0.072742'
   birdcage.elevation = 19
 
   sun = ephem.Sun()
