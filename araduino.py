@@ -1,4 +1,4 @@
-import os, sys, getopt
+import os, sys, getopt, datetime
 import random
 
 def usage():
@@ -32,17 +32,24 @@ def main(argv):
   birdcage = ephem.Observer()
   birdcage.lat = '51.494036'
   birdcage.lon = '0.072742'
+  birdcage.date = str(datetime.datetime.now())
   birdcage.elevation = 4
 
   sun = ephem.Sun()
 
   next_sunrise = birdcage.next_rising(sun)
-  early_next_sunrise = ephem.Date(next_sunrise - 45 * ephem.minute) 
-  late_next_sunrise = ephem.Date(next_sunrise + 45 * ephem.minute) 
+  early_next_sunrise = ephem.Date(next_sunrise - 30 * ephem.minute) 
+  late_next_sunrise = ephem.Date(next_sunrise + 30 * ephem.minute) 
 
   next_sunset = birdcage.next_setting(sun)
-  early_next_sunset = ephem.Date(next_sunset - 45 * ephem.minute) 
-  late_next_sunset = ephem.Date(next_sunset + 45 * ephem.minute) 
+  early_next_sunset = ephem.Date(next_sunset - 30 * ephem.minute) 
+  late_next_sunset = ephem.Date(next_sunset + 30 * ephem.minute) 
+
+  print 'next rising'
+  print next_sunrise
+
+  print 'next setting'
+  print next_sunset
 
   print 'birdcage date'
   print birdcage.date
