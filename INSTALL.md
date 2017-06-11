@@ -42,3 +42,6 @@ sudo reboot
 run next line by line...
 https://learn.pimoroni.com/tutorial/phat/raspberry-pi-phat-dac-install
 (just asound.conf and config.txt changes)
+
+sudo reboot
+sudo apt-get install python-pygame
