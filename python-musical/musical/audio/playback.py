@@ -7,7 +7,9 @@ def pygame_play(data, rate=44100):
   '''
   import pygame
   pygame.mixer.init(rate, -16, 1, 1024)
-  sound = pygame.sndarray.numpysnd.make_sound(encode.as_int16(data))
+  pygame.mixer.music.set_volume(0.1)
+  data2 = numpy.reshape(data, [-1, 2])
+  sound = pygame.sndarray.make_sound(encode.as_int16(data2))
   length = sound.get_length()
   sound.play()
   pygame.time.wait(int(length * 1000))
