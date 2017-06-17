@@ -1,4 +1,4 @@
-import os, sys, getopt
+import os, sys, getopt, datetime
 import random
 
 def usage():
@@ -30,19 +30,20 @@ def main(argv):
   import ephem
 
   birdcage = ephem.Observer()
-  birdcage.lat = '51.494036'
-  birdcage.lon = '0.072742'
-  birdcage.elevation = 19
+  birdcage.lat = '52.9232454'
+  birdcage.lon = '-1.475355'
+  birdcage.date = str(datetime.datetime.now())
+  birdcage.elevation = 10
 
   sun = ephem.Sun()
 
   next_sunrise = birdcage.next_rising(sun)
-  early_next_sunrise = ephem.Date(next_sunrise - 15 * ephem.minute) 
-  late_next_sunrise = ephem.Date(next_sunrise + 15 * ephem.minute) 
+  early_next_sunrise = ephem.Date(next_sunrise - 30 * ephem.minute) 
+  late_next_sunrise = ephem.Date(next_sunrise + 30 * ephem.minute) 
 
   next_sunset = birdcage.next_setting(sun)
-  early_next_sunset = ephem.Date(next_sunset - 15 * ephem.minute) 
-  late_next_sunset = ephem.Date(next_sunset + 15 * ephem.minute) 
+  early_next_sunset = ephem.Date(next_sunset - 30 * ephem.minute) 
+  late_next_sunset = ephem.Date(next_sunset + 30 * ephem.minute) 
 
   if (birdcage.date > early_next_sunrise and birdcage.date < late_next_sunrise):
     print 'Sunrise roll'
@@ -100,6 +101,10 @@ def main(argv):
     [0.1, 0.1, 0.1, 0.2, 0.1, 0.1, 0.2],
     [0.1, 0.1, 0.1, 0.2, 0.1, 0.1, 0.1, 0.2, 0.0],
     [0.1, 0.0, 0.1, 0.0, 0.1, 0.0, 0.2, 0.0, 0.2, 0.0, 0.1, 0.1, 0.3],
+    [1.0, 0.2, 0.2, 0.2],
+    [0.2, 0.2, 0.2, 1.0],
+    [1.0, 0.2, 1.2, 0.4, 1.0, 0.3],
+    [0.2, 0.2, 0.2, 0.3, 0.3, 0.3, 0.5],
   ]
 
   random_melody = random.choice(melodies)
@@ -117,12 +122,12 @@ def main(argv):
     if i == 0:
       random_transpose = random.choice([8, 12])
     elif (last_interval == interval):
-      if random.choice([0,1,2]) == 2:
+      if random.choice([0, 1, 2]) == 2:
         random_transpose = last_transpose
       else:
         random_transpose = 0
     else:
-      random_transpose = random.choice([0, 2,4,6,8,10,12])
+      random_transpose = random.choice([0, 2, 4, 6, 8, 10, 12])
 
     last_interval = interval
     last_transpose = random_transpose
@@ -131,7 +136,7 @@ def main(argv):
     #print note
 
     # favour queued notes, but occasionally overlap them too
-    if (random.choice([1,2,3,4,5,6]) > 2):
+    if (random.choice([1, 2, 3, 4, 5, 6]) > 2):
       time = time + interval
       timeline.add(time, Hit(note, interval))
     else:
