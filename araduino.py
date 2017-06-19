@@ -54,7 +54,7 @@ def main(argv):
   else:
     dice_roll = random.choice([1,2,3,4,5,6])
 
-  if (dice_roll < 5 and _debug <> 1):
+  if (dice_roll < 4 and _debug <> 1):
     print "Going back to sleep"
     sys.exit()
 
@@ -88,7 +88,7 @@ def main(argv):
 
   melodies = [
     [1.0, 0.1, 0.2, 0.1, 0.2, 0.10, 0.1],
-    [0.8, 0.1, 0.1, 0.2],
+    [0.8, 0.2, 0.2, 0.2],
     [0.8, 0.4, 0.1, 0.2, 0.4, 0.1, 0.2],
     [0.8, 0.4, 0.4, 0.2, 0.2, 0.1, 0.1],
     [0.4, 0.0, 0.1, 0.1, 0.2, 0, 0.1, 0.4],
