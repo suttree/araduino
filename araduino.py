@@ -22,7 +22,7 @@ def main(argv):
     elif opt in ("-s", "--startup"):
       import time
       time.sleep(90)
-      os.system("/usr/bin/tvservice -o")
+      #os.system("/usr/bin/tvservice -o")
       _debug = 1
       
 
@@ -46,14 +46,14 @@ def main(argv):
 
   if (birdcage.date > early_next_sunrise and birdcage.date < late_next_sunrise):
     print 'Sunrise roll'
-    dice_roll = random.choice([1,2,3,4,5])
+    dice_roll = random.choice([1,2,3,4])
   elif (birdcage.date > early_next_sunset and birdcage.date < late_next_sunset):
     print 'Sunset roll'
-    dice_roll = random.choice([1,2,3,4,5])
+    dice_roll = random.choice([1,2,3,4])
   else:
     dice_roll = random.choice([1,2,3,4,5,6])
 
-  if (dice_roll < 5 and _debug <> 1):
+  if (dice_roll < 4 and _debug <> 1):
     print "Going back to sleep"
     sys.exit()
 
