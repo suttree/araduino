@@ -1,4 +1,4 @@
-import os, sys, getopt
+import os, sys, getopt, datetime
 import random
 
 def usage():
@@ -32,7 +32,8 @@ def main(argv):
   birdcage = ephem.Observer()
   birdcage.lat = '51.494036'
   birdcage.lon = '0.072742'
-  birdcage.elevation = 19
+  birdcage.date = str(datetime.datetime.now())
+  birdcage.elevation = 5
 
   sun = ephem.Sun()
 
