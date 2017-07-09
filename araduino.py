@@ -47,10 +47,10 @@ def main(argv):
 
   if (birdcage.date > early_next_sunrise and birdcage.date < late_next_sunrise):
     print 'Sunrise roll'
-    dice_roll = random.choice([1,2,3,4])
+    dice_roll = random.choice([1,2,3,4,5,6,7,8])
   elif (birdcage.date > early_next_sunset and birdcage.date < late_next_sunset):
     print 'Sunset roll'
-    dice_roll = random.choice([1,2,3,4])
+    dice_roll = random.choice([1,2,3,4,5,6,7,8])
   else:
     dice_roll = random.choice([1,2,3,4,5,6])
 
