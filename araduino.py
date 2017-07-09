@@ -143,7 +143,7 @@ def main(argv):
   data = timeline.render()
 
   # Reduce volume to 95%
-  data = data * 0.95
+  data = data * 1.95
 
   print "Playing audio..."
   for i in range(random.choice([1,2])):
