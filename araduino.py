@@ -30,8 +30,8 @@ def main(argv):
   import ephem
 
   birdcage = ephem.Observer()
-  birdcage.lat = '51.494036'
-  birdcage.lon = '0.072742'
+  birdcage.lat = '51.4900'
+  birdcage.lon = '0.0690'
   birdcage.date = str(datetime.datetime.now())
   birdcage.elevation = 5
 
@@ -46,16 +46,16 @@ def main(argv):
   late_next_sunset = ephem.Date(next_sunset + 15 * ephem.minute) 
 
   if (birdcage.date > early_next_sunrise and birdcage.date < late_next_sunrise):
-    print 'Sunrise roll'
+    #print 'Sunrise roll'
     dice_roll = random.choice([1,2,3,4,5,6,7,8])
   elif (birdcage.date > early_next_sunset and birdcage.date < late_next_sunset):
-    print 'Sunset roll'
+    #print 'Sunset roll'
     dice_roll = random.choice([1,2,3,4,5,6,7,8])
   else:
     dice_roll = random.choice([1,2,3,4,5,6])
 
-  if (dice_roll < 4 and _debug <> 1):
-    print "Going back to sleep"
+  if (dice_roll < 5 and _debug <> 1):
+    #print "Going back to sleep"
     sys.exit()
 
   # We're alive, import what else we need now
@@ -70,10 +70,11 @@ def main(argv):
   key = Note((random.choice(Note.NOTES), random.choice([2,3,3])))
 
   scales = ['major', 'minor', 'melodicminor', 'harmonicminor', 'pentatonicmajor', 'bluesmajor', 'pentatonicminor', 'bluesminor', 'augmented', 'diminished', 'wholehalf', 'halfwhole', 'augmentedfifth', 'japanese', 'oriental', 'ionian', 'phrygian', 'lydian', 'mixolydian', 'aeolian', 'locrian']
+  random.shuffle(scales)
   scale = Scale(key, random.choice(scales))
 
-  print key
-  print scale
+  #print key
+  #print scale
 
   # Grab progression chords from scale starting at the octave of our key
   progression = Chord.progression(scale, base_octave=key.octave)
@@ -104,7 +105,7 @@ def main(argv):
   ]
 
   random_melody = random.choice(melodies)
-  print random_melody
+  #print random_melody
 
   last_interval = 0.0
   last_transpose = 0
@@ -139,17 +140,17 @@ def main(argv):
       timeline.add(time, Hit(note, interval))
       time = time + interval
 
-  print "Rendering audio..."
+  #print "Rendering audio..."
   data = timeline.render()
 
   # Reduce volume to 95%
   data = data * 1.95
 
-  print "Playing audio..."
+  #print "Playing audio..."
   for i in range(random.choice([1,2])):
     playback.play(data)
 
-  print "Done!"
+  #print "Done!"
 
 if __name__ == "__main__":
   main(sys.argv[1:])
