@@ -30,7 +30,7 @@ def main(argv):
   import ephem
 
   birdcage = ephem.Observer()
-  birdcage.lat = '51.4900'
+  birdcage.lat = '51:28:38'
   birdcage.lon = '0.0690'
   birdcage.date = str(datetime.datetime.now())
   birdcage.elevation = 5
@@ -38,11 +38,11 @@ def main(argv):
   sun = ephem.Sun()
 
   next_sunrise = birdcage.next_rising(sun)
-  early_next_sunrise = ephem.Date(next_sunrise - 15 * ephem.minute) 
+  early_next_sunrise = ephem.Date(next_sunrise -545 * ephem.minute) 
   late_next_sunrise = ephem.Date(next_sunrise + 15 * ephem.minute) 
 
   next_sunset = birdcage.next_setting(sun)
-  early_next_sunset = ephem.Date(next_sunset - 15 * ephem.minute) 
+  early_next_sunset = ephem.Date(next_sunset - 55 * ephem.minute) 
   late_next_sunset = ephem.Date(next_sunset + 15 * ephem.minute) 
 
   if (birdcage.date > early_next_sunrise and birdcage.date < late_next_sunrise):
