@@ -75,8 +75,12 @@ def main(argv):
   if sunrise:
     if datetime.datetime.now().hour == 6 and datetime.datetime.now().minute > 30:
         sunrise = True
+    elif _debug:
+        sunrise = True
     else:
         sunrise = False
+
+  sunset = False
 
   # Define key and scale
   key = Note((random.choice(Note.NOTES), random.choice([2,3,3])))
