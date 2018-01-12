@@ -47,9 +47,11 @@ def main(argv):
 
   if (birdcage.date > early_next_sunrise and birdcage.date < late_next_sunrise):
     #print 'Sunrise roll'
+    sunrise = true
     dice_roll = random.choice([1,2,3,4,5,6,7,8])
   elif (birdcage.date > early_next_sunset and birdcage.date < late_next_sunset):
     #print 'Sunset roll'
+    sunset = true
     dice_roll = random.choice([1,2,3,4,5,6,7,8])
   else:
     dice_roll = random.choice([1,2,3,4,5,6])
@@ -119,7 +121,7 @@ def main(argv):
     if i == 0:
       random_transpose = random.choice([8, 12])
     elif (last_interval == interval):
-      if random.choice([0,1,2]) == 2:
+      if random.choice([0,1]) == 1:
         random_transpose = last_transpose
       else:
         random_transpose = 0
