@@ -71,6 +71,13 @@ def main(argv):
 
   from timeline import Hit, Timeline
 
+  # Try to limit the chance of more than one duplicate morning songs - TODO rewrite this :)
+  if sunrise:
+    if datetime.datetime.now().hour == 6 and datetime.datetime.now().minute > 30:
+        sunrise = True
+    else:
+        sunrise = False
+
   # Define key and scale
   key = Note((random.choice(Note.NOTES), random.choice([2,3,3])))
 
