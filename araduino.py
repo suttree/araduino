@@ -2,11 +2,11 @@ import os, sys, getopt, datetime
 import random
 
 def usage():
-  print "araduino.py -h (help) -d (debug) -s (startup)"
+  print "araduino.py -h (help) -d (debug) -s (startup) -m (morning) -e (evening)"
 
 def main(argv):
   try:
-    opts, args = getopt.getopt(argv, "hds", ['help', 'debug', 'startup'])
+    opts, args = getopt.getopt(argv, "hdsme", ['help', 'debug', 'startup', 'morning', 'evening'])
   except getopt.GetoptError:
     usage()
     sys.exit(2)
@@ -24,7 +24,10 @@ def main(argv):
       time.sleep(90)
       #os.system("/usr/bin/tvservice -o")
       _debug = 1
-      
+    elif opt in ("-m", "--morning"):
+        sunrise = True
+    elif opt in("-e", "--evening"):
+        sunset = True
 
   # Increase chance of singing at sunrise/sunset
   import ephem
@@ -47,11 +50,11 @@ def main(argv):
 
   if (birdcage.date > early_next_sunrise and birdcage.date < late_next_sunrise):
     #print 'Sunrise roll'
-    sunrise = true
+    sunrise = True
     dice_roll = random.choice([1,2,3,4,5,6,7,8])
   elif (birdcage.date > early_next_sunset and birdcage.date < late_next_sunset):
     #print 'Sunset roll'
-    sunset = true
+    sunset = True
     dice_roll = random.choice([1,2,3,4,5,6,7,8])
   else:
     dice_roll = random.choice([1,2,3,4,5,6])
@@ -106,8 +109,14 @@ def main(argv):
     [0.1, 0.0, 0.1, 0.0, 0.1, 0.0, 0.2, 0.0, 0.2, 0.0, 0.1, 0.1, 0.3],
   ]
 
-  random_melody = random.choice(melodies)
-  #print random_melody
+  if sunrise:
+      morning_song = []
+      morning_song.append(melodies[-1])
+      morning_song.append(random.choice(melodies[0:-1]))
+      random_melody = [y for x in morning_song for y in x]
+  else:
+      random_melody = random.choice(melodies)
+      #print random_melody
 
   last_interval = 0.0
   last_transpose = 0
@@ -119,14 +128,14 @@ def main(argv):
     # identical intervals should often hold the same pitch
     # otherwise, pick a random pitch
     if i == 0:
-      random_transpose = random.choice([8, 12])
+      random_transpose = random.choice([8,10,12])
     elif (last_interval == interval):
       if random.choice([0,1]) == 1:
         random_transpose = last_transpose
       else:
         random_transpose = 0
     else:
-      random_transpose = random.choice([0, 2,4,6,8,10,12])
+      random_transpose = random.choice([0,2,4,6,8,10,12])
 
     last_interval = interval
     last_transpose = random_transpose
@@ -149,7 +158,12 @@ def main(argv):
   data = data * 1.95
 
   #print "Playing audio..."
-  for i in range(random.choice([1,2])):
+  if sunset or sunrise:
+      plays = [1]
+  else:
+    plays = [1,2]
+
+  for i in range(random.choice(plays)):
     playback.play(data)
 
   #print "Done!"
