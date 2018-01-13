@@ -6,24 +6,32 @@ def usage():
 
 def main(argv):
   try:
-    opts, args = getopt.getopt(argv, "hds", ['help', 'debug', 'startup'])
+    opts, args = getopt.getopt(argv, "hdsm", ['help', 'debug', 'startup', 'morning'])
   except getopt.GetoptError:
     usage()
     sys.exit(2)
 
   global _debug
   _debug = 0
+
+  morning = False 
+
   for opt, arg in opts:
     if opt in ("-h", "--help"):
       usage()
       sys.exit()
-    elif opt == '-d':
+
+    if opt in ("-m", "--morning"):
+      morning = True
+
+    if opt == '-d':
       _debug = 1
-    elif opt in ("-s", "--startup"):
+
+    if opt in ("-s", "--startup"):
       import time
       time.sleep(90)
       #os.system("/usr/bin/tvservice -o")
-      _debug = 1
+
       
 
   # Increase chance of singing at sunrise/sunset
@@ -104,6 +112,10 @@ def main(argv):
   ]
 
   random_melody = random.choice(melodies)
+
+  if morning:
+    random_melody = melodies[-1]
+
   print random_melody
 
   last_interval = 0.0
@@ -143,11 +155,15 @@ def main(argv):
   data = timeline.render()
 
   # Reduce volume to 95%
-  data = data * 1.95
+  data = data * 0.95
 
   print "Playing audio..."
-  for i in range(random.choice([1,2])):
-    playback.play(data)
+  if morning:
+    for i in range(2):
+      playback.play(data)
+  else:
+    for i in range(random.choice([1,2])):
+      playback.play(data)
 
   print "Done!"
 
