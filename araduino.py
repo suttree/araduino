@@ -57,6 +57,8 @@ def main(argv):
     sunset = True
     dice_roll = random.choice([1,2,3,4,5,6,7,8])
   else:
+    sunset = False
+    sunrise = False
     dice_roll = random.choice([1,2,3,4,5,6])
 
   if (dice_roll < 5 and _debug <> 1):
@@ -72,15 +74,13 @@ def main(argv):
   from timeline import Hit, Timeline
 
   # Try to limit the chance of more than one duplicate morning songs - TODO rewrite this :)
-  if sunrise:
-    if datetime.datetime.now().hour == 6 and datetime.datetime.now().minute > 30:
+  if sunrise or _debug == 1:
+    if datetime.datetime.now().hour == 6 and datetime.datetime.now().minute > 30 and datetime.datetime.now().weekday() < 5:
         sunrise = True
-    elif _debug:
+    elif _debug == 1:
         sunrise = True
     else:
         sunrise = False
-
-  sunset = False
 
   # Define key and scale
   key = Note((random.choice(Note.NOTES), random.choice([2,3,3])))
