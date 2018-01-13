@@ -121,9 +121,8 @@ def main(argv):
   ]
 
   if sunrise:
-      morning_song = []
-      morning_song.append(melodies[-1])
-      morning_song.append(random.choice(melodies[0:-1]))
+      #morning_song = []
+      #morning_song.append(melodies[-1])
       random_melody = [y for x in morning_song for y in x]
   else:
       random_melody = random.choice(melodies)
