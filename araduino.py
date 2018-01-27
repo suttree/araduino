@@ -52,11 +52,15 @@ def main(argv):
   early_next_sunset = ephem.Date(next_sunset - 55 * ephem.minute) 
   late_next_sunset = ephem.Date(next_sunset + 15 * ephem.minute) 
 
+  sunrise = False;
+  sunset = False;
   if (birdcage.date > early_next_sunrise and birdcage.date < late_next_sunrise):
     #print 'Sunrise roll'
+    sunrise = true;
     dice_roll = random.choice([1,2,3,4,5,6,7,8])
   elif (birdcage.date > early_next_sunset and birdcage.date < late_next_sunset):
     #print 'Sunset roll'
+    sunset = true;
     dice_roll = random.choice([1,2,3,4,5,6,7,8])
   else:
     dice_roll = random.choice([1,2,3,4,5,6])
@@ -94,9 +98,22 @@ def main(argv):
   chord = progression[ random.choice(range(len(progression)-1)) ]
   notes = chord.notes
 
-  melodies = [
+  melodies = [ 
+    [0.8, 0.2],
+    [0.5, 0.5],
+    [0.4, 0.2],
+    [0.2, 0.2],
+    [0.2, 0.8],
+    [0.2, 0.8],
+    [0.6, 0.1],
+    [0.6, 0.2],
+    [0.4, 0.4],
+    [0.2, 0.2],
+    [0.4, 0.4, 0.2],
+    [0.8, 0.1, 0.2],
+    [0.2, 0.2, 0.2],
+    [0.2, 0.4, 0.2],
     [1.0, 0.1, 0.2, 0.1, 0.2, 0.10, 0.1],
-    [0.8, 0.1, 0.1, 0.2],
     [0.8, 0.4, 0.1, 0.2, 0.4, 0.1, 0.2],
     [0.8, 0.4, 0.4, 0.2, 0.2, 0.1, 0.1],
     [0.4, 0.0, 0.1, 0.1, 0.2, 0, 0.1, 0.4],
@@ -111,7 +128,10 @@ def main(argv):
     [0.1, 0.0, 0.1, 0.0, 0.1, 0.0, 0.2, 0.0, 0.2, 0.0, 0.1, 0.1, 0.3],
   ]
 
-  random_melody = random.choice(melodies)
+  if sunrise or sunset:
+    random_melody = random.choice(melodies[0:12])
+  else:
+    random_melody = random.choice(melodies)
 
   if morning:
     random_melody = melodies[-1]
