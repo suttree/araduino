@@ -45,7 +45,7 @@ def main(argv):
   sun = ephem.Sun()
 
   next_sunrise = birdcage.next_rising(sun)
-  early_next_sunrise = ephem.Date(next_sunrise -545 * ephem.minute) 
+  early_next_sunrise = ephem.Date(next_sunrise -55 * ephem.minute) 
   late_next_sunrise = ephem.Date(next_sunrise + 15 * ephem.minute) 
 
   next_sunset = birdcage.next_setting(sun)
