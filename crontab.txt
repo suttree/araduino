@@ -23,3 +23,4 @@
 0 0 * * * cd /home/pi/src/araduino && git pull >> /tmp/araduino.log
 */4 * * * * python /home/pi/src/araduino/araduino.py >> /home/pi/src/araduino/araduino.log
 @reboot python /home/pi/src/araduino/araduino.py -s
+30 7 * * * python /home/pi/src/araduino/araduino.py -m
