@@ -45,23 +45,24 @@ def main(argv):
   sun = ephem.Sun()
 
   next_sunrise = birdcage.next_rising(sun)
-  early_next_sunrise = ephem.Date(next_sunrise - 55 * ephem.minute) 
+  early_next_sunrise = ephem.Date(next_sunrise - 15 * ephem.minute) 
   late_next_sunrise = ephem.Date(next_sunrise + 15 * ephem.minute) 
 
   next_sunset = birdcage.next_setting(sun)
-  early_next_sunset = ephem.Date(next_sunset - 55 * ephem.minute) 
+  early_next_sunset = ephem.Date(next_sunset - 15 * ephem.minute) 
   late_next_sunset = ephem.Date(next_sunset + 15 * ephem.minute) 
 
   sunrise = False;
   sunset = False;
+
   if (birdcage.date > early_next_sunrise and birdcage.date < late_next_sunrise):
     #print 'Sunrise roll'
     sunrise = true;
-    dice_roll = random.choice([1,2,3,4,5,6,7,8])
+    dice_roll = random.choice([1,2,3,4,5,6,7,8,9,10])
   elif (birdcage.date > early_next_sunset and birdcage.date < late_next_sunset):
     #print 'Sunset roll'
     sunset = true;
-    dice_roll = random.choice([1,2,3,4,5,6,7,8])
+    dice_roll = random.choice([1,2,3,4,5,6,7,8,9,10])
   else:
     dice_roll = random.choice([1,2,3,4,5,6])
 
