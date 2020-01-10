@@ -75,14 +75,15 @@ def main(argv):
 
   from musical.theory import Note, Scale, Chord
   from musical.audio import effect, playback
-
   from timeline import Hit, Timeline
 
   # Define key and scale
   key = Note((random.choice(Note.NOTES), random.choice([2,3,3])))
 
-  scales = ['major', 'minor', 'melodicminor', 'harmonicminor', 'pentatonicmajor', 'bluesmajor', 'pentatonicminor', 'bluesminor', 'augmented', 'diminished', 'wholehalf', 'halfwhole', 'augmentedfifth', 'japanese', 'oriental', 'ionian', 'phrygian', 'lydian', 'mixolydian', 'aeolian', 'locrian']
-  random.shuffle(scales)
+  scales = ['major', 'minor', 'melodicminor', 'harmonicminor', 'pentatonicmajor', 
+          'bluesmajor', 'pentatonicminor', 'bluesminor', 'augmented', 'diminished', 
+          'wholehalf', 'halfwhole', 'augmentedfifth', 'japanese', 'oriental', 'ionian', 
+          'phrygian', 'lydian', 'mixolydian', 'aeolian', 'locrian']
   scale = Scale(key, random.choice(scales))
 
   #print key
@@ -152,7 +153,7 @@ def main(argv):
       else:
         random_transpose = 0
     else:
-      random_transpose = random.choice([0, 2,4,6,8,10,12])
+      random_transpose = random.choice([0,2,4,6,8,10,12])
 
     last_interval = interval
     last_transpose = random_transpose
@@ -172,7 +173,7 @@ def main(argv):
   data = timeline.render()
 
   # Reduce volume to 95%
-  data = data * 0.95
+  data = data * 0.65
 
   print "Playing audio..."
   if morning:
