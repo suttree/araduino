@@ -72,3 +72,12 @@ chunks.append(source.sine(key, 1.5) + source.square(fifth, 1.5))
 print("Rendering audio...")
 
 data = numpy.concatenate(chunks)
+
+--
+
+Can I pick a chord, then transpose it to 'major' and 'minor' depending on time of day?
+    chord.py + major/minor/augmented/diminished
+        returns triads, which we can use for songs
+        
+        
+Use ringbuffer and and pluck for other effects?
