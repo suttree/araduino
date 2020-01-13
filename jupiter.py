@@ -199,6 +199,16 @@ def main(argv):
   last_interval = 0.0
   last_transpose = 0
 
+#    timeline = Timeline()
+  chord = progression[0]
+  timeline.add(time + 0.0, Hit(chord.notes[0], 2.0))
+  timeline.add(time + 0.1, Hit(chord.notes[1], 2.0))
+  timeline.add(time + 0.2, Hit(chord.notes[2], 2.0))
+  timeline.add(time + 0.3, Hit(chord.notes[0].transpose(12), 2.0))
+  timeline.add(time + 0.4, Hit(chord.notes[1].transpose(12), 2.0))
+  timeline.add(time + 0.4, Hit(chord.notes[2].transpose(12), 2.0))
+  time = time + 2.5
+
   for i, interval in enumerate(random_melody):
     random_note = random.choice(notes)
 
@@ -206,14 +216,14 @@ def main(argv):
     # identical intervals should often hold the same pitch
     # otherwise, pick a random pitch
     if i == 0:
-      random_transpose = random.choice([8, 12])
+      random_transpose = random.choice([6, 8])
     elif (last_interval == interval):
       if random.choice([0,1,2]) == 2:
         random_transpose = last_transpose
       else:
         random_transpose = 0
     else:
-      random_transpose = random.choice([0,2,4,6,8,10,12])
+      random_transpose = random.choice([0,2,4,6,8])
 
     last_interval = interval
     last_transpose = random_transpose
@@ -222,7 +232,11 @@ def main(argv):
     #print note
 
     # favour queued notes, but occasionally overlap them too
-    if (random.choice([1,2,3,4,5,6]) > 2):
+    stutter = random.choice([1,2,3,4,5,6])
+    if (stutter > 4):
+      time = time + interval/2
+      timeline.add(time, Hit(note, interval))
+    elif (stutter > 2):
       time = time + interval
       timeline.add(time, Hit(note, interval))
     else:
@@ -233,7 +247,11 @@ def main(argv):
   data = timeline.render()
 
   # Reduce volume to 95%
-  data = data * 0.65
+  data = data * 0.25
+  
+  data = effect.chorus(data, freq=0.1804)
+  data = effect.flanger(data, freq=1.0208)
+  data = effect.tremolo(data, freq=0.1975)
   
   print "Playing audio..."
   if morning:
