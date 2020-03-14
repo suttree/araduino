@@ -1,12 +1,9 @@
-Run to get audio working:
-
+// Run to get audio working
 curl https://get.pimoroni.com/phatdac | bash
 
-Add to boot/config.txt
-
+// Add to boot/config.txt
 dtparam=audio=on
 dtoverlay=hifiberry-dac
 
-Select headphone output in Advanced > Audio
-
+// Select headphone output in Advanced > Audio
 sudo raspi-config

@@ -8,7 +8,7 @@ See araduino.tumblr.com
 
 - to increase volume on latest versions of Ubuntu:
 alsamixer
-sudo alsactrl store
+sudo alsactl store
 
 
 # Make sure headphone output is selected (not HDMI), in /boot/config

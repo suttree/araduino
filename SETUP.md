@@ -33,4 +33,5 @@ python araduino.py -d
 
 // Set the volume
 alsamixer
+sudo alsactl store
 
