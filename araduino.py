@@ -23,6 +23,7 @@ def main(argv):
 
     if opt in ("-m", "--morning"):
       morning = True
+      _debug = 1
 
     if opt == '-d':
       _debug = 1
@@ -45,11 +46,11 @@ def main(argv):
   sun = ephem.Sun()
 
   next_sunrise = birdcage.next_rising(sun)
-  early_next_sunrise = ephem.Date(next_sunrise - 55 * ephem.minute) 
+  early_next_sunrise = ephem.Date(next_sunrise - 25 * ephem.minute) 
   late_next_sunrise = ephem.Date(next_sunrise + 15 * ephem.minute) 
 
   next_sunset = birdcage.next_setting(sun)
-  early_next_sunset = ephem.Date(next_sunset - 55 * ephem.minute) 
+  early_next_sunset = ephem.Date(next_sunset - 25 * ephem.minute) 
   late_next_sunset = ephem.Date(next_sunset + 15 * ephem.minute) 
 
   sunrise = False;
@@ -57,11 +58,11 @@ def main(argv):
   if (birdcage.date > early_next_sunrise and birdcage.date < late_next_sunrise):
     #print 'Sunrise roll'
     sunrise = true;
-    dice_roll = random.choice([1,2,3,4,5,6,7,8])
+    dice_roll = random.choice([1,2,3,4,5,6,7,8,9])
   elif (birdcage.date > early_next_sunset and birdcage.date < late_next_sunset):
     #print 'Sunset roll'
     sunset = true;
-    dice_roll = random.choice([1,2,3,4,5,6,7,8])
+    dice_roll = random.choice([1,2,3,4,5,6,7,8,9])
   else:
     dice_roll = random.choice([1,2,3,4,5,6])
 
@@ -128,6 +129,14 @@ def main(argv):
     random_melody = random.choice(melodies[0:12])
   else:
     random_melody = random.choice(melodies)
+
+  # Testing a new melody-generation idea
+  random_melody = []
+  melody_length = random.randrange(1, 12)
+
+  for i in range(0, melody_length):
+    random_melody.append( round(random.uniform(0.1, 0.6), 1) )
+  # test end
 
   if morning:
     random_melody = melodies[-1]
