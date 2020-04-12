@@ -130,12 +130,13 @@ def main(argv):
   else:
     random_melody = random.choice(melodies)
 
-  # Testing a new melody-generation idea
-  random_melody = []
-  melody_length = random.randrange(1, 12)
-
-  for i in range(0, melody_length):
-    random_melody.append( round(random.uniform(0.1, 0.6), 1) )
+  # Testing a new melody-generation idea - duncan 11/4/20
+  # - needs more work, disabling for now - 12/4/20
+  #random_melody = []
+  #melody_length = random.randrange(1, 12)
+  #
+  #for i in range(0, melody_length):
+  #  random_melody.append( round(random.uniform(0.1, 0.6), 1) )
   # test end
 
   if morning:
