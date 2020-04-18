@@ -46,11 +46,11 @@ def main(argv):
   sun = ephem.Sun()
 
   next_sunrise = birdcage.next_rising(sun)
-  early_next_sunrise = ephem.Date(next_sunrise - 25 * ephem.minute) 
+  early_next_sunrise = ephem.Date(next_sunrise - 15 * ephem.minute) 
   late_next_sunrise = ephem.Date(next_sunrise + 15 * ephem.minute) 
 
   next_sunset = birdcage.next_setting(sun)
-  early_next_sunset = ephem.Date(next_sunset - 25 * ephem.minute) 
+  early_next_sunset = ephem.Date(next_sunset - 15 * ephem.minute) 
   late_next_sunset = ephem.Date(next_sunset + 15 * ephem.minute) 
 
   sunrise = False;
@@ -58,11 +58,11 @@ def main(argv):
   if (birdcage.date > early_next_sunrise and birdcage.date < late_next_sunrise):
     #print 'Sunrise roll'
     sunrise = true;
-    dice_roll = random.choice([1,2,3,4,5,6,7,8,9])
+    dice_roll = random.choice([1,2,3,4,5,6,7,8])
   elif (birdcage.date > early_next_sunset and birdcage.date < late_next_sunset):
     #print 'Sunset roll'
     sunset = true;
-    dice_roll = random.choice([1,2,3,4,5,6,7,8,9])
+    dice_roll = random.choice([1,2,3,4,5,6,7,8])
   else:
     dice_roll = random.choice([1,2,3,4,5,6])
 
@@ -161,7 +161,7 @@ def main(argv):
       else:
         random_transpose = 0
     else:
-      random_transpose = random.choice([0, 2,4,6,8,10,12])
+      random_transpose = random.choice([0,2,4,6,8,10,12])
 
     last_interval = interval
     last_transpose = random_transpose
@@ -180,8 +180,8 @@ def main(argv):
   #print "Rendering audio..."
   data = timeline.render()
 
-  # Reduce volume to 95%
-  data = data * 0.95
+  # Reduce volume to 75%
+  data = data * 0.75
 
   print "Playing audio..."
   if morning:
