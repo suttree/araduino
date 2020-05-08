@@ -38,3 +38,15 @@ python araduino.py -d
 alsamixer
 sudo alsactl store
 
+// Install Pirate Audio: https://learn.pimoroni.com/tutorial/sandyj/getting-started-with-pirate-audio
+git clone https://github.com/pimoroni/pirate-audio
+cd pirate-audio/mopidy
+sudo ./install.sh
+
+// For Pirate Audio setup, install pyaudio and configure python musical to use that instead of pygame
+sudo apt-get install python-pyaudio
+
+And reduce the volume in araduino.py to something like 0.05
+
+And turn off mopidy audio player that comes with the Pirate Audio speaker
+sudo systemctl disable mopidy
