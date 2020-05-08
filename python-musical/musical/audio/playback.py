@@ -81,7 +81,9 @@ def pyaudio_supported():
 def play(data, rate=44100):
   ''' Send audio to first available playback method
   '''
-  if pygame_supported():
+  if pyaudio_supported():
+    return pyaudio_play(data)
+  elif pygame_supported():
     return pygame_play(data)
   elif oss_supported():
     return oss_play(data)
