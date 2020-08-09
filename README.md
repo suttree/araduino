@@ -6,8 +6,9 @@ Ara is a unique and passive experience. Discover companionship and digital art i
 
 ![Image of Ara](https://github.com/suttree/araduino/blob/master/ara.png?raw=true)
 
-See (https://www.duncangough.com/portfolio) for more.
+See https://www.duncangough.com/portfolio for more.
 
+---
 
 ### todo / notes / misc
 
@@ -20,6 +21,6 @@ alsamixer
 sudo alsactl store
 
 
-## Make sure headphone output is selected (not HDMI), in /boot/config
-## Enable audio (loads snd_bcm2835)
+#### Make sure headphone output is selected (not HDMI), in /boot/config
+#### Enable audio (loads snd_bcm2835)
 dtparam=audio=on
