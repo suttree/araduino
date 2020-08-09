@@ -6,7 +6,7 @@ Ara is a unique and passive experience. Discover companionship and digital art i
 
 ![Image of Ara](https://github.com/suttree/araduino/blob/master/ara.png?raw=true)
 
-See duncangough.com/portfolio for more.
+See (https://www.duncangough.com/portfolio) for more.
 
 
 ### todo / notes / misc
