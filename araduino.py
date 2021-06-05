@@ -180,8 +180,8 @@ def main(argv):
   #print "Rendering audio..."
   data = timeline.render()
 
-  # Reduce volume to 50%
-  data = data * 0.05
+  # Reduce volume 
+  data = data * 0.0375
 
   print "Playing audio..."
   if morning:
