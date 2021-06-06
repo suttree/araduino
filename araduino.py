@@ -1,5 +1,8 @@
 import os, sys, getopt, datetime
-import random
+import random, time
+
+# Pause for effect
+time.sleep(random.randint(6,180))
 
 def usage():
   print "araduino.py -h (help) -d (debug) -s (startup)"
@@ -181,7 +184,7 @@ def main(argv):
   data = timeline.render()
 
   # Reduce volume 
-  data = data * 0.0375
+  data = data * 0.02
 
   print "Playing audio..."
   if morning:
