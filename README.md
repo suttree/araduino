@@ -10,6 +10,10 @@ See https://www.duncangough.com/portfolio for more.
 
 ---
 
+## Install
+pip install ephem
+pip install musical
+
 ### todo / notes / misc
 
 - crontab info
