@@ -1,6 +1,9 @@
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/sin2048_int8.h>
+#include <RTClib.h> // Include the RTC library
+
+RTC_DS3231 rtc;
 
 #define CONTROL_RATE 64
 
@@ -123,24 +126,41 @@ void startNewSong() {
 
 void setup() {
   Serial.begin(9600);
+  Serial.println("Starting new song1...");
+  if (!rtc.begin()) {
+    Serial.println("Couldn't find RTC");
+    while (1); // Stop if the RTC is not found
+  }
+  Serial.println("Starting new song2...");
+
   startMozzi(CONTROL_RATE);
   randomSeed(analogRead(0));
 }
 
 void updateControl() {
   unsigned long currentTime = millis();
-  
-  // Check if we should start a new song
-  if (!isPlaying && (currentTime - lastCheckTime >= 235040)) {
-    lastCheckTime = currentTime;
-    if (shouldSing()) {
-      startNewSong();
+
+  // Get current time from RTC
+  DateTime now = rtc.now();
+  int currentHour = now.hour();
+
+  // Only play between 9 AM and 10 PM (21:00)
+  if (currentHour >= 9 && currentHour < 22) {
+    // Check if we should start a new song
+    if (!isPlaying && (currentTime - lastCheckTime >= 60000)) {
+      lastCheckTime = currentTime;
+      if (shouldSing()) {
+        startNewSong();
+      }
     }
-  }
-  
-  // If we are playing, check if it's time for the next note
-  if (isPlaying && (currentTime - noteStartTime >= noteDuration)) {
-    playNextNote();
+
+    // If we are playing, check if it's time for the next note
+    if (isPlaying && (currentTime - noteStartTime >= noteDuration)) {
+      playNextNote();
+    }
+  } else {
+    // Stop playing outside allowed hours
+    isPlaying = false;
   }
 }
 
