@@ -18,9 +18,12 @@ const int NOTES[] = {262, 277, 294, 311, 330, 349, 370, 392, 415, 440, 466, 494}
 const int SCALES[][8] = {
   {0, 2, 4, 5, 7, 9, 11, 12},   // Major
   {0, 2, 3, 5, 7, 9, 11, 12},   // Melodic Minor
-  {0, 2, 4, 5, 7, 9, 10, 12},    // Mixolydian
+  {0, 2, 4, 5, 7, 9, 10, 12},   // Mixolydian
   {0, 2, 4, 7, 9, 11, 13, 14},  // Double Harmonic Major
   {0, 3, 4, 7, 9, 12, 15, 16},  // Arabian
+  {0, 1, 4, 5, 7, 8, 10, 12},   // Neapolitan Major
+  {0, 1, 3, 5, 6, 8, 10, 12},   // Locrian
+  {0, 2, 3, 5, 7, 8, 10, 12},   // Dorian
   {0, 2, 5, 7, 8, 10, 12, 14}   // Japanese
 };
 
@@ -38,7 +41,7 @@ const float MELODIES[][8] = {
   {0.6, 0.2, 0.2, 0.2, 0.2, 0.0, 0.0, 0.0},
   {0.4, 0.4, 0.2, 0.2, 0.4, 0.0, 0.0, 0.0},
   {0.4, 0.2, 0.2, 0.2, 0.4, 0.6, 0.0, 0.0},
-  {0.8, 0.2, 0.2, 0.4, 0.2, 0.0, 0.0, 0.0},
+  {0.6, 0.2, 0.2, 0.4, 0.2, 0.0, 0.0, 0.0},
   {0.2, 0.2, 0.2, 0.2, 0.2, 0.0, 0.0, 0.0},
   {0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.0, 0.0},
   {0.6, 0.1, 0.1, 0.2, 0.2, 0.0, 0.0, 0.0}
@@ -87,13 +90,19 @@ float smoothNoise(float x) {
 
 float noiseOffset = 0; // Offset to smoothly vary the noise
 
+/*
 bool shouldSing() {
   noiseOffset += 0.05; // Adjust increment for slower/faster variation
 
   float noiseValue = smoothNoise(noiseOffset);
   int mappedValue = map(noiseValue * 100, 0, 100, 1, 7);
 
-  return mappedValue >= 5;
+  return mappedValue >= 4;
+}
+*/
+
+bool shouldSing() {
+  return random(1, 7) >= 4;
 }
 
 const unsigned long baseInterval = 190000; // Base interval: 3 minutes 10 seconds (in ms)
@@ -185,7 +194,7 @@ void playNextNote() {
 void startNewSong() {
   currentKey = random(12);
   currentScaleIndex = random(7);
-  currentMelodyIndex = random(16); // Updated to match the size of MELODIES
+  currentMelodyIndex = random(16);
   currentNoteIndex = 0;
 
   shouldRepeatMelody = random(1, 7) > 3;
