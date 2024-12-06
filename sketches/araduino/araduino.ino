@@ -117,11 +117,11 @@ bool shouldSing() {
   float randomNoise = (rand() % 100) / 100.0 * randomFactor;
 
   // Threshold for singing
-  return (noiseValue + randomNoise) > 0.6; // Adjust threshold as needed
+  return (noiseValue + randomNoise) > 0.65; // Adjust threshold as needed
 }
 
 const unsigned long baseInterval = 190000;
-const unsigned long noiseRange = 20000;
+const unsigned long noiseRange = 100000;
 
 unsigned long calculateDynamicInterval() {
     long adjustment = random(-noiseRange, noiseRange + 1);
