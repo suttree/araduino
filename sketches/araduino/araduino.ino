@@ -149,8 +149,10 @@ void updateControl() {
     Serial.println("SUNRISE OR SUNSET");
     Serial.println(currentTime);
     Serial.println(currentHour);
+    Serial.println(currentMinutes);
     Serial.println(sunriseMinutes);
     Serial.println(currentMinutes - sunriseMinutes);
+    Serial.println(sunriseTimes[month - 1]);
     if (!isPlaying && (currentTime - lastCheckTime >= adjustedInterval)) {
       lastCheckTime = currentTime;
       if (shouldSing()) {
