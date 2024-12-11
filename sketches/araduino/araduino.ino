@@ -140,7 +140,8 @@ void updateControl() {
   int month = now.month();
 
   int sunriseMinutes = convertTimeToMinutes(sunriseTimes[month - 1]);
-  nearSunrise = currentMinutes - sunriseMinutes <= 15;
+  //nearSunrise = currentMinutes - sunriseMinutes <= 15;
+  bool nearSunrise = abs(currentMinutes - sunriseMinutes) <= 30;
 
   static unsigned long lastInterval = 0;
   unsigned long adjustedInterval = calculateDynamicInterval();
