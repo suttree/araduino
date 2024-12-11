@@ -65,8 +65,8 @@ int convertTimeToMinutes(float time) {
   return hours * 60 + minutes;
 }
 
-bool isWithinWindow(int currentMinutes, int targetMinutes, int windowMinutes) {
-  return abs(currentMinutes - targetMinutes) <= windowMinutes;
+bool isWithinWindow(int _currentMinutes, int targetMinutes, int windowMinutes) {
+  return abs(_currentMinutes - targetMinutes) <= windowMinutes;
 }
 
 float smoothNoise(float x) {
@@ -95,11 +95,9 @@ bool shouldSing() {
 }
 */
 
-/*
 bool shouldSing() {
   return random(1, 7) >= 4;
 }
-*/
 
 #include <math.h>
 
@@ -107,6 +105,7 @@ float noiseOffset = 0;
 float variationSpeed = 0.03; // Adjust for slower/faster variation
 float randomFactor = 0.2;   // Introduces slight randomness for natural behavior
 
+/*
 bool shouldSing() {
   noiseOffset += variationSpeed;
 
@@ -117,8 +116,9 @@ bool shouldSing() {
   float randomNoise = (rand() % 100) / 100.0 * randomFactor;
 
   // Threshold for singing
-  return (noiseValue + randomNoise) > 0.65; // Adjust threshold as needed
+  return (noiseValue + randomNoise) > 0.6; // Adjust threshold as needed
 }
+*/
 
 const unsigned long baseInterval = 190000;
 const unsigned long noiseRange = 100000;
@@ -140,12 +140,17 @@ void updateControl() {
   int month = now.month();
 
   int sunriseMinutes = convertTimeToMinutes(sunriseTimes[month - 1]);
-  int sunsetMinutes = convertTimeToMinutes(sunsetTimes[month - 1]);
+  nearSunrise = currentMinutes - sunriseMinutes <= 15;
 
   static unsigned long lastInterval = 0;
   unsigned long adjustedInterval = calculateDynamicInterval();
 
  if (nearSunrise || nearSunset) {
+    Serial.println("SUNRISE OR SUNSET");
+    Serial.println(currentTime);
+    Serial.println(currentHour);
+    Serial.println(sunriseMinutes);
+    Serial.println(currentMinutes - sunriseMinutes);
     if (!isPlaying && (currentTime - lastCheckTime >= adjustedInterval)) {
       lastCheckTime = currentTime;
       if (shouldSing()) {
@@ -153,13 +158,21 @@ void updateControl() {
       }
     }
   } else if (currentHour >= 9 && currentHour <= 22) {
+    Serial.println("HERE TO GO");
+    Serial.println(currentTime);
+    Serial.println(currentHour);
+    //Serial.println(lastCheckTime);
+    //Serial.println(adjustedInterval);
     if (!isPlaying && (currentTime - lastCheckTime >= adjustedInterval)) {
+      //Serial.println("WOAH");
       lastCheckTime = currentTime;
       if (shouldSing()) {
         startNewSong();
       }
     }
   } else {
+    //Serial.println(currentHour);
+    //Serial.println("HERE TO SKIP");
     isPlaying = false;
   }
 
@@ -223,6 +236,11 @@ void setup() {
   if (!rtc.begin()) {
     Serial.println("Couldn't find RTC");
     while (1);
+  }
+
+  if (rtc.lostPower()) {
+    Serial.println("RTC lost power, setting the time!");
+    rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
   }
 
   startMozzi(CONTROL_RATE);
