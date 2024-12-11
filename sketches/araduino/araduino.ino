@@ -147,13 +147,13 @@ void updateControl() {
   unsigned long adjustedInterval = calculateDynamicInterval();
 
  if (nearSunrise || nearSunset) {
-    Serial.println("SUNRISE OR SUNSET");
-    Serial.println(currentTime);
-    Serial.println(currentHour);
-    Serial.println(currentMinutes);
-    Serial.println(sunriseMinutes);
-    Serial.println(currentMinutes - sunriseMinutes);
-    Serial.println(sunriseTimes[month - 1]);
+    //Serial.println("SUNRISE OR SUNSET");
+    //Serial.println(currentTime);
+    //Serial.println(currentHour);
+    //Serial.println(currentMinutes);
+    //Serial.println(sunriseMinutes);
+    //Serial.println(currentMinutes - sunriseMinutes);
+    //Serial.println(sunriseTimes[month - 1]);
     if (!isPlaying && (currentTime - lastCheckTime >= adjustedInterval)) {
       lastCheckTime = currentTime;
       if (shouldSing()) {
@@ -161,9 +161,9 @@ void updateControl() {
       }
     }
   } else if (currentHour >= 9 && currentHour <= 22) {
-    Serial.println("HERE TO GO");
-    Serial.println(currentTime);
-    Serial.println(currentHour);
+    //Serial.println("HERE TO GO");
+    //Serial.println(currentTime);
+    //Serial.println(currentHour);
     //Serial.println(lastCheckTime);
     //Serial.println(adjustedInterval);
     if (!isPlaying && (currentTime - lastCheckTime >= adjustedInterval)) {
