@@ -141,6 +141,9 @@ void updateControl() {
   int sunriseMinutes = convertTimeToMinutes(sunriseTimes[month - 1]);
   nearSunrise = abs(currentMinutes - sunriseMinutes) <= 30;
 
+  int sunsetMinutes = convertTimeToMinutes(sunsetTimes[month - 1]);
+  nearSunset = abs(currentMinutes - sunsetMinutes) <= 30;
+
   static unsigned long lastInterval = 0;
   unsigned long adjustedInterval = calculateDynamicInterval();
 
