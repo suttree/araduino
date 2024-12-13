@@ -109,8 +109,8 @@ bool shouldSing() {
 }
 */
 
-bool shouldSing() {
-  return random(1, 7) >= 4;
+bool shouldSing(int threshold = 4) {
+  return random(1, 7) >= threshold;
 }
 
 #include <math.h>
@@ -154,7 +154,7 @@ void updateControl() {
     //Serial.println(sunriseTimes[month - 1]);
     if (!isPlaying && (currentTime - lastCheckTime >= adjustedInterval)) {
       lastCheckTime = currentTime;
-      if (shouldSing()) {
+      if (shouldSing(3)) {
         startNewSong();
       }
     }
