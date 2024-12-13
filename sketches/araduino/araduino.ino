@@ -45,7 +45,6 @@ const float MELODIES[][8] = {
   {0.6, 0.1, 0.1, 0.2, 0.2, 0.0, 0.0, 0.0}
 };
 
-
 Oscil<SIN2048_NUM_CELLS, AUDIO_RATE> aOscil(SIN2048_DATA);
 
 bool isPlaying = false;
@@ -69,6 +68,7 @@ bool isWithinWindow(int _currentMinutes, int targetMinutes, int windowMinutes) {
   return abs(_currentMinutes - targetMinutes) <= windowMinutes;
 }
 
+/*
 float smoothNoise(float x) {
   int xi = (int)x;
   float xf = x - xi;
@@ -82,7 +82,6 @@ float smoothNoise(float x) {
   return left + xf * (right - left);
 }
 
-/*
 float noiseOffset = 0;
 
 bool shouldSing() {
@@ -94,16 +93,6 @@ bool shouldSing() {
   return mappedValue >= 5;
 }
 */
-
-bool shouldSing() {
-  return random(1, 7) >= 4;
-}
-
-#include <math.h>
-
-float noiseOffset = 0;
-float variationSpeed = 0.03; // Adjust for slower/faster variation
-float randomFactor = 0.2;   // Introduces slight randomness for natural behavior
 
 /*
 bool shouldSing() {
@@ -119,6 +108,16 @@ bool shouldSing() {
   return (noiseValue + randomNoise) > 0.6; // Adjust threshold as needed
 }
 */
+
+bool shouldSing() {
+  return random(1, 7) >= 4;
+}
+
+#include <math.h>
+
+float noiseOffset = 0;
+float variationSpeed = 0.03; // Adjust for slower/faster variation
+float randomFactor = 0.2;   // Introduces slight randomness for natural behavior
 
 const unsigned long baseInterval = 190000;
 const unsigned long noiseRange = 100000;
@@ -140,7 +139,7 @@ void updateControl() {
   int month = now.month();
 
   int sunriseMinutes = convertTimeToMinutes(sunriseTimes[month - 1]);
-  nearSunrise = abs(currentMinutes - sunriseMinutes) <= 60;
+  nearSunrise = abs(currentMinutes - sunriseMinutes) <= 30;
 
   static unsigned long lastInterval = 0;
   unsigned long adjustedInterval = calculateDynamicInterval();
