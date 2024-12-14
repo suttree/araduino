@@ -82,6 +82,12 @@ float smoothNoise(float x) {
   return left + xf * (right - left);
 }
 
+#include <math.h>
+
+float noiseOffset = 0;
+float variationSpeed = 0.03; // Adjust for slower/faster variation
+float randomFactor = 0.2;   // Introduces slight randomness for natural behavior
+
 float noiseOffset = 0;
 
 bool shouldSing() {
@@ -113,13 +119,7 @@ bool shouldSing(int threshold = 4) {
   return random(1, 7) >= threshold;
 }
 
-#include <math.h>
-
-float noiseOffset = 0;
-float variationSpeed = 0.03; // Adjust for slower/faster variation
-float randomFactor = 0.2;   // Introduces slight randomness for natural behavior
-
-const unsigned long baseInterval = 190000;
+const unsigned long baseInterval = 270000;
 const unsigned long noiseRange = 100000;
 
 unsigned long calculateDynamicInterval() {
@@ -139,10 +139,10 @@ void updateControl() {
   int month = now.month();
 
   int sunriseMinutes = convertTimeToMinutes(sunriseTimes[month - 1]);
-  nearSunrise = abs(currentMinutes - sunriseMinutes) <= 30;
+  nearSunrise = abs(currentMinutes - sunriseMinutes) <= 15;
 
   int sunsetMinutes = convertTimeToMinutes(sunsetTimes[month - 1]);
-  nearSunset = abs(currentMinutes - sunsetMinutes) <= 30;
+  nearSunset = abs(currentMinutes - sunsetMinutes) <= 15;
 
   static unsigned long lastInterval = 0;
   unsigned long adjustedInterval = calculateDynamicInterval();
@@ -249,6 +249,8 @@ void setup() {
 
   startMozzi(CONTROL_RATE);
   randomSeed(analogRead(0));
+
+  startNewSong();
 }
 
 const float volume = 0.5;
