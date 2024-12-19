@@ -161,7 +161,7 @@ void updateControl() {
         startNewSong();
       }
     }
-  } else if (currentHour >= 9 && currentHour <= 22) {
+  } else if (currentHour >= 9 && currentHour < 22) {
     //Serial.println("HERE TO GO");
     //Serial.println(currentTime);
     //Serial.println(currentHour);
