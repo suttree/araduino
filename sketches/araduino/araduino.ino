@@ -27,19 +27,24 @@ const int SCALES[][8] = {
 };
 
 const float MELODIES[][8] = {
+  {0.1, 0.2, 0.1, 0.0, 0.0, 0.0, 0.0, 0.0},
+  {0.2, 0.1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0},
+  {0.2, 0.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0},
+  {0.1, 0.1, 0.2, 0.0, 0.0, 0.0, 0.0, 0.0},
+  {0.2, 0.2, 0.2, 0.0, 0.0, 0.0, 0.0, 0.0},
   {0.8, 0.2, 0.2, 0.2, 0.2, 0.0, 0.0, 0.0},
-  {0.6, 0.2, 0.4, 0.2, 0.2, 0.0, 0.0, 0.0},
+  {0.6, 0.2, 0.4, 0.2, 0.2, 0.1, 0.0, 0.0},
   {0.4, 0.2, 0.4, 0.0, 0.0, 0.0, 0.0, 0.0},
   {0.4, 0.2, 0.4, 0.2, 0.2, 0.0, 0.0, 0.0},
   {0.2, 0.8, 0.2, 0.4, 0.2, 0.0, 0.0, 0.0},
-  {0.2, 0.8, 0.2, 0.4, 0.2, 0.0, 0.0, 0.0},
+  {0.2, 0.8, 0.2, 0.4, 0.2, 0.2, 0.0, 0.0},
   {0.4, 0.2, 0.2, 0.8, 0.0, 0.0, 0.0, 0.0},
   {0.2, 0.4, 0.4, 0.2, 0.6, 0.0, 0.0, 0.0},
   {0.6, 0.2, 0.4, 0.2, 0.4, 0.0, 0.0, 0.0},
   {0.6, 0.2, 0.2, 0.2, 0.2, 0.0, 0.0, 0.0},
   {0.4, 0.4, 0.2, 0.2, 0.4, 0.0, 0.0, 0.0},
   {0.4, 0.2, 0.2, 0.2, 0.4, 0.6, 0.0, 0.0},
-  {0.6, 0.2, 0.2, 0.4, 0.2, 0.0, 0.0, 0.0},
+  {0.6, 0.2, 0.2, 0.4, 0.2, 0.0, 0.1, 0.0},
   {0.2, 0.2, 0.2, 0.2, 0.2, 0.0, 0.0, 0.0},
   {0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.0, 0.0},
   {0.6, 0.1, 0.1, 0.2, 0.2, 0.0, 0.0, 0.0}
@@ -148,25 +153,13 @@ void updateControl() {
   unsigned long adjustedInterval = calculateDynamicInterval();
 
  if (nearSunrise || nearSunset) {
-    //Serial.println("SUNRISE OR SUNSET");
-    //Serial.println(currentTime);
-    //Serial.println(currentHour);
-    //Serial.println(currentMinutes);
-    //Serial.println(sunriseMinutes);
-    //Serial.println(currentMinutes - sunriseMinutes);
-    //Serial.println(sunriseTimes[month - 1]);
     if (!isPlaying && (currentTime - lastCheckTime >= adjustedInterval)) {
       lastCheckTime = currentTime;
       if (shouldSing(3)) {
         startNewSong();
       }
     }
-  } else if (currentHour >= 9 && currentHour <= 22) {
-    //Serial.println("HERE TO GO");
-    //Serial.println(currentTime);
-    //Serial.println(currentHour);
-    //Serial.println(lastCheckTime);
-    //Serial.println(adjustedInterval);
+  } else if (currentHour > 8 && currentHour < 22) {
     if (!isPlaying && (currentTime - lastCheckTime >= adjustedInterval)) {
       //Serial.println("WOAH");
       lastCheckTime = currentTime;
@@ -175,8 +168,6 @@ void updateControl() {
       }
     }
   } else {
-    //Serial.println(currentHour);
-    //Serial.println("HERE TO SKIP");
     isPlaying = false;
   }
 
@@ -203,7 +194,7 @@ void playNextNote() {
     noteDuration = MELODIES[currentMelodyIndex][currentNoteIndex] * 1000;
 
     note *= octave;
-    note += random(-10, 12);
+    note += random(-9, 13);
 
     aOscil.setFreq(note);
 
