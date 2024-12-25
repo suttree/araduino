@@ -27,24 +27,19 @@ const int SCALES[][8] = {
 };
 
 const float MELODIES[][8] = {
-  {0.1, 0.2, 0.1, 0.0, 0.0, 0.0, 0.0, 0.0},
-  {0.2, 0.1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0},
-  {0.2, 0.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0},
-  {0.1, 0.1, 0.2, 0.0, 0.0, 0.0, 0.0, 0.0},
-  {0.2, 0.2, 0.2, 0.0, 0.0, 0.0, 0.0, 0.0},
-  {0.8, 0.2, 0.2, 0.2, 0.2, 0.0, 0.0, 0.0},
-  {0.6, 0.2, 0.4, 0.2, 0.2, 0.1, 0.0, 0.0},
+  {0.8, 0.2, 0.2, 0.1, 0.2, 0.0, 0.0, 0.0},
+  {0.6, 0.2, 0.4, 0.2, 0.0, 0.0, 0.0, 0.0},
   {0.4, 0.2, 0.4, 0.0, 0.0, 0.0, 0.0, 0.0},
-  {0.4, 0.2, 0.4, 0.2, 0.2, 0.0, 0.0, 0.0},
+  {0.4, 0.2, 0.4, 0.2, 0.2, 0.1, 0.0, 0.0},
+  {0.2, 0.8, 0.2, 0.4, 0.0, 0.0, 0.0, 0.0},
   {0.2, 0.8, 0.2, 0.4, 0.2, 0.0, 0.0, 0.0},
-  {0.2, 0.8, 0.2, 0.4, 0.2, 0.2, 0.0, 0.0},
   {0.4, 0.2, 0.2, 0.8, 0.0, 0.0, 0.0, 0.0},
   {0.2, 0.4, 0.4, 0.2, 0.6, 0.0, 0.0, 0.0},
   {0.6, 0.2, 0.4, 0.2, 0.4, 0.0, 0.0, 0.0},
   {0.6, 0.2, 0.2, 0.2, 0.2, 0.0, 0.0, 0.0},
   {0.4, 0.4, 0.2, 0.2, 0.4, 0.0, 0.0, 0.0},
   {0.4, 0.2, 0.2, 0.2, 0.4, 0.6, 0.0, 0.0},
-  {0.6, 0.2, 0.2, 0.4, 0.2, 0.0, 0.1, 0.0},
+  {0.6, 0.2, 0.2, 0.4, 0.2, 0.0, 0.0, 0.0},
   {0.2, 0.2, 0.2, 0.2, 0.2, 0.0, 0.0, 0.0},
   {0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.0, 0.0},
   {0.6, 0.1, 0.1, 0.2, 0.2, 0.0, 0.0, 0.0}
@@ -72,53 +67,6 @@ int convertTimeToMinutes(float time) {
 bool isWithinWindow(int _currentMinutes, int targetMinutes, int windowMinutes) {
   return abs(_currentMinutes - targetMinutes) <= windowMinutes;
 }
-
-/*
-float smoothNoise(float x) {
-  int xi = (int)x;
-  float xf = x - xi;
-
-  // Hashing function for pseudo-random repeatable values
-  int hash = (xi * 73 + 97) % 256; 
-  float left = (hash % 100) / 100.0;
-  hash = ((xi + 1) * 73 + 97) % 256;
-  float right = (hash % 100) / 100.0;
-
-  return left + xf * (right - left);
-}
-
-#include <math.h>
-
-float noiseOffset = 0;
-float variationSpeed = 0.03; // Adjust for slower/faster variation
-float randomFactor = 0.2;   // Introduces slight randomness for natural behavior
-
-float noiseOffset = 0;
-
-bool shouldSing() {
-  noiseOffset += 0.05; // Adjust increment for slower/faster variation
-
-  float noiseValue = smoothNoise(noiseOffset);
-  int mappedValue = map(noiseValue * 100, 0, 100, 1, 7);
-
-  return mappedValue >= 5;
-}
-*/
-
-/*
-bool shouldSing() {
-  noiseOffset += variationSpeed;
-
-  // Generate Perlin noise value between 0 and 1
-  float noiseValue = (sin(noiseOffset) + 1.0) / 2.0; // Simulating Perlin with sin for simplicity
-
-  // Add randomness for more natural variation
-  float randomNoise = (rand() % 100) / 100.0 * randomFactor;
-
-  // Threshold for singing
-  return (noiseValue + randomNoise) > 0.6; // Adjust threshold as needed
-}
-*/
 
 bool shouldSing(int threshold = 4) {
   return random(1, 7) >= threshold;
@@ -153,13 +101,25 @@ void updateControl() {
   unsigned long adjustedInterval = calculateDynamicInterval();
 
  if (nearSunrise || nearSunset) {
+    //Serial.println("SUNRISE OR SUNSET");
+    //Serial.println(currentTime);
+    //Serial.println(currentHour);
+    //Serial.println(currentMinutes);
+    //Serial.println(sunriseMinutes);
+    //Serial.println(currentMinutes - sunriseMinutes);
+    //Serial.println(sunriseTimes[month - 1]);
     if (!isPlaying && (currentTime - lastCheckTime >= adjustedInterval)) {
       lastCheckTime = currentTime;
       if (shouldSing(3)) {
         startNewSong();
       }
     }
-  } else if (currentHour > 8 && currentHour < 22) {
+  } else if (currentHour >= 9 && currentHour <= 22) {
+    //Serial.println("HERE TO GO");
+    //Serial.println(currentTime);
+    //Serial.println(currentHour);
+    //Serial.println(lastCheckTime);
+    //Serial.println(adjustedInterval);
     if (!isPlaying && (currentTime - lastCheckTime >= adjustedInterval)) {
       //Serial.println("WOAH");
       lastCheckTime = currentTime;
@@ -168,6 +128,8 @@ void updateControl() {
       }
     }
   } else {
+    //Serial.println(currentHour);
+    //Serial.println("HERE TO SKIP");
     isPlaying = false;
   }
 
@@ -194,7 +156,7 @@ void playNextNote() {
     noteDuration = MELODIES[currentMelodyIndex][currentNoteIndex] * 1000;
 
     note *= octave;
-    note += random(-9, 13);
+    note += random(-10, 12);
 
     aOscil.setFreq(note);
 
