@@ -72,16 +72,23 @@ bool shouldSing(int threshold = 4) {
   return random(1, 7) >= threshold;
 }
 
+bool nearSunrise = false;
+bool nearSunset = false;
+
 const unsigned long baseInterval = 270000;
 const unsigned long noiseRange = 100000;
 
 unsigned long calculateDynamicInterval() {
     long adjustment = random(-noiseRange, noiseRange + 1);
-    return baseInterval + adjustment;
-}
+    unsigned long interval = baseInterval + adjustment;
 
-bool nearSunrise = false;
-bool nearSunset = false;
+    // Reduce interval when near sunrise or sunset
+    if (nearSunrise || nearSunset) {
+        interval /= 2;
+    }
+
+    return interval;
+}
 
 void updateControl() {
   unsigned long currentTime = millis();
@@ -109,7 +116,6 @@ void updateControl() {
     }
   } else if (currentHour >= 9 && currentHour <= 22) {
     if (!isPlaying && (currentTime - lastCheckTime >= adjustedInterval)) {
-      //Serial.println("WOAH");
       lastCheckTime = currentTime;
       if (shouldSing()) {
         startNewSong();
