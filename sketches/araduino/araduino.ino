@@ -27,6 +27,7 @@ const int SCALES[][8] = {
 };
 
 const float MELODIES[][8] = {
+  {0.1, 0.2, 0.1, 0.1, 0.1, 0.2, 0.0, 0.0},
   {0.8, 0.2, 0.2, 0.2, 0.2, 0.0, 0.0, 0.0},
   {0.6, 0.2, 0.4, 0.2, 0.0, 0.0, 0.0, 0.0},
   {0.4, 0.2, 0.4, 0.0, 0.0, 0.0, 0.0, 0.0},
@@ -180,6 +181,7 @@ void startNewSong() {
 }
 
 void setup() {
+  Serial.println("Hello");
   Serial.begin(9600);
   if (!rtc.begin()) {
     Serial.println("Couldn't find RTC");
