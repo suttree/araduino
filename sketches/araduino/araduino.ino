@@ -100,7 +100,7 @@ void updateControl() {
   int month = now.month();
 
   int sunriseMinutes = convertTimeToMinutes(sunriseTimes[month - 1]);
-  nearSunrise = abs(currentMinutes - sunriseMinutes) <= 15;
+  nearSunrise = abs(currentMinutes - sunriseMinutes) <= 10;
 
   int sunsetMinutes = convertTimeToMinutes(sunsetTimes[month - 1]);
   nearSunset = abs(currentMinutes - sunsetMinutes) <= 15;
@@ -181,7 +181,7 @@ void startNewSong() {
 }
 
 void setup() {
-  Serial.println("Hello");
+  //Serial.println("Hello");
   Serial.begin(9600);
   if (!rtc.begin()) {
     Serial.println("Couldn't find RTC");
