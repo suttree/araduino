@@ -197,6 +197,25 @@ void setup() {
   randomSeed(analogRead(0));
 
   startNewSong();
+
+  /*
+  rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
+
+  DateTime now = rtc.now(); // Get current time
+
+  Serial.print(now.year(), DEC);
+  Serial.print('/');
+  Serial.print(now.month(), DEC);
+  Serial.print('/');
+  Serial.print(now.day(), DEC);
+  Serial.print(" ");
+  Serial.print(now.hour(), DEC);
+  Serial.print(':');
+  Serial.print(now.minute(), DEC);
+  Serial.print(':');
+  Serial.print(now.second(), DEC);
+  Serial.println();
+  */
 }
 
 const float volume = 0.5;
