@@ -1,5 +1,6 @@
 #include <MozziGuts.h>
 #include <Oscil.h>
+#include <mozzi_pgmspace.h>
 #include <tables/sin2048_int8.h>
 
 constexpr int CONTROL_RATE_HZ = 64;
@@ -7,9 +8,10 @@ constexpr long MIN_ATTEMPT_INTERVAL_MS = 170000;
 constexpr long MAX_ATTEMPT_INTERVAL_MS = 370000;
 
 // C4 to B4
-const int NOTES[] = {262, 277, 294, 311, 330, 349, 370, 392, 415, 440, 466, 494}; 
+CONSTTABLE_STORAGE(uint16_t NOTES[]) = {262, 277, 294, 311, 330, 349, 370, 392, 415, 440, 466, 494};
+constexpr uint8_t NOTE_COUNT = sizeof(NOTES) / sizeof(NOTES[0]);
 
-const int SCALES[][8] = {
+CONSTTABLE_STORAGE(uint8_t SCALES[][8]) = {
   {0, 2, 4, 5, 7, 9, 11, 12},   // Major
   {0, 2, 3, 5, 7, 9, 11, 12},   // Melodic Minor
   {0, 2, 4, 5, 7, 9, 10, 12},   // Mixolydian
@@ -20,26 +22,35 @@ const int SCALES[][8] = {
   {0, 2, 3, 5, 7, 8, 10, 12},   // Dorian
   {0, 2, 5, 7, 8, 10, 12, 14}   // Japanese
 };
+constexpr uint8_t SCALE_COUNT = sizeof(SCALES) / sizeof(SCALES[0]);
 
-const float MELODIES[][8] = {
-  {0.1, 0.2, 0.1, 0.1, 0.1, 0.2, 0.0, 0.0},
-  {0.8, 0.2, 0.2, 0.2, 0.2, 0.0, 0.0, 0.0},
-  {0.6, 0.2, 0.4, 0.2, 0.0, 0.0, 0.0, 0.0},
-  {0.4, 0.2, 0.4, 0.0, 0.0, 0.0, 0.0, 0.0},
-  {0.4, 0.2, 0.4, 0.2, 0.2, 0.2, 0.0, 0.0},
-  {0.2, 0.8, 0.2, 0.4, 0.0, 0.0, 0.0, 0.0},
-  {0.2, 0.8, 0.2, 0.4, 0.2, 0.0, 0.0, 0.0},
-  {0.4, 0.2, 0.2, 0.8, 0.0, 0.0, 0.0, 0.0},
-  {0.2, 0.4, 0.4, 0.2, 0.6, 0.0, 0.0, 0.0},
-  {0.6, 0.2, 0.4, 0.2, 0.4, 0.0, 0.0, 0.0},
-  {0.6, 0.2, 0.2, 0.2, 0.2, 0.0, 0.0, 0.0},
-  {0.4, 0.4, 0.2, 0.2, 0.4, 0.0, 0.0, 0.0},
-  {0.4, 0.2, 0.2, 0.2, 0.4, 0.6, 0.0, 0.0},
-  {0.6, 0.2, 0.2, 0.4, 0.2, 0.0, 0.0, 0.0},
-  {0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.0, 0.0},
-  {0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.0, 0.0},
-  {0.6, 0.2, 0.2, 0.2, 0.2, 0.0, 0.0, 0.0}
+// Note lengths in milliseconds. A zero ends the line.
+constexpr uint8_t MAX_LINE_NOTES = 8;
+CONSTTABLE_STORAGE(uint16_t MELODY_DURATIONS[][MAX_LINE_NOTES]) = {
+  {100, 200, 100, 100, 100, 200},
+  {800, 200, 200, 200, 200},
+  {600, 200, 400, 200},
+  {400, 200, 400},
+  {400, 200, 400, 200, 200, 200},
+  {200, 800, 200, 400},
+  {200, 800, 200, 400, 200},
+  {400, 200, 200, 800},
+  {200, 400, 400, 200, 600},
+  {600, 200, 400, 200, 400},
+  {600, 200, 200, 200, 200},
+  {400, 400, 200, 200, 400},
+  {400, 200, 200, 200, 400, 600},
+  {600, 200, 200, 400, 200},
+  {200, 200, 200, 200, 200, 400},
+  {200, 200, 200, 200, 200, 400},
+  {600, 200, 200, 200, 200}
 };
+constexpr uint8_t MELODY_COUNT = sizeof(MELODY_DURATIONS) / sizeof(MELODY_DURATIONS[0]);
+constexpr unsigned long NOTE_LENGTH_PERCENT = 65;
+
+// Root, third, fifth, seventh, and ninth. The ninth uses the second degree's pitch class.
+CONSTTABLE_STORAGE(uint8_t CHORD_DEGREES[]) = {0, 2, 4, 6, 1};
+constexpr uint8_t CHORD_NOTE_COUNT = sizeof(CHORD_DEGREES) / sizeof(CHORD_DEGREES[0]);
 
 Oscil<SIN2048_NUM_CELLS, AUDIO_RATE> aOscil(SIN2048_DATA);
 
@@ -49,11 +60,9 @@ unsigned long noteStartTime = 0;
 unsigned long noteDuration = 0;
 unsigned long lastAttemptTime = 0;
 unsigned long attemptInterval = 0;
-int currentMelodyIndex = 0;
-int currentNoteIndex = 0;
-int currentKey = 0;
-int currentScaleIndex = 0;
-int chordNotes[5];
+uint8_t currentMelodyIndex = 0;
+uint8_t currentNoteIndex = 0;
+uint8_t chordNotes[CHORD_NOTE_COUNT];
 
 void scheduleNextAttempt(unsigned long now) {
   lastAttemptTime = now;
@@ -75,50 +84,44 @@ void updateControl() {
 }
 
 void playNextNote() {
-  if (currentNoteIndex >= 8 || MELODIES[currentMelodyIndex][currentNoteIndex] == 0) {
+  uint16_t duration = currentNoteIndex < MAX_LINE_NOTES
+    ? FLASH_OR_RAM_READ(&MELODY_DURATIONS[currentMelodyIndex][currentNoteIndex])
+    : 0;
+  if (duration == 0) {
     if (shouldRepeatMelody) {
       currentNoteIndex = 0;
       shouldRepeatMelody = false;
+      duration = FLASH_OR_RAM_READ(&MELODY_DURATIONS[currentMelodyIndex][0]);
     } else {
       isPlaying = false;
       return;
     }
   }
 
-  if (MELODIES[currentMelodyIndex][currentNoteIndex] > 0) {
-    int note = NOTES[chordNotes[random(5)]] * 4;
-    int octave = random(1, 4);
-    noteDuration = MELODIES[currentMelodyIndex][currentNoteIndex] * 1000;
+  int frequency = FLASH_OR_RAM_READ(&NOTES[chordNotes[random(CHORD_NOTE_COUNT)]]) * 4;
+  frequency *= random(1, 4);
+  frequency += random(-10, 12);
+  aOscil.setFreq(frequency);
 
-    note *= octave;
-    note += random(-10, 12);
-
-    aOscil.setFreq(note);
-
-    // Set overlapping note start (e.g., start the next note slightly earlier)
-    int overlapDuration = noteDuration * 0.65;
-    noteStartTime = millis();
-    isPlaying = true;
-    noteDuration = overlapDuration;
-  }
-
+  noteStartTime = millis();
+  noteDuration = duration * NOTE_LENGTH_PERCENT / 100;
+  isPlaying = true;
   currentNoteIndex++;
 }
 
 void startNewSong() {
-  currentKey = random(12);
-  currentScaleIndex = random(7);
-  currentMelodyIndex = random(16);
+  const uint8_t key = random(NOTE_COUNT);
+  const uint8_t scale = random(SCALE_COUNT);
+  currentMelodyIndex = random(MELODY_COUNT);
   currentNoteIndex = 0;
 
-  shouldRepeatMelody = random(1, 7) > 3;
+  shouldRepeatMelody = random(2) == 0;
 
-  chordNotes[0] = currentKey;
-  chordNotes[1] = (currentKey + SCALES[currentScaleIndex][2]) % 12;
-  chordNotes[2] = (currentKey + SCALES[currentScaleIndex][4]) % 12;
-  chordNotes[3] = (currentKey + SCALES[currentScaleIndex][6]) % 12;
-  chordNotes[4] = (currentKey + SCALES[currentScaleIndex][8]) % 12;
-
+  for (uint8_t i = 0; i < CHORD_NOTE_COUNT; i++) {
+    const uint8_t degree = FLASH_OR_RAM_READ(&CHORD_DEGREES[i]);
+    const uint8_t offset = FLASH_OR_RAM_READ(&SCALES[scale][degree]);
+    chordNotes[i] = (key + offset) % NOTE_COUNT;
+  }
   playNextNote();
 }
 
