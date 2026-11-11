@@ -1,15 +1,10 @@
 #include <MozziGuts.h>
 #include <Oscil.h>
 #include <tables/sin2048_int8.h>
-#include <RTClib.h>
 
-RTC_DS3231 rtc;
-
-#define CONTROL_RATE 64
-
-// Sunrise and Sunset Times (precomputed for the 15th of each month, London)
-float sunriseTimes[12] = {8.05, 7.25, 6.30, 5.50, 5.05, 4.50, 5.00, 5.35, 6.20, 7.05, 7.50, 8.20};
-float sunsetTimes[12] = {16.05, 17.10, 18.00, 19.10, 20.10, 21.00, 20.50, 20.00, 19.00, 17.40, 16.30, 15.50};
+constexpr int CONTROL_RATE_HZ = 64;
+constexpr long MIN_ATTEMPT_INTERVAL_MS = 170000;
+constexpr long MAX_ATTEMPT_INTERVAL_MS = 370000;
 
 // C4 to B4
 const int NOTES[] = {262, 277, 294, 311, 330, 349, 370, 392, 415, 440, 466, 494}; 
@@ -52,82 +47,30 @@ bool isPlaying = false;
 bool shouldRepeatMelody = false;
 unsigned long noteStartTime = 0;
 unsigned long noteDuration = 0;
-unsigned long lastCheckTime = 0;
+unsigned long lastAttemptTime = 0;
+unsigned long attemptInterval = 0;
 int currentMelodyIndex = 0;
 int currentNoteIndex = 0;
 int currentKey = 0;
 int currentScaleIndex = 0;
 int chordNotes[5];
 
-int convertTimeToMinutes(float time) {
-  int hours = (int)time;
-  int minutes = (time - hours) * 60;
-  return hours * 60 + minutes;
-}
-
-bool isWithinWindow(int _currentMinutes, int targetMinutes, int windowMinutes) {
-  return abs(_currentMinutes - targetMinutes) <= windowMinutes;
-}
-
-bool shouldSing(int threshold = 4) {
-  return random(1, 7) >= threshold;
-}
-
-bool nearSunrise = false;
-bool nearSunset = false;
-
-const unsigned long baseInterval = 270000;
-const unsigned long noiseRange = 100000;
-
-unsigned long calculateDynamicInterval() {
-    long adjustment = random(-noiseRange, noiseRange + 1);
-    unsigned long interval = baseInterval + adjustment;
-
-    // Reduce interval when near sunrise or sunset
-    if (nearSunrise || nearSunset) {
-        interval /= 2;
-    }
-
-    return interval;
+void scheduleNextAttempt(unsigned long now) {
+  lastAttemptTime = now;
+  attemptInterval = random(MIN_ATTEMPT_INTERVAL_MS, MAX_ATTEMPT_INTERVAL_MS + 1);
 }
 
 void updateControl() {
-  unsigned long currentTime = millis();
-
-  DateTime now = rtc.now();
-  int currentHour = now.hour();
-  int currentMinutes = now.hour() * 60 + now.minute();
-  int month = now.month();
-
-  int sunriseMinutes = convertTimeToMinutes(sunriseTimes[month - 1]);
-  nearSunrise = abs(currentMinutes - sunriseMinutes) <= 10;
-
-  int sunsetMinutes = convertTimeToMinutes(sunsetTimes[month - 1]);
-  nearSunset = abs(currentMinutes - sunsetMinutes) <= 15;
-
-  static unsigned long lastInterval = 0;
-  unsigned long adjustedInterval = calculateDynamicInterval();
-
- if (nearSunrise || nearSunset) {
-    if (!isPlaying && (currentTime - lastCheckTime >= adjustedInterval)) {
-      lastCheckTime = currentTime;
-      if (shouldSing(3)) {
-        startNewSong();
-      }
+  const unsigned long now = millis();
+  if (isPlaying) {
+    if (now - noteStartTime >= noteDuration) {
+      playNextNote();
     }
-  } else if (currentHour >= 9 && currentHour <= 22) {
-    if (!isPlaying && (currentTime - lastCheckTime >= adjustedInterval)) {
-      lastCheckTime = currentTime;
-      if (shouldSing()) {
-        startNewSong();
-      }
+  } else if (now - lastAttemptTime >= attemptInterval) {
+    scheduleNextAttempt(now);
+    if (random(2) == 0) {
+      startNewSong();
     }
-  } else {
-    isPlaying = false;
-  }
-
-  if (isPlaying && (currentTime - noteStartTime >= noteDuration)) {
-    playNextNote();
   }
 }
 
@@ -176,46 +119,14 @@ void startNewSong() {
   chordNotes[3] = (currentKey + SCALES[currentScaleIndex][6]) % 12;
   chordNotes[4] = (currentKey + SCALES[currentScaleIndex][8]) % 12;
 
-  //Serial.println("Starting new song...");
   playNextNote();
 }
 
 void setup() {
-  //Serial.println("Hello");
-  Serial.begin(9600);
-  if (!rtc.begin()) {
-    Serial.println("Couldn't find RTC");
-    while (1);
-  }
-
-  if (rtc.lostPower()) {
-    Serial.println("RTC lost power, setting the time!");
-    rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
-  }
-
-  startMozzi(CONTROL_RATE);
   randomSeed(analogRead(0));
-
+  startMozzi(CONTROL_RATE_HZ);
   startNewSong();
-
-  /*
-  rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
-
-  DateTime now = rtc.now(); // Get current time
-
-  Serial.print(now.year(), DEC);
-  Serial.print('/');
-  Serial.print(now.month(), DEC);
-  Serial.print('/');
-  Serial.print(now.day(), DEC);
-  Serial.print(" ");
-  Serial.print(now.hour(), DEC);
-  Serial.print(':');
-  Serial.print(now.minute(), DEC);
-  Serial.print(':');
-  Serial.print(now.second(), DEC);
-  Serial.println();
-  */
+  scheduleNextAttempt(millis());
 }
 
 const float volume = 0.5;
