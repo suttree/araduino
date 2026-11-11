@@ -6,6 +6,7 @@
 constexpr int CONTROL_RATE_HZ = 64;
 constexpr long MIN_ATTEMPT_INTERVAL_MS = 170000;
 constexpr long MAX_ATTEMPT_INTERVAL_MS = 370000;
+constexpr unsigned long REPEAT_PAUSE_MS = 250;
 
 // C4 to B4
 CONSTTABLE_STORAGE(uint16_t NOTES[]) = {262, 277, 294, 311, 330, 349, 370, 392, 415, 440, 466, 494};
@@ -54,15 +55,17 @@ constexpr uint8_t CHORD_NOTE_COUNT = sizeof(CHORD_DEGREES) / sizeof(CHORD_DEGREE
 
 Oscil<SIN2048_NUM_CELLS, AUDIO_RATE> aOscil(SIN2048_DATA);
 
-bool isPlaying = false;
-bool shouldRepeatMelody = false;
-unsigned long noteStartTime = 0;
-unsigned long noteDuration = 0;
+enum class Playback : uint8_t { Idle, Playing, RepeatPause };
+Playback playback = Playback::Idle;
+bool repeatLine = false;
+unsigned long playbackStartedAt = 0;
+unsigned long playbackDuration = 0;
 unsigned long lastAttemptTime = 0;
 unsigned long attemptInterval = 0;
 uint8_t currentMelodyIndex = 0;
 uint8_t currentNoteIndex = 0;
-uint8_t chordNotes[CHORD_NOTE_COUNT];
+uint8_t lineLength = 0;
+int lineFrequencies[MAX_LINE_NOTES];
 
 void scheduleNextAttempt(unsigned long now) {
   lastAttemptTime = now;
@@ -71,71 +74,70 @@ void scheduleNextAttempt(unsigned long now) {
 
 void updateControl() {
   const unsigned long now = millis();
-  if (isPlaying) {
-    if (now - noteStartTime >= noteDuration) {
-      playNextNote();
+  if (playback != Playback::Idle) {
+    if (now - playbackStartedAt >= playbackDuration) {
+      advancePlayback(now);
     }
   } else if (now - lastAttemptTime >= attemptInterval) {
     scheduleNextAttempt(now);
     if (random(2) == 0) {
-      startNewSong();
+      startNewSong(now);
     }
   }
 }
 
-void playNextNote() {
-  uint16_t duration = currentNoteIndex < MAX_LINE_NOTES
-    ? FLASH_OR_RAM_READ(&MELODY_DURATIONS[currentMelodyIndex][currentNoteIndex])
-    : 0;
-  if (duration == 0) {
-    if (shouldRepeatMelody) {
-      currentNoteIndex = 0;
-      shouldRepeatMelody = false;
-      duration = FLASH_OR_RAM_READ(&MELODY_DURATIONS[currentMelodyIndex][0]);
-    } else {
-      isPlaying = false;
-      return;
-    }
+void advancePlayback(unsigned long now) {
+  if (currentNoteIndex < lineLength) {
+    const uint16_t duration = FLASH_OR_RAM_READ(&MELODY_DURATIONS[currentMelodyIndex][currentNoteIndex]);
+    aOscil.setFreq(lineFrequencies[currentNoteIndex++]);
+    playback = Playback::Playing;
+    playbackStartedAt = now;
+    playbackDuration = duration * NOTE_LENGTH_PERCENT / 100;
+  } else if (repeatLine) {
+    repeatLine = false;
+    currentNoteIndex = 0;
+    playback = Playback::RepeatPause;
+    playbackStartedAt = now;
+    playbackDuration = REPEAT_PAUSE_MS;
+  } else {
+    playback = Playback::Idle;
   }
-
-  int frequency = FLASH_OR_RAM_READ(&NOTES[chordNotes[random(CHORD_NOTE_COUNT)]]) * 4;
-  frequency *= random(1, 4);
-  frequency += random(-10, 12);
-  aOscil.setFreq(frequency);
-
-  noteStartTime = millis();
-  noteDuration = duration * NOTE_LENGTH_PERCENT / 100;
-  isPlaying = true;
-  currentNoteIndex++;
 }
 
-void startNewSong() {
+void startNewSong(unsigned long now) {
   const uint8_t key = random(NOTE_COUNT);
   const uint8_t scale = random(SCALE_COUNT);
   currentMelodyIndex = random(MELODY_COUNT);
-  currentNoteIndex = 0;
+  repeatLine = random(2) == 0;
 
-  shouldRepeatMelody = random(2) == 0;
-
-  for (uint8_t i = 0; i < CHORD_NOTE_COUNT; i++) {
-    const uint8_t degree = FLASH_OR_RAM_READ(&CHORD_DEGREES[i]);
+  lineLength = 0;
+  while (lineLength < MAX_LINE_NOTES &&
+         FLASH_OR_RAM_READ(&MELODY_DURATIONS[currentMelodyIndex][lineLength]) != 0) {
+    const uint8_t degree = FLASH_OR_RAM_READ(&CHORD_DEGREES[random(CHORD_NOTE_COUNT)]);
     const uint8_t offset = FLASH_OR_RAM_READ(&SCALES[scale][degree]);
-    chordNotes[i] = (key + offset) % NOTE_COUNT;
+    const uint8_t pitch = (key + offset) % NOTE_COUNT;
+    int frequency = FLASH_OR_RAM_READ(&NOTES[pitch]) * 4;
+    frequency *= random(1, 4);
+    frequency += random(-10, 12);
+    lineFrequencies[lineLength++] = frequency;
   }
-  playNextNote();
+
+  currentNoteIndex = 0;
+  advancePlayback(now);
 }
 
 void setup() {
   randomSeed(analogRead(0));
   startMozzi(CONTROL_RATE_HZ);
-  startNewSong();
-  scheduleNextAttempt(millis());
+  const unsigned long now = millis();
+  startNewSong(now);
+  scheduleNextAttempt(now);
 }
 
 const float volume = 0.5;
 
 int updateAudio() {
-    return isPlaying ? aOscil.next() * volume : 0;
+  return playback == Playback::Playing ? aOscil.next() * volume : 0;
 }
 
 void loop() {
