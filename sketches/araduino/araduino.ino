@@ -7,6 +7,7 @@ constexpr int CONTROL_RATE_HZ = 64;
 constexpr long MIN_ATTEMPT_INTERVAL_MS = 170000;
 constexpr long MAX_ATTEMPT_INTERVAL_MS = 370000;
 constexpr unsigned long REPEAT_PAUSE_MS = 250;
+constexpr unsigned long PITCH_SCALE_PER_THOUSAND = 1122;  // Two semitones up.
 
 // C4 to B4
 CONSTTABLE_STORAGE(uint16_t NOTES[]) = {262, 277, 294, 311, 330, 349, 370, 392, 415, 440, 466, 494};
@@ -119,7 +120,7 @@ void startNewSong(unsigned long now) {
     int frequency = FLASH_OR_RAM_READ(&NOTES[pitch]) * 4;
     frequency *= random(1, 4);
     frequency += random(-10, 12);
-    lineFrequencies[lineLength++] = frequency;
+    lineFrequencies[lineLength++] = (frequency * PITCH_SCALE_PER_THOUSAND + 500) / 1000;
   }
 
   currentNoteIndex = 0;
