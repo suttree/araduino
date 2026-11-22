@@ -18,6 +18,10 @@ class BirdVoice {
   explicit BirdVoice(uint32_t seed = 1, uint16_t pitchScale = 1888)
       : rng(seed ? seed : 1), pitchScale(pitchScale) {}
   bool busy() const { return active; }
+  void setGainPercent(uint8_t percent) {
+    // The syllable levels leave enough 8-bit headroom for up to twice the gain.
+    gainPercent = percent > 200 ? 200 : percent;
+  }
   Profile selectedProfile() const { return mode; }
   void triggerRandom() {
     if (!active) trigger(static_cast<Profile>(pick(6)));
@@ -142,7 +146,8 @@ class BirdVoice {
       const int16_t noise = int16_t(noiseState >> 8) - 128;
       wave = (wave * (128 - noiseMix) + noise * noiseMix) / 128;
     }
-    return int32_t(wave) * amplitude / 65536;
+    const int16_t sample = int32_t(wave) * amplitude / 65536;
+    return sample * gainPercent / 100;
   }
 
  private:
@@ -153,6 +158,7 @@ class BirdVoice {
   } motif[5] = {};
   uint32_t rng, phase = 0, increment = 0, incrementTarget = 0;
   uint16_t pitchScale;
+  uint8_t gainPercent = 100;
   uint32_t secondPhase = 0;
   uint16_t noiseState = 0xace1;
   uint8_t secondToneMix = 0, noiseMix = 0;

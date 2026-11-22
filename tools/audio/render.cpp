@@ -128,6 +128,7 @@ int main(int argc, char **argv) {
   if (registersSeen != 15) throw std::runtime_error("Did not exercise all four registers");
   std::cout << "Passed completion, restart, register and output-range checks for 1200 phrases\n";
   ara::BirdVoice mixedVoice(20261122);
+  mixedVoice.setGainPercent(150);
   mixedVoice.setRegisterRange(8, 11);
   unsigned profilesSeen = 0;
   for (unsigned song = 0; song < 100; ++song) {
@@ -143,7 +144,7 @@ int main(int argc, char **argv) {
       if (mixedVoice.selectedProfile() != profile || mixedVoice.selectedRegister() != selected)
         throw std::runtime_error("Voice or register changed within a song");
       for (unsigned frame = 0; frame < 64; ++frame) {
-        if (std::abs(int(mixedVoice.audio())) > 64)
+        if (std::abs(int(mixedVoice.audio())) > 96)
           throw std::runtime_error("Mixed voice exceeded output headroom");
       }
     }
@@ -151,5 +152,5 @@ int main(int argc, char **argv) {
       throw std::runtime_error("Mixed voice did not finish cleanly");
   }
   if (profilesSeen != 63) throw std::runtime_error("Random selection did not exercise every profile");
-  std::cout << "Passed 100 consecutive random songs, including every voice and trills\n";
+  std::cout << "Passed 100 consecutive random songs at 150% gain, including every voice and trills\n";
 }

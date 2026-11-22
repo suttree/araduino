@@ -36,6 +36,8 @@ The default range includes 8, 9, 10 and 11 semitones. Set both limits to 11 for 
 
 The firmware chooses a voice at random for each song, with equal probability for Soft, Garden, Lively, Chirps, Liquid and Textured. Lively includes the trills. The voice remains fixed through the song and its repeat. Consecutive songs can choose the same voice. The firmware retains the original interval between attempts and its chance of remaining silent. To audition a fixed voice, replace the two `voice.triggerRandom()` calls with a call such as `voice.trigger(ara::BirdVoice::Chirps)`.
 
+`OUTPUT_GAIN_PERCENT` sets the firmware volume. It is now 150, a 50% increase in digital amplitude over the previews, or approximately 3.5 dB. The voice limits this setting to 200 to preserve output headroom. This gain change does not alter pitch or timing. Existing desktop previews remain at the original 100% level.
+
 ## Sound shape variations
 
 The [20-second comparison](../../output/birdsong-shapes/ara-shape-comparison-d24496268783.mp3) contains these voices at the same fixed eleven-semitone register, in order:
@@ -75,11 +77,11 @@ The MP3 files use the same output scale, without loudness normalization, reverb 
 
 ## Validation
 
-The Uno firmware uses 6622 bytes of flash and 851 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. Earlier builds with a fixed Soft or Textured profile also passed. Firmware from commit `bce77f6` was uploaded to the connected Uno on 22 November 2026. avrdude verified all 6622 bytes against the compiled firmware by reading back the flash. Physical listening and sustained runtime timing remain unconfirmed.
+The Uno firmware uses 6670 bytes of flash and 852 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. Earlier builds with a fixed Soft or Textured profile also passed. The owner confirmed that the first random-voice upload played through Ara's speaker, but reported that it was quiet. The 150% gain version was uploaded on 22 November 2026, and avrdude verified all 6670 bytes by reading back the flash. Listening at the higher gain and sustained runtime timing remain unconfirmed.
 
 The desktop renderer runs with address and undefined-behavior sanitizers. It checks output range, phrase completion, return to silence and restart across 100 seeds for all six voices, with both fixed and variable registers. The 1200 phrases exercise every register in the default range and check that the register remains fixed during each song. The oscillator is limited to 7000 Hz, below the 8192 Hz Nyquist limit. These checks do not assess how natural the birdsong sounds.
 
-An additional sequence of 100 random songs checks that all six profiles are selected, including Lively, that voice and register stay fixed during a song, and that every song finishes within the expected duration and returns to silence.
+An additional sequence of 100 random songs at 150% gain checks that all six profiles are selected, including Lively, that voice and register stay fixed during a song, that output stays within its expected headroom, and that every song finishes within the expected duration and returns to silence.
 
 To build with Arduino CLI:
 
