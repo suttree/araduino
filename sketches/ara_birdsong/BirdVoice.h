@@ -21,7 +21,8 @@ class BirdVoice {
   void setNoisyOnsets(bool enabled) { noisyOnsets = enabled; }
   void setGainPercent(uint8_t percent) {
     // The syllable levels leave enough 8-bit headroom for up to twice the gain.
-    gainPercent = percent > 200 ? 200 : percent;
+    if (percent > 200) percent = 200;
+    gainQ8 = (uint16_t(percent) * 256 + 50) / 100;
   }
   Profile selectedProfile() const { return mode; }
   void triggerRandom() {
@@ -147,8 +148,15 @@ class BirdVoice {
       const int16_t noise = int16_t(noiseState >> 8) - 128;
       wave = (wave * (128 - noiseMix) + noise * noiseMix) / 128;
     }
-    const int16_t sample = int32_t(wave) * amplitude / 65536;
-    return sample * gainPercent / 100;
+    // Explicit unsigned shifts avoid AVR's slow signed division helpers.
+    // Take the magnitude first to preserve truncation toward zero for negatives.
+    const int32_t product = int32_t(wave) * amplitude;
+    const int16_t sample = product < 0
+        ? -int16_t(uint32_t(-product) >> 16)
+        : int16_t(uint32_t(product) >> 16);
+    const int16_t gained = sample * int16_t(gainQ8);
+    return gained < 0 ? -int16_t(uint16_t(-gained) >> 8)
+                      : int16_t(uint16_t(gained) >> 8);
   }
 
  private:
@@ -159,7 +167,7 @@ class BirdVoice {
   } motif[5] = {};
   uint32_t rng, phase = 0, increment = 0, incrementTarget = 0;
   uint16_t pitchScale;
-  uint8_t gainPercent = 100;
+  uint16_t gainQ8 = 256;
   bool noisyOnsets = true;
   uint32_t secondPhase = 0;
   uint16_t noiseState = 0xace1;

@@ -40,6 +40,8 @@ The firmware chooses a voice at random for each song, with equal probability for
 
 `NOISY_ONSETS` is currently `false` in the firmware. The owner reported crackling only during songs after increasing the volume. This setting disables the experimental noise at the start of Textured syllables while preserving the second tone, all six voice choices and 150% gain. It tests a possible cause; listening must establish whether it removes the reported crackle. Existing audition recordings retain their original noise setting.
 
+Disabling those onsets did not fully remove the crackle. Inspection of the AVR assembly then found signed 32-bit and 16-bit division helpers in the function that generates every audio sample. The sample function now uses explicit magnitude shifts and a precomputed gain multiplier. Its AVR assembly no longer calls division helpers. The current 150% gain remains unchanged. This reduces processing cost; whether timing caused the physical crackle still requires a listening test.
+
 ## Sound shape variations
 
 The [20-second comparison](../../output/birdsong-shapes/ara-shape-comparison-d24496268783.mp3) contains these voices at the same fixed eleven-semitone register, in order:
@@ -79,11 +81,13 @@ The MP3 files use the same output scale, without loudness normalization, reverb 
 
 ## Validation
 
-The Uno firmware uses 6698 bytes of flash and 853 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. Earlier builds with a fixed Soft or Textured profile also passed. The owner confirmed physical playback and the increased volume at 150% gain, then reported crackle during songs. The version with noisy onsets disabled was uploaded on 22 November 2026, and avrdude verified all 6698 bytes by reading back the flash. Listening with noisy onsets disabled and sustained runtime timing remain unconfirmed.
+The Uno firmware uses 6740 bytes of flash and 854 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. Earlier builds with a fixed Soft or Textured profile also passed. The owner confirmed physical playback and the increased volume at 150% gain, then reported crackle during songs. Removing the deliberate noisy onset did not fully resolve it. The version without per-sample divisions was uploaded on 22 November 2026, and avrdude verified all 6740 bytes by reading back the flash. Listening with the faster sample function and sustained runtime timing remain unconfirmed.
 
 The desktop renderer runs with address and undefined-behavior sanitizers. It checks output range, phrase completion, return to silence and restart across 100 seeds for all six voices, with both fixed and variable registers. The 1200 phrases exercise every register in the default range and check that the register remains fixed during each song. The oscillator is limited to 7000 Hz, below the 8192 Hz Nyquist limit. These checks do not assess how natural the birdsong sounds.
 
 An additional sequence of 100 random songs at 150% gain checks that all six profiles are selected, including Lively, that voice and register stay fixed during a song, that output stays within its expected headroom, and that every song finishes within the expected duration and returns to silence.
+
+A one-off comparison against the preceding engine checked 589824 samples across all six voices at each of 100%, 125%, 150%, 175% and 200% gain. Every sample matched. Other percentage settings use a rounded fixed-point multiplier and can differ slightly. `tools/audio/check_avr_audio.py --compiler /path/to/avr-g++` compiles a sample wrapper for ATmega328P and rejects division helper calls in its assembly. This guards against the expensive arithmetic returning; it does not measure actual buffer underruns.
 
 To build with Arduino CLI:
 
