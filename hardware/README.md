@@ -1,6 +1,6 @@
 # Ara custom board brief
 
-Status: requirements recorded on 22 November 2026. The schematic, PCB layout and manufacturing files have not been created or reviewed. This brief is not ready to order from a factory.
+Status: requirements recorded on 22 November 2026. A [revision A schematic draft](schematic/README.md) is available. The PCB layout and manufacturing files have not been created. Native KiCad ERC, an independent hardware review and physical testing are still required. This brief is not ready to order from a factory.
 
 ## Agreed requirements
 
