@@ -17,6 +17,10 @@ All new voices generate a motif, repeat it with a small pitch offset, then stop.
 
 The new voices now sing approximately eight semitones higher than the first experiment, three semitones above the previous revision. Their pitch contours are multiplied by 1.587, with timing and volume preserved. The [register comparison](../../output/birdsong/soft-register-comparison.mp3) plays the original soft voice first, then the higher version at 0:26.5. Both use the same seed and phrases. The [original register](../../output/birdsong/04-soft-original-register.mp3) is also available separately. Passing `1000` as the second `BirdVoice` constructor argument selects that original register.
 
+The [short pitch comparison](../../output/birdsong/ara-register-steps-original-five-eight-5a592528fa73.mp3) plays the same phrase in its original register at 0:00, five semitones higher at 0:05, and eight semitones higher at 0:10. The [latest soft voice with a distinct filename](../../output/birdsong/ara-soft-plus-eight-semitones-b014f8cdde3f.mp3) avoids reusing the previous playback path. A stale player cache is a possible explanation for hearing the same pitch, but has not been confirmed.
+
+Run `python3 tools/audio/compare_registers.py` to recreate these files from the three saved Git revisions. This requires Git and ffmpeg. The script checks pitch ratios by counting waveform cycles with a threshold that excludes low-level encoding noise. The measured ratios are 1.3352 and 1.5862 relative to the original. It records results in `output/birdsong/register-verification.json` and gives each published audio file a filename containing its content hash.
+
 The soft voice is the firmware default. Change `ara::BirdVoice::Soft` to `Garden` or `Lively` in the sketch to try the others. The firmware retains the original interval between attempts and its chance of remaining silent.
 
 ## Reproduce the previews
