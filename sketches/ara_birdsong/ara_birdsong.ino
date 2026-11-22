@@ -3,8 +3,8 @@
 
 static_assert(AUDIO_RATE == 16384, "This voice requires 16384 Hz audio.");
 constexpr uint16_t CONTROL_RATE_HZ = 256;
-// 100 is the original preview level. 150 raises amplitude by 50%.
-constexpr uint8_t OUTPUT_GAIN_PERCENT = 150;
+// 100 is the original preview level. 200 is the maximum supported gain.
+constexpr uint8_t OUTPUT_GAIN_PERCENT = 200;
 // Disable the experimental noisy onset while testing physical playback.
 constexpr bool NOISY_ONSETS = false;
 // Each song chooses an integer semitone offset within this inclusive range.
