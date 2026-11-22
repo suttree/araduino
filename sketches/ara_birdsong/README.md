@@ -30,12 +30,11 @@ The firmware chooses a register for each song. These constants near the top of `
 ```cpp
 constexpr uint8_t MIN_REGISTER_SEMITONES = 8;
 constexpr uint8_t MAX_REGISTER_SEMITONES = 11;
-constexpr ara::BirdVoice::Profile VOICE_PROFILE = ara::BirdVoice::Soft;
 ```
 
 The default range includes 8, 9, 10 and 11 semitones. Set both limits to 11 for the highest register auditioned so far. The supported range is 0 through 12. Values outside that range are clamped, and reversed limits are swapped. The chosen register remains fixed through the song and its repeat.
 
-The soft voice remains the firmware default while the alternatives are auditioned. Change `VOICE_PROFILE` to `Garden`, `Lively`, `Chirps`, `Liquid` or `Textured` to try another profile. The firmware retains the original interval between attempts and its chance of remaining silent.
+The firmware chooses a voice at random for each song, with equal probability for Soft, Garden, Lively, Chirps, Liquid and Textured. Lively includes the trills. The voice remains fixed through the song and its repeat. Consecutive songs can choose the same voice. The firmware retains the original interval between attempts and its chance of remaining silent. To audition a fixed voice, replace the two `voice.triggerRandom()` calls with a call such as `voice.trigger(ara::BirdVoice::Chirps)`.
 
 ## Sound shape variations
 
@@ -76,9 +75,11 @@ The MP3 files use the same output scale, without loudness normalization, reverb 
 
 ## Validation
 
-The default Uno build uses 6400 bytes of flash and 851 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. A separate build with the Textured profile also passed, using 6482 bytes of flash and 851 bytes of static RAM. This confirms compilation and memory fit. Runtime timing and physical playback remain untested. Nothing was uploaded during this experiment.
+The Uno firmware uses 6622 bytes of flash and 851 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. Earlier builds with a fixed Soft or Textured profile also passed. This confirms compilation and memory fit. Runtime timing and physical playback remain untested. Nothing was uploaded during this experiment.
 
 The desktop renderer runs with address and undefined-behavior sanitizers. It checks output range, phrase completion, return to silence and restart across 100 seeds for all six voices, with both fixed and variable registers. The 1200 phrases exercise every register in the default range and check that the register remains fixed during each song. The oscillator is limited to 7000 Hz, below the 8192 Hz Nyquist limit. These checks do not assess how natural the birdsong sounds.
+
+An additional sequence of 100 random songs checks that all six profiles are selected, including Lively, that voice and register stay fixed during a song, and that every song finishes within the expected duration and returns to silence.
 
 To build with Arduino CLI:
 

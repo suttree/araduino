@@ -18,6 +18,10 @@ class BirdVoice {
   explicit BirdVoice(uint32_t seed = 1, uint16_t pitchScale = 1888)
       : rng(seed ? seed : 1), pitchScale(pitchScale) {}
   bool busy() const { return active; }
+  Profile selectedProfile() const { return mode; }
+  void triggerRandom() {
+    if (!active) trigger(static_cast<Profile>(pick(6)));
+  }
   // Semitones above the original experiment. Choose once for each whole song.
   void setRegisterRange(uint8_t lower, uint8_t upper) {
     minimumSemitones = lower > 12 ? 12 : lower;
