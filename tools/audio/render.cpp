@@ -47,30 +47,41 @@ void wav(const std::string &path, const std::vector<int16_t> &data) {
   if (!out) throw std::runtime_error("Could not write " + path);
 }
 int main(int argc, char **argv) {
-  if (argc != 2) return 2;
+  if (argc < 2 || argc > 3) return 2;
   const std::string directory = argv[1];
+  const bool variations = argc == 3 && std::string(argv[2]) == "--variations";
   constexpr uint32_t frames = 26 * 16384;
   std::vector<int16_t> samples(frames);
-  legacy::setup();
-  for (sampleClock = 0; sampleClock < frames; ++sampleClock) {
-    // Compress the minutes of silence for auditioning. Leave the song unchanged.
-    if (sampleClock && sampleClock % (8 * 16384) == 0 && sampleClock < 24 * 16384)
-      legacy::startNewSong(millis());
-    if (sampleClock % 256 == 0) legacy::updateControl();
-    samples[sampleClock] = legacy::updateAudio() * 256;
+  if (!variations) {
+    legacy::setup();
+    for (sampleClock = 0; sampleClock < frames; ++sampleClock) {
+      // Compress the minutes of silence for auditioning. Leave the song unchanged.
+      if (sampleClock && sampleClock % (8 * 16384) == 0 && sampleClock < 24 * 16384)
+        legacy::startNewSong(millis());
+      if (sampleClock % 256 == 0) legacy::updateControl();
+      samples[sampleClock] = legacy::updateAudio() * 256;
+    }
+    wav(directory + "/00-current-reference.wav", samples);
   }
-  wav(directory + "/00-current-reference.wav", samples);
-  const char *names[] = {"01-soft-whistles", "02-garden-calls", "03-lively-trills",
+  const char *originalNames[] = {"01-soft-whistles", "02-garden-calls", "03-lively-trills",
                          "04-soft-original-register"};
-  for (int profile = 0; profile < 4; ++profile) {
-    ara::BirdVoice voice(20261122, profile == 3 ? 1000 : 1888);
+  const char *shapeNames[] = {"00-whistle-reference", "01-short-chirps", "02-liquid-calls",
+                              "03-textured-chirps", "04-variable-register"};
+  const char **names = variations ? shapeNames : originalNames;
+  const ara::BirdVoice::Profile shapes[] = {ara::BirdVoice::Soft, ara::BirdVoice::Chirps,
+      ara::BirdVoice::Liquid, ara::BirdVoice::Textured, ara::BirdVoice::Chirps};
+  for (int profile = 0; profile < (variations ? 5 : 4); ++profile) {
+    ara::BirdVoice voice(20261122, !variations && profile == 3 ? 1000 : 1888);
+    if (variations && profile == 4) voice.setRegisterRange(8, 11);
     int peak = 0;
     uint64_t energy = 0;
     unsigned bouts = 0;
     for (uint32_t frame = 0; frame < frames; ++frame) {
       if (frame % (8 * 16384) == 0 && frame < 24 * 16384) {
         if (voice.busy()) throw std::runtime_error("Bout overlaps next audition slot");
-        voice.trigger(ara::BirdVoice::Profile(profile % 3));
+        voice.trigger(variations ? shapes[profile] : ara::BirdVoice::Profile(profile % 3));
+        if (variations && profile == 4)
+          std::cout << "Variable song " << bouts + 1 << ": +" << int(voice.selectedRegister()) << " semitones\n";
         ++bouts;
       }
       if (frame % 64 == 0) voice.control();
@@ -86,22 +97,34 @@ int main(int argc, char **argv) {
     std::cout << names[profile] << ": peak " << peak << "/128, three bouts, silent tail\n";
   }
   // Exercise phrase completion and silence over more than the audition seeds.
+  unsigned registersSeen = 0;
   for (uint32_t seed = 1; seed <= 100; ++seed) {
-    for (int profile = 0; profile < 3; ++profile) {
-      ara::BirdVoice voice(seed);
-      voice.trigger(ara::BirdVoice::Profile(profile));
-      for (unsigned tick = 0; tick < 6 * 256; ++tick) {
-        voice.control();
-        for (unsigned frame = 0; frame < 64; ++frame) {
-          if (std::abs(int(voice.audio())) > 64)
-            throw std::runtime_error("Output exceeded expected headroom");
+    for (int profile = 0; profile < 6; ++profile) {
+      for (unsigned variable = 0; variable < 2; ++variable) {
+        ara::BirdVoice voice(seed);
+        if (variable) voice.setRegisterRange(8, 11);
+        voice.trigger(ara::BirdVoice::Profile(profile));
+        const uint8_t selected = voice.selectedRegister();
+        if (variable) {
+          if (selected < 8 || selected > 11) throw std::runtime_error("Register out of range");
+          registersSeen |= 1u << (selected - 8);
         }
+        for (unsigned tick = 0; tick < 6 * 256; ++tick) {
+          voice.control();
+          if (voice.selectedRegister() != selected)
+            throw std::runtime_error("Register changed during a song");
+          for (unsigned frame = 0; frame < 64; ++frame) {
+            if (std::abs(int(voice.audio())) > 64)
+              throw std::runtime_error("Output exceeded expected headroom");
+          }
+        }
+        if (voice.busy() || voice.audio() != 0)
+          throw std::runtime_error("Phrase exceeded six seconds or left nonzero output");
+        voice.trigger(ara::BirdVoice::Profile(profile));
+        if (!voice.busy()) throw std::runtime_error("Voice could not restart");
       }
-      if (voice.busy() || voice.audio() != 0)
-        throw std::runtime_error("Phrase exceeded six seconds or left nonzero output");
-      voice.trigger(ara::BirdVoice::Profile(profile));
-      if (!voice.busy()) throw std::runtime_error("Voice could not restart");
     }
   }
-  std::cout << "Passed completion, restart and output-range checks for 300 phrases\n";
+  if (registersSeen != 15) throw std::runtime_error("Did not exercise all four registers");
+  std::cout << "Passed completion, restart, register and output-range checks for 1200 phrases\n";
 }

@@ -13,7 +13,7 @@ The [comparison recording](../../output/birdsong/ara-voice-comparison.mp3) plays
 | 0:53 | [Garden calls](../../output/birdsong/02-garden-calls.mp3) | Shorter syllables and a five-call motif |
 | 1:19.5 | [Lively trills](../../output/birdsong/03-lively-trills.mp3) | Garden calls with pitch and volume flutter in selected syllables |
 
-All new voices generate a motif, repeat it with a small pitch offset, then stop. They use frequencies measured in hertz rather than notes chosen from scales. Pitch and volume change throughout each syllable. The waveform is still a sine wave, with no recordings, effects or added background audio.
+All new voices generate a motif, repeat it with a small pitch offset, then stop. They use frequencies measured in hertz rather than notes chosen from scales. Pitch and volume change throughout each syllable. The original profiles use a sine wave. The new variations below also try a second tone and a noisy onset. No profile uses recordings or added background audio.
 
 The new voices now sing approximately eleven semitones higher than the first experiment, three semitones above the previous revision. Their pitch contours are multiplied by 1.888, with timing and volume preserved. The [register comparison](../../output/birdsong/soft-register-comparison.mp3) plays the original soft voice first, then the higher version at 0:26.5. Both use the same seed and phrases. The [original register](../../output/birdsong/04-soft-original-register.mp3) is also available separately. Passing `1000` as the second `BirdVoice` constructor argument selects that original register.
 
@@ -23,7 +23,40 @@ Run `python3 tools/audio/compare_registers.py` to recreate these files from the 
 
 After rendering the current voice, run `python3 tools/audio/compare_registers.py --current` for the [eight-versus-eleven comparison](../../output/birdsong/ara-register-steps-eight-eleven-a0ee560fcd89.mp3). The previous register plays at 0:00 and the new register at 0:05. The [new soft voice](../../output/birdsong/ara-soft-plus-eleven-semitones-0c4e28d480c3.mp3), [garden calls](../../output/birdsong/ara-garden-plus-eleven-semitones-84c231880d9a.mp3) and [lively trills](../../output/birdsong/ara-lively-plus-eleven-semitones-d11c2885fdfb.mp3) have distinct filenames. The measured pitch ratio is 1.8858 relative to the original, approximately 19% higher than the eight-semitone version.
 
-The soft voice is the firmware default. Change `ara::BirdVoice::Soft` to `Garden` or `Lively` in the sketch to try the others. The firmware retains the original interval between attempts and its chance of remaining silent.
+## Register settings
+
+The firmware chooses a register for each song. These constants near the top of `ara_birdsong.ino` set the inclusive range in semitones above the original experiment:
+
+```cpp
+constexpr uint8_t MIN_REGISTER_SEMITONES = 8;
+constexpr uint8_t MAX_REGISTER_SEMITONES = 11;
+constexpr ara::BirdVoice::Profile VOICE_PROFILE = ara::BirdVoice::Soft;
+```
+
+The default range includes 8, 9, 10 and 11 semitones. Set both limits to 11 for the highest register auditioned so far. The supported range is 0 through 12. Values outside that range are clamped, and reversed limits are swapped. The chosen register remains fixed through the song and its repeat.
+
+The soft voice remains the firmware default while the alternatives are auditioned. Change `VOICE_PROFILE` to `Garden`, `Lively`, `Chirps`, `Liquid` or `Textured` to try another profile. The firmware retains the original interval between attempts and its chance of remaining silent.
+
+## Sound shape variations
+
+The [20-second comparison](../../output/birdsong-shapes/ara-shape-comparison-d24496268783.mp3) contains these voices at the same fixed eleven-semitone register, in order:
+
+| Start | Voice | Change |
+| --- | --- | --- |
+| 0:00 | [Whistle reference](../../output/birdsong-shapes/00-whistle-reference-0c4e28d480c3.mp3) | The preceding soft voice, unchanged |
+| 0:05 | [Short chirps](../../output/birdsong-shapes/01-short-chirps-26b5459b54b4.mp3) | 55 to 109 ms calls, an early pitch peak, a falling tail and a decaying volume |
+| 0:10 | [Liquid calls](../../output/birdsong-shapes/02-liquid-calls-0d4ece475f2f.mp3) | 94 to 184 ms calls with rapid pitch and volume movement and a quiet second tone |
+| 0:15 | [Textured chirps](../../output/birdsong-shapes/03-textured-chirps-4f420806be12.mp3) | The same longer chirp shapes, a second tone and a brief noisy onset |
+
+All four use the same random seed and output scale. The three alternatives use a different sequence of random choices from the reference. The Liquid and Textured profiles share their underlying syllable durations and pitch targets. The second tone runs at three quarters of the main tone's frequency. The noise lasts only at the start of a Textured syllable. These are synthesis experiments; listening determines whether they sound more birdlike.
+
+The separate [variable-register demonstration](../../output/birdsong-shapes/04-variable-register-6fe700dda77c.mp3) uses Short chirps. Its three bouts start at 0:00, 0:08 and 0:16, choosing registers of 8, 11 and 9 semitones respectively.
+
+To reproduce these previews with distinct playback filenames:
+
+```sh
+python3 tools/audio/render.py --variations --output output/birdsong-shapes
+```
 
 ## Reproduce the previews
 
@@ -43,9 +76,9 @@ The MP3 files use the same output scale, without loudness normalization, reverb 
 
 ## Validation
 
-The Uno build uses 5528 bytes of flash and 839 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. This confirms compilation and memory fit. Runtime timing and physical playback remain untested. Nothing was uploaded during this experiment.
+The default Uno build uses 6400 bytes of flash and 851 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. A separate build with the Textured profile also passed, using 6482 bytes of flash and 851 bytes of static RAM. This confirms compilation and memory fit. Runtime timing and physical playback remain untested. Nothing was uploaded during this experiment.
 
-The desktop renderer runs with address and undefined-behavior sanitizers. It checks output range, phrase completion, return to silence and restart across 100 seeds for each new voice. These checks do not assess how natural the birdsong sounds.
+The desktop renderer runs with address and undefined-behavior sanitizers. It checks output range, phrase completion, return to silence and restart across 100 seeds for all six voices, with both fixed and variable registers. The 1200 phrases exercise every register in the default range and check that the register remains fixed during each song. The oscillator is limited to 7000 Hz, below the 8192 Hz Nyquist limit. These checks do not assess how natural the birdsong sounds.
 
 To build with Arduino CLI:
 
