@@ -15,7 +15,7 @@ The [comparison recording](../../output/birdsong/ara-voice-comparison.mp3) plays
 
 All new voices generate a motif, repeat it with a small pitch offset, then stop. They use frequencies measured in hertz rather than notes chosen from scales. Pitch and volume change throughout each syllable. The waveform is still a sine wave, with no recordings, effects or added background audio.
 
-The new voices now sing approximately five semitones higher than the first experiment. Their pitch contours are multiplied by 1.335, with timing and volume preserved. The [register comparison](../../output/birdsong/soft-register-comparison.mp3) plays the original soft voice first, then the higher version at 0:26.5. Both use the same seed and phrases. The [original register](../../output/birdsong/04-soft-original-register.mp3) is also available separately. Passing `1000` as the second `BirdVoice` constructor argument selects that original register.
+The new voices now sing approximately eight semitones higher than the first experiment, three semitones above the previous revision. Their pitch contours are multiplied by 1.587, with timing and volume preserved. The [register comparison](../../output/birdsong/soft-register-comparison.mp3) plays the original soft voice first, then the higher version at 0:26.5. Both use the same seed and phrases. The [original register](../../output/birdsong/04-soft-original-register.mp3) is also available separately. Passing `1000` as the second `BirdVoice` constructor argument selects that original register.
 
 The soft voice is the firmware default. Change `ara::BirdVoice::Soft` to `Garden` or `Lively` in the sketch to try the others. The firmware retains the original interval between attempts and its chance of remaining silent.
 
