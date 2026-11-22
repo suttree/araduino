@@ -38,6 +38,8 @@ The firmware chooses a voice at random for each song, with equal probability for
 
 `OUTPUT_GAIN_PERCENT` sets the firmware volume. It is now 150, a 50% increase in digital amplitude over the previews, or approximately 3.5 dB. The voice limits this setting to 200 to preserve output headroom. This gain change does not alter pitch or timing. Existing desktop previews remain at the original 100% level.
 
+`NOISY_ONSETS` is currently `false` in the firmware. The owner reported crackling only during songs after increasing the volume. This setting disables the experimental noise at the start of Textured syllables while preserving the second tone, all six voice choices and 150% gain. It tests a possible cause; listening must establish whether it removes the reported crackle. Existing audition recordings retain their original noise setting.
+
 ## Sound shape variations
 
 The [20-second comparison](../../output/birdsong-shapes/ara-shape-comparison-d24496268783.mp3) contains these voices at the same fixed eleven-semitone register, in order:
@@ -77,7 +79,7 @@ The MP3 files use the same output scale, without loudness normalization, reverb 
 
 ## Validation
 
-The Uno firmware uses 6670 bytes of flash and 852 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. Earlier builds with a fixed Soft or Textured profile also passed. The owner confirmed that the first random-voice upload played through Ara's speaker, but reported that it was quiet. The 150% gain version was uploaded on 22 November 2026, and avrdude verified all 6670 bytes by reading back the flash. Listening at the higher gain and sustained runtime timing remain unconfirmed.
+The Uno firmware uses 6698 bytes of flash and 853 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. Earlier builds with a fixed Soft or Textured profile also passed. The owner confirmed physical playback and the increased volume at 150% gain, then reported crackle during songs. The version with noisy onsets disabled was uploaded on 22 November 2026, and avrdude verified all 6698 bytes by reading back the flash. Listening with noisy onsets disabled and sustained runtime timing remain unconfirmed.
 
 The desktop renderer runs with address and undefined-behavior sanitizers. It checks output range, phrase completion, return to silence and restart across 100 seeds for all six voices, with both fixed and variable registers. The 1200 phrases exercise every register in the default range and check that the register remains fixed during each song. The oscillator is limited to 7000 Hz, below the 8192 Hz Nyquist limit. These checks do not assess how natural the birdsong sounds.
 

@@ -18,6 +18,7 @@ class BirdVoice {
   explicit BirdVoice(uint32_t seed = 1, uint16_t pitchScale = 1888)
       : rng(seed ? seed : 1), pitchScale(pitchScale) {}
   bool busy() const { return active; }
+  void setNoisyOnsets(bool enabled) { noisyOnsets = enabled; }
   void setGainPercent(uint8_t percent) {
     // The syllable levels leave enough 8-bit headroom for up to twice the gain.
     gainPercent = percent > 200 ? 200 : percent;
@@ -115,7 +116,7 @@ class BirdVoice {
       }
       // A quieter second tone and a brief noisy onset are separate auditions.
       secondToneMix = mode == Liquid ? 16 : mode == Textured ? 24 : 0;
-      noiseMix = mode == Textured && age < 4 ? (4 - age) * 6 : 0;
+      noiseMix = noisyOnsets && mode == Textured && age < 4 ? (4 - age) * 6 : 0;
       hz = (hz * pitchScale + 500) / 1000;
       if (hz > 7000) hz = 7000;
       ramp(uint16_t(level) << 8, uint32_t(hz) << 18);
@@ -159,6 +160,7 @@ class BirdVoice {
   uint32_t rng, phase = 0, increment = 0, incrementTarget = 0;
   uint16_t pitchScale;
   uint8_t gainPercent = 100;
+  bool noisyOnsets = true;
   uint32_t secondPhase = 0;
   uint16_t noiseState = 0xace1;
   uint8_t secondToneMix = 0, noiseMix = 0;

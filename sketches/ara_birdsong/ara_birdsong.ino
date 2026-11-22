@@ -5,6 +5,8 @@ static_assert(AUDIO_RATE == 16384, "This voice requires 16384 Hz audio.");
 constexpr uint16_t CONTROL_RATE_HZ = 256;
 // 100 is the original preview level. 150 raises amplitude by 50%.
 constexpr uint8_t OUTPUT_GAIN_PERCENT = 150;
+// Disable the experimental noisy onset while testing physical playback.
+constexpr bool NOISY_ONSETS = false;
 // Each song chooses an integer semitone offset within this inclusive range.
 constexpr uint8_t MIN_REGISTER_SEMITONES = 8;
 constexpr uint8_t MAX_REGISTER_SEMITONES = 11;
@@ -33,6 +35,7 @@ void setup() {
   randomSeed(seed);
   voice = ara::BirdVoice(seed);
   voice.setGainPercent(OUTPUT_GAIN_PERCENT);
+  voice.setNoisyOnsets(NOISY_ONSETS);
   voice.setRegisterRange(MIN_REGISTER_SEMITONES, MAX_REGISTER_SEMITONES);
   voice.triggerRandom();
   scheduleAttempt(millis());

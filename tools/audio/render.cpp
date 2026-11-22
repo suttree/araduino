@@ -129,6 +129,7 @@ int main(int argc, char **argv) {
   std::cout << "Passed completion, restart, register and output-range checks for 1200 phrases\n";
   ara::BirdVoice mixedVoice(20261122);
   mixedVoice.setGainPercent(150);
+  mixedVoice.setNoisyOnsets(false);
   mixedVoice.setRegisterRange(8, 11);
   unsigned profilesSeen = 0;
   for (unsigned song = 0; song < 100; ++song) {
@@ -152,5 +153,19 @@ int main(int argc, char **argv) {
       throw std::runtime_error("Mixed voice did not finish cleanly");
   }
   if (profilesSeen != 63) throw std::runtime_error("Random selection did not exercise every profile");
-  std::cout << "Passed 100 consecutive random songs at 150% gain, including every voice and trills\n";
+  std::cout << "Passed 100 consecutive random songs at 150% gain without noisy onsets, including every voice and trills\n";
+  // Turning off experimental noise must affect Textured, but not the pure voices.
+  for (const auto profile : {ara::BirdVoice::Soft, ara::BirdVoice::Textured}) {
+    ara::BirdVoice original(20261122), clean(20261122);
+    clean.setNoisyOnsets(false);
+    original.trigger(profile);
+    clean.trigger(profile);
+    bool different = false;
+    for (unsigned frame = 0; frame < 6 * 16384; ++frame) {
+      if (frame % 64 == 0) { original.control(); clean.control(); }
+      if (original.audio() != clean.audio()) different = true;
+    }
+    if (different != (profile == ara::BirdVoice::Textured))
+      throw std::runtime_error("Noisy onset switch affected the wrong voice");
+  }
 }
