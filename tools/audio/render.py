@@ -42,4 +42,11 @@ if shutil.which('ffmpeg'):
     subprocess.run(command + ['-filter_complex', filters, '-map', '[out]', '-ar', '44100',
                              '-codec:a', 'libmp3lame', '-b:a', '128k',
                              str(output / 'ara-voice-comparison.mp3')], check=True)
+    subprocess.run(['ffmpeg', '-hide_banner', '-loglevel', 'error', '-y',
+                    '-i', str(output / '04-soft-original-register.wav'),
+                    '-i', str(output / '01-soft-whistles.wav'),
+                    '-filter_complex',
+                    '[0:a]apad=pad_dur=0.5[lower];[lower][1:a]concat=n=2:v=0:a=1[out]',
+                    '-map', '[out]', '-ar', '44100', '-codec:a', 'libmp3lame', '-b:a', '128k',
+                    str(output / 'soft-register-comparison.mp3')], check=True)
 print(output)

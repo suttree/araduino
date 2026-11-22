@@ -14,7 +14,9 @@ namespace ara {
 class BirdVoice {
  public:
   enum Profile : uint8_t { Soft, Garden, Lively };
-  explicit BirdVoice(uint32_t seed = 1) : rng(seed ? seed : 1) {}
+  // 1335/1000 raises the register by approximately five semitones.
+  explicit BirdVoice(uint32_t seed = 1, uint16_t pitchScale = 1335)
+      : rng(seed ? seed : 1), pitchScale(pitchScale) {}
   bool busy() const { return active; }
   void trigger(Profile profile) {
     if (active) return;
@@ -58,6 +60,7 @@ class BirdVoice {
         hz += flutter * 2;
         level = uint16_t(level) * (192 + flutter / 2) / 255;
       }
+      hz = (hz * pitchScale + 500) / 1000;
       ramp(uint16_t(level) << 8, uint32_t(hz) << 18);
     } else {
       ramp(0, increment);
@@ -86,6 +89,7 @@ class BirdVoice {
     bool trill;
   } motif[5] = {};
   uint32_t rng, phase = 0, increment = 0, incrementTarget = 0;
+  uint16_t pitchScale;
   int32_t incrementDelta = 0;
   int16_t amplitude = 0, amplitudeTarget = 0, amplitudeDelta = 0;
   uint8_t remaining = 0, count = 0, index = 0;

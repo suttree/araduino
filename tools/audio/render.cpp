@@ -60,16 +60,17 @@ int main(int argc, char **argv) {
     samples[sampleClock] = legacy::updateAudio() * 256;
   }
   wav(directory + "/00-current-reference.wav", samples);
-  const char *names[] = {"01-soft-whistles", "02-garden-calls", "03-lively-trills"};
-  for (int profile = 0; profile < 3; ++profile) {
-    ara::BirdVoice voice(20261122);
+  const char *names[] = {"01-soft-whistles", "02-garden-calls", "03-lively-trills",
+                         "04-soft-original-register"};
+  for (int profile = 0; profile < 4; ++profile) {
+    ara::BirdVoice voice(20261122, profile == 3 ? 1000 : 1335);
     int peak = 0;
     uint64_t energy = 0;
     unsigned bouts = 0;
     for (uint32_t frame = 0; frame < frames; ++frame) {
       if (frame % (8 * 16384) == 0 && frame < 24 * 16384) {
         if (voice.busy()) throw std::runtime_error("Bout overlaps next audition slot");
-        voice.trigger(ara::BirdVoice::Profile(profile));
+        voice.trigger(ara::BirdVoice::Profile(profile % 3));
         ++bouts;
       }
       if (frame % 64 == 0) voice.control();

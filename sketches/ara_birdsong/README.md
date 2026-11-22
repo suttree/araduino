@@ -15,6 +15,8 @@ The [comparison recording](../../output/birdsong/ara-voice-comparison.mp3) plays
 
 All new voices generate a motif, repeat it with a small pitch offset, then stop. They use frequencies measured in hertz rather than notes chosen from scales. Pitch and volume change throughout each syllable. The waveform is still a sine wave, with no recordings, effects or added background audio.
 
+The new voices now sing approximately five semitones higher than the first experiment. Their pitch contours are multiplied by 1.335, with timing and volume preserved. The [register comparison](../../output/birdsong/soft-register-comparison.mp3) plays the original soft voice first, then the higher version at 0:26.5. Both use the same seed and phrases. The [original register](../../output/birdsong/04-soft-original-register.mp3) is also available separately. Passing `1000` as the second `BirdVoice` constructor argument selects that original register.
+
 The soft voice is the firmware default. Change `ara::BirdVoice::Soft` to `Garden` or `Lively` in the sketch to try the others. The firmware retains the original interval between attempts and its chance of remaining silent.
 
 ## Reproduce the previews
@@ -35,7 +37,7 @@ The MP3 files use the same output scale, without loudness normalization, reverb 
 
 ## Validation
 
-The Uno build uses 5480 bytes of flash and 837 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. This confirms compilation and memory fit. Runtime timing and physical playback remain untested. Nothing was uploaded during this experiment.
+The Uno build uses 5528 bytes of flash and 839 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. This confirms compilation and memory fit. Runtime timing and physical playback remain untested. Nothing was uploaded during this experiment.
 
 The desktop renderer runs with address and undefined-behavior sanitizers. It checks output range, phrase completion, return to silence and restart across 100 seeds for each new voice. These checks do not assess how natural the birdsong sounds.
 
