@@ -75,7 +75,7 @@ The MP3 files use the same output scale, without loudness normalization, reverb 
 
 ## Validation
 
-The Uno firmware uses 6622 bytes of flash and 851 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. Earlier builds with a fixed Soft or Textured profile also passed. This confirms compilation and memory fit. Runtime timing and physical playback remain untested. Nothing was uploaded during this experiment.
+The Uno firmware uses 6622 bytes of flash and 851 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. Earlier builds with a fixed Soft or Textured profile also passed. Firmware from commit `bce77f6` was uploaded to the connected Uno on 22 November 2026. avrdude verified all 6622 bytes against the compiled firmware by reading back the flash. Physical listening and sustained runtime timing remain unconfirmed.
 
 The desktop renderer runs with address and undefined-behavior sanitizers. It checks output range, phrase completion, return to silence and restart across 100 seeds for all six voices, with both fixed and variable registers. The 1200 phrases exercise every register in the default range and check that the register remains fixed during each song. The oscillator is limited to 7000 Hz, below the 8192 Hz Nyquist limit. These checks do not assess how natural the birdsong sounds.
 
