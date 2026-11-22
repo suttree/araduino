@@ -19,10 +19,10 @@ class BirdVoice {
       : rng(seed ? seed : 1), pitchScale(pitchScale) {}
   bool busy() const { return active; }
   void setNoisyOnsets(bool enabled) { noisyOnsets = enabled; }
-  void setGainPercent(uint8_t percent) {
-    // The syllable levels leave enough 8-bit headroom for up to twice the gain.
-    if (percent > 200) percent = 200;
-    gainQ8 = (uint16_t(percent) * 256 + 50) / 100;
+  void setGainPercent(uint16_t percent) {
+    // Uno PWM accepts almost nine bits, wider than the oscillator's table.
+    if (percent > 375) percent = 375;
+    gainQ8 = (uint32_t(percent) * 256 + 50) / 100;
   }
   Profile selectedProfile() const { return mode; }
   void triggerRandom() {
@@ -131,7 +131,7 @@ class BirdVoice {
       if (++index == count * 2) active = false;
     }
   }
-  int8_t audio() {
+  int16_t audio() {
     if (remaining) {
       amplitude += amplitudeDelta;
       increment += incrementDelta;
@@ -154,9 +154,11 @@ class BirdVoice {
     const int16_t sample = product < 0
         ? -int16_t(uint32_t(-product) >> 16)
         : int16_t(uint32_t(product) >> 16);
-    const int16_t gained = sample * int16_t(gainQ8);
-    return gained < 0 ? -int16_t(uint16_t(-gained) >> 8)
-                      : int16_t(uint16_t(gained) >> 8);
+    const int32_t gained = int32_t(sample) * gainQ8;
+    const int16_t output = gained < 0 ? -int16_t(uint32_t(-gained) >> 8)
+                                     : int16_t(uint32_t(gained) >> 8);
+    // Mozzi's default Uno PWM range is -244 through +243. Leave a margin.
+    return output < -240 ? -240 : output > 240 ? 240 : output;
   }
 
  private:

@@ -15,7 +15,7 @@ with tempfile.TemporaryDirectory(prefix='ara-avr-audio-') as directory:
     source = temporary / 'audio.cpp'
     source.write_text(
         '#include "BirdVoice.h"\n'
-        'extern "C" __attribute__((noinline)) int8_t audioSample(ara::BirdVoice *voice) {\n'
+        'extern "C" __attribute__((noinline)) int16_t audioSample(ara::BirdVoice *voice) {\n'
         '  return voice->audio();\n}\n')
     assembly = temporary / 'audio.s'
     subprocess.run([str(args.compiler), '-std=gnu++11', '-Os', '-mmcu=atmega328p',

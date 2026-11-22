@@ -128,10 +128,11 @@ int main(int argc, char **argv) {
   if (registersSeen != 15) throw std::runtime_error("Did not exercise all four registers");
   std::cout << "Passed completion, restart, register and output-range checks for 1200 phrases\n";
   ara::BirdVoice mixedVoice(20261122);
-  mixedVoice.setGainPercent(200);
+  mixedVoice.setGainPercent(350);
   mixedVoice.setNoisyOnsets(false);
   mixedVoice.setRegisterRange(8, 11);
   unsigned profilesSeen = 0;
+  int mixedPeak = 0;
   for (unsigned song = 0; song < 100; ++song) {
     mixedVoice.triggerRandom();
     const auto profile = mixedVoice.selectedProfile();
@@ -145,7 +146,9 @@ int main(int argc, char **argv) {
       if (mixedVoice.selectedProfile() != profile || mixedVoice.selectedRegister() != selected)
         throw std::runtime_error("Voice or register changed within a song");
       for (unsigned frame = 0; frame < 64; ++frame) {
-        if (std::abs(int(mixedVoice.audio())) > 123)
+        const int output = std::abs(int(mixedVoice.audio()));
+        mixedPeak = std::max(mixedPeak, output);
+        if (output > 240)
           throw std::runtime_error("Mixed voice exceeded output headroom");
       }
     }
@@ -153,7 +156,23 @@ int main(int argc, char **argv) {
       throw std::runtime_error("Mixed voice did not finish cleanly");
   }
   if (profilesSeen != 63) throw std::runtime_error("Random selection did not exercise every profile");
-  std::cout << "Passed 100 consecutive random songs at 200% gain without noisy onsets, including every voice and trills\n";
+  if (mixedPeak <= 127) throw std::runtime_error("High gain never used the wider PWM range");
+  std::cout << "Passed 100 consecutive random songs at 350% gain, peak " << mixedPeak
+            << "/244, without noisy onsets, including every voice and trills\n";
+  // Requests beyond the gain limit must clamp, rather than wrap at 8 bits.
+  for (int profile = 0; profile < 6; ++profile) {
+    ara::BirdVoice maximum(20261122), excessive(20261122);
+    maximum.setGainPercent(375);
+    excessive.setGainPercent(65535);
+    maximum.trigger(static_cast<ara::BirdVoice::Profile>(profile));
+    excessive.trigger(static_cast<ara::BirdVoice::Profile>(profile));
+    for (unsigned frame = 0; frame < 6 * 16384; ++frame) {
+      if (frame % 64 == 0) { maximum.control(); excessive.control(); }
+      const int sample = maximum.audio();
+      if (sample != excessive.audio() || std::abs(sample) > 240)
+        throw std::runtime_error("Gain limit wrapped or exceeded the Uno PWM range");
+    }
+  }
   // Turning off experimental noise must affect Textured, but not the pure voices.
   for (const auto profile : {ara::BirdVoice::Soft, ara::BirdVoice::Textured}) {
     ara::BirdVoice original(20261122), clean(20261122);
