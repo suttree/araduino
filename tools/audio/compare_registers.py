@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Compare saved soft-voice revisions and give playback files unique names."""
 import array
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -13,6 +14,10 @@ ROOT = Path(__file__).resolve().parents[2]
 OUTPUT = ROOT / 'output/birdsong'
 REVISIONS = [('original', '6ef77a7', 1.0), ('plus-five', '5d67622', 1.335),
              ('plus-eight', '3302552', 1.587)]
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--current', action='store_true',
+                    help='Compare the eight-semitone revision with the current eleven-semitone render')
+args = parser.parse_args()
 
 
 def run(arguments, **kwargs):
@@ -60,17 +65,36 @@ with tempfile.TemporaryDirectory(prefix='ara-register-check-') as directory:
             raise RuntimeError(f'{label}: unexpected pitch ratio {ratio}')
         report.append({'label': label, 'revision': revision, 'cycles': cycles,
                        'ratio': round(ratio, 4)})
+    comparison_name = 'ara-register-steps-original-five-eight'
+    report_name = 'register-verification.json'
+    if args.current:
+        current = OUTPUT / '01-soft-whistles.mp3'
+        cycles = cycle_count(current)
+        ratio = cycles / report[0]['cycles']
+        if abs(ratio - 1.888) > 0.01:
+            raise RuntimeError(f'Current render: unexpected pitch ratio {ratio}')
+        report.append({'label': 'plus-eleven', 'revision': 'current render',
+                       'cycles': cycles, 'ratio': round(ratio, 4)})
+        sources = [sources[-1], current]
+        comparison_name = 'ara-register-steps-eight-eleven'
+        report_name = 'register-verification-eight-eleven.json'
     command = ['ffmpeg', '-v', 'error', '-y']
     for source in sources:
         command += ['-i', str(source)]
     filters = ';'.join(
         f'[{i}:a]atrim=end=4,asetpts=PTS-STARTPTS,apad=pad_dur=1[a{i}]'
-        for i in range(3))
-    filters += ';[a0][a1][a2]concat=n=3:v=0:a=1[out]'
+        for i in range(len(sources)))
+    filters += ';' + ''.join(f'[a{i}]' for i in range(len(sources)))
+    filters += f'concat=n={len(sources)}:v=0:a=1[out]'
     comparison = temporary / 'comparison.mp3'
     run(command + ['-filter_complex', filters, '-map', '[out]', '-ar', '44100',
                    '-codec:a', 'libmp3lame', '-b:a', '128k', str(comparison)])
-    print(publish(comparison, 'ara-register-steps-original-five-eight'))
-    print(publish(sources[-1], 'ara-soft-plus-eight-semitones'))
-    (OUTPUT / 'register-verification.json').write_text(json.dumps(report, indent=2) + '\n')
+    print(publish(comparison, comparison_name))
+    if args.current:
+        for source_name, label in [('01-soft-whistles', 'soft'), ('02-garden-calls', 'garden'),
+                                   ('03-lively-trills', 'lively')]:
+            print(publish(OUTPUT / f'{source_name}.mp3', f'ara-{label}-plus-eleven-semitones'))
+    else:
+        print(publish(sources[-1], 'ara-soft-plus-eight-semitones'))
+    (OUTPUT / report_name).write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps(report, indent=2))

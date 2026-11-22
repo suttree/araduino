@@ -63,7 +63,7 @@ int main(int argc, char **argv) {
   const char *names[] = {"01-soft-whistles", "02-garden-calls", "03-lively-trills",
                          "04-soft-original-register"};
   for (int profile = 0; profile < 4; ++profile) {
-    ara::BirdVoice voice(20261122, profile == 3 ? 1000 : 1587);
+    ara::BirdVoice voice(20261122, profile == 3 ? 1000 : 1888);
     int peak = 0;
     uint64_t energy = 0;
     unsigned bouts = 0;

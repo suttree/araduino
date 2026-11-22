@@ -14,8 +14,8 @@ namespace ara {
 class BirdVoice {
  public:
   enum Profile : uint8_t { Soft, Garden, Lively };
-  // 1587/1000 raises the register by approximately eight semitones.
-  explicit BirdVoice(uint32_t seed = 1, uint16_t pitchScale = 1587)
+  // 1888/1000 raises the register by approximately eleven semitones.
+  explicit BirdVoice(uint32_t seed = 1, uint16_t pitchScale = 1888)
       : rng(seed ? seed : 1), pitchScale(pitchScale) {}
   bool busy() const { return active; }
   void trigger(Profile profile) {

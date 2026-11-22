@@ -1,0 +1,26 @@
+[
+  {
+    "label": "original",
+    "revision": "6ef77a7",
+    "cycles": 3765,
+    "ratio": 1.0
+  },
+  {
+    "label": "plus-five",
+    "revision": "5d67622",
+    "cycles": 5027,
+    "ratio": 1.3352
+  },
+  {
+    "label": "plus-eight",
+    "revision": "3302552",
+    "cycles": 5972,
+    "ratio": 1.5862
+  },
+  {
+    "label": "plus-eleven",
+    "revision": "current render",
+    "cycles": 7100,
+    "ratio": 1.8858
+  }
+]
