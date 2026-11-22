@@ -21,7 +21,7 @@ class BirdVoice {
   void setNoisyOnsets(bool enabled) { noisyOnsets = enabled; }
   void setGainPercent(uint16_t percent) {
     // Uno PWM accepts almost nine bits, wider than the oscillator's table.
-    if (percent > 375) percent = 375;
+    if (percent > 500) percent = 500;
     gainQ8 = (uint32_t(percent) * 256 + 50) / 100;
   }
   Profile selectedProfile() const { return mode; }

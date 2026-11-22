@@ -128,7 +128,7 @@ int main(int argc, char **argv) {
   if (registersSeen != 15) throw std::runtime_error("Did not exercise all four registers");
   std::cout << "Passed completion, restart, register and output-range checks for 1200 phrases\n";
   ara::BirdVoice mixedVoice(20261122);
-  mixedVoice.setGainPercent(350);
+  mixedVoice.setGainPercent(500);
   mixedVoice.setNoisyOnsets(false);
   mixedVoice.setRegisterRange(8, 11);
   unsigned profilesSeen = 0;
@@ -157,12 +157,13 @@ int main(int argc, char **argv) {
   }
   if (profilesSeen != 63) throw std::runtime_error("Random selection did not exercise every profile");
   if (mixedPeak <= 127) throw std::runtime_error("High gain never used the wider PWM range");
-  std::cout << "Passed 100 consecutive random songs at 350% gain, peak " << mixedPeak
+  if (mixedPeak != 240) throw std::runtime_error("500% gain did not exercise output limiting");
+  std::cout << "Passed 100 consecutive random songs at 500% gain, limited peak " << mixedPeak
             << "/244, without noisy onsets, including every voice and trills\n";
   // Requests beyond the gain limit must clamp, rather than wrap at 8 bits.
   for (int profile = 0; profile < 6; ++profile) {
     ara::BirdVoice maximum(20261122), excessive(20261122);
-    maximum.setGainPercent(375);
+    maximum.setGainPercent(500);
     excessive.setGainPercent(65535);
     maximum.trigger(static_cast<ara::BirdVoice::Profile>(profile));
     excessive.trigger(static_cast<ara::BirdVoice::Profile>(profile));
