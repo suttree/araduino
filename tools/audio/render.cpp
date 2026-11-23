@@ -208,14 +208,18 @@ int main(int argc, char **argv) {
   ara::BirdVoice mixedVoice(20261122);
   mixedVoice.setGainPercent(400);
   mixedVoice.setNoisyOnsets(false);
-  mixedVoice.setRegisterRange(8, 11);
+  mixedVoice.setRegisterChoices(13, 15, 17, 2, 3, 5);
   unsigned profilesSeen = 0;
+  unsigned registerCounts[3] = {}, limitedTicks = 0, activeTicks = 0;
   int mixedPeak = 0;
   unsigned longerSongs = 0;
   for (unsigned song = 0; song < 200; ++song) {
     mixedVoice.triggerRandom();
     const auto profile = mixedVoice.selectedProfile();
     const uint8_t selected = mixedVoice.selectedRegister();
+    const int registerIndex = selected == 13 ? 0 : selected == 15 ? 1 : selected == 17 ? 2 : -1;
+    if (registerIndex < 0) throw std::runtime_error("Weighted choice selected an unexpected register");
+    ++registerCounts[registerIndex];
     if (profile >= ara::BirdVoice::ProfileCount) throw std::runtime_error("Invalid random profile");
     if (profile >= ara::BirdVoice::Song) ++longerSongs;
     profilesSeen |= 1u << profile;
@@ -223,6 +227,9 @@ int main(int argc, char **argv) {
     mixedVoice.triggerRandom();
     for (unsigned tick = 0; tick < 12 * 256; ++tick) {
       mixedVoice.control();
+      if (mixedVoice.busy()) ++activeTicks;
+      if (mixedVoice.pitchWasLimited()) ++limitedTicks;
+      if (mixedVoice.targetFrequencyHz() > 7000) throw std::runtime_error("Pitch exceeds frequency limit");
       if (mixedVoice.selectedProfile() != profile || mixedVoice.selectedRegister() != selected)
         throw std::runtime_error("Voice or register changed within a song");
       for (unsigned frame = 0; frame < 64; ++frame) {
@@ -241,6 +248,24 @@ int main(int argc, char **argv) {
   if (mixedPeak <= 127) throw std::runtime_error("High gain never used the wider PWM range");
   std::cout << "Passed 200 consecutive random songs at 400% gain, peak " << mixedPeak
             << "/244, without noisy onsets, including every voice and trills\n";
+  std::cout << "Weighted registers: +13=" << registerCounts[0] << ", +15=" << registerCounts[1]
+            << ", +17=" << registerCounts[2] << "; pitch limit used on " << limitedTicks
+            << "/" << activeTicks << " active control ticks\n";
+  unsigned choices[3] = {};
+  for (unsigned seed = 1; seed <= 5000; ++seed) {
+    ara::BirdVoice voice(seed);
+    voice.setRegisterChoices(13, 15, 17, 2, 3, 5);
+    voice.trigger(ara::BirdVoice::Song);
+    const unsigned selected = voice.selectedRegister();
+    if (selected == 13) ++choices[0];
+    else if (selected == 15) ++choices[1];
+    else if (selected == 17) ++choices[2];
+    else throw std::runtime_error("Register choice is outside the requested set");
+  }
+  if (choices[0] < 900 || choices[0] > 1100 || choices[1] < 1400 || choices[1] > 1600
+      || choices[2] < 2400 || choices[2] > 2600)
+    throw std::runtime_error("Weighted register distribution is outside its expected range");
+  std::cout << "5000 register choices: " << choices[0] << ", " << choices[1] << ", " << choices[2] << "\n";
   // Requests beyond the gain limit must clamp, rather than wrap at 8 bits.
   for (int profile = 0; profile < ara::BirdVoice::ProfileCount; ++profile) {
     ara::BirdVoice maximum(20261122), excessive(20261122);

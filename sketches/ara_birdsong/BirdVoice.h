@@ -20,6 +20,7 @@ class BirdVoice {
       : rng(seed ? seed : 1), pitchScale(pitchScale) {}
   bool busy() const { return active; }
   uint16_t targetFrequencyHz() const { return incrementTarget >> 18; }
+  bool pitchWasLimited() const { return frequencyLimited; }
   void setNoisyOnsets(bool enabled) { noisyOnsets = enabled; }
   void setGainPercent(uint16_t percent) {
     // Uno PWM accepts almost nine bits, wider than the oscillator's table.
@@ -36,22 +37,44 @@ class BirdVoice {
   }
   // Semitones above the original experiment. Choose once for each whole song.
   void setRegisterRange(uint8_t lower, uint8_t upper) {
-    minimumSemitones = lower > 12 ? 12 : lower;
-    maximumSemitones = upper > 12 ? 12 : upper;
+    minimumSemitones = lower > 17 ? 17 : lower;
+    maximumSemitones = upper > 17 ? 17 : upper;
     if (minimumSemitones > maximumSemitones) {
       const uint8_t swap = minimumSemitones;
       minimumSemitones = maximumSemitones;
       maximumSemitones = swap;
     }
     variableRegister = true;
+    weightedRegisters = false;
+  }
+  void setRegisterChoices(uint8_t lower, uint8_t middle, uint8_t upper,
+                          uint8_t lowerWeight, uint8_t middleWeight, uint8_t upperWeight) {
+    registerChoices[0] = lower > 17 ? 17 : lower;
+    registerChoices[1] = middle > 17 ? 17 : middle;
+    registerChoices[2] = upper > 17 ? 17 : upper;
+    registerWeights[0] = lowerWeight;
+    registerWeights[1] = middleWeight;
+    registerWeights[2] = upperWeight;
+    if (uint16_t(lowerWeight) + middleWeight + upperWeight == 0)
+      registerWeights[0] = registerWeights[1] = registerWeights[2] = 1;
+    variableRegister = weightedRegisters = true;
   }
   uint8_t selectedRegister() const { return selectedSemitones; }
   void trigger(Profile profile) {
     if (active) return;
     if (variableRegister) {
-      selectedSemitones = minimumSemitones + pick(maximumSemitones - minimumSemitones + 1);
+      if (weightedRegisters) {
+        const uint16_t total = uint16_t(registerWeights[0]) + registerWeights[1] + registerWeights[2];
+        const uint16_t choice = pick(total);
+        selectedSemitones = choice < registerWeights[0] ? registerChoices[0]
+            : choice < uint16_t(registerWeights[0]) + registerWeights[1] ? registerChoices[1]
+                                                                                  : registerChoices[2];
+      } else {
+        selectedSemitones = minimumSemitones + pick(maximumSemitones - minimumSemitones + 1);
+      }
       static const uint16_t scales[] ARA_FLASH = {
-        1000, 1059, 1122, 1189, 1260, 1335, 1414, 1498, 1587, 1682, 1782, 1888, 2000
+        1000, 1059, 1122, 1189, 1260, 1335, 1414, 1498, 1587, 1682, 1782, 1888, 2000,
+        2119, 2245, 2378, 2520, 2670
       };
 #ifdef __AVR__
       pitchScale = pgm_read_word(&scales[selectedSemitones]);
@@ -107,6 +130,7 @@ class BirdVoice {
     active = true;
   }
   void control() {
+    frequencyLimited = false;
     if (!active) { ramp(0, increment); return; }
     const Syllable &s = motif[index % count];
     if (age < s.ticks) {
@@ -147,7 +171,7 @@ class BirdVoice {
       secondToneMix = mode == Liquid ? 16 : mode == Textured ? 24 : 0;
       noiseMix = noisyOnsets && mode == Textured && age < 4 ? (4 - age) * 6 : 0;
       hz = (hz * pitchScale + 500) / 1000;
-      if (hz > 7000) hz = 7000;
+      if (hz > 7000) { hz = 7000; frequencyLimited = true; }
       ramp(uint16_t(level) << 8, uint32_t(hz) << 18);
     } else {
       ramp(0, increment);
@@ -207,6 +231,9 @@ class BirdVoice {
   uint8_t secondToneMix = 0, noiseMix = 0;
   uint8_t minimumSemitones = 8, maximumSemitones = 11, selectedSemitones = 11;
   bool variableRegister = false;
+  bool weightedRegisters = false, frequencyLimited = false;
+  uint8_t registerChoices[3] = {13, 15, 17};
+  uint8_t registerWeights[3] = {2, 3, 5};
   int32_t incrementDelta = 0;
   int16_t amplitude = 0, amplitudeTarget = 0, amplitudeDelta = 0;
   uint8_t remaining = 0, count = 0, index = 0;
