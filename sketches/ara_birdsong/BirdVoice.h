@@ -19,6 +19,7 @@ class BirdVoice {
   explicit BirdVoice(uint32_t seed = 1, uint16_t pitchScale = 1888)
       : rng(seed ? seed : 1), pitchScale(pitchScale) {}
   bool busy() const { return active; }
+  uint16_t targetFrequencyHz() const { return incrementTarget >> 18; }
   void setNoisyOnsets(bool enabled) { noisyOnsets = enabled; }
   void setGainPercent(uint16_t percent) {
     // Uno PWM accepts almost nine bits, wider than the oscillator's table.

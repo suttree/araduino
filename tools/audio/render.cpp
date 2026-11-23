@@ -77,12 +77,54 @@ void renderSongPreviews(const std::string &directory) {
   }
 }
 
+void renderRegisterPreviews(const std::string &directory) {
+  // Fixed offsets above the original experiment, compared with today's upper +11 register.
+  const uint16_t scales[] = {1888, 2119, 2378, 2670};
+  const char *names[] = {"00-current-plus11", "01-higher-plus13", "02-higher-plus15", "03-higher-plus17"};
+  const ara::BirdVoice::Profile profiles[] = {ara::BirdVoice::Song, ara::BirdVoice::TrillSong,
+                                            ara::BirdVoice::Cascade};
+  std::ofstream report(directory + "/register-peaks.csv");
+  report << "file,scale,peak_hz,ceiling_updates\n";
+  for (unsigned variant = 0; variant < 4; ++variant) {
+    std::vector<int16_t> samples(33 * 16384);
+    unsigned peakHz = 0, ceilingUpdates = 0;
+    for (unsigned song = 0; song < 3; ++song) {
+      ara::BirdVoice voice(20261123, scales[variant]);
+      voice.setGainPercent(400);
+      voice.setNoisyOnsets(false);
+      voice.trigger(profiles[song]);
+      for (unsigned frame = 0; frame < 11 * 16384; ++frame) {
+        if (frame % 64 == 0) {
+          voice.control();
+          if (voice.busy()) {
+            peakHz = std::max(peakHz, unsigned(voice.targetFrequencyHz()));
+            if (voice.targetFrequencyHz() == 7000) ++ceilingUpdates;
+          }
+        }
+        const int sample = voice.audio();
+        if (std::abs(sample) > 240) throw std::runtime_error("Register preview exceeds PWM range");
+        samples[song * 11 * 16384 + frame] = sample * 128;
+      }
+      if (voice.busy() || voice.audio() != 0)
+        throw std::runtime_error("Register preview cuts off a song");
+    }
+    if (ceilingUpdates) throw std::runtime_error("Higher-register sample hits the pitch ceiling");
+    wav(directory + "/" + names[variant] + ".wav", samples);
+    report << names[variant] << ',' << scales[variant] << ',' << peakHz << ',' << ceilingUpdates << '\n';
+    std::cout << names[variant] << ": peak pitch " << peakHz << " Hz; "
+              << ceilingUpdates << " control updates at pitch ceiling\n";
+  }
+  if (!report) throw std::runtime_error("Could not write register pitch report");
+}
+
 int main(int argc, char **argv) {
   if (argc < 2 || argc > 3) return 2;
   const std::string directory = argv[1];
   const bool variations = argc == 3 && std::string(argv[2]) == "--variations";
   const bool songs = argc == 3 && std::string(argv[2]) == "--songs";
-  if (songs) renderSongPreviews(directory);
+  const bool registers = argc == 3 && std::string(argv[2]) == "--registers";
+  if (registers) renderRegisterPreviews(directory);
+  else if (songs) renderSongPreviews(directory);
   else {
     constexpr uint32_t frames = 26 * 16384;
     std::vector<int16_t> samples(frames);

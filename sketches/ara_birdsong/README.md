@@ -31,6 +31,29 @@ These previews use seed `20261123`. Their PCM output maps the almost-nine-bit PW
 
 ## Listen
 
+### Higher register samples, 23 November
+
+The owner reported that the longer songs still sometimes sounded like a human whistle and requested higher-register samples. These recordings keep the song profiles, random seed, phrasing and 400% gain fixed. The first uses the top of the current firmware's range; the others raise it by another two, four and six semitones. The Arduino has not been changed or uploaded for this audition.
+
+The [38-second comparison](../../output/birdsong-registers/ara-higher-register-comparison-1a4b429c15e7.mp3) repeats the same TrillSong at each pitch:
+
+| Start | Register | Peak pitch across all three sample songs |
+| --- | --- | --- |
+| 0:00 | Current upper register, +11 above the original experiment | 4718 Hz |
+| 0:09.5 | [Two semitones higher](../../output/birdsong-registers/01-higher-plus13-258fffb48861.mp3) | 5295 Hz |
+| 0:19 | [Four semitones higher](../../output/birdsong-registers/02-higher-plus15-525dd595ca4d.mp3) | 5943 Hz |
+| 0:28.5 | [Six semitones higher](../../output/birdsong-registers/03-higher-plus17-536e5a100077.mp3) | 6672 Hz |
+
+Each linked full sample contains Song at 0:00, TrillSong at 0:11 and Cascade at 0:22. They use seed `20261123`, with fixed pitch multipliers of 1.888, 2.119, 2.378 and 2.670. No sample reaches the engine's 7000 Hz pitch ceiling. The renderer rejects previews that hit that ceiling, to prevent flattened pitch contours from obscuring the comparison. Measurements are recorded in `output/birdsong-registers/register-peaks.csv`. A waveform cycle-count check also confirmed increasing pitches in the generated audio.
+
+These previews use the existing constructor's fixed pitch multiplier. The firmware's random register configuration remains at 8 through 11, with a supported table up to 12. Selecting one of the higher ranges for physical playback will need a configuration change and further checks across random phrases. No speaker or enclosure response is simulated.
+
+To reproduce the samples:
+
+```sh
+python3 tools/audio/render.py --registers
+```
+
 The [comparison recording](../../output/birdsong/ara-voice-comparison.mp3) plays these approaches in order. Each section contains three bouts, with the long waits between songs shortened for auditioning.
 
 | Start | Voice | Change |
