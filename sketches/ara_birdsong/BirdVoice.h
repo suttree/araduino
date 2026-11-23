@@ -28,12 +28,15 @@ class BirdVoice {
     gainQ8 = (uint32_t(percent) * 256 + 50) / 100;
   }
   Profile selectedProfile() const { return mode; }
+  uint8_t selectedMotif() const { return mode >= Song ? melodyVariant : 255; }
   void triggerRandom() {
     if (active) return;
-    // Three quarters of choices are longer songs; retain every earlier voice.
-    const uint8_t choice = pick(12);
-    trigger(choice < 3 ? Song : choice < 7 ? TrillSong : choice < 9 ? Cascade
-                                                               : static_cast<Profile>(pick(6)));
+    Profile next = randomProfile();
+    for (uint8_t tries = 0; next == lastRandomProfile && tries < 8; ++tries) next = randomProfile();
+    if (next == lastRandomProfile)
+      next = static_cast<Profile>((uint8_t(lastRandomProfile) + 1 + pick(ProfileCount - 1)) % ProfileCount);
+    lastRandomProfile = next;
+    trigger(next);
   }
   // Semitones above the original experiment. Choose once for each whole song.
   void setRegisterRange(uint8_t lower, uint8_t upper) {
@@ -83,7 +86,17 @@ class BirdVoice {
 #endif
     }
     mode = profile;
-    count = profile >= Song ? 8 : profile == Soft ? 4 : 5;
+    count = profile >= Song ? 6 + pick(3) : profile == Soft ? 4 : 5;
+    if (profile >= Song) {
+      melodyVariant = pick(6);
+      if (melodyVariant == lastMelodyVariant) melodyVariant = (melodyVariant + 1 + pick(5)) % 6;
+      lastMelodyVariant = melodyVariant;
+      rhythmPattern = pick(4);
+      songRenditions = 2 + pick(2);
+      phraseOrder = pick(3);
+    }
+    const uint8_t firstTrill = profile >= Song ? 2 + pick(2) : 0;
+    const uint8_t cascadeStep = profile >= Song ? 70 + pick(61) : 100;
     const int base = 1850 + pick(650);
     for (uint8_t i = 0; i < count; ++i) {
       Syllable &s = motif[i];
@@ -104,24 +117,38 @@ class BirdVoice {
         s.bend = 280 + pick(350);
       }
       if (profile >= Song) {
-        // A shared pitch centre and ordered gestures give the motif continuity.
-        static const int16_t offsets[] ARA_FLASH = {0, 180, 300, 140, -120, 80, 240, -160};
+        // Choose a whole contour, then vary the rhythm and syllables within it.
+        static const int16_t offsets[][8] ARA_FLASH = {
+          {0, 180, 300, 140, -120, 80, 240, -160},
+          {220, 60, -180, 0, 260, 100, -80, 180},
+          {-180, 0, 220, -100, 80, 280, 140, -60},
+          {100, 280, 40, -200, -40, 180, -120, 60},
+          {280, 100, -60, 200, 0, -180, 60, 240},
+          {-80, 180, 0, 260, 80, -140, 200, 40}
+        };
+        static const uint8_t rhythms[][8] ARA_FLASH = {
+          {0, 8, 0, 12, 4, 0, 10, 6}, {10, 0, 6, 0, 12, 4, 0, 8},
+          {4, 12, 0, 8, 0, 10, 6, 0}, {8, 4, 10, 0, 6, 0, 12, 4}
+        };
 #ifdef __AVR__
-        const int16_t offset = int16_t(pgm_read_word(&offsets[i]));
+        const int16_t offset = int16_t(pgm_read_word(&offsets[melodyVariant][i]));
+        const uint8_t rhythm = pgm_read_byte(&rhythms[rhythmPattern][i]);
 #else
-        const int16_t offset = offsets[i];
+        const int16_t offset = offsets[melodyVariant][i];
+        const uint8_t rhythm = rhythms[rhythmPattern][i];
 #endif
-        s.start = base + (profile == Cascade ? 350 - int16_t(i) * 100 : offset);
-        s.end = s.start + (i % 2 ? -140 : 180);
-        s.bend = i % 2 ? -100 : 130;
+        s.start = base + (profile == Cascade ? int16_t(count - 1) * cascadeStep / 2 - int16_t(i) * cascadeStep : offset);
+        s.start += int16_t(pick(81)) - 40;
+        s.end = s.start + (pick(2) ? -100 - int16_t(pick(121)) : 100 + int16_t(pick(121)));
+        s.bend = pick(2) ? -80 - int16_t(pick(101)) : 80 + int16_t(pick(101));
         s.level = 100 + pick(16);
-        s.trill = i == 3 || i == 6 || (profile == TrillSong && (i == 1 || i == 4));
+        s.trill = i == firstTrill || i == count - 2 || (profile == TrillSong && (i == 1 || i == count / 2));
         s.trillRate = 18 + pick(11);
-        s.ticks = s.trill ? 80 + pick(45) : 22 + pick(20);
-        if (i == 0 || i == 7) s.ticks = 38 + pick(16);
+        s.ticks = s.trill ? 65 + pick(40) + rhythm : 18 + pick(24) + rhythm;
+        if (i == 0 || i == count - 1) s.ticks = 30 + pick(24);
         if (profile == Cascade && !s.trill) s.ticks = 18 + pick(12);
         s.gap = 4 + pick(7);
-        if (i == 3) s.gap += 20;  // A short breath before the answering phrase.
+        if (i == count / 2) s.gap += 12 + pick(17);
       }
     }
     index = 0;
@@ -132,7 +159,13 @@ class BirdVoice {
   void control() {
     frequencyLimited = false;
     if (!active) { ramp(0, increment); return; }
-    const Syllable &s = motif[index % count];
+    uint8_t syllable = index % count;
+    if (mode >= Song && index >= count) {
+      if (phraseOrder == 1 && index < count * 2) syllable = (syllable + count / 2) % count;
+      if (phraseOrder == 2 && index >= count * 2 && syllable >= count - 2)
+        syllable = count * 2 - 3 - syllable;
+    }
+    const Syllable &s = motif[syllable];
     if (age < s.ticks) {
       const uint16_t t = uint32_t(age) * 255 / (s.ticks - 1);
       // Keep the fraction until after multiplication by the bend depth.
@@ -177,7 +210,7 @@ class BirdVoice {
       ramp(0, increment);
     }
     // A longer breath separates the two renditions of the motif.
-    const uint8_t renditions = mode >= Song ? 3 : 2;
+    const uint8_t renditions = mode >= Song ? songRenditions : 2;
     const uint16_t breath = (index + 1) % count == 0 && index + 1 < count * renditions
         ? (mode >= Song ? 55 : 90) : 0;
     if (++age >= s.ticks + s.gap + breath) {
@@ -233,7 +266,10 @@ class BirdVoice {
   bool variableRegister = false;
   bool weightedRegisters = false, frequencyLimited = false;
   uint8_t registerChoices[3] = {13, 15, 17};
-  uint8_t registerWeights[3] = {2, 3, 5};
+  uint8_t registerWeights[3] = {4, 5, 1};
+  Profile lastRandomProfile = ProfileCount;
+  uint8_t melodyVariant = 0, lastMelodyVariant = 255, rhythmPattern = 0;
+  uint8_t songRenditions = 3, phraseOrder = 0;
   int32_t incrementDelta = 0;
   int16_t amplitude = 0, amplitudeTarget = 0, amplitudeDelta = 0;
   uint8_t remaining = 0, count = 0, index = 0;
@@ -241,6 +277,11 @@ class BirdVoice {
   int16_t repeatShift = 0;
   Profile mode = Soft;
   bool active = false;
+  Profile randomProfile() {
+    const uint8_t choice = pick(12);
+    return choice < 3 ? Song : choice < 7 ? TrillSong : choice < 9 ? Cascade
+                                                               : static_cast<Profile>(pick(6));
+  }
   uint16_t pick(uint16_t upper) {
     rng ^= rng << 13; rng ^= rng >> 17; rng ^= rng << 5;
     return rng % upper;

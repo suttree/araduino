@@ -9,13 +9,13 @@ constexpr uint16_t CONTROL_RATE_HZ = 256;
 constexpr uint16_t OUTPUT_GAIN_PERCENT = 400;
 // Disable the experimental noisy onset while testing physical playback.
 constexpr bool NOISY_ONSETS = false;
-// +2, +4 or +6 above the previous +11 upper register, weighted 20%, 30%, 50%.
+// +2, +4 or +6 above the previous +11 upper register, weighted 40%, 50%, 10%.
 constexpr uint8_t LOWER_REGISTER_SEMITONES = 13;
 constexpr uint8_t MIDDLE_REGISTER_SEMITONES = 15;
 constexpr uint8_t UPPER_REGISTER_SEMITONES = 17;
-constexpr uint8_t LOWER_REGISTER_WEIGHT = 2;
-constexpr uint8_t MIDDLE_REGISTER_WEIGHT = 3;
-constexpr uint8_t UPPER_REGISTER_WEIGHT = 5;
+constexpr uint8_t LOWER_REGISTER_WEIGHT = 4;
+constexpr uint8_t MIDDLE_REGISTER_WEIGHT = 5;
+constexpr uint8_t UPPER_REGISTER_WEIGHT = 1;
 ara::BirdVoice voice;
 unsigned long lastAttempt = 0;
 unsigned long attemptInterval = 0;
@@ -37,7 +37,15 @@ void updateControl() {
 int updateAudio() { return voice.audio(); }
 
 void setup() {
-  const unsigned long seed = analogRead(0);
+  // Mix several analogue readings and their timing, rather than one pin value.
+  unsigned long seed = micros();
+  for (uint8_t i = 0; i < 16; ++i) {
+    seed ^= analogRead(0);
+    seed ^= micros();
+    seed ^= seed << 13;
+    seed ^= seed >> 17;
+    seed ^= seed << 5;
+  }
   randomSeed(seed);
   voice = ara::BirdVoice(seed);
   voice.setGainPercent(OUTPUT_GAIN_PERCENT);

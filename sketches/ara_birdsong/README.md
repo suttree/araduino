@@ -2,9 +2,19 @@
 
 This sketch experiments with shaped whistles and repeated calls on the existing Uno hardware. The working sketch at `../araduino/araduino.ino` remains separate.
 
+## Less repetition, 23 November
+
+The highest register is now a 10% choice. The lower and middle choices have weights of 40% and 50%. Gain remains at 400%.
+
+The owner reported hearing the same two songs frequently. The earlier song profiles reused one eight-syllable pitch contour, fixed trill positions and three renditions. The generator now varies six contours, four rhythm patterns, phrase length from six to eight syllables, trill positions, sweep directions, note lengths and breaths. Songs use two or three renditions. The answering phrase can exchange the two halves of the motif, and the final rendition can exchange its last two syllables. Cascades vary their pitch step. A song still retains a shared pitch centre and related phrases.
+
+Random voice selection avoids the preceding voice, and successive longer songs avoid the preceding contour. The selection pool still favours songs and trills, but retrying a repeated voice changes the exact profile probabilities. Startup mixes sixteen analogue readings with their timing instead of seeding from one reading. This reduces reliance on a single input value; it does not guarantee different startup sequences.
+
+The earlier audio samples below capture preceding versions. Rendering the current code produces the new phrasing.
+
 ## Songs and trills, 23 November
 
-The gain is now 400%, following the owner's request to reduce the previous 500% setting. Three new profiles add longer songs built from an opening chirp, a motif, an answering phrase and trills. Each uses eight syllables and three renditions, with a small pitch change for the last rendition. A song keeps one voice and one register throughout.
+The first 400% song revision added three profiles built from an opening chirp, a motif, an answering phrase and trills. The recordings in this section use eight syllables and three renditions. The current generator varies that structure as described above. A song keeps one voice and one register throughout.
 
 The [33-second comparison](../../output/birdsong-songs/ara-song-comparison-1aac9e961ad2.mp3) plays a preceding voice followed by the new profiles. All four use 400% gain, the same seed and a fixed register of eleven semitones above the original experiment:
 
@@ -17,7 +27,7 @@ The [33-second comparison](../../output/birdsong-songs/ara-song-comparison-1aac9
 
 The rendered new songs last approximately 6.3, 8.0 and 5.2 seconds respectively. Song trills pulse almost to silence at 18 to 28 pulses per second, alongside pitch modulation. These profiles use a single sine oscillator, without the secondary tone or noisy onset of the earlier timbre experiments. The goal is a more recognisable song; naturalness still needs listening through Ara's speaker.
 
-Ara now chooses a longer song 75% of the time. Song has a 25% probability, TrillSong approximately 33%, and Cascade approximately 17%. The remaining 25% is shared equally among the six earlier voices, including Lively's trills. The default register selection now uses the higher choices described below. Attempt intervals and the chance of remaining silent are unchanged.
+The candidate selection pool gives longer songs 75% of the weight: Song 25%, TrillSong approximately 33%, and Cascade approximately 17%. The remaining 25% is shared equally among the six earlier voices, including Lively's trills. Immediate voice repeats are now retried, so actual profile probabilities depend on the preceding choice. Attempt intervals and the chance of remaining silent are unchanged.
 
 The [random-song preview](../../output/birdsong-songs/04-random-song-mix-4ead8b466b3f.mp3) demonstrates the actual weighted selection and variable register, with the long pauses shortened. Its songs begin at 0:00, 0:13 and 0:26.
 
@@ -81,14 +91,14 @@ The firmware chooses one of three registers per song. These constants near the t
 constexpr uint8_t LOWER_REGISTER_SEMITONES = 13;
 constexpr uint8_t MIDDLE_REGISTER_SEMITONES = 15;
 constexpr uint8_t UPPER_REGISTER_SEMITONES = 17;
-constexpr uint8_t LOWER_REGISTER_WEIGHT = 2;
-constexpr uint8_t MIDDLE_REGISTER_WEIGHT = 3;
-constexpr uint8_t UPPER_REGISTER_WEIGHT = 5;
+constexpr uint8_t LOWER_REGISTER_WEIGHT = 4;
+constexpr uint8_t MIDDLE_REGISTER_WEIGHT = 5;
+constexpr uint8_t UPPER_REGISTER_WEIGHT = 1;
 ```
 
-These are the auditioned two, four and six semitones above the preceding +11 upper register. Their probabilities are 20%, 30% and 50% respectively. Ara keeps the chosen register through the whole song and every repeat. `setRegisterChoices()` accepts the three registers and their relative weights; all-zero weights fall back to equal probabilities. The supported pitch table now covers 0 through 17 semitones. Out-of-range register values clamp to 17. The older `setRegisterRange()` method remains available for an equally weighted inclusive range.
+These are the auditioned two, four and six semitones above the preceding +11 upper register. Their probabilities are 40%, 50% and 10% respectively. Ara keeps the chosen register through the whole song and every repeat. `setRegisterChoices()` accepts the three registers and their relative weights; all-zero weights fall back to equal probabilities. The supported pitch table now covers 0 through 17 semitones. Out-of-range register values clamp to 17. The older `setRegisterRange()` method remains available for an equally weighted inclusive range.
 
-Random motifs can exceed the pitch targets in the fixed auditions. The engine retains its 7000 Hz frequency limit; in the 200-song check it limited 13224 of 286365 active control updates, approximately 4.6%. Those parts of the pitch contour flatten at the limit. This is not a claim of unlimited pitch headroom.
+Random motifs can exceed the pitch targets in the fixed auditions. The engine retains its 7000 Hz frequency limit; in the latest 200-song check it limited 2196 of 211316 active control updates, approximately 1%. Those parts of the pitch contour flatten at the limit. This is not a claim of unlimited pitch headroom.
 
 The firmware chooses a voice at random using the song weighting above. It retains Soft, Garden, Lively, Chirps, Liquid and Textured alongside Song, TrillSong and Cascade. The voice remains fixed through the song and its repeats. Consecutive songs can choose the same voice. To audition a fixed voice, replace the two `voice.triggerRandom()` calls with a call such as `voice.trigger(ara::BirdVoice::TrillSong)`.
 
@@ -139,11 +149,11 @@ The MP3 files use the same output scale, without loudness normalization, reverb 
 
 ## Validation
 
-The Uno firmware uses 7756 bytes of flash and 906 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. The owner confirmed clean playback after the division fix, more realistic birdsong in the enclosure, and louder playback without audible distortion at 500% gain. The 400% version with longer songs from commit `2b626ab` was uploaded to the connected Uno on 23 November 2026. avrdude verified all 7608 bytes of that build by flash readback. The higher-register default from commit `5e44b22` was uploaded on 23 November 2026, and avrdude verified all 7756 bytes by flash readback. Physical listening to the weighted higher registers remains unconfirmed. Sustained runtime timing remains unmeasured.
+The Uno firmware uses 8936 bytes of flash and 912 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. The owner confirmed clean playback after the division fix, more realistic birdsong in the enclosure, and louder playback without audible distortion at 500% gain. After trying the weighted higher registers, they requested less frequent use of the highest choice and more song variety. The latest version was uploaded on 23 November 2026, and avrdude verified all 8936 bytes by flash readback. Listening to the new variety remains unconfirmed. Sustained runtime timing remains unmeasured.
 
 The desktop renderer runs with address and undefined-behavior sanitizers. It checks output range, phrase completion, return to silence and restart across 100 seeds for all nine voices, with both fixed and variable registers. These 1800 phrases exercise every register in the default range and check that the register remains fixed during each song. Older calls must finish within six seconds; the longer songs must finish within twelve seconds. The oscillator is limited to 7000 Hz, below the 8192 Hz Nyquist limit. These checks do not assess how natural the birdsong sounds.
 
-An additional sequence of 200 random songs at 400% gain and the new weighted registers checks that all nine profiles are selected, that longer songs dominate the choices, that voice and register stay fixed during a song, that pitch remains at or below 7000 Hz, that output stays within the Uno PWM range, and that every song finishes within the expected duration and returns to silence. Register counts were 45, 56 and 99. A separate check of 5000 initial song choices selected registers 13, 15 and 17 respectively 994, 1469 and 2537 times, approximately 20%, 29% and 51%. The output check requires samples above 127 so an accidental return to an 8-bit sample cannot pass. Further comparisons at gains of 500 and 65535 check that excessive requests clamp without wrapping.
+An additional sequence of 200 random songs at 400% gain checks that all nine profiles and all six song contours are selected, that longer songs dominate, that consecutive random voices and successive song contours do not repeat, and that voice, motif and register remain fixed during a song. It also checks the 7000 Hz limit, PWM output bounds, completion and return to silence. Register counts were 72, 106 and 22. A separate check of 5000 initial song choices selected registers 13, 15 and 17 respectively 1960, 2550 and 490 times, approximately 39%, 51% and 10%. The output check requires samples above 127 so an accidental return to an 8-bit sample cannot pass. Further comparisons at gains of 500 and 65535 check that excessive requests clamp without wrapping.
 
 A one-off comparison against the preceding engine checked 589824 samples across all six voices at each of 100%, 125%, 150%, 175% and 200% gain. Every sample matched. Other percentage settings use a rounded fixed-point multiplier and can differ slightly. `tools/audio/check_avr_audio.py --compiler /path/to/avr-g++` compiles a sample wrapper for ATmega328P and rejects division helper calls in its assembly. This guards against the expensive arithmetic returning; it does not measure actual buffer underruns.
 
