@@ -13,7 +13,8 @@
 namespace ara {
 class BirdVoice {
  public:
-  enum Profile : uint8_t { Soft, Garden, Lively, Chirps, Liquid, Textured };
+  enum Profile : uint8_t { Soft, Garden, Lively, Chirps, Liquid, Textured,
+                           Song, TrillSong, Cascade, ProfileCount };
   // 1888/1000 raises the register by approximately eleven semitones.
   explicit BirdVoice(uint32_t seed = 1, uint16_t pitchScale = 1888)
       : rng(seed ? seed : 1), pitchScale(pitchScale) {}
@@ -26,7 +27,11 @@ class BirdVoice {
   }
   Profile selectedProfile() const { return mode; }
   void triggerRandom() {
-    if (!active) trigger(static_cast<Profile>(pick(6)));
+    if (active) return;
+    // Three quarters of choices are longer songs; retain every earlier voice.
+    const uint8_t choice = pick(12);
+    trigger(choice < 3 ? Song : choice < 7 ? TrillSong : choice < 9 ? Cascade
+                                                               : static_cast<Profile>(pick(6)));
   }
   // Semitones above the original experiment. Choose once for each whole song.
   void setRegisterRange(uint8_t lower, uint8_t upper) {
@@ -54,7 +59,7 @@ class BirdVoice {
 #endif
     }
     mode = profile;
-    count = profile == Soft ? 4 : 5;
+    count = profile >= Song ? 8 : profile == Soft ? 4 : 5;
     const int base = 1850 + pick(650);
     for (uint8_t i = 0; i < count; ++i) {
       Syllable &s = motif[i];
@@ -65,6 +70,7 @@ class BirdVoice {
       s.gap = 13 + pick(24);
       s.level = 100 + pick(24);
       s.trill = profile == Lively && i % 2 == 1;
+      s.trillRate = 16;
       if (s.trill) s.ticks += 28;
       if (profile >= Chirps) {
         // Preserve the pitch vocabulary but replace the slow whistle gestures.
@@ -72,6 +78,26 @@ class BirdVoice {
         s.gap = 5 + pick(13);
         s.end = s.start - 180 - pick(400);
         s.bend = 280 + pick(350);
+      }
+      if (profile >= Song) {
+        // A shared pitch centre and ordered gestures give the motif continuity.
+        static const int16_t offsets[] ARA_FLASH = {0, 180, 300, 140, -120, 80, 240, -160};
+#ifdef __AVR__
+        const int16_t offset = int16_t(pgm_read_word(&offsets[i]));
+#else
+        const int16_t offset = offsets[i];
+#endif
+        s.start = base + (profile == Cascade ? 350 - int16_t(i) * 100 : offset);
+        s.end = s.start + (i % 2 ? -140 : 180);
+        s.bend = i % 2 ? -100 : 130;
+        s.level = 100 + pick(16);
+        s.trill = i == 3 || i == 6 || (profile == TrillSong && (i == 1 || i == 4));
+        s.trillRate = 18 + pick(11);
+        s.ticks = s.trill ? 80 + pick(45) : 22 + pick(20);
+        if (i == 0 || i == 7) s.ticks = 38 + pick(16);
+        if (profile == Cascade && !s.trill) s.ticks = 18 + pick(12);
+        s.gap = 4 + pick(7);
+        if (i == 3) s.gap += 20;  // A short breath before the answering phrase.
       }
     }
     index = 0;
@@ -86,7 +112,7 @@ class BirdVoice {
       const uint16_t t = uint32_t(age) * 255 / (s.ticks - 1);
       // Keep the fraction until after multiplication by the bend depth.
       int32_t hz = s.start + int32_t(s.end - s.start) * t / 255;
-      if (mode >= Chirps) {
+      if (mode >= Chirps && mode < Song) {
         // Reach the high point early, then fall for the rest of the chirp.
         const uint16_t contour = t < 48 ? t * 255 / 48 : (255 - t) * 255 / 207;
         hz += int32_t(s.bend) * contour / 255;
@@ -94,10 +120,11 @@ class BirdVoice {
         hz += int32_t(s.bend) * 4 * t * (255 - t) / 65025;
       }
       if (index >= count) hz += repeatShift;
+      if (mode >= Song && index >= count * 2) hz -= 90;
       uint8_t level = s.level;
-      const uint8_t attack = mode >= Chirps ? 1 : mode == Soft ? 7 : 4;
-      const uint8_t release = mode >= Chirps ? 4 : mode == Soft ? 12 : 7;
-      if (mode >= Chirps) {
+      const uint8_t attack = mode >= Song ? 2 : mode >= Chirps ? 1 : mode == Soft ? 7 : 4;
+      const uint8_t release = mode >= Song ? 5 : mode >= Chirps ? 4 : mode == Soft ? 12 : 7;
+      if (mode >= Chirps && mode < Song) {
         // Short attack and a decaying body instead of a sustained whistle.
         level = uint16_t(level) * (255 - t / 2) / 255;
       }
@@ -105,10 +132,10 @@ class BirdVoice {
       if (s.ticks - 1 - age < release)
         level = uint16_t(level) * (s.ticks - 1 - age) / release;
       if (s.trill) {
-        // A 16 Hz flutter with linked pitch and amplitude movement.
-        const int16_t flutter = sine(uint8_t(age * 16));
-        hz += flutter * 2;
-        level = uint16_t(level) * (192 + flutter / 2) / 255;
+        const int16_t flutter = sine(uint8_t(age * s.trillRate));
+        hz += mode >= Song ? flutter : flutter * 2;
+        // Song trills fall almost to silence between pulses, unlike vibrato.
+        level = uint16_t(level) * (mode >= Song ? 128 + flutter : 192 + flutter / 2) / 255;
       }
       if (mode == Liquid) {
         const int16_t flutter = sine(uint8_t(age * 39));
@@ -125,10 +152,12 @@ class BirdVoice {
       ramp(0, increment);
     }
     // A longer breath separates the two renditions of the motif.
-    const uint16_t breath = index == count - 1 ? 90 : 0;
+    const uint8_t renditions = mode >= Song ? 3 : 2;
+    const uint16_t breath = (index + 1) % count == 0 && index + 1 < count * renditions
+        ? (mode >= Song ? 55 : 90) : 0;
     if (++age >= s.ticks + s.gap + breath) {
       age = 0;
-      if (++index == count * 2) active = false;
+      if (++index == count * renditions) active = false;
     }
   }
   int16_t audio() {
@@ -166,7 +195,8 @@ class BirdVoice {
     int16_t start, end, bend;
     uint8_t ticks, gap, level;
     bool trill;
-  } motif[5] = {};
+    uint8_t trillRate;
+  } motif[8] = {};
   uint32_t rng, phase = 0, increment = 0, incrementTarget = 0;
   uint16_t pitchScale;
   uint16_t gainQ8 = 256;

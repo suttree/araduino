@@ -2,6 +2,33 @@
 
 This sketch experiments with shaped whistles and repeated calls on the existing Uno hardware. The working sketch at `../araduino/araduino.ino` remains separate.
 
+## Songs and trills, 23 November
+
+The gain is now 400%, following the owner's request to reduce the previous 500% setting. Three new profiles add longer songs built from an opening chirp, a motif, an answering phrase and trills. Each uses eight syllables and three renditions, with a small pitch change for the last rendition. A song keeps one voice and one register throughout.
+
+The [33-second comparison](../../output/birdsong-songs/ara-song-comparison-1aac9e961ad2.mp3) plays a preceding voice followed by the new profiles. All four use 400% gain, the same seed and a fixed register of eleven semitones above the original experiment:
+
+| Start | Voice | Phrasing |
+| --- | --- | --- |
+| 0:00 | [Previous whistle](../../output/birdsong-songs/00-previous-whistle-cb566b9a9bd7.mp3) | A reference for the preceding Soft voice |
+| 0:04.5 | [Motif song](../../output/birdsong-songs/01-motif-song-98523380e25e.mp3) | Opening chirps, repeated phrases and two trills per rendition |
+| 0:14 | [Trill song](../../output/birdsong-songs/02-trill-song-327def474e36.mp3) | Four longer trills per rendition, with short answering chirps |
+| 0:23.5 | [Cascade song](../../output/birdsong-songs/03-cascade-song-c67349b0aa51.mp3) | Descending chirps separated by trills and short breaths |
+
+The rendered new songs last approximately 6.3, 8.0 and 5.2 seconds respectively. Song trills pulse almost to silence at 18 to 28 pulses per second, alongside pitch modulation. These profiles use a single sine oscillator, without the secondary tone or noisy onset of the earlier timbre experiments. The goal is a more recognisable song; naturalness still needs listening through Ara's speaker.
+
+Ara now chooses a longer song 75% of the time. Song has a 25% probability, TrillSong approximately 33%, and Cascade approximately 17%. The remaining 25% is shared equally among the six earlier voices, including Lively's trills. The register still varies from 8 through 11 semitones between songs. Attempt intervals and the chance of remaining silent are unchanged.
+
+The [random-song preview](../../output/birdsong-songs/04-random-song-mix-4ead8b466b3f.mp3) demonstrates the actual weighted selection and variable register, with the long pauses shortened. Its songs begin at 0:00, 0:13 and 0:26.
+
+To reproduce these recordings:
+
+```sh
+python3 tools/audio/render.py --songs
+```
+
+These previews use seed `20261123`. Their PCM output maps the almost-nine-bit PWM range into 16-bit audio, so samples above 127 do not wrap. The comparison preserves the full first song in each section. No loudness normalization or reverb is applied. Earlier previews below retain their original settings.
+
 ## Listen
 
 The [comparison recording](../../output/birdsong/ara-voice-comparison.mp3) plays these approaches in order. Each section contains three bouts, with the long waits between songs shortened for auditioning.
@@ -34,13 +61,13 @@ constexpr uint8_t MAX_REGISTER_SEMITONES = 11;
 
 The default range includes 8, 9, 10 and 11 semitones. Set both limits to 11 for the highest register auditioned so far. The supported range is 0 through 12. Values outside that range are clamped, and reversed limits are swapped. The chosen register remains fixed through the song and its repeat.
 
-The firmware chooses a voice at random for each song, with equal probability for Soft, Garden, Lively, Chirps, Liquid and Textured. Lively includes the trills. The voice remains fixed through the song and its repeat. Consecutive songs can choose the same voice. The firmware retains the original interval between attempts and its chance of remaining silent. To audition a fixed voice, replace the two `voice.triggerRandom()` calls with a call such as `voice.trigger(ara::BirdVoice::Chirps)`.
+The firmware chooses a voice at random using the song weighting above. It retains Soft, Garden, Lively, Chirps, Liquid and Textured alongside Song, TrillSong and Cascade. The voice remains fixed through the song and its repeats. Consecutive songs can choose the same voice. To audition a fixed voice, replace the two `voice.triggerRandom()` calls with a call such as `voice.trigger(ara::BirdVoice::TrillSong)`.
 
-`OUTPUT_GAIN_PERCENT` sets the firmware volume. It is now 500, applied before the output limit, following the owner's request to try more volume. The earlier 200% limit was imposed by the experiment's 8-bit sample return type, not by the full Uno PWM output range. The voice now returns a 16-bit sample and accepts gain settings up to 500. Output remains limited to -240 through +240, within Mozzi's default Uno range of -244 through +243. At 500%, louder peaks reach this limit and are clipped, so the nominal gain increase does not translate to proportional peak output and can add distortion. Firmware assertions require the default PWM bias and carrier rate. Pitch targets and timing remain unchanged. Existing desktop previews remain at the original 100% level.
+`OUTPUT_GAIN_PERCENT` sets the firmware volume. It is now 400, applied before the output limit, reduced from 500 after the owner confirmed louder playback without audible distortion. The earlier 200% limit was imposed by the experiment's 8-bit sample return type, not by the full Uno PWM output range. The voice now returns a 16-bit sample and accepts gain settings up to 500. Output remains limited to -240 through +240, within Mozzi's default Uno range of -244 through +243. Peaks reaching that limit are clipped, so gain above that point can add distortion. Firmware assertions require the default PWM bias and carrier rate. The early desktop previews remain at 100%; the new song previews use 400%.
 
 [Mozzi's AVR documentation](https://sensorium.github.io/Mozzi/doc/html/hardware_avr.html) describes the almost-nine-bit output range. The bundled library confirms the 244 bias and direct addition of the sample to the PWM compare register. This provides additional digital headroom; physical loudness and distortion still require a listening test. The earlier recommendation that an amplifier was the only remaining option was premature.
 
-`NOISY_ONSETS` is currently `false` in the firmware. The owner reported crackling only during songs after increasing the volume. This setting disables the experimental noise at the start of Textured syllables while preserving the second tone and all six voice choices. Existing audition recordings retain their original noise setting.
+`NOISY_ONSETS` is currently `false` in the firmware. The owner reported crackling only during songs after increasing the volume. This setting disables the experimental noise at the start of Textured syllables while preserving its second tone. Earlier audition recordings retain their original noise setting.
 
 Disabling those onsets did not fully remove the crackle. Inspection of the AVR assembly then found signed 32-bit and 16-bit division helpers in the function that generates every audio sample. The sample function now uses explicit magnitude shifts and a precomputed gain multiplier. Its AVR assembly no longer calls division helpers. The owner confirmed that the crackle disappeared after uploading that change at 150% gain.
 
@@ -83,11 +110,11 @@ The MP3 files use the same output scale, without loudness normalization, reverb 
 
 ## Validation
 
-The Uno firmware uses 6778 bytes of flash and 854 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. Earlier builds with a fixed Soft or Textured profile also passed. The owner confirmed clean playback after the division fix, more realistic birdsong in the enclosure, and improved volume at 350% gain. The requested 500% version was uploaded on 22 November 2026, and avrdude verified all 6778 bytes by flash readback. Physical listening at 500% gain remains unconfirmed. Sustained runtime timing remains unmeasured.
+The Uno firmware uses 7608 bytes of flash and 892 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. The owner confirmed clean playback after the division fix, more realistic birdsong in the enclosure, and louder playback without audible distortion at 500% gain. The new 400% version with longer songs has built successfully. It has not been uploaded; Ara was not connected by USB when checked on 23 November 2026. Sustained runtime timing remains unmeasured.
 
-The desktop renderer runs with address and undefined-behavior sanitizers. It checks output range, phrase completion, return to silence and restart across 100 seeds for all six voices, with both fixed and variable registers. The 1200 phrases exercise every register in the default range and check that the register remains fixed during each song. The oscillator is limited to 7000 Hz, below the 8192 Hz Nyquist limit. These checks do not assess how natural the birdsong sounds.
+The desktop renderer runs with address and undefined-behavior sanitizers. It checks output range, phrase completion, return to silence and restart across 100 seeds for all nine voices, with both fixed and variable registers. These 1800 phrases exercise every register in the default range and check that the register remains fixed during each song. Older calls must finish within six seconds; the longer songs must finish within twelve seconds. The oscillator is limited to 7000 Hz, below the 8192 Hz Nyquist limit. These checks do not assess how natural the birdsong sounds.
 
-An additional sequence of 100 random songs at 500% gain checks that all six profiles are selected, including Lively, that voice and register stay fixed during a song, that output stays within the Uno PWM range, and that every song finishes within the expected duration and returns to silence. The measured peak reaches the 240 output limit. The check requires that limit to be exercised, so an accidental return to an 8-bit sample cannot pass. Further comparisons at gains of 500 and 65535 check that excessive requests clamp without wrapping.
+An additional sequence of 200 random songs at 400% gain checks that all nine profiles are selected, that longer songs dominate the choices, that voice and register stay fixed during a song, that output stays within the Uno PWM range, and that every song finishes within the expected duration and returns to silence. The measured peak reaches the 240 output limit. The check requires output above 127 so an accidental return to an 8-bit sample cannot pass. Further comparisons at gains of 500 and 65535 check that excessive requests clamp without wrapping.
 
 A one-off comparison against the preceding engine checked 589824 samples across all six voices at each of 100%, 125%, 150%, 175% and 200% gain. Every sample matched. Other percentage settings use a rounded fixed-point multiplier and can differ slightly. `tools/audio/check_avr_audio.py --compiler /path/to/avr-g++` compiles a sample wrapper for ATmega328P and rejects division helper calls in its assembly. This guards against the expensive arithmetic returning; it does not measure actual buffer underruns.
 

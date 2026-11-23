@@ -10,9 +10,12 @@ import tempfile
 ROOT = Path(__file__).resolve().parents[2]
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--output', type=Path)
-parser.add_argument('--variations', action='store_true', help='Audition alternative syllable shapes and timbres')
+group = parser.add_mutually_exclusive_group()
+group.add_argument('--variations', action='store_true', help='Audition alternative syllable shapes and timbres')
+group.add_argument('--songs', action='store_true', help='Audition longer songs and trills at 400% gain')
 args = parser.parse_args()
-output = (args.output or ROOT / ('output/birdsong-shapes' if args.variations else 'output/birdsong')).resolve()
+default = 'output/birdsong-songs' if args.songs else 'output/birdsong-shapes' if args.variations else 'output/birdsong'
+output = (args.output or ROOT / default).resolve()
 output.mkdir(parents=True, exist_ok=True)
 with tempfile.TemporaryDirectory(prefix='ara-audio-') as temporary:
     build = Path(temporary)
@@ -27,24 +30,27 @@ with tempfile.TemporaryDirectory(prefix='ara-audio-') as temporary:
                     '-fsanitize=undefined,address', '-I', str(build),
                     '-I', str(ROOT / 'sketches/libraries/Mozzi'),
                     str(ROOT / 'tools/audio/render.cpp'), '-o', str(executable)], check=True)
-    subprocess.run([str(executable), str(output)] + (['--variations'] if args.variations else []), check=True)
+    mode = ['--songs'] if args.songs else ['--variations'] if args.variations else []
+    subprocess.run([str(executable), str(output)] + mode, check=True)
 
 if shutil.which('ffmpeg'):
     for source in sorted(output.glob('*.wav')):
         subprocess.run(['ffmpeg', '-hide_banner', '-loglevel', 'error', '-y',
                         '-i', str(source), '-ar', '44100', '-codec:a', 'libmp3lame',
                         '-b:a', '128k', str(source.with_suffix('.mp3'))], check=True)
-    if args.variations:
+    if args.variations or args.songs:
         # Match the first four registers and seeds, then audition each first bout.
         sources = sorted(output.glob('0[0-3]-*.wav'))
         command = ['ffmpeg', '-hide_banner', '-loglevel', 'error', '-y']
         for source in sources:
             command += ['-i', str(source)]
+        durations = [4, 9, 9, 9] if args.songs else [4] * 4
+        padding = 0.5 if args.songs else 1
         filters = ';'.join(
-            f'[{i}:a]atrim=end=4,asetpts=PTS-STARTPTS,apad=pad_dur=1[a{i}]'
+            f'[{i}:a]atrim=end={durations[i]},asetpts=PTS-STARTPTS,apad=pad_dur={padding}[a{i}]'
             for i in range(4))
         filters += ';[a0][a1][a2][a3]concat=n=4:v=0:a=1[out]'
-        comparison = output / 'ara-shape-comparison.mp3'
+        comparison = output / ('ara-song-comparison.mp3' if args.songs else 'ara-shape-comparison.mp3')
         subprocess.run(command + ['-filter_complex', filters, '-map', '[out]', '-ar', '44100',
                                  '-codec:a', 'libmp3lame', '-b:a', '128k', str(comparison)], check=True)
         recordings = [source.with_suffix('.mp3') for source in sorted(output.glob('0[0-4]-*.wav'))]
