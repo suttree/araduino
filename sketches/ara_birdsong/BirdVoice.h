@@ -21,6 +21,8 @@ class BirdVoice {
   bool busy() const { return active; }
   uint16_t targetFrequencyHz() const { return incrementTarget >> 18; }
   bool pitchWasLimited() const { return frequencyLimited; }
+  bool longNoteActive() const { return heldActive; }
+  uint8_t longNoteTicks() const { return heldSyllable == 255 ? 0 : heldTicks; }
   void setNoisyOnsets(bool enabled) { noisyOnsets = enabled; }
   void setGainPercent(uint16_t percent) {
     // Uno PWM accepts almost nine bits, wider than the oscillator's table.
@@ -84,6 +86,7 @@ class BirdVoice {
 #endif
     }
     mode = profile;
+    heldSyllable = 255;
     count = profile >= Song ? 6 + pick(3) : profile == Soft ? 4 : 5;
     if (profile >= Song) {
       // Twelve contours, each available forwards/backwards and rising/falling.
@@ -99,6 +102,14 @@ class BirdVoice {
       endingStyle = pick(4);
       answerEnding = pick(3);
       phraseBreath = 20 + pick(65);
+      // One held gesture in roughly three out of ten melodic songs, in either rendition.
+      if ((profile == Song || profile == TrillSong) && pick(10) < 3) {
+        heldSyllable = pick(count);
+        heldRendition = pick(2);
+        heldTicks = 128 + pick(65);
+        heldDrift = int16_t(pick(91)) - 45;
+        heldBend = int16_t(pick(51)) - 25;
+      }
     }
     const uint8_t firstTrill = profile >= Song ? pick(count) : 0;
     const uint8_t secondTrill = profile >= Song ? (firstTrill + 2 + pick(count - 2)) % count : 0;
@@ -184,6 +195,7 @@ class BirdVoice {
   }
   void control() {
     frequencyLimited = false;
+    heldActive = false;
     if (!active) { ramp(0, increment); return; }
     uint8_t syllable = index % count;
     if (mode >= Song && index >= count) {
@@ -194,6 +206,7 @@ class BirdVoice {
     }
     const Syllable &s = motif[syllable];
     const bool answering = mode >= Song && index >= count;
+    const bool holding = mode >= Song && syllable == heldSyllable && index / count == heldRendition;
     uint16_t ticks = answering ? (uint16_t(s.answerTicks) * answerTempo + 50) / 100 : s.ticks;
     const uint16_t gap = answering ? (uint16_t(s.answerGap) * answerTempo + 50) / 100 : s.gap;
     uint8_t tailStyle = s.tailStyle;
@@ -201,7 +214,9 @@ class BirdVoice {
       if (answerEnding == 0) { if (ticks > 24) ticks = 24; tailStyle = 1; }
       if (answerEnding == 1) tailStyle = 2;
     }
+    if (holding) { ticks = heldTicks; tailStyle = 0; }
     if (age < ticks) {
+      heldActive = holding;
       const uint16_t t = uint32_t(age) * 255 / (ticks - 1);
       // Keep the fraction until after multiplication by the bend depth.
       int32_t hz = s.start + int32_t(s.end - s.start) * t / 255;
@@ -212,11 +227,16 @@ class BirdVoice {
       } else {
         hz += int32_t(s.bend) * 4 * t * (255 - t) / 65025;
       }
+      if (holding) {
+        hz = s.start + int32_t(heldDrift) * t / 255;
+        hz += int32_t(heldBend) * 4 * t * (255 - t) / 65025;
+      }
       if (index >= count) hz += repeatShift;
       if (answering) hz += answerTranspose;
       uint8_t level = s.level;
-      const uint8_t attack = mode >= Song ? 2 : mode >= Chirps ? 1 : mode == Soft ? 7 : 4;
-      const uint8_t release = tailStyle == 1 ? 2 : mode >= Song ? 5 : mode >= Chirps ? 4 : mode == Soft ? 12 : 7;
+      if (holding) level = uint16_t(level) * 88 / 100;
+      const uint8_t attack = holding ? 6 : mode >= Song ? 2 : mode >= Chirps ? 1 : mode == Soft ? 7 : 4;
+      const uint8_t release = holding ? 12 : tailStyle == 1 ? 2 : mode >= Song ? 5 : mode >= Chirps ? 4 : mode == Soft ? 12 : 7;
       if (tailStyle == 2) level = uint16_t(level) * (255 - t) / 255;
       if (mode >= Chirps && mode < Song) {
         // Short attack and a decaying body instead of a sustained whistle.
@@ -225,7 +245,7 @@ class BirdVoice {
       if (age < attack) level = uint16_t(level) * age / attack;
       if (ticks - 1 - age < release)
         level = uint16_t(level) * (ticks - 1 - age) / release;
-      if (s.trill) {
+      if (s.trill && !holding) {
         const int16_t flutter = sine(uint8_t(age * s.trillRate));
         hz += mode >= Song ? flutter : flutter * 2;
         // Song trills fall almost to silence between pulses, unlike vibrato.
@@ -308,6 +328,9 @@ class BirdVoice {
   uint8_t recentMotifs[3] = {255, 255, 255};
   uint8_t phraseOrder = 0, answerTempo = 100;
   uint8_t endingStyle = 0, answerEnding = 0, phraseBreath = 55;
+  uint8_t heldSyllable = 255, heldRendition = 0, heldTicks = 128;
+  int8_t heldDrift = 0, heldBend = 0;
+  bool heldActive = false;
   int16_t answerTranspose = 0;
   int32_t incrementDelta = 0;
   int16_t amplitude = 0, amplitudeTarget = 0, amplitudeDelta = 0;

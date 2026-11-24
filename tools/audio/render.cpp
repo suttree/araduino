@@ -132,7 +132,7 @@ void renderMelodySession(const std::string &directory, uint32_t seed) {
     ++frame;
   };
   std::ofstream report(directory + "/melody-session.csv");
-  report << "song,start_seconds,duration_seconds,profile,motif,register,max_rendition,seed\n";
+  report << "song,start_seconds,duration_seconds,profile,motif,register,max_rendition,seed,held_start_seconds,held_duration_seconds\n";
   // Showcase the melodic repertoire; this order is illustrative, not a random-frequency sample.
   const ara::BirdVoice::Profile examples[] = {ara::BirdVoice::Song, ara::BirdVoice::TrillSong,
       ara::BirdVoice::Song, ara::BirdVoice::TrillSong, ara::BirdVoice::Song,
@@ -144,15 +144,21 @@ void renderMelodySession(const std::string &directory, uint32_t seed) {
     const auto profile = voice.selectedProfile();
     const unsigned motif = voice.selectedMotif(), pitch = voice.selectedRegister();
     unsigned maximumRendition = 0;
+    unsigned heldStart = 0, heldFrames = 0;
     do {
       if (voice.busy()) maximumRendition = std::max(maximumRendition, unsigned(voice.currentRendition()));
       step();
+      if (voice.longNoteActive()) {
+        if (!heldFrames) heldStart = frame - 1;
+        ++heldFrames;
+      }
       if (frame - start > 12 * 16384) throw std::runtime_error("Demo song did not finish");
     } while (voice.busy());
     if (maximumRendition > 2) throw std::runtime_error("Demo repeated a melody more than twice");
     report << song + 1 << ',' << double(start) / 16384 << ',' << double(frame - start) / 16384
            << ',' << int(profile) << ',' << motif << ',' << pitch << ',' << maximumRendition
-           << ',' << seed << '\n';
+           << ',' << seed << ',' << (heldFrames ? double(heldStart) / 16384 : -1)
+           << ',' << double(heldFrames) / 16384 << '\n';
     if (song < 9) for (unsigned gap = 0; gap < 2 * 16384; ++gap) step();
   }
   for (unsigned tail = 0; tail < 16384; ++tail) step();
@@ -263,9 +269,13 @@ int main(int argc, char **argv) {
   uint64_t motifsSeen = 0;
   unsigned registerCounts[3] = {}, limitedTicks = 0, activeTicks = 0;
   int mixedPeak = 0;
-  unsigned longerSongs = 0, melodicSongs = 0;
+  unsigned longerSongs = 0, melodicSongs = 0, songsWithHeldNotes = 0;
   for (unsigned song = 0; song < 200; ++song) {
     mixedVoice.triggerRandom();
+    unsigned heldUpdates = 0, heldEvents = 0;
+    bool heldPreviously = false;
+    const unsigned expectedHeldTicks = mixedVoice.longNoteTicks();
+    if (expectedHeldTicks) ++songsWithHeldNotes;
     const auto profile = mixedVoice.selectedProfile();
     const uint8_t motif = mixedVoice.selectedMotif();
     if (profile >= ara::BirdVoice::Song) {
@@ -286,6 +296,11 @@ int main(int argc, char **argv) {
     mixedVoice.triggerRandom();
     for (unsigned tick = 0; tick < 12 * 256; ++tick) {
       mixedVoice.control();
+      if (mixedVoice.longNoteActive()) {
+        ++heldUpdates;
+        if (!heldPreviously) ++heldEvents;
+      }
+      heldPreviously = mixedVoice.longNoteActive();
       if (mixedVoice.busy() && mixedVoice.currentRendition() > 2)
         throw std::runtime_error("Random melody repeated more than twice");
       if (mixedVoice.busy()) ++activeTicks;
@@ -303,6 +318,10 @@ int main(int argc, char **argv) {
     }
     if (mixedVoice.busy() || mixedVoice.audio() != 0)
       throw std::runtime_error("Mixed voice did not finish cleanly");
+    if (heldUpdates != expectedHeldTicks || heldEvents != (expectedHeldTicks ? 1u : 0u))
+      throw std::runtime_error("Held note was missing, shortened or repeated");
+    if (expectedHeldTicks && (expectedHeldTicks < 128 || expectedHeldTicks > 192))
+      throw std::runtime_error("Held note duration is outside its intended range");
   }
   const unsigned songProfiles = (1u << ara::BirdVoice::Song) | (1u << ara::BirdVoice::TrillSong) | (1u << ara::BirdVoice::Cascade);
   if ((profilesSeen & songProfiles) != songProfiles)
@@ -313,8 +332,11 @@ int main(int argc, char **argv) {
   if (longerSongs < 180 || melodicSongs < 160 || 200 - longerSongs > 15)
     throw std::runtime_error("Random selection did not favour melodies and trills");
   if (mixedPeak <= 127) throw std::runtime_error("High gain never used the wider PWM range");
+  if (songsWithHeldNotes < 30 || songsWithHeldNotes > 80)
+    throw std::runtime_error("Held notes are not occasional");
   std::cout << "Passed 200 random songs at 350% gain: " << melodicSongs << " melody/trill, "
             << 200 - longerSongs << " shorter calls, " << motifCount << " contours, peak " << mixedPeak << "/244\n";
+  std::cout << songsWithHeldNotes << "/200 songs had exactly one held gesture each\n";
   std::cout << "Weighted registers: +13=" << registerCounts[0] << ", +15=" << registerCounts[1]
             << ", +17=" << registerCounts[2] << "; pitch limit used on " << limitedTicks
             << "/" << activeTicks << " active control ticks\n";
