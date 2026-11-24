@@ -2,6 +2,12 @@
 
 This sketch experiments with shaped whistles and repeated calls on the existing Uno hardware. The working sketch at `../araduino/araduino.ino` remains separate.
 
+## Less frequent singing, 24 November
+
+Ara now waits 340 to 740 seconds between attempts to sing, twice the previous 170 to 370 seconds. Each attempt still has a 50% chance of starting a song. This gives an average of one song every 18 minutes, previously nine minutes. The minimum interval is five minutes and 40 seconds; skipped attempts can produce much longer gaps. She still sings once on startup. Song generation and volume remain unchanged.
+
+This timing change has not been uploaded to Ara.
+
 ## Shorter held notes and held openings, 24 November
 
 Held notes now last 112 to 168 control ticks, approximately 0.44 to 0.66 seconds. This is a modest reduction from the previous 0.5 to 0.75 seconds. The chance of selecting a held note remains 30% for Song and TrillSong. One third of those selected songs begin with it. The rest place it later in the first phrase or in the answer. Each selected song still has exactly one held gesture.

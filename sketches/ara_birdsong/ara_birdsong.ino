@@ -22,7 +22,7 @@ unsigned long attemptInterval = 0;
 
 void scheduleAttempt(unsigned long now) {
   lastAttempt = now;
-  attemptInterval = random(170000L, 370001L);
+  attemptInterval = random(340000L, 740001L);
 }
 
 void updateControl() {
