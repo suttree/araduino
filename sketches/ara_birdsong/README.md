@@ -6,7 +6,7 @@ This sketch experiments with shaped whistles and repeated calls on the existing 
 
 Ara now waits 340 to 740 seconds between attempts to sing, twice the previous 170 to 370 seconds. Each attempt still has a 50% chance of starting a song. This gives an average of one song every 18 minutes, previously nine minutes. The minimum interval is five minutes and 40 seconds; skipped attempts can produce much longer gaps. She still sings once on startup. Song generation and volume remain unchanged.
 
-This timing change has not been uploaded to Ara.
+Firmware from commit `8b95b54` was uploaded to Ara on 24 November 2026. avrdude verified all 10162 bytes by flash readback. Physical listening to this upload remains unconfirmed.
 
 ## Shorter held notes and held openings, 24 November
 
