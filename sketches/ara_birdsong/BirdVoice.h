@@ -23,6 +23,7 @@ class BirdVoice {
   bool pitchWasLimited() const { return frequencyLimited; }
   bool longNoteActive() const { return heldActive; }
   uint8_t longNoteTicks() const { return heldSyllable == 255 ? 0 : heldTicks; }
+  bool startsWithLongNote() const { return heldSyllable == 0 && heldRendition == 0; }
   void setNoisyOnsets(bool enabled) { noisyOnsets = enabled; }
   void setGainPercent(uint16_t percent) {
     // Uno PWM accepts almost nine bits, wider than the oscillator's table.
@@ -104,9 +105,14 @@ class BirdVoice {
       phraseBreath = 20 + pick(65);
       // One held gesture in roughly three out of ten melodic songs, in either rendition.
       if ((profile == Song || profile == TrillSong) && pick(10) < 3) {
-        heldSyllable = pick(count);
-        heldRendition = pick(2);
-        heldTicks = 128 + pick(65);
+        if (pick(3) == 0) {
+          heldSyllable = 0;
+          heldRendition = 0;
+        } else {
+          heldRendition = pick(2);
+          heldSyllable = heldRendition == 0 ? 1 + pick(count - 1) : pick(count);
+        }
+        heldTicks = 112 + pick(57);
         heldDrift = int16_t(pick(91)) - 45;
         heldBend = int16_t(pick(51)) - 25;
       }

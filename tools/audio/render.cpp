@@ -269,12 +269,14 @@ int main(int argc, char **argv) {
   uint64_t motifsSeen = 0;
   unsigned registerCounts[3] = {}, limitedTicks = 0, activeTicks = 0;
   int mixedPeak = 0;
-  unsigned longerSongs = 0, melodicSongs = 0, songsWithHeldNotes = 0;
+  unsigned longerSongs = 0, melodicSongs = 0, songsWithHeldNotes = 0, heldOpenings = 0;
   for (unsigned song = 0; song < 200; ++song) {
     mixedVoice.triggerRandom();
     unsigned heldUpdates = 0, heldEvents = 0;
     bool heldPreviously = false;
     const unsigned expectedHeldTicks = mixedVoice.longNoteTicks();
+    const bool expectedOpening = mixedVoice.startsWithLongNote();
+    if (expectedOpening) ++heldOpenings;
     if (expectedHeldTicks) ++songsWithHeldNotes;
     const auto profile = mixedVoice.selectedProfile();
     const uint8_t motif = mixedVoice.selectedMotif();
@@ -296,6 +298,8 @@ int main(int argc, char **argv) {
     mixedVoice.triggerRandom();
     for (unsigned tick = 0; tick < 12 * 256; ++tick) {
       mixedVoice.control();
+      if (tick == 0 && mixedVoice.longNoteActive() != expectedOpening)
+        throw std::runtime_error("Held-note opening did not match the selected phrase");
       if (mixedVoice.longNoteActive()) {
         ++heldUpdates;
         if (!heldPreviously) ++heldEvents;
@@ -320,7 +324,7 @@ int main(int argc, char **argv) {
       throw std::runtime_error("Mixed voice did not finish cleanly");
     if (heldUpdates != expectedHeldTicks || heldEvents != (expectedHeldTicks ? 1u : 0u))
       throw std::runtime_error("Held note was missing, shortened or repeated");
-    if (expectedHeldTicks && (expectedHeldTicks < 128 || expectedHeldTicks > 192))
+    if (expectedHeldTicks && (expectedHeldTicks < 112 || expectedHeldTicks > 168))
       throw std::runtime_error("Held note duration is outside its intended range");
   }
   const unsigned songProfiles = (1u << ara::BirdVoice::Song) | (1u << ara::BirdVoice::TrillSong) | (1u << ara::BirdVoice::Cascade);
@@ -334,9 +338,12 @@ int main(int argc, char **argv) {
   if (mixedPeak <= 127) throw std::runtime_error("High gain never used the wider PWM range");
   if (songsWithHeldNotes < 30 || songsWithHeldNotes > 80)
     throw std::runtime_error("Held notes are not occasional");
+  if (heldOpenings < 5 || heldOpenings > 35 || heldOpenings >= songsWithHeldNotes)
+    throw std::runtime_error("Held-note placement lacks a mix of openings and later notes");
   std::cout << "Passed 200 random songs at 350% gain: " << melodicSongs << " melody/trill, "
             << 200 - longerSongs << " shorter calls, " << motifCount << " contours, peak " << mixedPeak << "/244\n";
-  std::cout << songsWithHeldNotes << "/200 songs had exactly one held gesture each\n";
+  std::cout << songsWithHeldNotes << "/200 songs had exactly one held gesture each; "
+            << heldOpenings << " opened with it\n";
   std::cout << "Weighted registers: +13=" << registerCounts[0] << ", +15=" << registerCounts[1]
             << ", +17=" << registerCounts[2] << "; pitch limit used on " << limitedTicks
             << "/" << activeTicks << " active control ticks\n";

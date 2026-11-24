@@ -2,9 +2,21 @@
 
 This sketch experiments with shaped whistles and repeated calls on the existing Uno hardware. The working sketch at `../araduino/araduino.ino` remains separate.
 
+## Shorter held notes and held openings, 24 November
+
+Held notes now last 112 to 168 control ticks, approximately 0.44 to 0.66 seconds. This is a modest reduction from the previous 0.5 to 0.75 seconds. The chance of selecting a held note remains 30% for Song and TrillSong. One third of those selected songs begin with it. The rest place it later in the first phrase or in the answer. Each selected song still has exactly one held gesture.
+
+The [fifth reel](../../output/birdsong-session-20261124-reel5/ara-melody-session-7dcc0e805ac6.mp3) contains ten examples over approximately 53 seconds. The last melody, around 0:49, opens with a held note of approximately 0.56 seconds. Other held notes occur around 0:05.8, 0:34.3 and 0:39. The seed was selected to include an opening example and later held gestures; this showcase does not measure their normal frequency. Gain, register choices, cadence and maximum of two renditions remain unchanged. Reproduce it with:
+
+```sh
+python3 tools/audio/render.py --session --seed 2026112406 --output output/birdsong-session-20261124-reel5
+```
+
+This revision has not been uploaded to Ara.
+
 ## Occasional held notes, 24 November
 
-Song and TrillSong now have a 30% chance of including one held note. Its position and rendition are chosen for that song, so it does not always close the phrase or recur in the answer. It lasts 0.5 to 0.75 seconds, with slight pitch drift and curvature, a softer level and a longer attack and release. Trill pulses are suppressed for that held gesture. The remaining phrasing, 350% gain, register weights and two-rendition maximum are unchanged.
+The first held-note revision gave Song and TrillSong a 30% chance of including one held note, lasting 0.5 to 0.75 seconds. The latest revision shortens that range and deliberately includes opening gestures, as described above. Slight pitch drift and curvature, a softer level and longer attack and release remain. Trill pulses are suppressed for the held gesture. The remaining phrasing, 350% gain, register weights and two-rendition maximum are unchanged.
 
 The [fourth demo reel](../../output/birdsong-session-20261124-reel4/ara-melody-session-e6083c057ce4.mp3) contains ten examples over approximately 55 seconds. Held notes begin around 0:08.9 and 0:24.1 and last approximately 0.74 and 0.61 seconds. The adjacent `melody-session.csv` records their exact locations and durations as well as song details. The demo uses the same illustrative profile order as the previous reels and a new seed:
 
@@ -159,7 +171,7 @@ constexpr uint8_t UPPER_REGISTER_WEIGHT = 1;
 
 These are the auditioned two, four and six semitones above the preceding +11 upper register. Their probabilities are 40%, 50% and 10% respectively. Ara keeps the chosen register through the whole song and every repeat. `setRegisterChoices()` accepts the three registers and their relative weights; all-zero weights fall back to equal probabilities. The supported pitch table now covers 0 through 17 semitones. Out-of-range register values clamp to 17. The older `setRegisterRange()` method remains available for an equally weighted inclusive range.
 
-Random motifs can exceed the pitch targets in the fixed auditions. The engine retains its 7000 Hz frequency limit; in the latest 200-song check it limited 1147 of 193508 active control updates, approximately 0.6%. Those parts of the pitch contour flatten at the limit. This is not a claim of unlimited pitch headroom.
+Random motifs can exceed the pitch targets in the fixed auditions. The engine retains its 7000 Hz frequency limit; in the latest 200-song check it limited 831 of 191459 active control updates, approximately 0.4%. Those parts of the pitch contour flatten at the limit. This is not a claim of unlimited pitch headroom.
 
 The firmware chooses a voice at random using the song weighting above. It retains Soft, Garden, Lively, Chirps, Liquid and Textured alongside Song, TrillSong and Cascade. The voice remains fixed through the song and its repeats. Consecutive songs can choose the same voice. To audition a fixed voice, replace the two `voice.triggerRandom()` calls with a call such as `voice.trigger(ara::BirdVoice::TrillSong)`.
 
@@ -210,11 +222,11 @@ The MP3 files use the same output scale, without loudness normalization, reverb 
 
 ## Validation
 
-The Uno firmware uses 10114 bytes of flash and 949 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. The preceding variety revision was uploaded on 23 November 2026 and verified by flash readback. The current 350% version with a two-rendition maximum, melody-focused selection, looser cadence and occasional held notes has built successfully and is presented as a demo; it has not been uploaded. Sustained runtime timing remains unmeasured.
+The Uno firmware uses 10162 bytes of flash and 949 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. The preceding variety revision was uploaded on 23 November 2026 and verified by flash readback. The current 350% version with a two-rendition maximum, melody-focused selection, looser cadence and shorter held notes including openings has built successfully and is presented as a demo; it has not been uploaded. Sustained runtime timing remains unmeasured.
 
 The desktop renderer runs with address and undefined-behavior sanitizers. It checks output range, phrase completion, return to silence and restart across 100 seeds for all nine voices, with both fixed and variable registers. These 1800 phrases exercise every register in the default range and check that the register remains fixed during each song. Older calls must finish within six seconds; the longer songs must finish within twelve seconds. The oscillator is limited to 7000 Hz, below the 8192 Hz Nyquist limit. These checks do not assess how natural the birdsong sounds.
 
-An additional sequence of 200 random songs at 350% gain produced 178 melody/trill songs and seven short calls, and exercised all 48 melodic contour variations. Fifty-one songs included a held note. The check measures its active duration, requires exactly one held event in each selected song and verifies the 0.5 to 0.75 second range. It also checks that none of the last three contours recurs, that voice, motif and register remain fixed during a song, that no motif plays more than twice, and that every song completes and returns to silence. The 7000 Hz limit and PWM bounds are checked. The measured output peak is 210 against a bias of 244. Register counts were 80, 103 and 17. A separate check of 5000 initial song choices selected registers 13, 15 and 17 respectively 1960, 2550 and 490 times, approximately 39%, 51% and 10%. Further comparisons at gains of 500 and 65535 check that excessive requests clamp without wrapping.
+An additional sequence of 200 random songs at 350% gain produced 183 melody/trill songs and six short calls, and exercised 47 melodic contour variations. Sixty-two songs included a held note, with 21 opening on it. The check measures active duration, requires exactly one held event in each selected song, verifies the 112 to 168 tick range and checks that planned openings are active at the start of the song. It also checks that none of the last three contours recurs, that voice, motif and register remain fixed during a song, that no motif plays more than twice, and that every song completes and returns to silence. The 7000 Hz limit and PWM bounds are checked. The measured output peak is 210 against a bias of 244. Register counts were 73, 106 and 21. A separate check of 5000 initial song choices selected registers 13, 15 and 17 respectively 1960, 2550 and 490 times, approximately 39%, 51% and 10%. Further comparisons at gains of 500 and 65535 check that excessive requests clamp without wrapping.
 
 A one-off comparison against the preceding engine checked 589824 samples across all six voices at each of 100%, 125%, 150%, 175% and 200% gain. Every sample matched. Other percentage settings use a rounded fixed-point multiplier and can differ slightly. `tools/audio/check_avr_audio.py --compiler /path/to/avr-g++` compiles a sample wrapper for ATmega328P and rejects division helper calls in its assembly. This guards against the expensive arithmetic returning; it does not measure actual buffer underruns.
 
