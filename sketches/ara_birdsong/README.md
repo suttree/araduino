@@ -12,7 +12,7 @@ The [fifth reel](../../output/birdsong-session-20261124-reel5/ara-melody-session
 python3 tools/audio/render.py --session --seed 2026112406 --output output/birdsong-session-20261124-reel5
 ```
 
-This revision has not been uploaded to Ara.
+Firmware from commit `3ded42e` was uploaded to Ara on 24 November 2026. avrdude verified all 10162 bytes by flash readback. Physical listening to this upload remains unconfirmed.
 
 ## Occasional held notes, 24 November
 
@@ -222,7 +222,7 @@ The MP3 files use the same output scale, without loudness normalization, reverb 
 
 ## Validation
 
-The Uno firmware uses 10162 bytes of flash and 949 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. The preceding variety revision was uploaded on 23 November 2026 and verified by flash readback. The current 350% version with a two-rendition maximum, melody-focused selection, looser cadence and shorter held notes including openings has built successfully and is presented as a demo; it has not been uploaded. Sustained runtime timing remains unmeasured.
+The Uno firmware uses 10162 bytes of flash and 949 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. The preceding variety revision was uploaded on 23 November 2026 and verified by flash readback. The current 350% version with a two-rendition maximum, melody-focused selection, looser cadence and shorter held notes including openings was uploaded on 24 November 2026 from commit `3ded42e`. avrdude verified all 10162 bytes by flash readback. Physical listening to this upload remains unconfirmed. Sustained runtime timing remains unmeasured.
 
 The desktop renderer runs with address and undefined-behavior sanitizers. It checks output range, phrase completion, return to silence and restart across 100 seeds for all nine voices, with both fixed and variable registers. These 1800 phrases exercise every register in the default range and check that the register remains fixed during each song. Older calls must finish within six seconds; the longer songs must finish within twelve seconds. The oscillator is limited to 7000 Hz, below the 8192 Hz Nyquist limit. These checks do not assess how natural the birdsong sounds.
 
