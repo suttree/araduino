@@ -84,7 +84,7 @@ class BirdVoice {
 #endif
     }
     mode = profile;
-    count = profile >= Song ? (profile == Cascade ? 6 + pick(3) : 7 + pick(2)) : profile == Soft ? 4 : 5;
+    count = profile >= Song ? 6 + pick(3) : profile == Soft ? 4 : 5;
     if (profile >= Song) {
       // Twelve contours, each available forwards/backwards and rising/falling.
       melodyVariant = pick(48);
@@ -93,12 +93,17 @@ class BirdVoice {
       recentMotifs[2] = recentMotifs[1];
       recentMotifs[1] = recentMotifs[0];
       recentMotifs[0] = melodyVariant;
-      rhythmPattern = pick(4);
       phraseOrder = pick(4);
       answerTempo = 90 + pick(21);
       answerTranspose = int16_t(pick(241)) - 120;
+      endingStyle = pick(4);
+      answerEnding = pick(3);
+      phraseBreath = 20 + pick(65);
     }
-    const uint8_t firstTrill = profile >= Song ? 2 + pick(2) : 0;
+    const uint8_t firstTrill = profile >= Song ? pick(count) : 0;
+    const uint8_t secondTrill = profile >= Song ? (firstTrill + 2 + pick(count - 2)) % count : 0;
+    uint8_t groupRemaining = profile >= Song ? 1 + pick(4) : 1;
+    uint8_t answerGroupRemaining = profile >= Song ? 1 + pick(4) : 1;
     const uint8_t cascadeStep = profile >= Song ? 70 + pick(61) : 100;
     const int base = 1850 + pick(650);
     for (uint8_t i = 0; i < count; ++i) {
@@ -111,6 +116,7 @@ class BirdVoice {
       s.level = 100 + pick(24);
       s.trill = profile == Lively && i % 2 == 1;
       s.trillRate = 16;
+      s.tailStyle = 0;
       if (s.trill) s.ticks += 28;
       if (profile >= Chirps) {
         // Preserve the pitch vocabulary but replace the slow whistle gestures.
@@ -135,16 +141,10 @@ class BirdVoice {
           {-200, 60, 180, 300, 100, -40, 220, 0},
           {180, 300, 60, -120, 40, 240, -80, 100}
         };
-        static const uint8_t rhythms[][8] ARA_FLASH = {
-          {0, 8, 0, 12, 4, 0, 10, 6}, {10, 0, 6, 0, 12, 4, 0, 8},
-          {4, 12, 0, 8, 0, 10, 6, 0}, {8, 4, 10, 0, 6, 0, 12, 4}
-        };
 #ifdef __AVR__
         int16_t offset = int16_t(pgm_read_word(&offsets[melodyVariant % 12][melodyVariant >= 24 ? count - 1 - i : i]));
-        const uint8_t rhythm = pgm_read_byte(&rhythms[rhythmPattern][i]);
 #else
         int16_t offset = offsets[melodyVariant % 12][melodyVariant >= 24 ? count - 1 - i : i];
-        const uint8_t rhythm = rhythms[rhythmPattern][i];
 #endif
         if ((melodyVariant / 12) % 2) offset = -offset;
         s.start = base + (profile == Cascade ? int16_t(count - 1) * cascadeStep / 2 - int16_t(i) * cascadeStep : offset);
@@ -152,13 +152,29 @@ class BirdVoice {
         s.end = s.start + (pick(2) ? -100 - int16_t(pick(121)) : 100 + int16_t(pick(121)));
         s.bend = pick(2) ? -80 - int16_t(pick(101)) : 80 + int16_t(pick(101));
         s.level = 100 + pick(16);
-        s.trill = i == firstTrill || i == count - 2 || (profile == TrillSong && (i == 1 || i == count / 2));
+        s.trill = i == firstTrill || i == secondTrill || (profile == TrillSong && pick(5) == 0);
         s.trillRate = 18 + pick(11);
-        s.ticks = s.trill ? 65 + pick(40) + rhythm : 18 + pick(24) + rhythm;
-        if (i == 0 || i == count - 1) s.ticks = 30 + pick(24);
+        const uint8_t gesture = pick(4);
+        s.ticks = s.trill ? 48 + pick(64) : gesture == 0 ? 10 + pick(10)
+            : gesture == 1 ? 18 + pick(16) : gesture == 2 ? 30 + pick(24) : 45 + pick(24);
         if (profile == Cascade && !s.trill) s.ticks = 18 + pick(12);
-        s.gap = 4 + pick(7);
-        if (i == count / 2) s.gap += 12 + pick(17);
+        // Separate irregular groups of one to four gestures with breaths.
+        if (--groupRemaining == 0) {
+          s.gap = 18 + pick(29);
+          groupRemaining = 1 + pick(4);
+        } else s.gap = 2 + pick(7);
+        if (i == count - 1) {
+          if (endingStyle == 0) { s.ticks = 10 + pick(14); s.trill = false; s.tailStyle = 1; }
+          if (endingStyle == 1) { s.ticks = 24 + pick(24); s.trill = false; s.tailStyle = 2; }
+          if (endingStyle == 2) { s.ticks = 48 + pick(48); s.trill = true; }
+        }
+        // Each answering syllable gets its own timing, not just a global tempo shift.
+        s.answerTicks = (uint16_t(s.ticks) * (70 + pick(61)) + 50) / 100;
+        if (s.answerTicks > 140) s.answerTicks = 140;
+        if (--answerGroupRemaining == 0) {
+          s.answerGap = 18 + pick(29);
+          answerGroupRemaining = 1 + pick(4);
+        } else s.answerGap = 2 + pick(9);
       }
     }
     index = 0;
@@ -178,8 +194,13 @@ class BirdVoice {
     }
     const Syllable &s = motif[syllable];
     const bool answering = mode >= Song && index >= count;
-    const uint16_t ticks = answering ? (uint16_t(s.ticks) * answerTempo + 50) / 100 : s.ticks;
-    const uint16_t gap = answering ? (uint16_t(s.gap) * answerTempo + 50) / 100 : s.gap;
+    uint16_t ticks = answering ? (uint16_t(s.answerTicks) * answerTempo + 50) / 100 : s.ticks;
+    const uint16_t gap = answering ? (uint16_t(s.answerGap) * answerTempo + 50) / 100 : s.gap;
+    uint8_t tailStyle = s.tailStyle;
+    if (answering && index % count == count - 1) {
+      if (answerEnding == 0) { if (ticks > 24) ticks = 24; tailStyle = 1; }
+      if (answerEnding == 1) tailStyle = 2;
+    }
     if (age < ticks) {
       const uint16_t t = uint32_t(age) * 255 / (ticks - 1);
       // Keep the fraction until after multiplication by the bend depth.
@@ -195,7 +216,8 @@ class BirdVoice {
       if (answering) hz += answerTranspose;
       uint8_t level = s.level;
       const uint8_t attack = mode >= Song ? 2 : mode >= Chirps ? 1 : mode == Soft ? 7 : 4;
-      const uint8_t release = mode >= Song ? 5 : mode >= Chirps ? 4 : mode == Soft ? 12 : 7;
+      const uint8_t release = tailStyle == 1 ? 2 : mode >= Song ? 5 : mode >= Chirps ? 4 : mode == Soft ? 12 : 7;
+      if (tailStyle == 2) level = uint16_t(level) * (255 - t) / 255;
       if (mode >= Chirps && mode < Song) {
         // Short attack and a decaying body instead of a sustained whistle.
         level = uint16_t(level) * (255 - t / 2) / 255;
@@ -226,7 +248,7 @@ class BirdVoice {
     // A longer breath separates the two renditions of the motif.
     const uint8_t renditions = selectedRenditions();
     const uint16_t breath = (index + 1) % count == 0 && index + 1 < count * renditions
-        ? (mode >= Song ? 55 : 90) : 0;
+        ? (mode >= Song ? phraseBreath : 90) : 0;
     if (++age >= ticks + gap + breath) {
       age = 0;
       if (++index == count * renditions) active = false;
@@ -268,6 +290,7 @@ class BirdVoice {
     uint8_t ticks, gap, level;
     bool trill;
     uint8_t trillRate;
+    uint8_t answerTicks, answerGap, tailStyle;
   } motif[8] = {};
   uint32_t rng, phase = 0, increment = 0, incrementTarget = 0;
   uint16_t pitchScale;
@@ -281,9 +304,10 @@ class BirdVoice {
   bool weightedRegisters = false, frequencyLimited = false;
   uint8_t registerChoices[3] = {13, 15, 17};
   uint8_t registerWeights[3] = {4, 5, 1};
-  uint8_t melodyVariant = 0, rhythmPattern = 0;
+  uint8_t melodyVariant = 0;
   uint8_t recentMotifs[3] = {255, 255, 255};
   uint8_t phraseOrder = 0, answerTempo = 100;
+  uint8_t endingStyle = 0, answerEnding = 0, phraseBreath = 55;
   int16_t answerTranspose = 0;
   int32_t incrementDelta = 0;
   int16_t amplitude = 0, amplitudeTarget = 0, amplitudeDelta = 0;
