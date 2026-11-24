@@ -6,7 +6,7 @@ static_assert(MOZZI_AUDIO_BIAS == 244, "High gain requires the default Uno PWM o
 static_assert(MOZZI_PWM_RATE == 32768, "High gain requires the default Uno PWM carrier rate.");
 constexpr uint16_t CONTROL_RATE_HZ = 256;
 // 100 is the original preview level. Use the Uno's wider PWM output range.
-constexpr uint16_t OUTPUT_GAIN_PERCENT = 400;
+constexpr uint16_t OUTPUT_GAIN_PERCENT = 350;
 // Disable the experimental noisy onset while testing physical playback.
 constexpr bool NOISY_ONSETS = false;
 // +2, +4 or +6 above the previous +11 upper register, weighted 40%, 50%, 10%.
