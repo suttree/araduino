@@ -29,6 +29,12 @@ The [one-minute melody demo](../../output/birdsong-session-20261124/ara-melody-s
 python3 tools/audio/render.py --session
 ```
 
+A [second reel](../../output/birdsong-session-20261124-reel2/ara-melody-session-0fa4c8d150ce.mp3) contains ten fresh examples over approximately 57 seconds. It uses the same gain, register weights, two-rendition limit and profile order, with seed `2026112402`. Its individual song details are in the adjacent `melody-session.csv`. Reproduce it with:
+
+```sh
+python3 tools/audio/render.py --session --seed 2026112402 --output output/birdsong-session-20261124-reel2
+```
+
 This revision is prepared for listening review and has not been uploaded to Ara.
 
 ## Less repetition, 23 November

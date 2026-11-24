@@ -117,8 +117,8 @@ void renderRegisterPreviews(const std::string &directory) {
   if (!report) throw std::runtime_error("Could not write register pitch report");
 }
 
-void renderMelodySession(const std::string &directory) {
-  ara::BirdVoice voice(20261124);
+void renderMelodySession(const std::string &directory, uint32_t seed) {
+  ara::BirdVoice voice(seed);
   voice.setGainPercent(350);
   voice.setNoisyOnsets(false);
   voice.setRegisterChoices(13, 15, 17, 4, 5, 1);
@@ -132,7 +132,7 @@ void renderMelodySession(const std::string &directory) {
     ++frame;
   };
   std::ofstream report(directory + "/melody-session.csv");
-  report << "song,start_seconds,duration_seconds,profile,motif,register,max_rendition\n";
+  report << "song,start_seconds,duration_seconds,profile,motif,register,max_rendition,seed\n";
   // Showcase the melodic repertoire; this order is illustrative, not a random-frequency sample.
   const ara::BirdVoice::Profile examples[] = {ara::BirdVoice::Song, ara::BirdVoice::TrillSong,
       ara::BirdVoice::Song, ara::BirdVoice::TrillSong, ara::BirdVoice::Song,
@@ -151,7 +151,8 @@ void renderMelodySession(const std::string &directory) {
     } while (voice.busy());
     if (maximumRendition > 2) throw std::runtime_error("Demo repeated a melody more than twice");
     report << song + 1 << ',' << double(start) / 16384 << ',' << double(frame - start) / 16384
-           << ',' << int(profile) << ',' << motif << ',' << pitch << ',' << maximumRendition << '\n';
+           << ',' << int(profile) << ',' << motif << ',' << pitch << ',' << maximumRendition
+           << ',' << seed << '\n';
     if (song < 9) for (unsigned gap = 0; gap < 2 * 16384; ++gap) step();
   }
   for (unsigned tail = 0; tail < 16384; ++tail) step();
@@ -161,13 +162,14 @@ void renderMelodySession(const std::string &directory) {
 }
 
 int main(int argc, char **argv) {
-  if (argc < 2 || argc > 3) return 2;
+  if (argc < 2 || argc > 4) return 2;
   const std::string directory = argv[1];
   const bool variations = argc == 3 && std::string(argv[2]) == "--variations";
   const bool songs = argc == 3 && std::string(argv[2]) == "--songs";
   const bool registers = argc == 3 && std::string(argv[2]) == "--registers";
-  const bool session = argc == 3 && std::string(argv[2]) == "--session";
-  if (session) renderMelodySession(directory);
+  const bool session = argc >= 3 && std::string(argv[2]) == "--session";
+  if (argc == 4 && !session) return 2;
+  if (session) renderMelodySession(directory, argc == 4 ? std::stoul(argv[3]) : 20261124);
   else if (registers) renderRegisterPreviews(directory);
   else if (songs) renderSongPreviews(directory);
   else {

@@ -10,12 +10,15 @@ import tempfile
 ROOT = Path(__file__).resolve().parents[2]
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--output', type=Path)
+parser.add_argument('--seed', type=int, help='Reproducible 32-bit seed for a fresh session reel')
 group = parser.add_mutually_exclusive_group()
 group.add_argument('--variations', action='store_true', help='Audition alternative syllable shapes and timbres')
 group.add_argument('--songs', action='store_true', help='Audition longer songs and trills at 400% gain')
 group.add_argument('--registers', action='store_true', help='Compare current songs at higher pitches, with fixed phrasing')
 group.add_argument('--session', action='store_true', help='Showcase ten melodies at the agreed register settings and 350% gain')
 args = parser.parse_args()
+if args.seed is not None and (not args.session or not 0 <= args.seed <= 0xffffffff):
+    parser.error('--seed requires --session and a value from 0 through 4294967295')
 default = ('output/birdsong-session-20261124' if args.session else 'output/birdsong-registers' if args.registers else 'output/birdsong-songs' if args.songs
            else 'output/birdsong-shapes' if args.variations else 'output/birdsong')
 output = (args.output or ROOT / default).resolve()
@@ -35,6 +38,8 @@ with tempfile.TemporaryDirectory(prefix='ara-audio-') as temporary:
                     str(ROOT / 'tools/audio/render.cpp'), '-o', str(executable)], check=True)
     mode = (['--session'] if args.session else ['--registers'] if args.registers else ['--songs'] if args.songs
             else ['--variations'] if args.variations else [])
+    if args.session and args.seed is not None:
+        mode.append(str(args.seed))
     subprocess.run([str(executable), str(output)] + mode, check=True)
 
 if shutil.which('ffmpeg'):
