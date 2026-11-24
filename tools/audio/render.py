@@ -14,8 +14,9 @@ group = parser.add_mutually_exclusive_group()
 group.add_argument('--variations', action='store_true', help='Audition alternative syllable shapes and timbres')
 group.add_argument('--songs', action='store_true', help='Audition longer songs and trills at 400% gain')
 group.add_argument('--registers', action='store_true', help='Compare current songs at higher pitches, with fixed phrasing')
+group.add_argument('--session', action='store_true', help='Showcase ten melodies at the agreed register settings and 350% gain')
 args = parser.parse_args()
-default = ('output/birdsong-registers' if args.registers else 'output/birdsong-songs' if args.songs
+default = ('output/birdsong-session-20261124' if args.session else 'output/birdsong-registers' if args.registers else 'output/birdsong-songs' if args.songs
            else 'output/birdsong-shapes' if args.variations else 'output/birdsong')
 output = (args.output or ROOT / default).resolve()
 output.mkdir(parents=True, exist_ok=True)
@@ -32,7 +33,7 @@ with tempfile.TemporaryDirectory(prefix='ara-audio-') as temporary:
                     '-fsanitize=undefined,address', '-I', str(build),
                     '-I', str(ROOT / 'sketches/libraries/Mozzi'),
                     str(ROOT / 'tools/audio/render.cpp'), '-o', str(executable)], check=True)
-    mode = (['--registers'] if args.registers else ['--songs'] if args.songs
+    mode = (['--session'] if args.session else ['--registers'] if args.registers else ['--songs'] if args.songs
             else ['--variations'] if args.variations else [])
     subprocess.run([str(executable), str(output)] + mode, check=True)
 
@@ -41,6 +42,13 @@ if shutil.which('ffmpeg'):
         subprocess.run(['ffmpeg', '-hide_banner', '-loglevel', 'error', '-y',
                         '-i', str(source), '-ar', '44100', '-codec:a', 'libmp3lame',
                         '-b:a', '128k', str(source.with_suffix('.mp3'))], check=True)
+    if args.session:
+        source = output / 'ara-melody-session.mp3'
+        digest = hashlib.sha256(source.read_bytes()).hexdigest()[:12]
+        destination = output / f'ara-melody-session-{digest}.mp3'
+        shutil.copyfile(source, destination)
+        print(destination)
+        raise SystemExit(0)
     if args.variations or args.songs or args.registers:
         # Match the first four registers and seeds, then audition each first bout.
         sources = sorted(output.glob('0[0-3]-*.wav'))

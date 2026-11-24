@@ -117,13 +117,58 @@ void renderRegisterPreviews(const std::string &directory) {
   if (!report) throw std::runtime_error("Could not write register pitch report");
 }
 
+void renderMelodySession(const std::string &directory) {
+  ara::BirdVoice voice(20261124);
+  voice.setGainPercent(350);
+  voice.setNoisyOnsets(false);
+  voice.setRegisterChoices(13, 15, 17, 4, 5, 1);
+  std::vector<int16_t> samples;
+  unsigned frame = 0;
+  auto step = [&]() {
+    if (frame % 64 == 0) voice.control();
+    const int sample = voice.audio();
+    if (std::abs(sample) > 240) throw std::runtime_error("Session exceeds output range");
+    samples.push_back(sample * 128);
+    ++frame;
+  };
+  std::ofstream report(directory + "/melody-session.csv");
+  report << "song,start_seconds,duration_seconds,profile,motif,register,max_rendition\n";
+  // Showcase the melodic repertoire; this order is illustrative, not a random-frequency sample.
+  const ara::BirdVoice::Profile examples[] = {ara::BirdVoice::Song, ara::BirdVoice::TrillSong,
+      ara::BirdVoice::Song, ara::BirdVoice::TrillSong, ara::BirdVoice::Song,
+      ara::BirdVoice::Cascade, ara::BirdVoice::TrillSong, ara::BirdVoice::Song,
+      ara::BirdVoice::TrillSong, ara::BirdVoice::Song};
+  for (unsigned song = 0; song < 10; ++song) {
+    const unsigned start = frame;
+    voice.trigger(examples[song]);
+    const auto profile = voice.selectedProfile();
+    const unsigned motif = voice.selectedMotif(), pitch = voice.selectedRegister();
+    unsigned maximumRendition = 0;
+    do {
+      if (voice.busy()) maximumRendition = std::max(maximumRendition, unsigned(voice.currentRendition()));
+      step();
+      if (frame - start > 12 * 16384) throw std::runtime_error("Demo song did not finish");
+    } while (voice.busy());
+    if (maximumRendition > 2) throw std::runtime_error("Demo repeated a melody more than twice");
+    report << song + 1 << ',' << double(start) / 16384 << ',' << double(frame - start) / 16384
+           << ',' << int(profile) << ',' << motif << ',' << pitch << ',' << maximumRendition << '\n';
+    if (song < 9) for (unsigned gap = 0; gap < 2 * 16384; ++gap) step();
+  }
+  for (unsigned tail = 0; tail < 16384; ++tail) step();
+  if (voice.audio() != 0 || !report) throw std::runtime_error("Demo did not finish cleanly");
+  wav(directory + "/ara-melody-session.wav", samples);
+  std::cout << "Rendered ten melody and trill examples, " << double(frame) / 16384 << " seconds\n";
+}
+
 int main(int argc, char **argv) {
   if (argc < 2 || argc > 3) return 2;
   const std::string directory = argv[1];
   const bool variations = argc == 3 && std::string(argv[2]) == "--variations";
   const bool songs = argc == 3 && std::string(argv[2]) == "--songs";
   const bool registers = argc == 3 && std::string(argv[2]) == "--registers";
-  if (registers) renderRegisterPreviews(directory);
+  const bool session = argc == 3 && std::string(argv[2]) == "--session";
+  if (session) renderMelodySession(directory);
+  else if (registers) renderRegisterPreviews(directory);
   else if (songs) renderSongPreviews(directory);
   else {
     constexpr uint32_t frames = 26 * 16384;
@@ -189,6 +234,8 @@ int main(int argc, char **argv) {
         const unsigned limit = profile >= ara::BirdVoice::Song ? 12 : 6;
         for (unsigned tick = 0; tick < limit * 256; ++tick) {
           voice.control();
+          if (voice.busy() && voice.currentRendition() > 2)
+            throw std::runtime_error("A melody repeated more than twice");
           if (voice.selectedRegister() != selected)
             throw std::runtime_error("Register changed during a song");
           for (unsigned frame = 0; frame < 64; ++frame) {
@@ -206,27 +253,24 @@ int main(int argc, char **argv) {
   if (registersSeen != 15) throw std::runtime_error("Did not exercise all four registers");
   std::cout << "Passed completion, restart, register and output-range checks for 1800 phrases\n";
   ara::BirdVoice mixedVoice(20261122);
-  mixedVoice.setGainPercent(400);
+  mixedVoice.setGainPercent(350);
   mixedVoice.setNoisyOnsets(false);
   mixedVoice.setRegisterChoices(13, 15, 17, 4, 5, 1);
   unsigned profilesSeen = 0;
-  auto previousProfile = ara::BirdVoice::ProfileCount;
-  uint8_t previousSongMotif = 255;
-  unsigned motifsSeen = 0;
+  uint8_t recentMotifs[3] = {255, 255, 255};
+  uint64_t motifsSeen = 0;
   unsigned registerCounts[3] = {}, limitedTicks = 0, activeTicks = 0;
   int mixedPeak = 0;
-  unsigned longerSongs = 0;
+  unsigned longerSongs = 0, melodicSongs = 0;
   for (unsigned song = 0; song < 200; ++song) {
     mixedVoice.triggerRandom();
     const auto profile = mixedVoice.selectedProfile();
     const uint8_t motif = mixedVoice.selectedMotif();
-    if (profile == previousProfile) throw std::runtime_error("Consecutive random voices repeated");
-    previousProfile = profile;
     if (profile >= ara::BirdVoice::Song) {
-      if (motif >= 6 || motif == previousSongMotif)
+      if (motif >= 48 || motif == recentMotifs[0] || motif == recentMotifs[1] || motif == recentMotifs[2])
         throw std::runtime_error("Song contour repeated or was outside the repertoire");
-      previousSongMotif = motif;
-      motifsSeen |= 1u << motif;
+      recentMotifs[2] = recentMotifs[1]; recentMotifs[1] = recentMotifs[0]; recentMotifs[0] = motif;
+      motifsSeen |= uint64_t(1) << motif;
     }
     const uint8_t selected = mixedVoice.selectedRegister();
     const int registerIndex = selected == 13 ? 0 : selected == 15 ? 1 : selected == 17 ? 2 : -1;
@@ -234,11 +278,14 @@ int main(int argc, char **argv) {
     ++registerCounts[registerIndex];
     if (profile >= ara::BirdVoice::ProfileCount) throw std::runtime_error("Invalid random profile");
     if (profile >= ara::BirdVoice::Song) ++longerSongs;
+    if (profile == ara::BirdVoice::Song || profile == ara::BirdVoice::TrillSong) ++melodicSongs;
     profilesSeen |= 1u << profile;
     // A second request during a song must leave its voice and register alone.
     mixedVoice.triggerRandom();
     for (unsigned tick = 0; tick < 12 * 256; ++tick) {
       mixedVoice.control();
+      if (mixedVoice.busy() && mixedVoice.currentRendition() > 2)
+        throw std::runtime_error("Random melody repeated more than twice");
       if (mixedVoice.busy()) ++activeTicks;
       if (mixedVoice.pitchWasLimited()) ++limitedTicks;
       if (mixedVoice.targetFrequencyHz() > 7000) throw std::runtime_error("Pitch exceeds frequency limit");
@@ -255,13 +302,17 @@ int main(int argc, char **argv) {
     if (mixedVoice.busy() || mixedVoice.audio() != 0)
       throw std::runtime_error("Mixed voice did not finish cleanly");
   }
-  if (profilesSeen != (1u << ara::BirdVoice::ProfileCount) - 1)
-    throw std::runtime_error("Random selection did not exercise every profile");
-  if (motifsSeen != 63) throw std::runtime_error("Random songs did not exercise all six contours");
-  if (longerSongs < 120) throw std::runtime_error("Random selection did not favour longer songs");
+  const unsigned songProfiles = (1u << ara::BirdVoice::Song) | (1u << ara::BirdVoice::TrillSong) | (1u << ara::BirdVoice::Cascade);
+  if ((profilesSeen & songProfiles) != songProfiles)
+    throw std::runtime_error("Random selection did not exercise each longer-song profile");
+  unsigned motifCount = 0;
+  for (unsigned i = 0; i < 48; ++i) if (motifsSeen & (uint64_t(1) << i)) ++motifCount;
+  if (motifCount < 36) throw std::runtime_error("Random songs used too little of the contour repertoire");
+  if (longerSongs < 180 || melodicSongs < 160 || 200 - longerSongs > 15)
+    throw std::runtime_error("Random selection did not favour melodies and trills");
   if (mixedPeak <= 127) throw std::runtime_error("High gain never used the wider PWM range");
-  std::cout << "Passed 200 consecutive random songs at 400% gain, peak " << mixedPeak
-            << "/244, without noisy onsets, including every voice and trills\n";
+  std::cout << "Passed 200 random songs at 350% gain: " << melodicSongs << " melody/trill, "
+            << 200 - longerSongs << " shorter calls, " << motifCount << " contours, peak " << mixedPeak << "/244\n";
   std::cout << "Weighted registers: +13=" << registerCounts[0] << ", +15=" << registerCounts[1]
             << ", +17=" << registerCounts[2] << "; pitch limit used on " << limitedTicks
             << "/" << activeTicks << " active control ticks\n";
