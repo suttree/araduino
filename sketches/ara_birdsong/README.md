@@ -2,6 +2,12 @@
 
 This sketch experiments with shaped whistles and repeated calls on the existing Uno hardware. The working sketch at `../araduino/araduino.ino` remains separate.
 
+## A chance to sing every 18 minutes, 25 November
+
+Ara now makes one attempt every 18 minutes, with a 50% chance of singing at each attempt. If she skips one, she waits another 18 minutes before trying again. This gives an average of one song every 36 minutes, with longer gaps possible. She still sings once on startup.
+
+This timing change has not been uploaded to Ara.
+
 ## Less frequent singing, 24 November
 
 Ara now waits 340 to 740 seconds between attempts to sing, twice the previous 170 to 370 seconds. Each attempt still has a 50% chance of starting a song. This gives an average of one song every 18 minutes, previously nine minutes. The minimum interval is five minutes and 40 seconds; skipped attempts can produce much longer gaps. She still sings once on startup. Song generation and volume remain unchanged.
