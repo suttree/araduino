@@ -6,7 +6,7 @@ This sketch experiments with shaped whistles and repeated calls on the existing 
 
 Ara now makes one attempt every 18 minutes, with a 50% chance of singing at each attempt. If she skips one, she waits another 18 minutes before trying again. This gives an average of one song every 36 minutes, with longer gaps possible. She still sings once on startup.
 
-This timing change has not been uploaded to Ara.
+Firmware from commit `8e0969d` was uploaded to Ara on 25 November 2026. avrdude verified all 10128 bytes by flash readback. Physical listening to this upload remains unconfirmed.
 
 ## Less frequent singing, 24 November
 
