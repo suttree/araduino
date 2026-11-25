@@ -8,7 +8,7 @@ Ara now draws a fresh wait uniformly between 9 and 60 minutes before each attemp
 
 The average wait between attempts is 34.5 minutes. With the 50% singing chance, the average gap between songs is 69 minutes. Skipped attempts can make the gap longer than 60 minutes.
 
-This timing change has not been uploaded to Ara.
+Firmware from commit `db4b82d` was uploaded to Ara on 25 November 2026. avrdude verified all 10162 bytes by flash readback. Physical listening to this upload remains unconfirmed.
 
 ## Random waits of 9 to 120 minutes, 25 November
 
