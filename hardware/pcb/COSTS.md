@@ -6,8 +6,8 @@ Checked on 25 November 2026. All figures below are US dollars. No order has been
 | --- | ---: | ---: | --- |
 | Parts fitted to the boards | $24.94 | $49.88 | Selected JLCPCB parts at the dated snapshot's initial unit prices |
 | Bare PCB fabrication | $5.20 | $6.20 | JLCPCB web form, 65 × 45 mm, two layers, 1.6 mm, green, lead-free HASL |
-| Assembly, handling and part attrition | $72.72 | $95.61 | Economic PCBA, top side, all 27 selected types |
-| Board and assembly subtotal | **$77.92** | **$101.81** | Excludes shipping, taxes and programming |
+| Assembly, handling and part attrition | $73.63 | $95.61 | Economic PCBA, top side, all 27 selected types |
+| Board and assembly subtotal | **$78.83** | **$101.81** | Excludes shipping, taxes and programming |
 | Initial programming and startup test | Not yet quoted | Not yet quoted | Requires factory agreement on method and price |
 | Shipping and taxes | Not yet confirmed | Not yet confirmed | Depends on the actual delivery destination and checkout options |
 
@@ -23,4 +23,6 @@ The owner authorized uploading the Gerber ZIP, BOM and CPL for five- and ten-boa
 
 The owner approved the assembly-service terms and signed in. The BOM and CPL were uploaded, and all 27 selected part types were matched. JLCPCB initially substituted another CH340C stock code; it was changed back to the specified C84681 before calculating the quote.
 
-The five-board quote is $77.92, made up of $5.20 PCB fabrication and $72.72 assembly/components. Assembly includes $8.24 setup, $1.55 stencil, $26.25 components, $30.90 extended-component fees, $1.51 SMT assembly, $3.61 hand-soldering labour and $0.66 manual assembly. The factory preview exposed component orientation and connector-origin differences. The CPL was corrected using numbered supplier CAD pads, reuploaded, and the final preview inspected. Final factory DFM placement approval remains required. The ten-board subtotal is $101.81, comprising $6.20 fabrication and $95.61 assembly/components. The extra five boards add $23.89 to the quoted subtotal. No order or payment has been submitted.
+The five-board quote is $78.83, made up of $5.20 PCB fabrication and $73.63 assembly/components. Assembly includes $8.24 setup, $1.55 stencil, $26.25 components, $30.90 extended-component fees, $1.51 SMT assembly, $3.61 hand-soldering labour and $0.66 manual assembly. The factory preview exposed component orientation and connector-origin differences. The CPL was corrected using numbered supplier CAD pads, reuploaded, and the final preview inspected. Final factory DFM placement approval remains required. The ten-board subtotal is $101.81, comprising $6.20 fabrication and $95.61 assembly/components. The extra five boards add $22.98 to the quoted subtotal. No order or payment has been submitted.
+
+The owner selected five prototypes and programming after delivery. On returning to the quote, the factory included a $0.91 nitrogen reflow charge, taking the five-board subtotal to $78.83. The batch is saved in the cart; delivery and tax are not yet confirmed. No order has been submitted or paid.

@@ -3,8 +3,8 @@
   "currency": "USD",
   "five": {
     "pcb": 5.2,
-    "assembly": 72.72,
-    "total_before_shipping_tax_programming": 77.92,
+    "assembly": 73.63,
+    "total_before_shipping_tax_programming": 78.83,
     "breakdown": {
       "setup": 8.24,
       "stencil": 1.55,
@@ -12,11 +12,12 @@
       "extended_components": 30.9,
       "smt_assembly": 1.51,
       "hand_soldering_labor": 3.61,
-      "manual_assembly": 0.66
+      "manual_assembly": 0.66,
+      "nitrogen_reflow": 0.91
     }
   },
   "assembly": "Economic, top side, all 27 selected part types",
-  "status": "Quotation only. Corrected CPL uploaded and placement preview inspected. Final factory DFM approval, initial programming, shipping and taxes remain outstanding. No order placed.",
+  "status": "Five-board batch saved to JLCPCB cart. Checkout total, delivery and tax remain outstanding. No order submitted or paid.",
   "ten": {
     "pcb": 6.2,
     "assembly": 95.61,
@@ -37,5 +38,7 @@
     "cpl_sha256": "7671a25d3bd726a579668511dc0a535e439c7609eeba6595b0aa9345473d72c5",
     "method": "Supplier numbered-pad CAD comparison and final web preview inspection",
     "final_ten_quote_reconfirmed": true
-  }
+  },
+  "selected_batch": 5,
+  "programming_plan": "Owner will program after delivery through the fitted ISP header; no factory programming requested."
 }
