@@ -2,11 +2,11 @@
 
 This sketch experiments with shaped whistles and repeated calls on the existing Uno hardware. The working sketch at `../araduino/araduino.ino` remains separate.
 
-## Random waits of 9 to 180 minutes, 25 November
+## Random waits of 9 to 120 minutes, 25 November
 
-Ara now draws a fresh wait uniformly between 9 and 180 minutes before each attempt to sing. Each attempt still has a 50% chance of starting a song. After every attempt, including a skipped one, she draws another wait. She still sings once on startup.
+Ara now draws a fresh wait uniformly between 9 and 120 minutes before each attempt to sing. Each attempt still has a 50% chance of starting a song. After every attempt, including a skipped one, she draws another wait. She still sings once on startup.
 
-The average wait between attempts is 94.5 minutes. With the 50% singing chance, the average gap between songs is 189 minutes, or three hours and nine minutes. Skipped attempts can make the gap longer than 180 minutes.
+The average wait between attempts is 64.5 minutes. With the 50% singing chance, the average gap between songs is 129 minutes, or two hours and nine minutes. Skipped attempts can make the gap longer than 120 minutes.
 
 This timing change has not been uploaded to Ara.
 
