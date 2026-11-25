@@ -39,4 +39,4 @@ The speaker, enclosure, USB cable and power adapter are separate from the PCB as
 - `manifest.json` records source hashes, toolchain and export hashes. The firmware timing is a snapshot and can be changed by USB upload after initial programming.
 - `TESTING.md` describes checks the owner can perform after delivery.
 
-No order has been placed. The owner will decide whether the quoted prototype cost warrants an external design review.
+Five prototype boards were ordered and paid on 25 November 2026 for $94.04 including standard UK shipping and tax after a $10 assembly coupon. JLCPCB batch `W2026112603479484` is marked Paid; PCB and assembly file checks are marked Reviewing. This does not establish production or shipment. Initial programming will be performed after delivery. See `../../pcb/quotes.json` for the confirmation.

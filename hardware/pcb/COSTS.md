@@ -1,6 +1,6 @@
 # Prototype cost worksheet
 
-Checked on 25 November 2026. All figures below are US dollars. No order has been placed.
+Checked on 25 November 2026. All figures below are US dollars. The five-board order is now paid; see the confirmation below.
 
 | Item | Five boards | Ten boards | Basis |
 | --- | ---: | ---: | --- |
@@ -29,4 +29,8 @@ The owner selected five prototypes and programming after delivery. On returning 
 
 The UK checkout total is $106.04, including $9.53 Global Standard Direct Line shipping and $17.68 customs duties and taxes. The listed shipping transit is 8–12 business days after production. DHL Express instead gives a total of $123.66 and a listed 2–4 business-day transit. The owner subsequently chose Pay Directly and authorized a total up to $106.04.
 
-The five-board order was submitted using Pay Directly, payment batch `W2026112603479484`. The New User SMT coupon takes $10 off and reduces tax to $15.68. Card payment has no listed fee, giving $94.04 total; PayPal instead gives $94.54 including its fee. The checkout is awaiting the owner’s card entry and payment completion. No successful payment has been observed.
+The five-board order was submitted using Pay Directly, payment batch `W2026112603479484`. The New User SMT coupon takes $10 off and reduces tax to $15.68. Card payment has no listed fee, giving $94.04 total; PayPal instead gives $94.54 including its fee. The owner completed card payment. JLCPCB confirms Paid, $94.04.
+
+## Payment confirmation
+
+On 25 November 2026, JLCPCB order history confirmed payment of $94.04 for batch `W2026112603479484`. This comprises $68.83 merchandise after the assembly coupon, $9.53 shipping and $15.68 customs duties and taxes. PCB order `Y2-14239613A` and assembly order `SMT026112565540-14239613A` each contain five units. Both are marked Reviewing. Production and shipment are not yet confirmed. The owner will program the boards after delivery.

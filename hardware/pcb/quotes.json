@@ -35,7 +35,7 @@
     }
   },
   "assembly": "Economic, top side, all 27 selected part types",
-  "status": "Five-board order submitted using Pay Directly. Awaiting owner card entry and payment completion. No successful payment observed.",
+  "status": "Paid $94.04. JLCPCB order history confirms five PCBs and five Economic PCBA units, both Reviewing. Production and shipment not yet confirmed.",
   "ten": {
     "pcb": 6.2,
     "assembly": 95.61,
@@ -58,5 +58,19 @@
     "final_ten_quote_reconfirmed": true
   },
   "selected_batch": 5,
-  "programming_plan": "Owner will program after delivery through the fitted ISP header; no factory programming requested."
+  "programming_plan": "Owner will program after delivery through the fitted ISP header; no factory programming requested.",
+  "order_confirmation": {
+    "checked_on": "2026-11-25",
+    "batch_reference": "W2026112603479484",
+    "pcb_order": "Y2-14239613A",
+    "assembly_order": "SMT026112565540-14239613A",
+    "quantity": 5,
+    "payment_status": "Paid",
+    "paid_total_usd": 94.04,
+    "pcb_status": "Reviewing",
+    "assembly_status": "Reviewing",
+    "merchandise_after_discount": 68.83,
+    "shipping": 9.53,
+    "customs_duties_and_taxes": 15.68
+  }
 }

@@ -18,7 +18,7 @@
   "toolchain": "Arduino AVR 1.8.6; Mozzi 2.0.2; FixMath 1.0.7; arduino:avr:uno",
   "files_sha256": {
     "PROGRAMMING.md": "45373b25ebca36c3b13af536d090e5936132736a40e465028432322b5ac8c183",
-    "README.md": "bfa25f17cde1eba1ac8438b0f3cb34c4232878cd0fb0f69aa6ffba6a73bca253",
+    "README.md": "0296f20dd75b7849e3168cafba792408e1f7f9961ba4680dd898de7685f38b4e",
     "TESTING.md": "8c0e9d3d5e114aa550ce1200477f1a441989250ec301a3e8157f2427e2dc4460",
     "assembly.svg": "548b5089975e0c845553f5998f7d70c4a515cc83ebf633ad8db03ab0aef63aab",
     "board-bottom.svg": "8f7a093d121ea4904a11d4e047a39d04a5c290a35a4d892a2e757cfbcb7d446b",
