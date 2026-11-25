@@ -22,10 +22,20 @@
       "customs_duties_and_taxes": 17.68,
       "total": 106.04,
       "alternative_dhl_express_total": 123.66
+    },
+    "payment_checkout": {
+      "batch_reference": "W2026112603479484",
+      "coupon": "New User SMT - JLCPCB",
+      "discount": 10,
+      "shipping": 9.53,
+      "customs_duties_and_taxes": 15.68,
+      "card_payment_fee": 0,
+      "card_total": 94.04,
+      "paypal_total": 94.54
     }
   },
   "assembly": "Economic, top side, all 27 selected part types",
-  "status": "Five-board checkout prepared with Review Before Payment selected. Awaiting owner approval of the delivered total before submission. No order submitted or paid.",
+  "status": "Five-board order submitted using Pay Directly. Awaiting owner card entry and payment completion. No successful payment observed.",
   "ten": {
     "pcb": 6.2,
     "assembly": 95.61,
