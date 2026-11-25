@@ -14,10 +14,18 @@
       "hand_soldering_labor": 3.61,
       "manual_assembly": 0.66,
       "nitrogen_reflow": 0.91
+    },
+    "delivery_quote": {
+      "shipping_method": "Global Standard Direct Line",
+      "transit_business_days": "8-12 after production",
+      "shipping": 9.53,
+      "customs_duties_and_taxes": 17.68,
+      "total": 106.04,
+      "alternative_dhl_express_total": 123.66
     }
   },
   "assembly": "Economic, top side, all 27 selected part types",
-  "status": "Five-board batch saved to JLCPCB cart. Checkout total, delivery and tax remain outstanding. No order submitted or paid.",
+  "status": "Five-board checkout prepared with Review Before Payment selected. Awaiting owner approval of the delivered total before submission. No order submitted or paid.",
   "ten": {
     "pcb": 6.2,
     "assembly": 95.61,
