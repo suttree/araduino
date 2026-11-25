@@ -1,0 +1,38 @@
+{
+  "status": "PASS: fabrication geometry inspection, not physical testing",
+  "fitted_components": 45,
+  "vias_overlapping_fitted_smd_paste": [],
+  "all_fitted_components_on_top": true,
+  "fitted_pads_outside_screw_head_areas": true,
+  "critical_net_geometry": {
+    "/XTAL1": {
+      "total_trace_length_mm": 4.001,
+      "vias": 0
+    },
+    "/XTAL2": {
+      "total_trace_length_mm": 5.294,
+      "vias": 0
+    },
+    "/USB_DP": {
+      "total_trace_length_mm": 20.41,
+      "vias": 0
+    },
+    "/USB_DM": {
+      "total_trace_length_mm": 17.201,
+      "vias": 2
+    },
+    "/AMP_INP": {
+      "total_trace_length_mm": 4.108,
+      "vias": 0
+    },
+    "/AMP_INM": {
+      "total_trace_length_mm": 3.406,
+      "vias": 0
+    }
+  },
+  "limitations": [
+    "No electrical simulation or measurement",
+    "Factory part rotations not verified",
+    "Trace lengths are geometry totals, not a USB signal-integrity test"
+  ]
+}

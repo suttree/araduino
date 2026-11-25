@@ -1,0 +1,4959 @@
+{
+  "checked_at": "2026-11-25T18:22:41.803710+00:00",
+  "parts": {
+    "C14877": {
+      "componentCode": "C14877",
+      "componentBrandEn": "Microchip Tech",
+      "componentModelEn": "ATMEGA328P-AU",
+      "componentSpecificationEn": "TQFP-32(7x7)",
+      "describe": "-40℃~+85℃ 1.8V~5.5V 10bit 1KB 20MHz 23 2KB 32KB 8 Bit AVR Built-in FLASH TQFP-32(7x7) Microcontrollers (MCU/MPU/SOC) ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "EEPROM",
+          "component_code": "C14877",
+          "attribute_value_name": "1KB"
+        },
+        {
+          "attribute_name_en": "Operating Temperature",
+          "component_code": "C14877",
+          "attribute_value_name": "-40℃~+85℃"
+        },
+        {
+          "attribute_name_en": "CPU Maximum Speed",
+          "component_code": "C14877",
+          "attribute_value_name": "20MHz"
+        },
+        {
+          "attribute_name_en": "Program Memory Type",
+          "component_code": "C14877",
+          "attribute_value_name": "FLASH"
+        },
+        {
+          "attribute_name_en": "Program Storage Size",
+          "component_code": "C14877",
+          "attribute_value_name": "32KB"
+        },
+        {
+          "attribute_name_en": "Voltage - Supply",
+          "component_code": "C14877",
+          "attribute_value_name": "1.8V~5.5V"
+        },
+        {
+          "attribute_name_en": "RAM Size",
+          "component_code": "C14877",
+          "attribute_value_name": "2KB"
+        },
+        {
+          "attribute_name_en": "Core Size",
+          "component_code": "C14877",
+          "attribute_value_name": "8 Bit"
+        },
+        {
+          "attribute_name_en": "CPU Core",
+          "component_code": "C14877",
+          "attribute_value_name": "AVR"
+        },
+        {
+          "attribute_name_en": "Number of I/O",
+          "component_code": "C14877",
+          "attribute_value_name": "23"
+        },
+        {
+          "attribute_name_en": "Features",
+          "component_code": "C14877",
+          "attribute_value_name": "Power-on reset (POR)、Undervoltage detection (BOR/LVD/LVR/LVI)、External pin reset (NRST)、Built-in general-purpose timer、Programmable watchdog、Touch function"
+        },
+        {
+          "attribute_name_en": "ADC (Bit)",
+          "component_code": "C14877",
+          "attribute_value_name": "10bit"
+        },
+        {
+          "attribute_name_en": "Oscillator Type",
+          "component_code": "C14877",
+          "attribute_value_name": "Built-in"
+        }
+      ],
+      "stockCount": 37312,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C14877",
+          "startNumber": 1,
+          "endNumber": 9,
+          "productPrice": 2.3082,
+          "erpComponentPriceKeyId": 304554530,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C14877",
+          "startNumber": 10,
+          "endNumber": 29,
+          "productPrice": 2.0002,
+          "erpComponentPriceKeyId": 304554555,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C14877",
+          "startNumber": 30,
+          "endNumber": 249,
+          "productPrice": 1.7824,
+          "erpComponentPriceKeyId": 304554542,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C14877",
+          "startNumber": 250,
+          "endNumber": 499,
+          "productPrice": 1.612,
+          "erpComponentPriceKeyId": 304554559,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C14877",
+          "startNumber": 500,
+          "endNumber": 999,
+          "productPrice": 1.5203,
+          "erpComponentPriceKeyId": 304554546,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C14877",
+          "startNumber": 1000,
+          "endNumber": -1,
+          "productPrice": 1.4826,
+          "erpComponentPriceKeyId": 304554550,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "expand",
+      "leastNumber": 1,
+      "lossNumber": 0,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 2.3082,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C14877"
+    },
+    "C84681": {
+      "componentCode": "C84681",
+      "componentBrandEn": "WCH(Jiangsu Qin Heng)",
+      "componentModelEn": "CH340C",
+      "componentSpecificationEn": "SOP-16",
+      "describe": "-20℃~+70℃ 2Mbps 3.3V、5V 50uA 7mA Transceiver USB 2.0 SOP-16 USB Converters ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Operating Temperature",
+          "component_code": "C84681",
+          "attribute_value_name": "-20℃~+70℃"
+        },
+        {
+          "attribute_name_en": "Data Rate",
+          "component_code": "C84681",
+          "attribute_value_name": "2Mbps"
+        },
+        {
+          "attribute_name_en": "Number of Channels",
+          "component_code": "C84681",
+          "attribute_value_name": "-"
+        },
+        {
+          "attribute_name_en": "Applications Function",
+          "component_code": "C84681",
+          "attribute_value_name": "Transceiver"
+        },
+        {
+          "attribute_name_en": "Voltage - Supply",
+          "component_code": "C84681",
+          "attribute_value_name": "3.3V、5V"
+        },
+        {
+          "attribute_name_en": "USB Protocol",
+          "component_code": "C84681",
+          "attribute_value_name": "USB 2.0"
+        },
+        {
+          "attribute_name_en": "Current - Supply",
+          "component_code": "C84681",
+          "attribute_value_name": "7mA"
+        },
+        {
+          "attribute_name_en": "Quiescent Supply Current",
+          "component_code": "C84681",
+          "attribute_value_name": "50uA"
+        }
+      ],
+      "stockCount": 77370,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C84681",
+          "startNumber": 1,
+          "endNumber": 9,
+          "productPrice": 0.5456,
+          "erpComponentPriceKeyId": 327223408,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C84681",
+          "startNumber": 10,
+          "endNumber": 49,
+          "productPrice": 0.4555,
+          "erpComponentPriceKeyId": 327223410,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C84681",
+          "startNumber": 50,
+          "endNumber": 99,
+          "productPrice": 0.3883,
+          "erpComponentPriceKeyId": 327223412,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C84681",
+          "startNumber": 100,
+          "endNumber": 499,
+          "productPrice": 0.3342,
+          "erpComponentPriceKeyId": 327223414,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C84681",
+          "startNumber": 500,
+          "endNumber": 999,
+          "productPrice": 0.3179,
+          "erpComponentPriceKeyId": 327223417,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C84681",
+          "startNumber": 1000,
+          "endNumber": -1,
+          "productPrice": 0.308,
+          "erpComponentPriceKeyId": 327223419,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "expand",
+      "leastNumber": 1,
+      "lossNumber": 0,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.5456,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C84681"
+    },
+    "C112137": {
+      "componentCode": "C112137",
+      "componentBrandEn": "Diodes Incorporated",
+      "componentModelEn": "PAM8302AADCR",
+      "componentSpecificationEn": "SOP-8",
+      "describe": "-40℃~+85℃ 0.3% 1-Channel 2.5Wx1@4Ω 2V~5.5V 4mA 50dB 80dB 85% Class D Filterless architecture SOP-8 Audio Amplifiers ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Power Supply Rejection Ratio (PSRR)",
+          "component_code": "C112137",
+          "attribute_value_name": "50dB"
+        },
+        {
+          "attribute_name_en": "Operating Temperature",
+          "component_code": "C112137",
+          "attribute_value_name": "-40℃~+85℃"
+        },
+        {
+          "attribute_name_en": "Total Harmonic Distortion + Noise (THD+N)",
+          "component_code": "C112137",
+          "attribute_value_name": "0.3%"
+        },
+        {
+          "attribute_name_en": "Output Power",
+          "component_code": "C112137",
+          "attribute_value_name": "2.5Wx1@4Ω"
+        },
+        {
+          "attribute_name_en": "Efficiency",
+          "component_code": "C112137",
+          "attribute_value_name": "85%"
+        },
+        {
+          "attribute_name_en": "Voltage - Supply",
+          "component_code": "C112137",
+          "attribute_value_name": "2V~5.5V"
+        },
+        {
+          "attribute_name_en": "Number of Inputs",
+          "component_code": "C112137",
+          "attribute_value_name": "-"
+        },
+        {
+          "attribute_name_en": "Quiescent Current",
+          "component_code": "C112137",
+          "attribute_value_name": "4mA"
+        },
+        {
+          "attribute_name_en": "Features",
+          "component_code": "C112137",
+          "attribute_value_name": "Filterless architecture"
+        },
+        {
+          "attribute_name_en": "Class",
+          "component_code": "C112137",
+          "attribute_value_name": "Class D"
+        },
+        {
+          "attribute_name_en": "Speaker Channels",
+          "component_code": "C112137",
+          "attribute_value_name": "1-Channel"
+        },
+        {
+          "attribute_name_en": "Signal-to-Noise Ratio",
+          "component_code": "C112137",
+          "attribute_value_name": "80dB"
+        }
+      ],
+      "stockCount": 136,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C112137",
+          "startNumber": 1,
+          "endNumber": 9,
+          "productPrice": 0.5767,
+          "erpComponentPriceKeyId": 217436907,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C112137",
+          "startNumber": 10,
+          "endNumber": 29,
+          "productPrice": 0.4702,
+          "erpComponentPriceKeyId": 217436895,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C112137",
+          "startNumber": 30,
+          "endNumber": 99,
+          "productPrice": 0.4161,
+          "erpComponentPriceKeyId": 217436899,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C112137",
+          "startNumber": 100,
+          "endNumber": 499,
+          "productPrice": 0.3637,
+          "erpComponentPriceKeyId": 217436901,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C112137",
+          "startNumber": 500,
+          "endNumber": 999,
+          "productPrice": 0.3326,
+          "erpComponentPriceKeyId": 217436897,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C112137",
+          "startNumber": 1000,
+          "endNumber": -1,
+          "productPrice": 0.2802,
+          "erpComponentPriceKeyId": 217436903,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "expand",
+      "leastNumber": 1,
+      "lossNumber": 0,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.5767,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C112137"
+    },
+    "C131941": {
+      "componentCode": "C131941",
+      "componentBrandEn": "Texas Instruments",
+      "componentModelEn": "TPS22918DBVR",
+      "componentSpecificationEn": "SOT-23-6",
+      "describe": "-40℃~+105℃ 1 1V~5.5V 2A 53mΩ Active High Load Switch Output discharge function、Soft-start、Integrated charge pump SOT-23-6 Power Distribution Switches ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Type",
+          "component_code": "C131941",
+          "attribute_value_name": "Load Switch"
+        },
+        {
+          "attribute_name_en": "Number of Channels",
+          "component_code": "C131941",
+          "attribute_value_name": "1"
+        },
+        {
+          "attribute_name_en": "Voltage - Supply",
+          "component_code": "C131941",
+          "attribute_value_name": "1V~5.5V"
+        },
+        {
+          "attribute_name_en": "Operating Temperature\t-",
+          "component_code": "C131941",
+          "attribute_value_name": "-40℃~+105℃"
+        },
+        {
+          "attribute_name_en": "Maximum Continuous Current",
+          "component_code": "C131941",
+          "attribute_value_name": "2A"
+        },
+        {
+          "attribute_name_en": "Features",
+          "component_code": "C131941",
+          "attribute_value_name": "Output discharge function、Soft-start、Integrated charge pump"
+        },
+        {
+          "attribute_name_en": "RDS(on)",
+          "component_code": "C131941",
+          "attribute_value_name": "53mΩ"
+        },
+        {
+          "attribute_name_en": "Control Input Logic",
+          "component_code": "C131941",
+          "attribute_value_name": "Active High"
+        }
+      ],
+      "stockCount": 49650,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C131941",
+          "startNumber": 1,
+          "endNumber": 49,
+          "productPrice": 0.3424,
+          "erpComponentPriceKeyId": 217848694,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C131941",
+          "startNumber": 50,
+          "endNumber": 149,
+          "productPrice": 0.2522,
+          "erpComponentPriceKeyId": 217848685,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C131941",
+          "startNumber": 150,
+          "endNumber": 499,
+          "productPrice": 0.2081,
+          "erpComponentPriceKeyId": 217848698,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C131941",
+          "startNumber": 500,
+          "endNumber": 2999,
+          "productPrice": 0.1529,
+          "erpComponentPriceKeyId": 217848692,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C131941",
+          "startNumber": 3000,
+          "endNumber": 5999,
+          "productPrice": 0.1421,
+          "erpComponentPriceKeyId": 217848683,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C131941",
+          "startNumber": 6000,
+          "endNumber": -1,
+          "productPrice": 0.1355,
+          "erpComponentPriceKeyId": 217848688,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "expand",
+      "leastNumber": 5,
+      "lossNumber": 0,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.3424,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C131941"
+    },
+    "C7519": {
+      "componentCode": "C7519",
+      "componentBrandEn": "STMicroelectronics",
+      "componentModelEn": "USBLC6-2SC6",
+      "componentSpecificationEn": "SOT-23-6L",
+      "describe": "-40℃~+125℃ 150nA 17V 2 3.5pF 5.25V 5A 6V ESD IEC 61000-4-2 Unidirectional SOT-23-6L ESD and Surge Protection (TVS/ESD) ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Operating Temperature",
+          "component_code": "C7519",
+          "attribute_value_name": "-40℃~+125℃"
+        },
+        {
+          "attribute_name_en": "Type",
+          "component_code": "C7519",
+          "attribute_value_name": "ESD"
+        },
+        {
+          "attribute_name_en": "Junction Capacitance",
+          "component_code": "C7519",
+          "attribute_value_name": "3.5pF"
+        },
+        {
+          "attribute_name_en": "Number of Channels",
+          "component_code": "C7519",
+          "attribute_value_name": "2"
+        },
+        {
+          "attribute_name_en": "level of protection",
+          "component_code": "C7519",
+          "attribute_value_name": "IEC 61000-4-2"
+        },
+        {
+          "attribute_name_en": "Clamping Voltage",
+          "component_code": "C7519",
+          "attribute_value_name": "17V"
+        },
+        {
+          "attribute_name_en": "Polarity",
+          "component_code": "C7519",
+          "attribute_value_name": "Unidirectional"
+        },
+        {
+          "attribute_name_en": "Peak Pulse Current (Ipp)",
+          "component_code": "C7519",
+          "attribute_value_name": "5A"
+        },
+        {
+          "attribute_name_en": "Voltage - Breakdown",
+          "component_code": "C7519",
+          "attribute_value_name": "6V"
+        },
+        {
+          "attribute_name_en": "Reverse Stand-Off Voltage (Vrwm)",
+          "component_code": "C7519",
+          "attribute_value_name": "5.25V"
+        },
+        {
+          "attribute_name_en": "Reverse Leakage Current (Ir)",
+          "component_code": "C7519",
+          "attribute_value_name": "150nA"
+        }
+      ],
+      "stockCount": 38677,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C7519",
+          "startNumber": 1,
+          "endNumber": 49,
+          "productPrice": 0.1531,
+          "erpComponentPriceKeyId": 307600102,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C7519",
+          "startNumber": 50,
+          "endNumber": 149,
+          "productPrice": 0.116,
+          "erpComponentPriceKeyId": 307600108,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C7519",
+          "startNumber": 150,
+          "endNumber": 499,
+          "productPrice": 0.098,
+          "erpComponentPriceKeyId": 307600086,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C7519",
+          "startNumber": 500,
+          "endNumber": 2999,
+          "productPrice": 0.082,
+          "erpComponentPriceKeyId": 307600098,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C7519",
+          "startNumber": 3000,
+          "endNumber": 5999,
+          "productPrice": 0.0775,
+          "erpComponentPriceKeyId": 307600082,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C7519",
+          "startNumber": 6000,
+          "endNumber": -1,
+          "productPrice": 0.0749,
+          "erpComponentPriceKeyId": 307600088,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "expand",
+      "leastNumber": 5,
+      "lossNumber": 2,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.1531,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C7519"
+    },
+    "C165948": {
+      "componentCode": "C165948",
+      "componentBrandEn": "Korean Hroparts Elec",
+      "componentModelEn": "TYPE-C-31-M-12",
+      "componentSpecificationEn": "SMD",
+      "describe": "-30℃~+80℃ 1 10,000 cycles 16P 20V 5A 7.35mm Female Surface Mount, Right Angle Type-C SMD USB Connectors ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Operating Temperature",
+          "component_code": "C165948",
+          "attribute_value_name": "-30℃~+80℃"
+        },
+        {
+          "attribute_name_en": "Number of Ports",
+          "component_code": "C165948",
+          "attribute_value_name": "1"
+        },
+        {
+          "attribute_name_en": "Length",
+          "component_code": "C165948",
+          "attribute_value_name": "7.35mm"
+        },
+        {
+          "attribute_name_en": "Current Rating-Power",
+          "component_code": "C165948",
+          "attribute_value_name": "5A"
+        },
+        {
+          "attribute_name_en": "Voltage Rating",
+          "component_code": "C165948",
+          "attribute_value_name": "20V"
+        },
+        {
+          "attribute_name_en": "Connector Type",
+          "component_code": "C165948",
+          "attribute_value_name": "Type-C"
+        },
+        {
+          "attribute_name_en": "Number of Contacts",
+          "component_code": "C165948",
+          "attribute_value_name": "16P"
+        },
+        {
+          "attribute_name_en": "Gender",
+          "component_code": "C165948",
+          "attribute_value_name": "Female"
+        },
+        {
+          "attribute_name_en": "Connect-Disconnect Life",
+          "component_code": "C165948",
+          "attribute_value_name": "10,000 cycles"
+        },
+        {
+          "attribute_name_en": "Mounting Type",
+          "component_code": "C165948",
+          "attribute_value_name": "Surface Mount, Right Angle"
+        },
+        {
+          "attribute_name_en": "Protocol Standard",
+          "component_code": "C165948",
+          "attribute_value_name": "-"
+        }
+      ],
+      "stockCount": 437068,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C165948",
+          "startNumber": 1,
+          "endNumber": 49,
+          "productPrice": 0.1871,
+          "erpComponentPriceKeyId": 271137928,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C165948",
+          "startNumber": 50,
+          "endNumber": 149,
+          "productPrice": 0.1478,
+          "erpComponentPriceKeyId": 271137894,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C165948",
+          "startNumber": 150,
+          "endNumber": 999,
+          "productPrice": 0.1285,
+          "erpComponentPriceKeyId": 271137887,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C165948",
+          "startNumber": 1000,
+          "endNumber": 1999,
+          "productPrice": 0.1042,
+          "erpComponentPriceKeyId": 271137948,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C165948",
+          "startNumber": 2000,
+          "endNumber": 4999,
+          "productPrice": 0.0995,
+          "erpComponentPriceKeyId": 271137908,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C165948",
+          "startNumber": 5000,
+          "endNumber": -1,
+          "productPrice": 0.0967,
+          "erpComponentPriceKeyId": 271137914,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "expand",
+      "leastNumber": 2,
+      "lossNumber": 0,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.1871,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C165948"
+    },
+    "C341521": {
+      "componentCode": "C341521",
+      "componentBrandEn": "Murata Electronics",
+      "componentModelEn": "CSTNE16M0V530000R0",
+      "componentSpecificationEn": "SMD3213-3P",
+      "describe": "-40℃~+85℃ 15pF 16MHz 40Ω SMD3213-3P Ceramic Resonators ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Operating Temperature",
+          "component_code": "C341521",
+          "attribute_value_name": "-40℃~+85℃"
+        },
+        {
+          "attribute_name_en": "Resonant Impedance",
+          "component_code": "C341521",
+          "attribute_value_name": "40Ω"
+        },
+        {
+          "attribute_name_en": "Frequency",
+          "component_code": "C341521",
+          "attribute_value_name": "16MHz"
+        },
+        {
+          "attribute_name_en": "Built - in Load Capacitance",
+          "component_code": "C341521",
+          "attribute_value_name": "15pF"
+        }
+      ],
+      "stockCount": 12356,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C341521",
+          "startNumber": 1,
+          "endNumber": 49,
+          "productPrice": 0.2435,
+          "erpComponentPriceKeyId": 326865035,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C341521",
+          "startNumber": 50,
+          "endNumber": 149,
+          "productPrice": 0.1993,
+          "erpComponentPriceKeyId": 326865057,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C341521",
+          "startNumber": 150,
+          "endNumber": 499,
+          "productPrice": 0.1802,
+          "erpComponentPriceKeyId": 326864991,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C341521",
+          "startNumber": 500,
+          "endNumber": 2999,
+          "productPrice": 0.1567,
+          "erpComponentPriceKeyId": 326865013,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C341521",
+          "startNumber": 3000,
+          "endNumber": 5999,
+          "productPrice": 0.1198,
+          "erpComponentPriceKeyId": 326864990,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C341521",
+          "startNumber": 6000,
+          "endNumber": -1,
+          "productPrice": 0.1134,
+          "erpComponentPriceKeyId": 326865000,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "expand",
+      "leastNumber": 5,
+      "lossNumber": 0,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.2435,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C341521"
+    },
+    "C85840": {
+      "componentCode": "C85840",
+      "componentBrandEn": "Murata Electronics",
+      "componentModelEn": "BLM21PG221SN1D",
+      "componentSpecificationEn": "0805",
+      "describe": "1 220Ω@100MHz 2A 45mΩ ±25% 0805 Ferrite Beads ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Operating Temperature",
+          "component_code": "C85840",
+          "attribute_value_name": "-55℃~+125℃"
+        },
+        {
+          "attribute_name_en": "Impedance @ Frequency",
+          "component_code": "C85840",
+          "attribute_value_name": "220Ω@100MHz"
+        },
+        {
+          "attribute_name_en": "Tolerance",
+          "component_code": "C85840",
+          "attribute_value_name": "±25%"
+        },
+        {
+          "attribute_name_en": "Current Rating",
+          "component_code": "C85840",
+          "attribute_value_name": "2A"
+        },
+        {
+          "attribute_name_en": "Number of Circuits",
+          "component_code": "C85840",
+          "attribute_value_name": "1"
+        },
+        {
+          "attribute_name_en": "DC Resistance(DCR)",
+          "component_code": "C85840",
+          "attribute_value_name": "45mΩ"
+        }
+      ],
+      "stockCount": 6,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C85840",
+          "startNumber": 1,
+          "endNumber": 199,
+          "productPrice": 0.0266,
+          "erpComponentPriceKeyId": 327106872,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C85840",
+          "startNumber": 200,
+          "endNumber": 599,
+          "productPrice": 0.0202,
+          "erpComponentPriceKeyId": 327106878,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C85840",
+          "startNumber": 600,
+          "endNumber": 3999,
+          "productPrice": 0.0174,
+          "erpComponentPriceKeyId": 327106874,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C85840",
+          "startNumber": 4000,
+          "endNumber": 7999,
+          "productPrice": 0.0147,
+          "erpComponentPriceKeyId": 166126965214978052,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C85840",
+          "startNumber": 8000,
+          "endNumber": 19999,
+          "productPrice": 0.0138,
+          "erpComponentPriceKeyId": 166126965214978051,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C85840",
+          "startNumber": 20000,
+          "endNumber": -1,
+          "productPrice": 0.0133,
+          "erpComponentPriceKeyId": 327106870,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "expand",
+      "leastNumber": 20,
+      "lossNumber": 8,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 447,
+      "initialPrice": 0.0202,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C85840"
+    },
+    "C173752": {
+      "componentCode": "C173752",
+      "componentBrandEn": "JST",
+      "componentModelEn": "S2B-PH-K-S(LF)(SN)",
+      "componentSpecificationEn": "Push-Pull,P=2mm",
+      "describe": "-25℃~+85℃ 1 100V 1x2P 2 2A 2P 2mm 4.8mm 5.9mm 7.6mm Brass K Pin PA66 PH Right Angle Tin UL94V-0 White 弯插,P=2mm Wire To Board Connector ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Operating Temperature",
+          "component_code": "C173752",
+          "attribute_value_name": "-25℃~+85℃"
+        },
+        {
+          "attribute_name_en": "Number of Rows",
+          "component_code": "C173752",
+          "attribute_value_name": "1"
+        },
+        {
+          "attribute_name_en": "Voltage Rating",
+          "component_code": "C173752",
+          "attribute_value_name": "100V"
+        },
+        {
+          "attribute_name_en": "Color",
+          "component_code": "C173752",
+          "attribute_value_name": "White"
+        },
+        {
+          "attribute_name_en": "Current Rating",
+          "component_code": "C173752",
+          "attribute_value_name": "2A"
+        },
+        {
+          "attribute_name_en": "Pins Structure",
+          "component_code": "C173752",
+          "attribute_value_name": "1x2P"
+        },
+        {
+          "attribute_name_en": "Row Spacing",
+          "component_code": "C173752",
+          "attribute_value_name": "-"
+        },
+        {
+          "attribute_name_en": "Mounting Type",
+          "component_code": "C173752",
+          "attribute_value_name": "Right Angle"
+        },
+        {
+          "attribute_name_en": "Flame Retardant Rating",
+          "component_code": "C173752",
+          "attribute_value_name": "UL94V-0"
+        },
+        {
+          "attribute_name_en": "Y-Width of Bottom Edge on Board",
+          "component_code": "C173752",
+          "attribute_value_name": "7.6mm"
+        },
+        {
+          "attribute_name_en": "X-Length of Bottom Edge on Board (Spacing Line)",
+          "component_code": "C173752",
+          "attribute_value_name": "5.9mm"
+        },
+        {
+          "attribute_name_en": "Reference Series",
+          "component_code": "C173752",
+          "attribute_value_name": "PH"
+        },
+        {
+          "attribute_name_en": "Contact Plating",
+          "component_code": "C173752",
+          "attribute_value_name": "Tin"
+        },
+        {
+          "attribute_name_en": "Number of Pins",
+          "component_code": "C173752",
+          "attribute_value_name": "2P"
+        },
+        {
+          "attribute_name_en": "Pitch",
+          "component_code": "C173752",
+          "attribute_value_name": "2mm"
+        },
+        {
+          "attribute_name_en": "Contact Material",
+          "component_code": "C173752",
+          "attribute_value_name": "Brass"
+        },
+        {
+          "attribute_name_en": "Supplementary Features",
+          "component_code": "C173752",
+          "attribute_value_name": "Kinked Pin"
+        },
+        {
+          "attribute_name_en": "Z-Height of the Board",
+          "component_code": "C173752",
+          "attribute_value_name": "4.8mm"
+        },
+        {
+          "attribute_name_en": "Plastic Material",
+          "component_code": "C173752",
+          "attribute_value_name": "PA66"
+        },
+        {
+          "attribute_name_en": "Number of PINs Per Row",
+          "component_code": "C173752",
+          "attribute_value_name": "2"
+        }
+      ],
+      "stockCount": 136658,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C173752",
+          "startNumber": 1,
+          "endNumber": 199,
+          "productPrice": 0.0397,
+          "erpComponentPriceKeyId": 309323586,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C173752",
+          "startNumber": 200,
+          "endNumber": 999,
+          "productPrice": 0.0318,
+          "erpComponentPriceKeyId": 309323595,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C173752",
+          "startNumber": 1000,
+          "endNumber": 1999,
+          "productPrice": 0.0274,
+          "erpComponentPriceKeyId": 309323589,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C173752",
+          "startNumber": 2000,
+          "endNumber": 9999,
+          "productPrice": 0.0248,
+          "erpComponentPriceKeyId": 309323588,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C173752",
+          "startNumber": 10000,
+          "endNumber": 19999,
+          "productPrice": 0.0225,
+          "erpComponentPriceKeyId": 309323601,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C173752",
+          "startNumber": 20000,
+          "endNumber": -1,
+          "productPrice": 0.0212,
+          "erpComponentPriceKeyId": 309323590,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "expand",
+      "leastNumber": 2,
+      "lossNumber": 0,
+      "componentStatus": "yes",
+      "assemblyMode": "manualWeld",
+      "assemblyProcess": "THT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.0397,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C173752"
+    },
+    "C2886898": {
+      "componentCode": "C2886898",
+      "componentBrandEn": "E-Switch",
+      "componentModelEn": "TL3342F160QG",
+      "componentSpecificationEn": "SMD-4P,5.2x5.2mm",
+      "describe": "-20℃~+70℃ 1.54mm 1.6N 100,000 cycles 12V 5.2mm 5.2mm 50mA Gull Wing Round Button SPST Surface Mount,Vertical Without Bracket Yellow SMD-4P,5.2x5.2mm Tactile Switches ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Operating Temperature",
+          "component_code": "C2886898",
+          "attribute_value_name": "-20℃~+70℃"
+        },
+        {
+          "attribute_name_en": "Contact Current",
+          "component_code": "C2886898",
+          "attribute_value_name": "50mA"
+        },
+        {
+          "attribute_name_en": "Termination Style",
+          "component_code": "C2886898",
+          "attribute_value_name": "Gull Wing"
+        },
+        {
+          "attribute_name_en": "Voltage Rating",
+          "component_code": "C2886898",
+          "attribute_value_name": "12V"
+        },
+        {
+          "attribute_name_en": "Actuator Style",
+          "component_code": "C2886898",
+          "attribute_value_name": "Round Button"
+        },
+        {
+          "attribute_name_en": "with Bracket",
+          "component_code": "C2886898",
+          "attribute_value_name": "Without Bracket"
+        },
+        {
+          "attribute_name_en": "Switch Height",
+          "component_code": "C2886898",
+          "attribute_value_name": "1.54mm"
+        },
+        {
+          "attribute_name_en": "Circuit",
+          "component_code": "C2886898",
+          "attribute_value_name": "SPST"
+        },
+        {
+          "attribute_name_en": "Mounting Type",
+          "component_code": "C2886898",
+          "attribute_value_name": "Surface Mount,Vertical"
+        },
+        {
+          "attribute_name_en": "Actuator/Cap Color",
+          "component_code": "C2886898",
+          "attribute_value_name": "Yellow"
+        },
+        {
+          "attribute_name_en": "Operating Force",
+          "component_code": "C2886898",
+          "attribute_value_name": "1.6N"
+        },
+        {
+          "attribute_name_en": "Length",
+          "component_code": "C2886898",
+          "attribute_value_name": "5.2mm"
+        },
+        {
+          "attribute_name_en": "Life",
+          "component_code": "C2886898",
+          "attribute_value_name": "100,000 cycles"
+        },
+        {
+          "attribute_name_en": "Width",
+          "component_code": "C2886898",
+          "attribute_value_name": "5.2mm"
+        }
+      ],
+      "stockCount": 1,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C2886898",
+          "startNumber": 1,
+          "endNumber": 9,
+          "productPrice": 1.0452,
+          "erpComponentPriceKeyId": 341677906,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C2886898",
+          "startNumber": 10,
+          "endNumber": 29,
+          "productPrice": 0.8404,
+          "erpComponentPriceKeyId": 341677909,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C2886898",
+          "startNumber": 30,
+          "endNumber": 99,
+          "productPrice": 0.7389,
+          "erpComponentPriceKeyId": 341677905,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C2886898",
+          "startNumber": 100,
+          "endNumber": 499,
+          "productPrice": 0.6389,
+          "erpComponentPriceKeyId": 341677904,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C2886898",
+          "startNumber": 500,
+          "endNumber": 999,
+          "productPrice": 0.5783,
+          "erpComponentPriceKeyId": 341677908,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C2886898",
+          "startNumber": 1000,
+          "endNumber": -1,
+          "productPrice": 0.5472,
+          "erpComponentPriceKeyId": 341677907,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "expand",
+      "leastNumber": 1,
+      "lossNumber": 0,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 9,
+      "initialPrice": 1.0452,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C2886898"
+    },
+    "C139797": {
+      "componentCode": "C139797",
+      "componentBrandEn": "ALPSALPINE",
+      "componentModelEn": "SKRPACE010",
+      "componentSpecificationEn": "SMD-4P,4.2x3.2mm",
+      "describe": "-30℃~+85℃ 16V 2.5mm 2.6N 3.2mm 4.2mm 50,000 cycles 50mA J-Lead Oval button SPST-NO Surface Mount,Vertical SMD-4P,4.2x3.2mm Tactile Switches ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Operating Temperature",
+          "component_code": "C139797",
+          "attribute_value_name": "-30℃~+85℃"
+        },
+        {
+          "attribute_name_en": "Contact Current",
+          "component_code": "C139797",
+          "attribute_value_name": "50mA"
+        },
+        {
+          "attribute_name_en": "Operating Force",
+          "component_code": "C139797",
+          "attribute_value_name": "2.6N"
+        },
+        {
+          "attribute_name_en": "Length",
+          "component_code": "C139797",
+          "attribute_value_name": "4.2mm"
+        },
+        {
+          "attribute_name_en": "Termination Style",
+          "component_code": "C139797",
+          "attribute_value_name": "J-Lead"
+        },
+        {
+          "attribute_name_en": "Voltage Rating",
+          "component_code": "C139797",
+          "attribute_value_name": "16V"
+        },
+        {
+          "attribute_name_en": "Actuator Style",
+          "component_code": "C139797",
+          "attribute_value_name": "Oval button"
+        },
+        {
+          "attribute_name_en": "Life",
+          "component_code": "C139797",
+          "attribute_value_name": "50,000 cycles"
+        },
+        {
+          "attribute_name_en": "Circuit",
+          "component_code": "C139797",
+          "attribute_value_name": "SPST - Normally Open"
+        },
+        {
+          "attribute_name_en": "Switch Height",
+          "component_code": "C139797",
+          "attribute_value_name": "2.5mm"
+        },
+        {
+          "attribute_name_en": "Mounting Type",
+          "component_code": "C139797",
+          "attribute_value_name": "Surface Mount,Vertical"
+        },
+        {
+          "attribute_name_en": "With Lamp",
+          "component_code": "C139797",
+          "attribute_value_name": "-"
+        },
+        {
+          "attribute_name_en": "Width",
+          "component_code": "C139797",
+          "attribute_value_name": "3.2mm"
+        }
+      ],
+      "stockCount": 136782,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C139797",
+          "startNumber": 1,
+          "endNumber": 99,
+          "productPrice": 0.0664,
+          "erpComponentPriceKeyId": 256849722,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C139797",
+          "startNumber": 100,
+          "endNumber": 299,
+          "productPrice": 0.0539,
+          "erpComponentPriceKeyId": 256849727,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C139797",
+          "startNumber": 300,
+          "endNumber": 999,
+          "productPrice": 0.0476,
+          "erpComponentPriceKeyId": 256849724,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C139797",
+          "startNumber": 1000,
+          "endNumber": 3999,
+          "productPrice": 0.0423,
+          "erpComponentPriceKeyId": 256849729,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C139797",
+          "startNumber": 4000,
+          "endNumber": 7999,
+          "productPrice": 0.0345,
+          "erpComponentPriceKeyId": 256849730,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C139797",
+          "startNumber": 8000,
+          "endNumber": -1,
+          "productPrice": 0.0333,
+          "erpComponentPriceKeyId": 256849720,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "expand",
+      "leastNumber": 5,
+      "lossNumber": 6,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.0664,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C139797"
+    },
+    "C21190": {
+      "componentCode": "C21190",
+      "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+      "componentModelEn": "0603WAF1001T5E",
+      "componentSpecificationEn": "0603",
+      "describe": "-55℃~+155℃ 100mW 1kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Resistance",
+          "component_code": "C21190",
+          "attribute_value_name": "1kΩ"
+        },
+        {
+          "attribute_name_en": "Operating Temperature",
+          "component_code": "C21190",
+          "attribute_value_name": "-55℃~+155℃"
+        },
+        {
+          "attribute_name_en": "Power(Watts)",
+          "component_code": "C21190",
+          "attribute_value_name": "100mW"
+        },
+        {
+          "attribute_name_en": "Type",
+          "component_code": "C21190",
+          "attribute_value_name": "Thick Film Resistor"
+        },
+        {
+          "attribute_name_en": "Voltage-Supply(Max)",
+          "component_code": "C21190",
+          "attribute_value_name": "75V"
+        },
+        {
+          "attribute_name_en": "Tolerance",
+          "component_code": "C21190",
+          "attribute_value_name": "±1%"
+        },
+        {
+          "attribute_name_en": "Temperature Coefficient",
+          "component_code": "C21190",
+          "attribute_value_name": "±100ppm/℃"
+        }
+      ],
+      "stockCount": 38202539,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C21190",
+          "startNumber": 1,
+          "endNumber": 999,
+          "productPrice": 0.0015,
+          "erpComponentPriceKeyId": 299828956,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C21190",
+          "startNumber": 1000,
+          "endNumber": 4999,
+          "productPrice": 0.0012,
+          "erpComponentPriceKeyId": 299828953,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C21190",
+          "startNumber": 5000,
+          "endNumber": 9999,
+          "productPrice": 0.0011,
+          "erpComponentPriceKeyId": 299828951,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C21190",
+          "startNumber": 10000,
+          "endNumber": 49999,
+          "productPrice": 0.0009,
+          "erpComponentPriceKeyId": 299828960,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C21190",
+          "startNumber": 50000,
+          "endNumber": 50199,
+          "productPrice": 0.0008,
+          "erpComponentPriceKeyId": 299828954,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C21190",
+          "startNumber": 50200,
+          "endNumber": -1,
+          "productPrice": 0.0008,
+          "erpComponentPriceKeyId": 299828958,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "base",
+      "leastNumber": 20,
+      "lossNumber": 10,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.0015,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C21190"
+    },
+    "C23186": {
+      "componentCode": "C23186",
+      "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+      "componentModelEn": "0603WAF5101T5E",
+      "componentSpecificationEn": "0603",
+      "describe": "-55℃~+155℃ 100mW 5.1kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Resistance",
+          "component_code": "C23186",
+          "attribute_value_name": "5.1kΩ"
+        },
+        {
+          "attribute_name_en": "Operating Temperature",
+          "component_code": "C23186",
+          "attribute_value_name": "-55℃~+155℃"
+        },
+        {
+          "attribute_name_en": "Power(Watts)",
+          "component_code": "C23186",
+          "attribute_value_name": "100mW"
+        },
+        {
+          "attribute_name_en": "Type",
+          "component_code": "C23186",
+          "attribute_value_name": "Thick Film Resistor"
+        },
+        {
+          "attribute_name_en": "Voltage-Supply(Max)",
+          "component_code": "C23186",
+          "attribute_value_name": "75V"
+        },
+        {
+          "attribute_name_en": "Tolerance",
+          "component_code": "C23186",
+          "attribute_value_name": "±1%"
+        },
+        {
+          "attribute_name_en": "Temperature Coefficient",
+          "component_code": "C23186",
+          "attribute_value_name": "±100ppm/℃"
+        }
+      ],
+      "stockCount": 17554692,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C23186",
+          "startNumber": 1,
+          "endNumber": 999,
+          "productPrice": 0.0015,
+          "erpComponentPriceKeyId": 265084166,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C23186",
+          "startNumber": 1000,
+          "endNumber": 4999,
+          "productPrice": 0.0011,
+          "erpComponentPriceKeyId": 265084168,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C23186",
+          "startNumber": 5000,
+          "endNumber": 9999,
+          "productPrice": 0.0009,
+          "erpComponentPriceKeyId": 265084163,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C23186",
+          "startNumber": 10000,
+          "endNumber": 49999,
+          "productPrice": 0.0008,
+          "erpComponentPriceKeyId": 265084167,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C23186",
+          "startNumber": 50000,
+          "endNumber": 50199,
+          "productPrice": 0.0007,
+          "erpComponentPriceKeyId": 265084164,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C23186",
+          "startNumber": 50200,
+          "endNumber": -1,
+          "productPrice": 0.0007,
+          "erpComponentPriceKeyId": 265084165,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "base",
+      "leastNumber": 20,
+      "lossNumber": 10,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.0015,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C23186"
+    },
+    "C25804": {
+      "componentCode": "C25804",
+      "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+      "componentModelEn": "0603WAF1002T5E",
+      "componentSpecificationEn": "0603",
+      "describe": "-55℃~+155℃ 100mW 10kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Resistance",
+          "component_code": "C25804",
+          "attribute_value_name": "10kΩ"
+        },
+        {
+          "attribute_name_en": "Operating Temperature",
+          "component_code": "C25804",
+          "attribute_value_name": "-55℃~+155℃"
+        },
+        {
+          "attribute_name_en": "Power(Watts)",
+          "component_code": "C25804",
+          "attribute_value_name": "100mW"
+        },
+        {
+          "attribute_name_en": "Type",
+          "component_code": "C25804",
+          "attribute_value_name": "Thick Film Resistor"
+        },
+        {
+          "attribute_name_en": "Voltage-Supply(Max)",
+          "component_code": "C25804",
+          "attribute_value_name": "75V"
+        },
+        {
+          "attribute_name_en": "Tolerance",
+          "component_code": "C25804",
+          "attribute_value_name": "±1%"
+        },
+        {
+          "attribute_name_en": "Temperature Coefficient",
+          "component_code": "C25804",
+          "attribute_value_name": "±100ppm/℃"
+        }
+      ],
+      "stockCount": 40405343,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C25804",
+          "startNumber": 1,
+          "endNumber": 999,
+          "productPrice": 0.0017,
+          "erpComponentPriceKeyId": 309545707,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C25804",
+          "startNumber": 1000,
+          "endNumber": 4999,
+          "productPrice": 0.0013,
+          "erpComponentPriceKeyId": 309545726,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C25804",
+          "startNumber": 5000,
+          "endNumber": 9999,
+          "productPrice": 0.0012,
+          "erpComponentPriceKeyId": 309545709,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C25804",
+          "startNumber": 10000,
+          "endNumber": 49999,
+          "productPrice": 0.0011,
+          "erpComponentPriceKeyId": 309545743,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C25804",
+          "startNumber": 50000,
+          "endNumber": 50199,
+          "productPrice": 0.001,
+          "erpComponentPriceKeyId": 309545728,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C25804",
+          "startNumber": 50200,
+          "endNumber": -1,
+          "productPrice": 0.001,
+          "erpComponentPriceKeyId": 309545745,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "base",
+      "leastNumber": 20,
+      "lossNumber": 10,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.0017,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C25804"
+    },
+    "C4190": {
+      "componentCode": "C4190",
+      "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+      "componentModelEn": "0603WAF2201T5E",
+      "componentSpecificationEn": "0603",
+      "describe": "-55℃~+155℃ 100mW 2.2kΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Resistance",
+          "component_code": "C4190",
+          "attribute_value_name": "2.2kΩ"
+        },
+        {
+          "attribute_name_en": "Operating Temperature",
+          "component_code": "C4190",
+          "attribute_value_name": "-55℃~+155℃"
+        },
+        {
+          "attribute_name_en": "Power(Watts)",
+          "component_code": "C4190",
+          "attribute_value_name": "100mW"
+        },
+        {
+          "attribute_name_en": "Type",
+          "component_code": "C4190",
+          "attribute_value_name": "Thick Film Resistor"
+        },
+        {
+          "attribute_name_en": "Voltage-Supply(Max)",
+          "component_code": "C4190",
+          "attribute_value_name": "75V"
+        },
+        {
+          "attribute_name_en": "Tolerance",
+          "component_code": "C4190",
+          "attribute_value_name": "±1%"
+        },
+        {
+          "attribute_name_en": "Temperature Coefficient",
+          "component_code": "C4190",
+          "attribute_value_name": "±100ppm/℃"
+        }
+      ],
+      "stockCount": 3905814,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C4190",
+          "startNumber": 1,
+          "endNumber": 999,
+          "productPrice": 0.0018,
+          "erpComponentPriceKeyId": 324006426,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C4190",
+          "startNumber": 1000,
+          "endNumber": 4999,
+          "productPrice": 0.0014,
+          "erpComponentPriceKeyId": 324006428,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C4190",
+          "startNumber": 5000,
+          "endNumber": 9999,
+          "productPrice": 0.0012,
+          "erpComponentPriceKeyId": 324006423,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C4190",
+          "startNumber": 10000,
+          "endNumber": 49999,
+          "productPrice": 0.0011,
+          "erpComponentPriceKeyId": 324006427,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C4190",
+          "startNumber": 50000,
+          "endNumber": 50199,
+          "productPrice": 0.0009,
+          "erpComponentPriceKeyId": 324006424,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C4190",
+          "startNumber": 50200,
+          "endNumber": -1,
+          "productPrice": 0.0009,
+          "erpComponentPriceKeyId": 324006425,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "base",
+      "leastNumber": 20,
+      "lossNumber": 10,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.0018,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C4190"
+    },
+    "C25803": {
+      "componentCode": "C25803",
+      "componentBrandEn": "UNI-ROYAL(Uniroyal Elec)",
+      "componentModelEn": "0603WAF1003T5E",
+      "componentSpecificationEn": "0603",
+      "describe": "-55℃~+155℃ 100kΩ 100mW 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Resistance",
+          "component_code": "C25803",
+          "attribute_value_name": "100kΩ"
+        },
+        {
+          "attribute_name_en": "Operating Temperature",
+          "component_code": "C25803",
+          "attribute_value_name": "-55℃~+155℃"
+        },
+        {
+          "attribute_name_en": "Power(Watts)",
+          "component_code": "C25803",
+          "attribute_value_name": "100mW"
+        },
+        {
+          "attribute_name_en": "Type",
+          "component_code": "C25803",
+          "attribute_value_name": "Thick Film Resistor"
+        },
+        {
+          "attribute_name_en": "Voltage-Supply(Max)",
+          "component_code": "C25803",
+          "attribute_value_name": "75V"
+        },
+        {
+          "attribute_name_en": "Tolerance",
+          "component_code": "C25803",
+          "attribute_value_name": "±1%"
+        },
+        {
+          "attribute_name_en": "Temperature Coefficient",
+          "component_code": "C25803",
+          "attribute_value_name": "±100ppm/℃"
+        }
+      ],
+      "stockCount": 12249294,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C25803",
+          "startNumber": 1,
+          "endNumber": 999,
+          "productPrice": 0.0026,
+          "erpComponentPriceKeyId": 319166426,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C25803",
+          "startNumber": 1000,
+          "endNumber": 4999,
+          "productPrice": 0.002,
+          "erpComponentPriceKeyId": 319166427,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C25803",
+          "startNumber": 5000,
+          "endNumber": 9999,
+          "productPrice": 0.0017,
+          "erpComponentPriceKeyId": 319166428,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C25803",
+          "startNumber": 10000,
+          "endNumber": 49999,
+          "productPrice": 0.0013,
+          "erpComponentPriceKeyId": 319166429,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C25803",
+          "startNumber": 50000,
+          "endNumber": 50199,
+          "productPrice": 0.0012,
+          "erpComponentPriceKeyId": 319166431,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C25803",
+          "startNumber": 50200,
+          "endNumber": -1,
+          "productPrice": 0.0012,
+          "erpComponentPriceKeyId": 319166430,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "base",
+      "leastNumber": 20,
+      "lossNumber": 10,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.0026,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C25803"
+    },
+    "C14663": {
+      "componentCode": "C14663",
+      "componentBrandEn": "YAGEO",
+      "componentModelEn": "CC0603KRX7R9BB104",
+      "componentSpecificationEn": "0603",
+      "describe": "100nF 50V X7R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Voltage Rating",
+          "component_code": "C14663",
+          "attribute_value_name": "50V"
+        },
+        {
+          "attribute_name_en": "Tolerance",
+          "component_code": "C14663",
+          "attribute_value_name": "±10%"
+        },
+        {
+          "attribute_name_en": "Capacitance",
+          "component_code": "C14663",
+          "attribute_value_name": "100nF"
+        },
+        {
+          "attribute_name_en": "Temperature Coefficient",
+          "component_code": "C14663",
+          "attribute_value_name": "X7R"
+        }
+      ],
+      "stockCount": 50029447,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C14663",
+          "startNumber": 1,
+          "endNumber": 999,
+          "productPrice": 0.0052,
+          "erpComponentPriceKeyId": 306429176,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C14663",
+          "startNumber": 1000,
+          "endNumber": 3999,
+          "productPrice": 0.004,
+          "erpComponentPriceKeyId": 306429197,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C14663",
+          "startNumber": 4000,
+          "endNumber": 7999,
+          "productPrice": 0.0034,
+          "erpComponentPriceKeyId": 191696405004349443,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C14663",
+          "startNumber": 8000,
+          "endNumber": 47999,
+          "productPrice": 0.003,
+          "erpComponentPriceKeyId": 306429189,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C14663",
+          "startNumber": 48000,
+          "endNumber": 99999,
+          "productPrice": 0.0026,
+          "erpComponentPriceKeyId": 306429203,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C14663",
+          "startNumber": 100000,
+          "endNumber": -1,
+          "productPrice": 0.0024,
+          "erpComponentPriceKeyId": 345648096,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "base",
+      "leastNumber": 20,
+      "lossNumber": 15,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.0052,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C14663"
+    },
+    "C15849": {
+      "componentCode": "C15849",
+      "componentBrandEn": "Samsung Electro-Mechanics",
+      "componentModelEn": "CL10A105KB8NNNC",
+      "componentSpecificationEn": "0603",
+      "describe": "1uF 50V X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Voltage Rating",
+          "component_code": "C15849",
+          "attribute_value_name": "50V"
+        },
+        {
+          "attribute_name_en": "Tolerance",
+          "component_code": "C15849",
+          "attribute_value_name": "±10%"
+        },
+        {
+          "attribute_name_en": "Capacitance",
+          "component_code": "C15849",
+          "attribute_value_name": "1uF"
+        },
+        {
+          "attribute_name_en": "Temperature Coefficient",
+          "component_code": "C15849",
+          "attribute_value_name": "X5R"
+        }
+      ],
+      "stockCount": 11584867,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C15849",
+          "startNumber": 1,
+          "endNumber": 499,
+          "productPrice": 0.0086,
+          "erpComponentPriceKeyId": 307580842,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C15849",
+          "startNumber": 500,
+          "endNumber": 1499,
+          "productPrice": 0.0067,
+          "erpComponentPriceKeyId": 307580822,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C15849",
+          "startNumber": 1500,
+          "endNumber": 3999,
+          "productPrice": 0.0058,
+          "erpComponentPriceKeyId": 307580836,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C15849",
+          "startNumber": 4000,
+          "endNumber": 23999,
+          "productPrice": 0.0052,
+          "erpComponentPriceKeyId": 307580830,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C15849",
+          "startNumber": 24000,
+          "endNumber": 47999,
+          "productPrice": 0.005,
+          "erpComponentPriceKeyId": 307580818,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C15849",
+          "startNumber": 48000,
+          "endNumber": -1,
+          "productPrice": 0.0048,
+          "erpComponentPriceKeyId": 307580826,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "base",
+      "leastNumber": 20,
+      "lossNumber": 10,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.0086,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C15849"
+    },
+    "C1779": {
+      "componentCode": "C1779",
+      "componentBrandEn": "Samsung Electro-Mechanics",
+      "componentModelEn": "CL21A475KAQNNNE",
+      "componentSpecificationEn": "0805",
+      "describe": "25V 4.7uF X5R ±10% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Voltage Rating",
+          "component_code": "C1779",
+          "attribute_value_name": "25V"
+        },
+        {
+          "attribute_name_en": "Tolerance",
+          "component_code": "C1779",
+          "attribute_value_name": "±10%"
+        },
+        {
+          "attribute_name_en": "Capacitance",
+          "component_code": "C1779",
+          "attribute_value_name": "4.7uF"
+        },
+        {
+          "attribute_name_en": "Temperature Coefficient",
+          "component_code": "C1779",
+          "attribute_value_name": "X5R"
+        }
+      ],
+      "stockCount": 2633351,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C1779",
+          "startNumber": 1,
+          "endNumber": 199,
+          "productPrice": 0.0222,
+          "erpComponentPriceKeyId": 263793666,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C1779",
+          "startNumber": 200,
+          "endNumber": 599,
+          "productPrice": 0.0173,
+          "erpComponentPriceKeyId": 263793695,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C1779",
+          "startNumber": 600,
+          "endNumber": 1999,
+          "productPrice": 0.0151,
+          "erpComponentPriceKeyId": 263793680,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C1779",
+          "startNumber": 2000,
+          "endNumber": 9999,
+          "productPrice": 0.0134,
+          "erpComponentPriceKeyId": 263793702,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C1779",
+          "startNumber": 10000,
+          "endNumber": 19999,
+          "productPrice": 0.0128,
+          "erpComponentPriceKeyId": 263793672,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C1779",
+          "startNumber": 20000,
+          "endNumber": -1,
+          "productPrice": 0.0124,
+          "erpComponentPriceKeyId": 263793687,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "base",
+      "leastNumber": 20,
+      "lossNumber": 10,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.0222,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C1779"
+    },
+    "C12891": {
+      "componentCode": "C12891",
+      "componentBrandEn": "Samsung Electro-Mechanics",
+      "componentModelEn": "CL31A226KAHNNNE",
+      "componentSpecificationEn": "1206",
+      "describe": "22uF 25V X5R ±10% 1206 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Voltage Rating",
+          "component_code": "C12891",
+          "attribute_value_name": "25V"
+        },
+        {
+          "attribute_name_en": "Tolerance",
+          "component_code": "C12891",
+          "attribute_value_name": "±10%"
+        },
+        {
+          "attribute_name_en": "Capacitance",
+          "component_code": "C12891",
+          "attribute_value_name": "22uF"
+        },
+        {
+          "attribute_name_en": "Temperature Coefficient",
+          "component_code": "C12891",
+          "attribute_value_name": "X5R"
+        }
+      ],
+      "stockCount": 2500805,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C12891",
+          "startNumber": 1,
+          "endNumber": 199,
+          "productPrice": 0.0905,
+          "erpComponentPriceKeyId": 318647420,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C12891",
+          "startNumber": 200,
+          "endNumber": 599,
+          "productPrice": 0.0728,
+          "erpComponentPriceKeyId": 318647442,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C12891",
+          "startNumber": 600,
+          "endNumber": 1999,
+          "productPrice": 0.0636,
+          "erpComponentPriceKeyId": 258106389846265859,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C12891",
+          "startNumber": 2000,
+          "endNumber": 9999,
+          "productPrice": 0.0562,
+          "erpComponentPriceKeyId": 508143663901310978,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C12891",
+          "startNumber": 10000,
+          "endNumber": 19999,
+          "productPrice": 0.0536,
+          "erpComponentPriceKeyId": 508143663901310979,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C12891",
+          "startNumber": 20000,
+          "endNumber": -1,
+          "productPrice": 0.0518,
+          "erpComponentPriceKeyId": 318647407,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "base",
+      "leastNumber": 5,
+      "lossNumber": 4,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.0905,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C12891"
+    },
+    "C21120": {
+      "componentCode": "C21120",
+      "componentBrandEn": "Samsung Electro-Mechanics",
+      "componentModelEn": "CL10B224KA8NNNC",
+      "componentSpecificationEn": "0603",
+      "describe": "220nF 25V X7R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Voltage Rating",
+          "component_code": "C21120",
+          "attribute_value_name": "25V"
+        },
+        {
+          "attribute_name_en": "Tolerance",
+          "component_code": "C21120",
+          "attribute_value_name": "±10%"
+        },
+        {
+          "attribute_name_en": "Capacitance",
+          "component_code": "C21120",
+          "attribute_value_name": "220nF"
+        },
+        {
+          "attribute_name_en": "Temperature Coefficient",
+          "component_code": "C21120",
+          "attribute_value_name": "X7R"
+        }
+      ],
+      "stockCount": 826187,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C21120",
+          "startNumber": 1,
+          "endNumber": 499,
+          "productPrice": 0.0089,
+          "erpComponentPriceKeyId": 129471798,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C21120",
+          "startNumber": 500,
+          "endNumber": 1499,
+          "productPrice": 0.0071,
+          "erpComponentPriceKeyId": 129471799,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C21120",
+          "startNumber": 1500,
+          "endNumber": 3999,
+          "productPrice": 0.0061,
+          "erpComponentPriceKeyId": 129471796,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C21120",
+          "startNumber": 4000,
+          "endNumber": 23999,
+          "productPrice": 0.0049,
+          "erpComponentPriceKeyId": 129471797,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C21120",
+          "startNumber": 24000,
+          "endNumber": 47999,
+          "productPrice": 0.0043,
+          "erpComponentPriceKeyId": 129471800,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C21120",
+          "startNumber": 48000,
+          "endNumber": -1,
+          "productPrice": 0.004,
+          "erpComponentPriceKeyId": 129471795,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "base",
+      "leastNumber": 20,
+      "lossNumber": 10,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.0089,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C21120"
+    },
+    "C1604": {
+      "componentCode": "C1604",
+      "componentBrandEn": "FH (Guangdong Fenghua Advanced Tech)",
+      "componentModelEn": "0603B222K500NT",
+      "componentSpecificationEn": "0603",
+      "describe": "2.2nF 50V X7R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Voltage Rating",
+          "component_code": "C1604",
+          "attribute_value_name": "50V"
+        },
+        {
+          "attribute_name_en": "Tolerance",
+          "component_code": "C1604",
+          "attribute_value_name": "±10%"
+        },
+        {
+          "attribute_name_en": "Capacitance",
+          "component_code": "C1604",
+          "attribute_value_name": "2.2nF"
+        },
+        {
+          "attribute_name_en": "Temperature Coefficient",
+          "component_code": "C1604",
+          "attribute_value_name": "X7R"
+        }
+      ],
+      "stockCount": 852234,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C1604",
+          "startNumber": 1,
+          "endNumber": 999,
+          "productPrice": 0.0109,
+          "erpComponentPriceKeyId": 171801962,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C1604",
+          "startNumber": 1000,
+          "endNumber": 2999,
+          "productPrice": 0.0086,
+          "erpComponentPriceKeyId": 171801966,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C1604",
+          "startNumber": 3000,
+          "endNumber": 7999,
+          "productPrice": 0.0073,
+          "erpComponentPriceKeyId": 171801965,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C1604",
+          "startNumber": 8000,
+          "endNumber": 47999,
+          "productPrice": 0.0062,
+          "erpComponentPriceKeyId": 171801963,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C1604",
+          "startNumber": 48000,
+          "endNumber": 95999,
+          "productPrice": 0.0055,
+          "erpComponentPriceKeyId": 171801964,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C1604",
+          "startNumber": 96000,
+          "endNumber": -1,
+          "productPrice": 0.0051,
+          "erpComponentPriceKeyId": 171801967,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "base",
+      "leastNumber": 20,
+      "lossNumber": 10,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.0109,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C1604"
+    },
+    "C21122": {
+      "componentCode": "C21122",
+      "componentBrandEn": "Samsung Electro-Mechanics",
+      "componentModelEn": "CL10B223KB8NNNC",
+      "componentSpecificationEn": "0603",
+      "describe": "22nF 50V X7R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Voltage Rating",
+          "component_code": "C21122",
+          "attribute_value_name": "50V"
+        },
+        {
+          "attribute_name_en": "Tolerance",
+          "component_code": "C21122",
+          "attribute_value_name": "±10%"
+        },
+        {
+          "attribute_name_en": "Capacitance",
+          "component_code": "C21122",
+          "attribute_value_name": "22nF"
+        },
+        {
+          "attribute_name_en": "Temperature Coefficient",
+          "component_code": "C21122",
+          "attribute_value_name": "X7R"
+        }
+      ],
+      "stockCount": 1042028,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C21122",
+          "startNumber": 1,
+          "endNumber": 499,
+          "productPrice": 0.0056,
+          "erpComponentPriceKeyId": 310594360,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C21122",
+          "startNumber": 500,
+          "endNumber": 1499,
+          "productPrice": 0.0043,
+          "erpComponentPriceKeyId": 310594357,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C21122",
+          "startNumber": 1500,
+          "endNumber": 3999,
+          "productPrice": 0.0037,
+          "erpComponentPriceKeyId": 310594358,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C21122",
+          "startNumber": 4000,
+          "endNumber": 23999,
+          "productPrice": 0.0033,
+          "erpComponentPriceKeyId": 310594361,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C21122",
+          "startNumber": 24000,
+          "endNumber": 47999,
+          "productPrice": 0.0031,
+          "erpComponentPriceKeyId": 310594362,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C21122",
+          "startNumber": 48000,
+          "endNumber": -1,
+          "productPrice": 0.003,
+          "erpComponentPriceKeyId": 310594359,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "base",
+      "leastNumber": 20,
+      "lossNumber": 10,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.0056,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C21122"
+    },
+    "C57112": {
+      "componentCode": "C57112",
+      "componentBrandEn": "FH (Guangdong Fenghua Advanced Tech)",
+      "componentModelEn": "0603B103K500NT",
+      "componentSpecificationEn": "0603",
+      "describe": "10nF 50V X7R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Voltage Rating",
+          "component_code": "C57112",
+          "attribute_value_name": "50V"
+        },
+        {
+          "attribute_name_en": "Tolerance",
+          "component_code": "C57112",
+          "attribute_value_name": "±10%"
+        },
+        {
+          "attribute_name_en": "Capacitance",
+          "component_code": "C57112",
+          "attribute_value_name": "10nF"
+        },
+        {
+          "attribute_name_en": "Temperature Coefficient",
+          "component_code": "C57112",
+          "attribute_value_name": "X7R"
+        }
+      ],
+      "stockCount": 4217695,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C57112",
+          "startNumber": 1,
+          "endNumber": 999,
+          "productPrice": 0.004,
+          "erpComponentPriceKeyId": 325450434,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C57112",
+          "startNumber": 1000,
+          "endNumber": 3999,
+          "productPrice": 0.0031,
+          "erpComponentPriceKeyId": 325450433,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C57112",
+          "startNumber": 4000,
+          "endNumber": 7999,
+          "productPrice": 0.0027,
+          "erpComponentPriceKeyId": 325450435,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C57112",
+          "startNumber": 8000,
+          "endNumber": 47999,
+          "productPrice": 0.0024,
+          "erpComponentPriceKeyId": 325450436,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C57112",
+          "startNumber": 48000,
+          "endNumber": 99999,
+          "productPrice": 0.0023,
+          "erpComponentPriceKeyId": 325450432,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C57112",
+          "startNumber": 100000,
+          "endNumber": -1,
+          "productPrice": 0.0022,
+          "erpComponentPriceKeyId": 325450431,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "base",
+      "leastNumber": 20,
+      "lossNumber": 10,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.004,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C57112"
+    },
+    "C1588": {
+      "componentCode": "C1588",
+      "componentBrandEn": "Samsung Electro-Mechanics",
+      "componentModelEn": "CL10B102KB8NNNC",
+      "componentSpecificationEn": "0603",
+      "describe": "-55℃~+125℃ 1nF 50V X7R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Operating Temperature",
+          "component_code": "C1588",
+          "attribute_value_name": "-55℃~+125℃"
+        },
+        {
+          "attribute_name_en": "Voltage Rating",
+          "component_code": "C1588",
+          "attribute_value_name": "50V"
+        },
+        {
+          "attribute_name_en": "Tolerance",
+          "component_code": "C1588",
+          "attribute_value_name": "±10%"
+        },
+        {
+          "attribute_name_en": "Capacitance",
+          "component_code": "C1588",
+          "attribute_value_name": "1nF"
+        },
+        {
+          "attribute_name_en": "Temperature Coefficient",
+          "component_code": "C1588",
+          "attribute_value_name": "X7R"
+        }
+      ],
+      "stockCount": 4850526,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C1588",
+          "startNumber": 1,
+          "endNumber": 499,
+          "productPrice": 0.0061,
+          "erpComponentPriceKeyId": 286798718,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C1588",
+          "startNumber": 500,
+          "endNumber": 1499,
+          "productPrice": 0.0047,
+          "erpComponentPriceKeyId": 286798704,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C1588",
+          "startNumber": 1500,
+          "endNumber": 3999,
+          "productPrice": 0.004,
+          "erpComponentPriceKeyId": 286798734,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C1588",
+          "startNumber": 4000,
+          "endNumber": 23999,
+          "productPrice": 0.0036,
+          "erpComponentPriceKeyId": 286798727,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C1588",
+          "startNumber": 24000,
+          "endNumber": 47999,
+          "productPrice": 0.0034,
+          "erpComponentPriceKeyId": 286798711,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C1588",
+          "startNumber": 48000,
+          "endNumber": -1,
+          "productPrice": 0.0033,
+          "erpComponentPriceKeyId": 286798740,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "base",
+      "leastNumber": 20,
+      "lossNumber": 10,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.0061,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C1588"
+    },
+    "C70076": {
+      "componentCode": "C70076",
+      "componentBrandEn": "TECHFUSE",
+      "componentModelEn": "nSMD050-24V",
+      "componentSpecificationEn": "1206",
+      "describe": "1.4mm 1.8mm 100A 100ms 150mΩ 1A 24V 3.5mm 500mA 600mW 700mΩ 1206 Resettable Fuses ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Power Dissipation",
+          "component_code": "C70076",
+          "attribute_value_name": "600mW"
+        },
+        {
+          "attribute_name_en": "Voltage - Max",
+          "component_code": "C70076",
+          "attribute_value_name": "24V"
+        },
+        {
+          "attribute_name_en": "Operating Temperature",
+          "component_code": "C70076",
+          "attribute_value_name": "-"
+        },
+        {
+          "attribute_name_en": "Time to Trip(Max)",
+          "component_code": "C70076",
+          "attribute_value_name": "100ms"
+        },
+        {
+          "attribute_name_en": "Length",
+          "component_code": "C70076",
+          "attribute_value_name": "3.5mm"
+        },
+        {
+          "attribute_name_en": "Resistance - Initial (Ri) (Min)",
+          "component_code": "C70076",
+          "attribute_value_name": "150mΩ"
+        },
+        {
+          "attribute_name_en": "Trip Current",
+          "component_code": "C70076",
+          "attribute_value_name": "1A"
+        },
+        {
+          "attribute_name_en": "Pitch",
+          "component_code": "C70076",
+          "attribute_value_name": "-"
+        },
+        {
+          "attribute_name_en": "Hold Current",
+          "component_code": "C70076",
+          "attribute_value_name": "500mA"
+        },
+        {
+          "attribute_name_en": "Height",
+          "component_code": "C70076",
+          "attribute_value_name": "1.4mm"
+        },
+        {
+          "attribute_name_en": "Current - Max",
+          "component_code": "C70076",
+          "attribute_value_name": "100A"
+        },
+        {
+          "attribute_name_en": "Width",
+          "component_code": "C70076",
+          "attribute_value_name": "1.8mm"
+        },
+        {
+          "attribute_name_en": "Resistance - Post Trip (R1) (Max)",
+          "component_code": "C70076",
+          "attribute_value_name": "700mΩ"
+        }
+      ],
+      "stockCount": 28088,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C70076",
+          "startNumber": 1,
+          "endNumber": 99,
+          "productPrice": 0.0587,
+          "erpComponentPriceKeyId": 270153479,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C70076",
+          "startNumber": 100,
+          "endNumber": 299,
+          "productPrice": 0.0487,
+          "erpComponentPriceKeyId": 270153491,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C70076",
+          "startNumber": 300,
+          "endNumber": 999,
+          "productPrice": 0.0438,
+          "erpComponentPriceKeyId": 270153482,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C70076",
+          "startNumber": 1000,
+          "endNumber": 3499,
+          "productPrice": 0.04,
+          "erpComponentPriceKeyId": 270153481,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C70076",
+          "startNumber": 3500,
+          "endNumber": 10499,
+          "productPrice": 0.0294,
+          "erpComponentPriceKeyId": 270153485,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C70076",
+          "startNumber": 10500,
+          "endNumber": -1,
+          "productPrice": 0.0279,
+          "erpComponentPriceKeyId": 270153488,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "expand",
+      "leastNumber": 5,
+      "lossNumber": 4,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.0587,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C70076"
+    },
+    "C2099": {
+      "componentCode": "C2099",
+      "componentBrandEn": "Jiangsu Changjing Electronics Technology Co., Ltd.",
+      "componentModelEn": "1N4148W",
+      "componentSpecificationEn": "SOD-123",
+      "describe": "1.25V@150mA 100V 150mA 1uA@75V 2A 4ns 500mW Standalone SOD-123 Switching Diodes ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Voltage - Forward(Vf@If)",
+          "component_code": "C2099",
+          "attribute_value_name": "1.25V@150mA"
+        },
+        {
+          "attribute_name_en": "Non-Repetitive Peak Forward Surge Current",
+          "component_code": "C2099",
+          "attribute_value_name": "2A"
+        },
+        {
+          "attribute_name_en": "Voltage - DC Reverse(Vr)",
+          "component_code": "C2099",
+          "attribute_value_name": "100V"
+        },
+        {
+          "attribute_name_en": "Operating Junction Temperature Range",
+          "component_code": "C2099",
+          "attribute_value_name": "-"
+        },
+        {
+          "attribute_name_en": "Reverse Recovery Time (trr)",
+          "component_code": "C2099",
+          "attribute_value_name": "4ns"
+        },
+        {
+          "attribute_name_en": "Diode Configuration",
+          "component_code": "C2099",
+          "attribute_value_name": "Standalone"
+        },
+        {
+          "attribute_name_en": "Current - Rectified",
+          "component_code": "C2099",
+          "attribute_value_name": "150mA"
+        },
+        {
+          "attribute_name_en": "Pd - Power Dissipation",
+          "component_code": "C2099",
+          "attribute_value_name": "500mW"
+        },
+        {
+          "attribute_name_en": "Reverse Leakage Current (Ir)",
+          "component_code": "C2099",
+          "attribute_value_name": "1uA@75V"
+        }
+      ],
+      "stockCount": 518036,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C2099",
+          "startNumber": 1,
+          "endNumber": 499,
+          "productPrice": 0.0106,
+          "erpComponentPriceKeyId": 288121473,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C2099",
+          "startNumber": 500,
+          "endNumber": 2999,
+          "productPrice": 0.0082,
+          "erpComponentPriceKeyId": 288121482,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C2099",
+          "startNumber": 3000,
+          "endNumber": 5999,
+          "productPrice": 0.0071,
+          "erpComponentPriceKeyId": 288121486,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C2099",
+          "startNumber": 6000,
+          "endNumber": 23999,
+          "productPrice": 0.0063,
+          "erpComponentPriceKeyId": 288121488,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C2099",
+          "startNumber": 24000,
+          "endNumber": 50999,
+          "productPrice": 0.006,
+          "erpComponentPriceKeyId": 288121475,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C2099",
+          "startNumber": 51000,
+          "endNumber": -1,
+          "productPrice": 0.0058,
+          "erpComponentPriceKeyId": 288121477,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "expand",
+      "leastNumber": 15,
+      "lossNumber": 16,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.0106,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C2099"
+    },
+    "C49257": {
+      "componentCode": "C49257",
+      "componentBrandEn": "BOOMELE(Boom Precision Elec)",
+      "componentModelEn": "2.54-1*3PPin",
+      "componentSpecificationEn": "Plugin,P=2.54mm",
+      "describe": "-40℃~+105℃ 1 1x3P 2.54mm 2.5mm 3A 3P 3mm 6mm Black Brass Gold Pin Header Through Hole 插件,P=2.54mm Pin Headers ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Operating Temperature",
+          "component_code": "C49257",
+          "attribute_value_name": "-40℃~+105℃"
+        },
+        {
+          "attribute_name_en": "Number of Rows",
+          "component_code": "C49257",
+          "attribute_value_name": "1"
+        },
+        {
+          "attribute_name_en": "Voltage Rating (Max)",
+          "component_code": "C49257",
+          "attribute_value_name": "-"
+        },
+        {
+          "attribute_name_en": "Insulation Height",
+          "component_code": "C49257",
+          "attribute_value_name": "2.5mm"
+        },
+        {
+          "attribute_name_en": "Length of End Connection Pin",
+          "component_code": "C49257",
+          "attribute_value_name": "3mm"
+        },
+        {
+          "attribute_name_en": "Color",
+          "component_code": "C49257",
+          "attribute_value_name": "Black"
+        },
+        {
+          "attribute_name_en": "Current Rating",
+          "component_code": "C49257",
+          "attribute_value_name": "3A"
+        },
+        {
+          "attribute_name_en": "Row Spacing",
+          "component_code": "C49257",
+          "attribute_value_name": "-"
+        },
+        {
+          "attribute_name_en": "Mounting Type",
+          "component_code": "C49257",
+          "attribute_value_name": "Through Hole"
+        },
+        {
+          "attribute_name_en": "Contact Plating",
+          "component_code": "C49257",
+          "attribute_value_name": "Gold"
+        },
+        {
+          "attribute_name_en": "Number of Pins",
+          "component_code": "C49257",
+          "attribute_value_name": "3P"
+        },
+        {
+          "attribute_name_en": "Pitch",
+          "component_code": "C49257",
+          "attribute_value_name": "2.54mm"
+        },
+        {
+          "attribute_name_en": "Contact Material",
+          "component_code": "C49257",
+          "attribute_value_name": "Brass"
+        },
+        {
+          "attribute_name_en": "Pin Structure",
+          "component_code": "C49257",
+          "attribute_value_name": "1x3P"
+        },
+        {
+          "attribute_name_en": "Length of Mating Pin",
+          "component_code": "C49257",
+          "attribute_value_name": "6mm"
+        },
+        {
+          "attribute_name_en": "Circluar Pins/Square Pins",
+          "component_code": "C49257",
+          "attribute_value_name": "Square pin"
+        }
+      ],
+      "stockCount": 433446,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C49257",
+          "startNumber": 1,
+          "endNumber": 199,
+          "productPrice": 0.0289,
+          "erpComponentPriceKeyId": 325912103,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C49257",
+          "startNumber": 200,
+          "endNumber": 999,
+          "productPrice": 0.0236,
+          "erpComponentPriceKeyId": 325912125,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C49257",
+          "startNumber": 1000,
+          "endNumber": 1999,
+          "productPrice": 0.0169,
+          "erpComponentPriceKeyId": 325912113,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C49257",
+          "startNumber": 2000,
+          "endNumber": 9999,
+          "productPrice": 0.0152,
+          "erpComponentPriceKeyId": 325912136,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C49257",
+          "startNumber": 10000,
+          "endNumber": 19999,
+          "productPrice": 0.0137,
+          "erpComponentPriceKeyId": 325912147,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C49257",
+          "startNumber": 20000,
+          "endNumber": -1,
+          "productPrice": 0.0129,
+          "erpComponentPriceKeyId": 325912167,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "expand",
+      "leastNumber": 2,
+      "lossNumber": 2,
+      "componentStatus": "yes",
+      "assemblyMode": "manualWeld",
+      "assemblyProcess": "THT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.0289,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C49257"
+    },
+    "C596496": {
+      "componentCode": "C596496",
+      "componentBrandEn": "Murata Electronics",
+      "componentModelEn": "BLM21SN300SN1D",
+      "componentSpecificationEn": "0805",
+      "describe": "1 30Ω@100MHz 4mΩ 8.5A 0805 Ferrite Beads ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Operating Temperature",
+          "component_code": "C596496",
+          "attribute_value_name": "-55℃~+125℃"
+        },
+        {
+          "attribute_name_en": "Impedance @ Frequency",
+          "component_code": "C596496",
+          "attribute_value_name": "30Ω@100MHz"
+        },
+        {
+          "attribute_name_en": "Tolerance",
+          "component_code": "C596496",
+          "attribute_value_name": "-"
+        },
+        {
+          "attribute_name_en": "Current Rating",
+          "component_code": "C596496",
+          "attribute_value_name": "8.5A"
+        },
+        {
+          "attribute_name_en": "Number of Circuits",
+          "component_code": "C596496",
+          "attribute_value_name": "1"
+        },
+        {
+          "attribute_name_en": "DC Resistance(DCR)",
+          "component_code": "C596496",
+          "attribute_value_name": "4mΩ"
+        }
+      ],
+      "stockCount": 744,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C596496",
+          "startNumber": 1,
+          "endNumber": 49,
+          "productPrice": 0.1283,
+          "erpComponentPriceKeyId": 138627407,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C596496",
+          "startNumber": 50,
+          "endNumber": 149,
+          "productPrice": 0.1034,
+          "erpComponentPriceKeyId": 138627408,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C596496",
+          "startNumber": 150,
+          "endNumber": 499,
+          "productPrice": 0.091,
+          "erpComponentPriceKeyId": 138627409,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C596496",
+          "startNumber": 500,
+          "endNumber": 2499,
+          "productPrice": 0.0816,
+          "erpComponentPriceKeyId": 138627410,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C596496",
+          "startNumber": 2500,
+          "endNumber": 3999,
+          "productPrice": 0.0711,
+          "erpComponentPriceKeyId": 138627411,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C596496",
+          "startNumber": 4000,
+          "endNumber": -1,
+          "productPrice": 0.0674,
+          "erpComponentPriceKeyId": 138627412,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "expand",
+      "leastNumber": 5,
+      "lossNumber": 2,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.1283,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C596496"
+    },
+    "C437411": {
+      "componentCode": "C437411",
+      "componentBrandEn": "Murata Electronics",
+      "componentModelEn": "BLM21PG221SZ1D",
+      "componentSpecificationEn": "0805",
+      "describe": "-55℃~+125℃ 1 220Ω@100MHz 2A 45mΩ ±25% 0805 Ferrite Beads ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Operating Temperature",
+          "component_code": "C437411",
+          "attribute_value_name": "-55℃~+125℃"
+        },
+        {
+          "attribute_name_en": "Impedance @ Frequency",
+          "component_code": "C437411",
+          "attribute_value_name": "220Ω@100MHz"
+        },
+        {
+          "attribute_name_en": "Tolerance",
+          "component_code": "C437411",
+          "attribute_value_name": "±25%"
+        },
+        {
+          "attribute_name_en": "Current Rating",
+          "component_code": "C437411",
+          "attribute_value_name": "2A"
+        },
+        {
+          "attribute_name_en": "Number of Circuits",
+          "component_code": "C437411",
+          "attribute_value_name": "1"
+        },
+        {
+          "attribute_name_en": "DC Resistance(DCR)",
+          "component_code": "C437411",
+          "attribute_value_name": "45mΩ"
+        }
+      ],
+      "stockCount": 23125,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C437411",
+          "startNumber": 1,
+          "endNumber": 99,
+          "productPrice": 0.0549,
+          "erpComponentPriceKeyId": 330549960,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C437411",
+          "startNumber": 100,
+          "endNumber": 299,
+          "productPrice": 0.0444,
+          "erpComponentPriceKeyId": 330549956,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C437411",
+          "startNumber": 300,
+          "endNumber": 999,
+          "productPrice": 0.0392,
+          "erpComponentPriceKeyId": 330549959,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C437411",
+          "startNumber": 1000,
+          "endNumber": 3999,
+          "productPrice": 0.0353,
+          "erpComponentPriceKeyId": 330549963,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C437411",
+          "startNumber": 4000,
+          "endNumber": 7999,
+          "productPrice": 0.031,
+          "erpComponentPriceKeyId": 330549961,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C437411",
+          "startNumber": 8000,
+          "endNumber": -1,
+          "productPrice": 0.0295,
+          "erpComponentPriceKeyId": 330549958,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "expand",
+      "leastNumber": 5,
+      "lossNumber": 4,
+      "componentStatus": "yes",
+      "assemblyMode": "smtWeld",
+      "assemblyProcess": "SMT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.0549,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C437411"
+    },
+    "C42391443": {
+      "componentCode": "C42391443",
+      "componentBrandEn": "FG",
+      "componentModelEn": "FG-PZ2.54-02-03P",
+      "componentSpecificationEn": "Plugin,P=2.54mm",
+      "describe": "2 2.54mm 2.54mm 2.5mm 2x3P 3mm 6P 6mm Black Brass Gold Pin Header Through Hole 插件,P=2.54mm Pin Headers ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Number of Rows",
+          "component_code": "C42391443",
+          "attribute_value_name": "2"
+        },
+        {
+          "attribute_name_en": "Insulation Height",
+          "component_code": "C42391443",
+          "attribute_value_name": "2.5mm"
+        },
+        {
+          "attribute_name_en": "Length of End Connection Pin",
+          "component_code": "C42391443",
+          "attribute_value_name": "3mm"
+        },
+        {
+          "attribute_name_en": "Color",
+          "component_code": "C42391443",
+          "attribute_value_name": "Black"
+        },
+        {
+          "attribute_name_en": "Contact Plating",
+          "component_code": "C42391443",
+          "attribute_value_name": "Gold"
+        },
+        {
+          "attribute_name_en": "Number of Pins",
+          "component_code": "C42391443",
+          "attribute_value_name": "6P"
+        },
+        {
+          "attribute_name_en": "Pitch",
+          "component_code": "C42391443",
+          "attribute_value_name": "2.54mm"
+        },
+        {
+          "attribute_name_en": "Contact Material",
+          "component_code": "C42391443",
+          "attribute_value_name": "Brass"
+        },
+        {
+          "attribute_name_en": "Pin Structure",
+          "component_code": "C42391443",
+          "attribute_value_name": "2x3P"
+        },
+        {
+          "attribute_name_en": "Row Spacing",
+          "component_code": "C42391443",
+          "attribute_value_name": "2.54mm"
+        },
+        {
+          "attribute_name_en": "Mounting Type",
+          "component_code": "C42391443",
+          "attribute_value_name": "Through Hole"
+        },
+        {
+          "attribute_name_en": "Length of Mating Pin",
+          "component_code": "C42391443",
+          "attribute_value_name": "6mm"
+        },
+        {
+          "attribute_name_en": "Circluar Pins/Square Pins",
+          "component_code": "C42391443",
+          "attribute_value_name": "Square pin"
+        }
+      ],
+      "stockCount": 2149,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C42391443",
+          "startNumber": 1,
+          "endNumber": 49,
+          "productPrice": 0.0503,
+          "erpComponentPriceKeyId": 475910414782398466,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C42391443",
+          "startNumber": 50,
+          "endNumber": 149,
+          "productPrice": 0.0402,
+          "erpComponentPriceKeyId": 475910414782398465,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C42391443",
+          "startNumber": 150,
+          "endNumber": 999,
+          "productPrice": 0.0351,
+          "erpComponentPriceKeyId": 475910414782398467,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C42391443",
+          "startNumber": 1000,
+          "endNumber": 1999,
+          "productPrice": 0.0312,
+          "erpComponentPriceKeyId": 475910414782398470,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C42391443",
+          "startNumber": 2000,
+          "endNumber": 4999,
+          "productPrice": 0.0282,
+          "erpComponentPriceKeyId": 475910414782398469,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C42391443",
+          "startNumber": 5000,
+          "endNumber": -1,
+          "productPrice": 0.0266,
+          "erpComponentPriceKeyId": 475910414782398468,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "expand",
+      "leastNumber": 2,
+      "lossNumber": 0,
+      "componentStatus": "yes",
+      "assemblyMode": "manualWeld",
+      "assemblyProcess": "THT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.0503,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C42391443"
+    },
+    "C390690": {
+      "componentCode": "C390690",
+      "componentBrandEn": "PINREX",
+      "componentModelEn": "210-92-03GB01",
+      "componentSpecificationEn": "Plugin,P=2.54mm",
+      "describe": "-40℃~+105℃ 2 2.54mm 2.54mm 2.5mm 2x3P 3A 3mm 6.1mm 6P Black Brass Pin Header Through Hole 插件,P=2.54mm Pin Headers ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Operating Temperature",
+          "component_code": "C390690",
+          "attribute_value_name": "-40℃~+105℃"
+        },
+        {
+          "attribute_name_en": "Number of Rows",
+          "component_code": "C390690",
+          "attribute_value_name": "2"
+        },
+        {
+          "attribute_name_en": "Voltage Rating (Max)",
+          "component_code": "C390690",
+          "attribute_value_name": "-"
+        },
+        {
+          "attribute_name_en": "Insulation Height",
+          "component_code": "C390690",
+          "attribute_value_name": "2.5mm"
+        },
+        {
+          "attribute_name_en": "Length of End Connection Pin",
+          "component_code": "C390690",
+          "attribute_value_name": "3mm"
+        },
+        {
+          "attribute_name_en": "Color",
+          "component_code": "C390690",
+          "attribute_value_name": "Black"
+        },
+        {
+          "attribute_name_en": "Current Rating",
+          "component_code": "C390690",
+          "attribute_value_name": "3A"
+        },
+        {
+          "attribute_name_en": "Row Spacing",
+          "component_code": "C390690",
+          "attribute_value_name": "2.54mm"
+        },
+        {
+          "attribute_name_en": "Mounting Type",
+          "component_code": "C390690",
+          "attribute_value_name": "Through Hole"
+        },
+        {
+          "attribute_name_en": "Contact Plating",
+          "component_code": "C390690",
+          "attribute_value_name": "-"
+        },
+        {
+          "attribute_name_en": "Number of Pins",
+          "component_code": "C390690",
+          "attribute_value_name": "6P"
+        },
+        {
+          "attribute_name_en": "Pitch",
+          "component_code": "C390690",
+          "attribute_value_name": "2.54mm"
+        },
+        {
+          "attribute_name_en": "Contact Material",
+          "component_code": "C390690",
+          "attribute_value_name": "Brass"
+        },
+        {
+          "attribute_name_en": "Pin Structure",
+          "component_code": "C390690",
+          "attribute_value_name": "2x3P"
+        },
+        {
+          "attribute_name_en": "Length of Mating Pin",
+          "component_code": "C390690",
+          "attribute_value_name": "6.1mm"
+        },
+        {
+          "attribute_name_en": "Circluar Pins/Square Pins",
+          "component_code": "C390690",
+          "attribute_value_name": "Pin Header"
+        }
+      ],
+      "stockCount": 0,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C390690",
+          "startNumber": 1,
+          "endNumber": 199,
+          "productPrice": 0.0353,
+          "erpComponentPriceKeyId": 128506186,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C390690",
+          "startNumber": 200,
+          "endNumber": 999,
+          "productPrice": 0.0274,
+          "erpComponentPriceKeyId": 128506187,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C390690",
+          "startNumber": 1000,
+          "endNumber": 1999,
+          "productPrice": 0.0225,
+          "erpComponentPriceKeyId": 128506189,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C390690",
+          "startNumber": 2000,
+          "endNumber": 9999,
+          "productPrice": 0.0199,
+          "erpComponentPriceKeyId": 128506191,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C390690",
+          "startNumber": 10000,
+          "endNumber": 19999,
+          "productPrice": 0.0176,
+          "erpComponentPriceKeyId": 128506190,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C390690",
+          "startNumber": 20000,
+          "endNumber": -1,
+          "productPrice": 0.0163,
+          "erpComponentPriceKeyId": 128506193,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "expand",
+      "leastNumber": 2,
+      "lossNumber": 0,
+      "componentStatus": "yes",
+      "assemblyMode": "manualWeld",
+      "assemblyProcess": "THT",
+      "minPurchaseNum": 330,
+      "initialPrice": 0.0274,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C390690"
+    },
+    "C131337": {
+      "componentCode": "C131337",
+      "componentBrandEn": "JST",
+      "componentModelEn": "B2B-PH-K-S(LF)(SN)",
+      "componentSpecificationEn": "Plugin,P=2mm",
+      "describe": "-25℃~+85℃ 1 100V 1x2P 2 2A 2P 2mm 4.5mm 5.9mm 6mm Brass K Pin PA66 PH Through Hole Tin UL94V-0 White 插件,P=2mm Wire To Board Connector ROHS",
+      "attributes": [
+        {
+          "attribute_name_en": "Operating Temperature",
+          "component_code": "C131337",
+          "attribute_value_name": "-25℃~+85℃"
+        },
+        {
+          "attribute_name_en": "Number of Rows",
+          "component_code": "C131337",
+          "attribute_value_name": "1"
+        },
+        {
+          "attribute_name_en": "Voltage Rating",
+          "component_code": "C131337",
+          "attribute_value_name": "100V"
+        },
+        {
+          "attribute_name_en": "Color",
+          "component_code": "C131337",
+          "attribute_value_name": "White"
+        },
+        {
+          "attribute_name_en": "Current Rating",
+          "component_code": "C131337",
+          "attribute_value_name": "2A"
+        },
+        {
+          "attribute_name_en": "Pins Structure",
+          "component_code": "C131337",
+          "attribute_value_name": "1x2P"
+        },
+        {
+          "attribute_name_en": "Row Spacing",
+          "component_code": "C131337",
+          "attribute_value_name": "-"
+        },
+        {
+          "attribute_name_en": "Mounting Type",
+          "component_code": "C131337",
+          "attribute_value_name": "Through Hole"
+        },
+        {
+          "attribute_name_en": "Flame Retardant Rating",
+          "component_code": "C131337",
+          "attribute_value_name": "UL94V-0"
+        },
+        {
+          "attribute_name_en": "Y-Width of Bottom Edge on Board",
+          "component_code": "C131337",
+          "attribute_value_name": "4.5mm"
+        },
+        {
+          "attribute_name_en": "X-Length of Bottom Edge on Board (Spacing Line)",
+          "component_code": "C131337",
+          "attribute_value_name": "5.9mm"
+        },
+        {
+          "attribute_name_en": "Reference Series",
+          "component_code": "C131337",
+          "attribute_value_name": "PH"
+        },
+        {
+          "attribute_name_en": "Contact Plating",
+          "component_code": "C131337",
+          "attribute_value_name": "Tin"
+        },
+        {
+          "attribute_name_en": "Number of Pins",
+          "component_code": "C131337",
+          "attribute_value_name": "2P"
+        },
+        {
+          "attribute_name_en": "Pitch",
+          "component_code": "C131337",
+          "attribute_value_name": "2mm"
+        },
+        {
+          "attribute_name_en": "Contact Material",
+          "component_code": "C131337",
+          "attribute_value_name": "Brass"
+        },
+        {
+          "attribute_name_en": "Supplementary Features",
+          "component_code": "C131337",
+          "attribute_value_name": "Kinked Pin"
+        },
+        {
+          "attribute_name_en": "Z-Height of the Board",
+          "component_code": "C131337",
+          "attribute_value_name": "6mm"
+        },
+        {
+          "attribute_name_en": "Plastic Material",
+          "component_code": "C131337",
+          "attribute_value_name": "PA66"
+        },
+        {
+          "attribute_name_en": "Number of PINs Per Row",
+          "component_code": "C131337",
+          "attribute_value_name": "2"
+        }
+      ],
+      "stockCount": 337926,
+      "prices": [
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C131337",
+          "startNumber": 1,
+          "endNumber": 199,
+          "productPrice": 0.0336,
+          "erpComponentPriceKeyId": 144551971,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C131337",
+          "startNumber": 200,
+          "endNumber": 999,
+          "productPrice": 0.0263,
+          "erpComponentPriceKeyId": 144551995,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C131337",
+          "startNumber": 1000,
+          "endNumber": 1999,
+          "productPrice": 0.0227,
+          "erpComponentPriceKeyId": 144552025,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C131337",
+          "startNumber": 2000,
+          "endNumber": 9999,
+          "productPrice": 0.0202,
+          "erpComponentPriceKeyId": 144551983,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C131337",
+          "startNumber": 10000,
+          "endNumber": 19999,
+          "productPrice": 0.0192,
+          "erpComponentPriceKeyId": 144551956,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        },
+        {
+          "componentPriceKeyId": null,
+          "componentPriceAccessId": null,
+          "lcscComponentId": null,
+          "componentCode": "C131337",
+          "startNumber": 20000,
+          "endNumber": -1,
+          "productPrice": 0.0186,
+          "erpComponentPriceKeyId": 144552010,
+          "createTime": null,
+          "updateTime": null,
+          "deleted": false,
+          "lcscPriceRangeCoefficient": 1
+        }
+      ],
+      "componentLibraryType": "expand",
+      "leastNumber": 2,
+      "lossNumber": 1,
+      "componentStatus": "yes",
+      "assemblyMode": "manualWeld",
+      "assemblyProcess": "THT",
+      "minPurchaseNum": 1,
+      "initialPrice": 0.0336,
+      "specialComponentFee": 0.0,
+      "source": "https://jlcpcb.com/partdetail/C131337"
+    }
+  },
+  "note": "Public JLCPCB component data. Prices are USD component prices, not an assembly quote. Stock is not reserved."
+}

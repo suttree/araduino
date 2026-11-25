@@ -91,21 +91,21 @@ part('J1', 'TYPE-C-31-M-12', (70, 83), [
     ('A1','GND A1','passive','GND'), ('A12','GND A12','passive','GND'),
     ('B1','GND B1','passive','GND'), ('B12','GND B12','passive','GND'),
     ('A8','SBU1','passive',None), ('B8','SBU2','passive',None),
-    ('S1','Shield','passive','GND')],
+    ('SH','Shield','passive','GND')],
     footprint='Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12',
     mpn='TYPE-C-31-M-12', lcsc='C165948',
     note='USB 2.0 device / 5 V sink. Recheck current supplier mechanical drawing before layout release.')
 two('R1', '5.1k 1%', (155, 60), 'CC1', 'GND')
 two('R2', '5.1k 1%', (155, 80), 'CC2', 'GND')
-two('F1', '500mA PTC', (155, 100), 'VBUS', 'USB_5V', 'F', mpn='1206L050YR')
-two('C1', '1uF 16V X7R', (155, 120), 'USB_5V', 'GND', 'C')
+two('F1', '500mA PTC 24V', (155, 100), 'VBUS', 'USB_5V', 'F', mpn='nSMD050-24V')
+two('C1', '1uF 50V X5R', (155, 120), 'USB_5V', 'GND', 'C')
 part('U4', 'TPS22918DBVR', (235, 70), [
     (1,'VIN','power_in','USB_5V'), (3,'ON','input','USB_5V'),
     (2,'GND','power_in','GND'), (6,'VOUT','power_out','+5V'),
     (4,'CT','passive','SOFTSTART'), (5,'QOD','passive','+5V')],
     footprint='Package_TO_SOT_SMD:SOT-23-6', mpn='TPS22918DBVR')
-two('C2', '2.2nF C0G', (235, 105), 'SOFTSTART', 'GND', 'C')
-two('C3', '4.7uF 16V X7R', (235, 125), '+5V', 'GND', 'C',
+two('C2', '2.2nF 50V X7R', (235, 105), 'SOFTSTART', 'GND', 'C')
+two('C3', '4.7uF 25V X5R', (235, 125), '+5V', 'GND', 'C',
     footprint='Capacitor_SMD:C_0805_2012Metric')
 part('U5', 'USBLC6-2SC6', (70, 145), [
     (1,'I/O1','passive','USB_DP'), (3,'I/O2','passive','USB_DM'),
@@ -135,16 +135,16 @@ mcu = [
 part('U1', 'ATMEGA328P-AU', (372, 90), mcu,
     footprint='Package_QFP:TQFP-32_7x7mm_P0.8mm', mpn='ATMEGA328P-AU', lcsc='C14877',
     note='32-pin TQFP pinout. Arduino Uno 16 MHz / 5 V compatibility. NRND lifecycle.')
-two('C4', '100nF 16V X7R', (510, 56), '+5V', 'GND', 'C', note='Close to U1 pin 4')
-two('C5', '100nF 16V X7R', (510, 76), '+5V', 'GND', 'C', note='Close to U1 pin 6')
-two('FB1', 'BLM21PG221SN1D', (510, 96), '+5V', 'AVCC', 'FB', mpn='BLM21PG221SN1D')
-two('C6', '100nF 16V X7R', (510, 116), 'AVCC', 'GND', 'C')
-two('C7', '100nF 16V X7R', (510, 136), 'AREF', 'GND', 'C')
-part('Y1', 'CSTCE16M0V53-R0', (360, 157), [
+two('C4', '100nF 50V X7R', (510, 56), '+5V', 'GND', 'C', note='Close to U1 pin 4')
+two('C5', '100nF 50V X7R', (510, 76), '+5V', 'GND', 'C', note='Close to U1 pin 6')
+two('FB1', 'BLM21PG221SZ1D', (510, 96), '+5V', 'AVCC', 'FB', mpn='BLM21PG221SZ1D')
+two('C6', '100nF 50V X7R', (510, 116), 'AVCC', 'GND', 'C')
+two('C7', '100nF 50V X7R', (510, 136), 'AREF', 'GND', 'C')
+part('Y1', 'CSTNE16M0V530000R0', (360, 157), [
     (1,'XTAL1','passive','XTAL1'), (2,'GND','passive','GND'),
     (3,'XTAL2','passive','XTAL2')],
     footprint='Crystal:Resonator_SMD_Murata_CSTxExxV-3Pin_3.0x1.1mm',
-    mpn='CSTCE16M0V53-R0', lcsc='C32180', note='16 MHz resonator with built-in capacitors.')
+    mpn='CSTNE16M0V530000R0', lcsc='C341521', note='16 MHz / 15 pF built-in load capacitors. Murata replacement for CSTCE16M0V53-R0.')
 two('R3', '10k 1%', (510, 159), '+5V', 'RESET_N')
 note(320, 180, '16 MHz resonator includes load capacitors. AREF is decoupled, not tied to +5V.')
 note(320, 186, 'A0 remains externally floating, as on the prototype, for the existing randomSeed call.')
@@ -159,21 +159,21 @@ part('U2', 'CH340C', (75, 244), [
     (12,'DCD_N','input',None), (11,'RI_N','input',None),
     (10,'DSR_N','input',None), (8,'OUT_N','output',None)],
     footprint='Package_SO:SOIC-16_3.9x9.9mm_P1.27mm', mpn='CH340C', lcsc='C84681')
-two('C8', '100nF 16V X7R', (170, 220), '+5V', 'GND', 'C')
-two('C9', '100nF 16V X7R', (245, 220), 'CH340_V3', 'GND', 'C')
+two('C8', '100nF 50V X7R', (170, 220), '+5V', 'GND', 'C')
+two('C9', '100nF 50V X7R', (245, 220), 'CH340_V3', 'GND', 'C')
 two('R4', '1k 1%', (170, 245), 'USB_TX', 'MCU_RX')
 two('R5', '1k 1%', (245, 245), 'MCU_TX', 'USB_RX')
-two('C10', '100nF 16V X7R', (170, 270), 'DTR_N', 'RESET_N', 'C')
+two('C10', '100nF 50V X7R', (170, 270), 'DTR_N', 'RESET_N', 'C')
 two('D1', '1N4148W', (245, 270), '+5V', 'RESET_N', 'D', mpn='1N4148W')
 note(25, 291, 'DTR falling edge resets U1 through C10. D1 clamps the positive reset pulse.')
 
 two('R6', '1k 1%', (365, 220), 'AUDIO_PWM', 'LP1')
 two('R7', '2.2k 1%', (490, 220), 'LP1', 'LP2')
-two('C11', '22nF C0G', (365, 243), 'LP1', 'GND', 'C')
-two('C12', '10nF C0G', (490, 243), 'LP2', 'GND', 'C')
+two('C11', '22nF 50V X7R', (365, 243), 'LP1', 'GND', 'C')
+two('C12', '10nF 50V X7R', (490, 243), 'LP2', 'GND', 'C')
 two('R8', '100k 1%', (350, 267), 'LP2', 'AUDIO_QUIET')
 two('R9', '1k 1%', (435, 267), 'AUDIO_QUIET', 'GND')
-two('C13', '220nF 16V X7R', (530, 267), 'AUDIO_QUIET', 'AMP_INP', 'C')
+two('C13', '220nF 25V X7R', (530, 267), 'AUDIO_QUIET', 'AMP_INP', 'C')
 note(320, 289, 'R8/R9 set a conservative starting volume. Tune by listening; do not assume a 3 W output.')
 
 part('J2', 'AVR ISP 2x3', (65, 346), [
@@ -182,7 +182,11 @@ part('J2', 'AVR ISP 2x3', (65, 346), [
     (4,'MOSI','passive','ISP_MOSI'), (6,'GND','passive','GND')],
     footprint='Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical',
     note='Programming/recovery access. USB powers target; programmer must not supply power.')
-two('SW1', 'RESET', (160, 340), 'RESET_N', 'GND', 'SW')
+part('SW1', 'SKRPACE010', (160, 340), [
+    (1,'Contact 1','passive','RESET_N'), (2,'Contact 2','passive','RESET_N'),
+    (3,'Contact 3','passive','GND'), (4,'Contact 4','passive','GND')],
+    footprint='AraBoard:SW_SKRPACE010', mpn='SKRPACE010', lcsc='C139797',
+    note='Alps diagram: 1/2 are common; 3/4 are common. Press joins both groups.')
 for ref, net, x, y in [('TP1','+5V',245,332), ('TP2','GND',245,346),
                        ('TP3','AUDIO_PWM',245,360), ('TP4','ADC0_SEED',245,374)]:
     part(ref, net, (x,y), [(1,net,'passive',net)],
@@ -197,26 +201,36 @@ part('U3', 'PAM8302AADCR', (360, 344), [
     (5,'VO+','output','AMP_OUTP'), (8,'VO-','output','AMP_OUTM'),
     (6,'VDD','power_in','+5V'), (7,'GND','power_in','GND')],
     footprint='Package_SO:SOIC-8_3.9x4.9mm_P1.27mm', mpn='PAM8302AADCR')
-two('FB2', 'BLM21PG221SN1D', (445, 330), 'AMP_OUTP', 'SPK_P', 'FB', mpn='BLM21PG221SN1D')
-two('FB3', 'BLM21PG221SN1D', (445, 350), 'AMP_OUTM', 'SPK_M', 'FB', mpn='BLM21PG221SN1D')
+two('FB2', 'BLM21PG221SZ1D', (445, 330), 'AMP_OUTP', 'SPK_P', 'FB', mpn='BLM21PG221SZ1D')
+two('FB3', 'BLM21PG221SZ1D', (445, 350), 'AMP_OUTM', 'SPK_M', 'FB', mpn='BLM21PG221SZ1D')
 part('J3', 'JST PH 2-pin', (540, 337), [
     (1,'Speaker +','passive','SPK_P'), (2,'Speaker -','passive','SPK_M')],
     footprint='Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal',
     mpn='S2B-PH-K-S(LF)(SN)', note='Verify supplied cable polarity. Neither speaker lead is ground.')
-two('C14', '220nF 16V X7R', (350, 371), 'GND', 'AMP_INM', 'C')
-two('C15', '1uF 16V X7R', (440, 371), '+5V', 'GND', 'C')
-two('C16', '22uF 16V X7R', (535, 371), '+5V', 'GND', 'C',
+two('C14', '220nF 25V X7R', (350, 371), 'GND', 'AMP_INM', 'C')
+two('C15', '1uF 50V X5R', (440, 371), '+5V', 'GND', 'C')
+two('C16', '22uF 25V X5R', (535, 371), '+5V', 'GND', 'C',
     footprint='Capacitor_SMD:C_1206_3216Metric', note='Verify effective capacitance at 5 V.')
 two('R10', '100k 1%', (350, 390), '+5V', 'AMP_ENABLE')
-two('C17', '100nF 16V X7R', (440, 390), 'AMP_ENABLE', 'GND', 'C')
+two('C17', '100nF 50V X7R', (440, 390), 'AMP_ENABLE', 'GND', 'C')
 two('R11', '1k 1%', (535, 390), 'AMP_CONTROL', 'AMP_ENABLE')
-two('C18', '1nF 50V C0G', (540, 350), 'SPK_P', 'GND', 'C')
+two('C18', '1nF 50V X7R', (540, 350), 'SPK_P', 'GND', 'C')
 # The second EMI capacitor is grouped in the filter panel to preserve drawing clearance.
-two('C19', '1nF 50V C0G', (540, 285), 'SPK_M', 'GND', 'C')
+two('C19', '1nF 50V X7R', (540, 285), 'SPK_M', 'GND', 'C')
 note(320, 407, 'Bridge output: neither speaker pin connects to GND. Keep speaker pair short / twisted.')
 for ref,net,x,y in [('#FLG01','VBUS',150,151),('#FLG02','GND',235,151),
                     ('#FLG03','USB_5V',150,166),('#FLG04','AVCC',510,175)]:
     part(ref,'PWR_FLAG',(x,y),[(1,'pwr','power_out',net)],kind='flag')
+
+# Exact procurement parts selected from the dated JLCPCB snapshot.
+selection = json.loads((HERE.parent/'pcb'/'parts.json').read_text())
+by_code = json.loads((HERE.parent/'pcb'/'sourcing.json').read_text())['parts']
+for group in selection['groups']:
+    source = by_code[group['lcsc']]
+    for ref in group['references']:
+        p = next(p for p in PARTS if p['ref'] == ref)
+        p['mpn'] = source['componentModelEn']
+        p['lcsc'] = group['lcsc']
 
 def effects(size=1.27, justify='', hide=False):
     return f'(effects (font (size {size} {size})){" (justify " + justify + ")" if justify else ""}{" hide" if hide else ""})'
@@ -237,7 +251,7 @@ def libsymbol(p):
                                       '(xy -1.27 -2.54) (xy -1.27 2.54)',
                                       '(xy -1.27 0) (xy 1.27 2.54) (xy 1.27 -2.54) (xy -1.27 0)',
                                       '(xy 1.27 0) (xy 3.175 0)'])
-    s = f'(symbol {q(name)} (pin_names (offset 0.762)) (in_bom {"no" if virtual else "yes"}) (on_board {"no" if virtual else "yes"})\n'
+    s = f'(symbol {q(name)} {"(power)" if virtual else ""} (pin_names (offset 0.762)) (in_bom {"no" if virtual or p["ref"].startswith("TP") else "yes"}) (on_board {"no" if virtual else "yes"})\n'
     s += f'(property "Reference" {q(p["ref"])} (id 0) (at 0 {h+3.81} 0) {effects()})\n'
     s += f'(property "Value" {q(p["value"])} (id 1) (at 0 {h+1.27} 0) {effects()})\n'
     s += f'(symbol {q(p["ref"]+"_0_1")} {body})\n'
@@ -251,14 +265,14 @@ def libsymbol(p):
 
 def kicad():
     s = '(kicad_sch (version 20211123) (generator ara_schematic_generator)\n'
-    s += f'(uuid {ROOT}) (paper "A2")\n'
-    s += '(title_block (title "Ara - Arduino audio board") (date "2026-11-22") (rev "A-draft") (comment 1 "ENGINEERING DRAFT - NOT FOR MANUFACTURE"))\n'
+    s += f'(uuid {ROOT}) (paper "User" 620 460)\n'
+    s += '(title_block (title "Ara - Arduino audio board") (date "2026-11-25") (rev "A-prototype") (comment 1 "PROTOTYPE - PHYSICAL TESTING PENDING"))\n'
     s += '(lib_symbols\n' + ''.join(libsymbol(p) for p in PARTS) + ')\n'
     for p in PARTS:
         ref,x,y=p['ref'],p['x'],p['y']
         virtual=p['kind']=='flag'
         top=y-p['height']/2
-        s += f'(symbol (lib_id {q("Ara:"+ref)}) (at {x} {y} 0) (unit 1) (in_bom {"no" if virtual else "yes"}) (on_board {"no" if virtual else "yes"}) (uuid {uid(ref)})\n'
+        s += f'(symbol (lib_id {q("Ara:"+ref)}) (at {x} {y} 0) (unit 1) (in_bom {"no" if virtual or p["ref"].startswith("TP") else "yes"}) (on_board {"no" if virtual else "yes"}) (uuid {uid(ref)})\n'
         for i,(key,val,py,hide) in enumerate([
             ('Reference',ref,top-4.0,virtual),('Value',p['value'],top-1.4,False),
             ('Footprint',p['footprint'],y,True),('Datasheet','',y,True),
@@ -294,9 +308,9 @@ def svg():
         el.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" stroke="{stroke}" stroke-width="{width}" fill="{fill}"/>')
     rect(0,0,594,420,fill='#ffffff')
     text(12,17,'ARA / Arduino audio board',5,'start')
-    text(12,25,'Revision A draft | 22 November 2026 | Same-name labels are electrically connected.',2,'start')
-    text(580,17,'ENGINEERING DRAFT',3,'end',color='#a53623')
-    text(580,24,'Not for manufacture',2,'end',color='#a53623')
+    text(12,25,'Revision A prototype | 25 November 2026 | Same-name labels are electrically connected.',2,'start')
+    text(580,17,'PROTOTYPE DESIGN',3,'end',color='#a53623')
+    text(580,24,'Physical testing pending',2,'end',color='#a53623')
     for x,y,w,h,title in PANELS:
         rect(x,y,w,h,stroke='#b4c2cc',fill='#fbfcfd')
         text(x+3,y+6,title,2.6,'start')
@@ -359,4 +373,8 @@ if __name__=='__main__':
     (HERE/'ara.svg').write_text(svg())
     (HERE/'ara.net').write_text(netlist())
     (HERE/'circuit.json').write_text(json.dumps(PARTS,indent=2)+'\n')
+    # Keep the custom symbols available to native ERC and future editing.
+    library = ''.join(libsymbol(p).replace(q('Ara:'+p['ref']), q(p['ref']), 1) for p in PARTS)
+    (HERE/'Ara.kicad_sym').write_text('(kicad_symbol_lib (version 20211014) (generator ara_schematic_generator)\n'+library+')\n')
+    (HERE/'sym-lib-table').write_text('(sym_lib_table (lib (name "Ara") (type "KiCad") (uri "${KIPRJMOD}/Ara.kicad_sym") (options "") (descr "Ara circuit symbols")))\n')
     print(f'Generated {len(PARTS)} components in {HERE}')

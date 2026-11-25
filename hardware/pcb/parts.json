@@ -1,0 +1,184 @@
+{
+  "groups": [
+    {
+      "lcsc": "C14877",
+      "references": [
+        "U1"
+      ]
+    },
+    {
+      "lcsc": "C84681",
+      "references": [
+        "U2"
+      ]
+    },
+    {
+      "lcsc": "C112137",
+      "references": [
+        "U3"
+      ]
+    },
+    {
+      "lcsc": "C131941",
+      "references": [
+        "U4"
+      ]
+    },
+    {
+      "lcsc": "C7519",
+      "references": [
+        "U5"
+      ]
+    },
+    {
+      "lcsc": "C165948",
+      "references": [
+        "J1"
+      ]
+    },
+    {
+      "lcsc": "C42391443",
+      "references": [
+        "J2"
+      ]
+    },
+    {
+      "lcsc": "C173752",
+      "references": [
+        "J3"
+      ]
+    },
+    {
+      "lcsc": "C341521",
+      "references": [
+        "Y1"
+      ]
+    },
+    {
+      "lcsc": "C437411",
+      "references": [
+        "FB1",
+        "FB2",
+        "FB3"
+      ]
+    },
+    {
+      "lcsc": "C139797",
+      "references": [
+        "SW1"
+      ]
+    },
+    {
+      "lcsc": "C70076",
+      "references": [
+        "F1"
+      ]
+    },
+    {
+      "lcsc": "C2099",
+      "references": [
+        "D1"
+      ]
+    },
+    {
+      "lcsc": "C21190",
+      "references": [
+        "R4",
+        "R5",
+        "R6",
+        "R9",
+        "R11"
+      ]
+    },
+    {
+      "lcsc": "C23186",
+      "references": [
+        "R1",
+        "R2"
+      ]
+    },
+    {
+      "lcsc": "C25804",
+      "references": [
+        "R3"
+      ]
+    },
+    {
+      "lcsc": "C4190",
+      "references": [
+        "R7"
+      ]
+    },
+    {
+      "lcsc": "C25803",
+      "references": [
+        "R8",
+        "R10"
+      ]
+    },
+    {
+      "lcsc": "C14663",
+      "references": [
+        "C4",
+        "C5",
+        "C6",
+        "C7",
+        "C8",
+        "C9",
+        "C10",
+        "C17"
+      ]
+    },
+    {
+      "lcsc": "C15849",
+      "references": [
+        "C1",
+        "C15"
+      ]
+    },
+    {
+      "lcsc": "C1779",
+      "references": [
+        "C3"
+      ]
+    },
+    {
+      "lcsc": "C12891",
+      "references": [
+        "C16"
+      ]
+    },
+    {
+      "lcsc": "C21120",
+      "references": [
+        "C13",
+        "C14"
+      ]
+    },
+    {
+      "lcsc": "C1604",
+      "references": [
+        "C2"
+      ]
+    },
+    {
+      "lcsc": "C21122",
+      "references": [
+        "C11"
+      ]
+    },
+    {
+      "lcsc": "C57112",
+      "references": [
+        "C12"
+      ]
+    },
+    {
+      "lcsc": "C1588",
+      "references": [
+        "C18",
+        "C19"
+      ]
+    }
+  ]
+}

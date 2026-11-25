@@ -1,0 +1,9 @@
+# Preserve the exact tool output used for factory uploads. KiCad's SVGs and
+# programming exports include tool-generated whitespace and line endings.
+hardware/manufacturing/**/*.svg -whitespace linguist-generated=true
+hardware/manufacturing/**/*.step -whitespace linguist-generated=true
+hardware/manufacturing/**/*.csv -whitespace linguist-generated=true
+hardware/manufacturing/**/*.hex -whitespace linguist-generated=true
+hardware/manufacturing/**/gerbers/* -whitespace linguist-generated=true
+hardware/pcb/*.ses -whitespace linguist-generated=true
+hardware/pcb/footprints/** linguist-vendored=true

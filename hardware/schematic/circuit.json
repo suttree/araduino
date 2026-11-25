@@ -157,7 +157,7 @@
         "side": "R"
       },
       {
-        "number": "S1",
+        "number": "SH",
         "name": "Shield",
         "type": "passive",
         "net": "GND",
@@ -176,8 +176,8 @@
     "width": 6.35,
     "height": 2.54,
     "footprint": "Resistor_SMD:R_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "0603WAF5101T5E",
+    "lcsc": "C23186",
     "note": "",
     "pins": [
       {
@@ -209,8 +209,8 @@
     "width": 6.35,
     "height": 2.54,
     "footprint": "Resistor_SMD:R_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "0603WAF5101T5E",
+    "lcsc": "C23186",
     "note": "",
     "pins": [
       {
@@ -235,15 +235,15 @@
   },
   {
     "ref": "F1",
-    "value": "500mA PTC",
+    "value": "500mA PTC 24V",
     "x": 154.94,
     "y": 100.33,
     "kind": "F",
     "width": 6.35,
     "height": 2.54,
     "footprint": "Fuse:Fuse_1206_3216Metric",
-    "mpn": "1206L050YR",
-    "lcsc": "",
+    "mpn": "nSMD050-24V",
+    "lcsc": "C70076",
     "note": "",
     "pins": [
       {
@@ -268,15 +268,15 @@
   },
   {
     "ref": "C1",
-    "value": "1uF 16V X7R",
+    "value": "1uF 50V X5R",
     "x": 154.94,
     "y": 119.38,
     "kind": "C",
     "width": 6.35,
     "height": 2.54,
     "footprint": "Capacitor_SMD:C_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "CL10A105KB8NNNC",
+    "lcsc": "C15849",
     "note": "",
     "pins": [
       {
@@ -309,7 +309,7 @@
     "height": 10.16,
     "footprint": "Package_TO_SOT_SMD:SOT-23-6",
     "mpn": "TPS22918DBVR",
-    "lcsc": "",
+    "lcsc": "C131941",
     "note": "",
     "pins": [
       {
@@ -370,15 +370,15 @@
   },
   {
     "ref": "C2",
-    "value": "2.2nF C0G",
+    "value": "2.2nF 50V X7R",
     "x": 234.95,
     "y": 105.41,
     "kind": "C",
     "width": 6.35,
     "height": 2.54,
     "footprint": "Capacitor_SMD:C_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "0603B222K500NT",
+    "lcsc": "C1604",
     "note": "",
     "pins": [
       {
@@ -403,15 +403,15 @@
   },
   {
     "ref": "C3",
-    "value": "4.7uF 16V X7R",
+    "value": "4.7uF 25V X5R",
     "x": 234.95,
     "y": 124.46,
     "kind": "C",
     "width": 6.35,
     "height": 2.54,
     "footprint": "Capacitor_SMD:C_0805_2012Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "CL21A475KAQNNNE",
+    "lcsc": "C1779",
     "note": "",
     "pins": [
       {
@@ -444,7 +444,7 @@
     "height": 10.16,
     "footprint": "Package_TO_SOT_SMD:SOT-23-6",
     "mpn": "USBLC6-2SC6",
-    "lcsc": "",
+    "lcsc": "C7519",
     "note": "",
     "pins": [
       {
@@ -808,15 +808,15 @@
   },
   {
     "ref": "C4",
-    "value": "100nF 16V X7R",
+    "value": "100nF 50V X7R",
     "x": 510.54,
     "y": 55.88,
     "kind": "C",
     "width": 6.35,
     "height": 2.54,
     "footprint": "Capacitor_SMD:C_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "CC0603KRX7R9BB104",
+    "lcsc": "C14663",
     "note": "Close to U1 pin 4",
     "pins": [
       {
@@ -841,15 +841,15 @@
   },
   {
     "ref": "C5",
-    "value": "100nF 16V X7R",
+    "value": "100nF 50V X7R",
     "x": 510.54,
     "y": 76.2,
     "kind": "C",
     "width": 6.35,
     "height": 2.54,
     "footprint": "Capacitor_SMD:C_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "CC0603KRX7R9BB104",
+    "lcsc": "C14663",
     "note": "Close to U1 pin 6",
     "pins": [
       {
@@ -874,15 +874,15 @@
   },
   {
     "ref": "FB1",
-    "value": "BLM21PG221SN1D",
+    "value": "BLM21PG221SZ1D",
     "x": 510.54,
     "y": 96.52,
     "kind": "FB",
     "width": 6.35,
     "height": 2.54,
     "footprint": "Inductor_SMD:L_0805_2012Metric",
-    "mpn": "BLM21PG221SN1D",
-    "lcsc": "",
+    "mpn": "BLM21PG221SZ1D",
+    "lcsc": "C437411",
     "note": "",
     "pins": [
       {
@@ -907,15 +907,15 @@
   },
   {
     "ref": "C6",
-    "value": "100nF 16V X7R",
+    "value": "100nF 50V X7R",
     "x": 510.54,
     "y": 115.57,
     "kind": "C",
     "width": 6.35,
     "height": 2.54,
     "footprint": "Capacitor_SMD:C_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "CC0603KRX7R9BB104",
+    "lcsc": "C14663",
     "note": "",
     "pins": [
       {
@@ -940,15 +940,15 @@
   },
   {
     "ref": "C7",
-    "value": "100nF 16V X7R",
+    "value": "100nF 50V X7R",
     "x": 510.54,
     "y": 135.89,
     "kind": "C",
     "width": 6.35,
     "height": 2.54,
     "footprint": "Capacitor_SMD:C_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "CC0603KRX7R9BB104",
+    "lcsc": "C14663",
     "note": "",
     "pins": [
       {
@@ -973,16 +973,16 @@
   },
   {
     "ref": "Y1",
-    "value": "CSTCE16M0V53-R0",
+    "value": "CSTNE16M0V530000R0",
     "x": 359.41,
     "y": 157.48,
     "kind": "box",
     "width": 22.86,
     "height": 7.62,
     "footprint": "Crystal:Resonator_SMD_Murata_CSTxExxV-3Pin_3.0x1.1mm",
-    "mpn": "CSTCE16M0V53-R0",
-    "lcsc": "C32180",
-    "note": "16 MHz resonator with built-in capacitors.",
+    "mpn": "CSTNE16M0V530000R0",
+    "lcsc": "C341521",
+    "note": "16 MHz / 15 pF built-in load capacitors. Murata replacement for CSTCE16M0V53-R0.",
     "pins": [
       {
         "number": "1",
@@ -1022,8 +1022,8 @@
     "width": 6.35,
     "height": 2.54,
     "footprint": "Resistor_SMD:R_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "0603WAF1002T5E",
+    "lcsc": "C25804",
     "note": "",
     "pins": [
       {
@@ -1207,15 +1207,15 @@
   },
   {
     "ref": "C8",
-    "value": "100nF 16V X7R",
+    "value": "100nF 50V X7R",
     "x": 170.18,
     "y": 219.71,
     "kind": "C",
     "width": 6.35,
     "height": 2.54,
     "footprint": "Capacitor_SMD:C_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "CC0603KRX7R9BB104",
+    "lcsc": "C14663",
     "note": "",
     "pins": [
       {
@@ -1240,15 +1240,15 @@
   },
   {
     "ref": "C9",
-    "value": "100nF 16V X7R",
+    "value": "100nF 50V X7R",
     "x": 245.11,
     "y": 219.71,
     "kind": "C",
     "width": 6.35,
     "height": 2.54,
     "footprint": "Capacitor_SMD:C_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "CC0603KRX7R9BB104",
+    "lcsc": "C14663",
     "note": "",
     "pins": [
       {
@@ -1280,8 +1280,8 @@
     "width": 6.35,
     "height": 2.54,
     "footprint": "Resistor_SMD:R_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "0603WAF1001T5E",
+    "lcsc": "C21190",
     "note": "",
     "pins": [
       {
@@ -1313,8 +1313,8 @@
     "width": 6.35,
     "height": 2.54,
     "footprint": "Resistor_SMD:R_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "0603WAF1001T5E",
+    "lcsc": "C21190",
     "note": "",
     "pins": [
       {
@@ -1339,15 +1339,15 @@
   },
   {
     "ref": "C10",
-    "value": "100nF 16V X7R",
+    "value": "100nF 50V X7R",
     "x": 170.18,
     "y": 270.51,
     "kind": "C",
     "width": 6.35,
     "height": 2.54,
     "footprint": "Capacitor_SMD:C_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "CC0603KRX7R9BB104",
+    "lcsc": "C14663",
     "note": "",
     "pins": [
       {
@@ -1380,7 +1380,7 @@
     "height": 2.54,
     "footprint": "Diode_SMD:D_SOD-123",
     "mpn": "1N4148W",
-    "lcsc": "",
+    "lcsc": "C2099",
     "note": "",
     "pins": [
       {
@@ -1412,8 +1412,8 @@
     "width": 6.35,
     "height": 2.54,
     "footprint": "Resistor_SMD:R_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "0603WAF1001T5E",
+    "lcsc": "C21190",
     "note": "",
     "pins": [
       {
@@ -1445,8 +1445,8 @@
     "width": 6.35,
     "height": 2.54,
     "footprint": "Resistor_SMD:R_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "0603WAF2201T5E",
+    "lcsc": "C4190",
     "note": "",
     "pins": [
       {
@@ -1471,15 +1471,15 @@
   },
   {
     "ref": "C11",
-    "value": "22nF C0G",
+    "value": "22nF 50V X7R",
     "x": 364.49,
     "y": 242.57,
     "kind": "C",
     "width": 6.35,
     "height": 2.54,
     "footprint": "Capacitor_SMD:C_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "CL10B223KB8NNNC",
+    "lcsc": "C21122",
     "note": "",
     "pins": [
       {
@@ -1504,15 +1504,15 @@
   },
   {
     "ref": "C12",
-    "value": "10nF C0G",
+    "value": "10nF 50V X7R",
     "x": 490.22,
     "y": 242.57,
     "kind": "C",
     "width": 6.35,
     "height": 2.54,
     "footprint": "Capacitor_SMD:C_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "0603B103K500NT",
+    "lcsc": "C57112",
     "note": "",
     "pins": [
       {
@@ -1544,8 +1544,8 @@
     "width": 6.35,
     "height": 2.54,
     "footprint": "Resistor_SMD:R_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "0603WAF1003T5E",
+    "lcsc": "C25803",
     "note": "",
     "pins": [
       {
@@ -1577,8 +1577,8 @@
     "width": 6.35,
     "height": 2.54,
     "footprint": "Resistor_SMD:R_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "0603WAF1001T5E",
+    "lcsc": "C21190",
     "note": "",
     "pins": [
       {
@@ -1603,15 +1603,15 @@
   },
   {
     "ref": "C13",
-    "value": "220nF 16V X7R",
+    "value": "220nF 25V X7R",
     "x": 529.59,
     "y": 266.7,
     "kind": "C",
     "width": 6.35,
     "height": 2.54,
     "footprint": "Capacitor_SMD:C_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "CL10B224KA8NNNC",
+    "lcsc": "C21120",
     "note": "",
     "pins": [
       {
@@ -1643,8 +1643,8 @@
     "width": 22.86,
     "height": 10.16,
     "footprint": "Connector_PinHeader_2.54mm:PinHeader_2x03_P2.54mm_Vertical",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "FG-PZ2.54-02-03P",
+    "lcsc": "C42391443",
     "note": "Programming/recovery access. USB powers target; programmer must not supply power.",
     "pins": [
       {
@@ -1705,33 +1705,51 @@
   },
   {
     "ref": "SW1",
-    "value": "RESET",
+    "value": "SKRPACE010",
     "x": 160.02,
     "y": 340.36,
-    "kind": "SW",
-    "width": 6.35,
-    "height": 2.54,
-    "footprint": "Button_Switch_SMD:SW_SPST_TL3342",
-    "mpn": "",
-    "lcsc": "",
-    "note": "",
+    "kind": "box",
+    "width": 22.86,
+    "height": 7.62,
+    "footprint": "AraBoard:SW_SKRPACE010",
+    "mpn": "SKRPACE010",
+    "lcsc": "C139797",
+    "note": "Alps diagram: 1/2 are common; 3/4 are common. Press joins both groups.",
     "pins": [
       {
         "number": "1",
-        "name": "1",
+        "name": "Contact 1",
         "type": "passive",
         "net": "RESET_N",
-        "dx": -5.08,
-        "dy": 0,
+        "dx": -13.969999999999999,
+        "dy": -1.27,
         "side": "L"
       },
       {
         "number": "2",
-        "name": "2",
+        "name": "Contact 2",
+        "type": "passive",
+        "net": "RESET_N",
+        "dx": -13.969999999999999,
+        "dy": 1.27,
+        "side": "L"
+      },
+      {
+        "number": "3",
+        "name": "Contact 3",
         "type": "passive",
         "net": "GND",
-        "dx": 5.08,
-        "dy": 0,
+        "dx": 13.969999999999999,
+        "dy": -1.27,
+        "side": "R"
+      },
+      {
+        "number": "4",
+        "name": "Contact 4",
+        "type": "passive",
+        "net": "GND",
+        "dx": 13.969999999999999,
+        "dy": 1.27,
         "side": "R"
       }
     ]
@@ -1842,7 +1860,7 @@
     "height": 12.7,
     "footprint": "Package_SO:SOIC-8_3.9x4.9mm_P1.27mm",
     "mpn": "PAM8302AADCR",
-    "lcsc": "",
+    "lcsc": "C112137",
     "note": "",
     "pins": [
       {
@@ -1921,15 +1939,15 @@
   },
   {
     "ref": "FB2",
-    "value": "BLM21PG221SN1D",
+    "value": "BLM21PG221SZ1D",
     "x": 444.5,
     "y": 330.2,
     "kind": "FB",
     "width": 6.35,
     "height": 2.54,
     "footprint": "Inductor_SMD:L_0805_2012Metric",
-    "mpn": "BLM21PG221SN1D",
-    "lcsc": "",
+    "mpn": "BLM21PG221SZ1D",
+    "lcsc": "C437411",
     "note": "",
     "pins": [
       {
@@ -1954,15 +1972,15 @@
   },
   {
     "ref": "FB3",
-    "value": "BLM21PG221SN1D",
+    "value": "BLM21PG221SZ1D",
     "x": 444.5,
     "y": 350.52,
     "kind": "FB",
     "width": 6.35,
     "height": 2.54,
     "footprint": "Inductor_SMD:L_0805_2012Metric",
-    "mpn": "BLM21PG221SN1D",
-    "lcsc": "",
+    "mpn": "BLM21PG221SZ1D",
+    "lcsc": "C437411",
     "note": "",
     "pins": [
       {
@@ -1995,7 +2013,7 @@
     "height": 5.08,
     "footprint": "Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal",
     "mpn": "S2B-PH-K-S(LF)(SN)",
-    "lcsc": "",
+    "lcsc": "C173752",
     "note": "Verify supplied cable polarity. Neither speaker lead is ground.",
     "pins": [
       {
@@ -2020,15 +2038,15 @@
   },
   {
     "ref": "C14",
-    "value": "220nF 16V X7R",
+    "value": "220nF 25V X7R",
     "x": 350.52,
     "y": 370.84,
     "kind": "C",
     "width": 6.35,
     "height": 2.54,
     "footprint": "Capacitor_SMD:C_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "CL10B224KA8NNNC",
+    "lcsc": "C21120",
     "note": "",
     "pins": [
       {
@@ -2053,15 +2071,15 @@
   },
   {
     "ref": "C15",
-    "value": "1uF 16V X7R",
+    "value": "1uF 50V X5R",
     "x": 439.42,
     "y": 370.84,
     "kind": "C",
     "width": 6.35,
     "height": 2.54,
     "footprint": "Capacitor_SMD:C_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "CL10A105KB8NNNC",
+    "lcsc": "C15849",
     "note": "",
     "pins": [
       {
@@ -2086,15 +2104,15 @@
   },
   {
     "ref": "C16",
-    "value": "22uF 16V X7R",
+    "value": "22uF 25V X5R",
     "x": 534.67,
     "y": 370.84,
     "kind": "C",
     "width": 6.35,
     "height": 2.54,
     "footprint": "Capacitor_SMD:C_1206_3216Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "CL31A226KAHNNNE",
+    "lcsc": "C12891",
     "note": "Verify effective capacitance at 5 V.",
     "pins": [
       {
@@ -2126,8 +2144,8 @@
     "width": 6.35,
     "height": 2.54,
     "footprint": "Resistor_SMD:R_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "0603WAF1003T5E",
+    "lcsc": "C25803",
     "note": "",
     "pins": [
       {
@@ -2152,15 +2170,15 @@
   },
   {
     "ref": "C17",
-    "value": "100nF 16V X7R",
+    "value": "100nF 50V X7R",
     "x": 439.42,
     "y": 389.89,
     "kind": "C",
     "width": 6.35,
     "height": 2.54,
     "footprint": "Capacitor_SMD:C_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "CC0603KRX7R9BB104",
+    "lcsc": "C14663",
     "note": "",
     "pins": [
       {
@@ -2192,8 +2210,8 @@
     "width": 6.35,
     "height": 2.54,
     "footprint": "Resistor_SMD:R_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "0603WAF1001T5E",
+    "lcsc": "C21190",
     "note": "",
     "pins": [
       {
@@ -2218,15 +2236,15 @@
   },
   {
     "ref": "C18",
-    "value": "1nF 50V C0G",
+    "value": "1nF 50V X7R",
     "x": 539.75,
     "y": 350.52,
     "kind": "C",
     "width": 6.35,
     "height": 2.54,
     "footprint": "Capacitor_SMD:C_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "CL10B102KB8NNNC",
+    "lcsc": "C1588",
     "note": "",
     "pins": [
       {
@@ -2251,15 +2269,15 @@
   },
   {
     "ref": "C19",
-    "value": "1nF 50V C0G",
+    "value": "1nF 50V X7R",
     "x": 539.75,
     "y": 284.48,
     "kind": "C",
     "width": 6.35,
     "height": 2.54,
     "footprint": "Capacitor_SMD:C_0603_1608Metric",
-    "mpn": "",
-    "lcsc": "",
+    "mpn": "CL10B102KB8NNNC",
+    "lcsc": "C1588",
     "note": "",
     "pins": [
       {

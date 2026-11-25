@@ -102,7 +102,7 @@ for number,name in {2:'PD4 / D4',4:'VCC',6:'VCC',7:'PB6 / XTAL1',8:'PB7 / XTAL2'
 same('+5V',('U1',4),('U1',6),('U2',16),('U3',6),('U4',6),('U4',5))
 same('GND',('U1',3),('U1',5),('U1',21),('U2',1),('U2',9),('U2',15),('U3',7),('U4',2))
 same('VBUS',*[('J1',p) for p in ['A4','A9','B4','B9']],('F1',1),('U5',5))
-same('GND',*[('J1',p) for p in ['A1','A12','B1','B12','S1']])
+same('GND',*[('J1',p) for p in ['A1','A12','B1','B12','SH']])
 same('USB_DP',('J1','A6'),('J1','B6'),('U2',5),('U5',1),('U5',6))
 same('USB_DM',('J1','A7'),('J1','B7'),('U2',6),('U5',3),('U5',4))
 pair('R1','CC1','GND');pair('R2','CC2','GND')
@@ -164,7 +164,7 @@ results={
     'connected_pins':len(exported),
     'nets':len(set(exported.values())), 'unconnected_pins_with_markers':len(nc),
     'small_signal_gain_db_pwm_to_speaker':samples,
-    'not_run':['KiCad native ERC','PCB layout DRC','Circuit simulation','Physical measurements'],
+    'outside_this_check':['KiCad native ERC','PCB layout DRC','Circuit simulation','Physical measurements'],
 }
 (HERE/'checks.json').write_text(json.dumps(results,indent=2)+'\n')
 print(json.dumps(results,indent=2))

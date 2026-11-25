@@ -1,0 +1,1 @@
+(sym_lib_table (lib (name "Ara") (type "KiCad") (uri "${KIPRJMOD}/Ara.kicad_sym") (options "") (descr "Ara circuit symbols")))

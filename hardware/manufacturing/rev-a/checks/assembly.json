@@ -1,0 +1,10 @@
+{
+  "status": "PASS: 45 unique BOM and CPL references; corrected positions within board bounds; rotations normalized; reset diode polarity retained",
+  "fitted_components": 45,
+  "part_types": 27,
+  "corrected_cpl_sha256": "7671a25d3bd726a579668511dc0a535e439c7609eeba6595b0aa9345473d72c5",
+  "raw_kicad_cpl_sha256": "e160260e4292db12e0df885fe976c455679cf8e39b8b7f8114e376514269bde7",
+  "limitations": [
+    "The supplier CAD comparison establishes pin orientation and origins, not solder-land approval or physical operation."
+  ]
+}

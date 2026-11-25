@@ -1,0 +1,98 @@
+{
+  "source": "JLCEDA/EasyEDA Official Library",
+  "source_homepages": [
+    "https://lceda.cn/",
+    "https://easyeda.com/"
+  ],
+  "purpose": "Factory CPL rotations and origin offsets, fitted to numbered CAD pads. Does not change PCB copper or prove physical fit.",
+  "parts": {
+    "J3": {
+      "rotation": 180,
+      "offset_x_mm": 1.0,
+      "offset_y_mm": 0.0,
+      "max_pad_center_residual_mm": 0.0,
+      "matched_pad_contacts": 2,
+      "source": "https://easyeda.com/api/products/C173752/components?version=6.4.19.5"
+    },
+    "U5": {
+      "rotation": 270,
+      "offset_x_mm": -0.0,
+      "offset_y_mm": 0.0,
+      "max_pad_center_residual_mm": 0.0116,
+      "matched_pad_contacts": 6,
+      "source": "https://easyeda.com/api/products/C7519/components?version=6.4.19.5"
+    },
+    "D1": {
+      "rotation": 90,
+      "offset_x_mm": 0.0,
+      "offset_y_mm": 0.0,
+      "max_pad_center_residual_mm": 0.0424,
+      "matched_pad_contacts": 2,
+      "source": "https://easyeda.com/api/products/C2099/components?version=6.4.19.5"
+    },
+    "Y1": {
+      "rotation": 270,
+      "offset_x_mm": 0.0,
+      "offset_y_mm": 0.0,
+      "max_pad_center_residual_mm": 0.0011,
+      "matched_pad_contacts": 3,
+      "source": "https://easyeda.com/api/products/C341521/components?version=6.4.19.5"
+    },
+    "J2": {
+      "rotation": 270,
+      "offset_x_mm": 1.27,
+      "offset_y_mm": -2.54,
+      "max_pad_center_residual_mm": 0.0,
+      "matched_pad_contacts": 6,
+      "source": "https://easyeda.com/api/products/C42391443/components?version=6.4.19.5"
+    },
+    "U4": {
+      "rotation": 180,
+      "offset_x_mm": 0.0,
+      "offset_y_mm": 0.0,
+      "max_pad_center_residual_mm": 0.2125,
+      "matched_pad_contacts": 6,
+      "source": "https://easyeda.com/api/products/C131941/components?version=6.4.19.5"
+    },
+    "SW1": {
+      "rotation": 0,
+      "offset_x_mm": 0.0,
+      "offset_y_mm": 0.0,
+      "max_pad_center_residual_mm": 0.0251,
+      "matched_pad_contacts": 4,
+      "source": "https://easyeda.com/api/products/C139797/components?version=6.4.19.5"
+    },
+    "J1": {
+      "rotation": 270,
+      "offset_x_mm": 1.5709,
+      "offset_y_mm": 0.0,
+      "max_pad_center_residual_mm": 0.0501,
+      "matched_pad_contacts": 16,
+      "source": "https://easyeda.com/api/products/C165948/components?version=6.4.19.5"
+    },
+    "U3": {
+      "rotation": 270,
+      "offset_x_mm": 0.0,
+      "offset_y_mm": 0.0,
+      "max_pad_center_residual_mm": 0.2075,
+      "matched_pad_contacts": 8,
+      "source": "https://easyeda.com/api/products/C112137/components?version=6.4.19.5"
+    },
+    "U2": {
+      "rotation": 270,
+      "offset_x_mm": 0.0,
+      "offset_y_mm": 0.0,
+      "max_pad_center_residual_mm": 0.3975,
+      "matched_pad_contacts": 16,
+      "source": "https://easyeda.com/api/products/C84681/components?version=6.4.19.5"
+    },
+    "U1": {
+      "rotation": 270,
+      "offset_x_mm": -0.0,
+      "offset_y_mm": 0.0,
+      "max_pad_center_residual_mm": 0.219,
+      "matched_pad_contacts": 32,
+      "source": "https://easyeda.com/api/products/C14877/components?version=6.4.19.5"
+    }
+  }
+}

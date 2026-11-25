@@ -1,0 +1,41 @@
+{
+  "checked_on": "2026-11-25",
+  "currency": "USD",
+  "five": {
+    "pcb": 5.2,
+    "assembly": 72.72,
+    "total_before_shipping_tax_programming": 77.92,
+    "breakdown": {
+      "setup": 8.24,
+      "stencil": 1.55,
+      "components": 26.25,
+      "extended_components": 30.9,
+      "smt_assembly": 1.51,
+      "hand_soldering_labor": 3.61,
+      "manual_assembly": 0.66
+    }
+  },
+  "assembly": "Economic, top side, all 27 selected part types",
+  "status": "Quotation only. Corrected CPL uploaded and placement preview inspected. Final factory DFM approval, initial programming, shipping and taxes remain outstanding. No order placed.",
+  "ten": {
+    "pcb": 6.2,
+    "assembly": 95.61,
+    "total_before_shipping_tax_programming": 101.81,
+    "breakdown": {
+      "setup": 8.24,
+      "stencil": 1.55,
+      "components": 46.12,
+      "extended_components": 30.9,
+      "smt_assembly": 2.88,
+      "hand_soldering_labor": 3.61,
+      "manual_assembly": 1.32,
+      "nitrogen_reflow": 0.99
+    }
+  },
+  "placement_review": {
+    "checked_on": "2026-11-25",
+    "cpl_sha256": "7671a25d3bd726a579668511dc0a535e439c7609eeba6595b0aa9345473d72c5",
+    "method": "Supplier numbered-pad CAD comparison and final web preview inspection",
+    "final_ten_quote_reconfirmed": true
+  }
+}

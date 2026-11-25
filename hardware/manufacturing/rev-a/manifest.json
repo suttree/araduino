@@ -1,0 +1,53 @@
+{
+  "status": "Prototype quotation package. Corrected factory placement preview inspected on 2026-11-25. Physical operation and final factory DFM approval remain outstanding.",
+  "board_mm": {
+    "width": 65,
+    "height": 45,
+    "thickness": 1.6
+  },
+  "layers": 2,
+  "assembly_side": "Top",
+  "fitted_components_per_board": 45,
+  "unique_part_numbers": 27,
+  "native_checks": "Zero ERC, DRC, unconnected and schematic parity findings.",
+  "firmware_source_commit": "62b4f2b464a87f09c5f0e7d7d716d14462fdf0c6",
+  "firmware_source_sha256": {
+    "sketches/ara_birdsong/ara_birdsong.ino": "f8ccd813308b200e611c9470f782f21b220e140c58d37219597de5ef964f19aa",
+    "sketches/ara_birdsong/BirdVoice.h": "d25cb347689fdb1695700b7666a4b7dc1740ee3f818b358fc6c0e5ca86966a37"
+  },
+  "toolchain": "Arduino AVR 1.8.6; Mozzi 2.0.2; FixMath 1.0.7; arduino:avr:uno",
+  "files_sha256": {
+    "PROGRAMMING.md": "45373b25ebca36c3b13af536d090e5936132736a40e465028432322b5ac8c183",
+    "README.md": "bfa25f17cde1eba1ac8438b0f3cb34c4232878cd0fb0f69aa6ffba6a73bca253",
+    "TESTING.md": "8c0e9d3d5e114aa550ce1200477f1a441989250ec301a3e8157f2427e2dc4460",
+    "assembly.svg": "548b5089975e0c845553f5998f7d70c4a515cc83ebf633ad8db03ab0aef63aab",
+    "board-bottom.svg": "8f7a093d121ea4904a11d4e047a39d04a5c290a35a4d892a2e757cfbcb7d446b",
+    "board-outline.step": "d0dae97c5f84691853d6ee681449bf481dccfcadf2be1ca4cebc9a0eb3276123",
+    "board-top.png": "40403cb27387b17d6460eef4e7668aaf426754f68288170fffeb35be41f57d10",
+    "board-top.svg": "81ab48af6112897bdffa7e6caa7a86fe98db7aef2365baa2b81832a1e7316d65",
+    "bom.csv": "462661f1f2728adc30da9ee7d101632a88750f860807ec0d1394270e2cbc6494",
+    "checks/assembly.json": "be68bf3473c299dd8ceac5fb962b6a4af0f01f1b583f03492b257e016528d300",
+    "checks/drc.json": "73522f7b582706e09e4ded4f07f57a5e6a7a2ea221db2a2956d85228ec540964",
+    "checks/drill.txt": "864d53e7bc0c048a61e1cb33e0fa3010eaa7c2f39125ff155eede540cf938471",
+    "checks/erc.json": "b2ee7eb9dca1289646c378e82a2d6e4f2a35f6fcdad80abc6f9fa6d30580c1b8",
+    "checks/fabrication.json": "6aefe469a0f5d686e6ea9596ae7f59549a76b93ca45893802c488c737674d792",
+    "cpl-kicad.csv": "e160260e4292db12e0df885fe976c455679cf8e39b8b7f8114e376514269bde7",
+    "cpl.csv": "7671a25d3bd726a579668511dc0a535e439c7609eeba6595b0aa9345473d72c5",
+    "firmware/ara-birdsong-with-bootloader.hex": "cafedf57dff7f28c30ad42f7afd62f6a48cb662afc11dce2a4bee86eac1f4e5c",
+    "firmware/ara-birdsong.hex": "1b82be8d02c11aa6f5036bce22b38f065a331c79005c0f2bc4843f7db3c5899d",
+    "gerbers/ara-B_Cu.gbl": "023540c68b1c70a413fab92dc6a5b058e4c5bb975abaa73e98abc0839d448ba4",
+    "gerbers/ara-B_Mask.gbs": "ee5fa1eb18e57481497c09132aef1745ade3bdbbd4eb5c438c1a7d83d4870c70",
+    "gerbers/ara-B_Paste.gbp": "c8510b451bc9e03335a754b7917cfbb945eed50be9dbc141bcac061b738dea7a",
+    "gerbers/ara-B_Silkscreen.gbo": "358ebc01e301f238b3a905172fd94ef2013301856e3cb586e5104bbb9b85988e",
+    "gerbers/ara-Edge_Cuts.gm1": "4c6434e660ae870f396ca5d79f4a67c79641df5100ffdae91b83c50e6dd5c4f4",
+    "gerbers/ara-F_Cu.gtl": "629703a0fae9483bd1a5613d6d65f88cfdf910d0a236bab9453236b192690427",
+    "gerbers/ara-F_Mask.gts": "dba9bb070cfc02d2bf02eb3eee0b578432bdb55cc42ed3e993b51601fe89d223",
+    "gerbers/ara-F_Paste.gtp": "2ac754a9e48e0e2cfe9c4ad32b873ed62066be462c29c1d6afb2faa660a82db9",
+    "gerbers/ara-F_Silkscreen.gto": "5bba4b1b0ba4d8e91302db3983801c58e62d5d93357881163d769af4fd379930",
+    "gerbers/ara-NPTH.drl": "5926f1ae86776aade2e1d6c4b4a3beada55ec1882b97dfce1a29b07ada326c31",
+    "gerbers/ara-PTH.drl": "978d62cafbbe0cffd78ac9604525f1c13a1447e901405d70371b981e1ae05d20",
+    "gerbers/ara-job.gbrjob": "924e531b50f0325e4a3959b549a1bd4f036add0e804cf091444f5873c67863dd",
+    "gerbers.zip": "69bac46d7ef76e14307579520cd1fe805cd6d5b873dc30be127fffb89c5e27d8",
+    "schematic/ara.svg": "6660745db75393a1503d4184fcb8b645e4d965466ca6b1f21fc859e110e8596a"
+  }
+}

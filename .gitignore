@@ -3,3 +3,10 @@
 *.pyc
 araduino.log
 *~
+
+# KiCad user state and reproducible PCB intermediates
+*.kicad_prl
+*.kicad_pro.bak
+*-backups/
+~*.lck
+hardware/pcb/ara-unrouted.*

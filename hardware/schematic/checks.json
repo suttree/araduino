@@ -2,7 +2,7 @@
   "status": "PASS: connectivity and design-invariant checks; not KiCad ERC",
   "components": 49,
   "power_flags": 4,
-  "connected_pins": 149,
+  "connected_pins": 151,
   "nets": 36,
   "unconnected_pins_with_markers": 23,
   "small_signal_gain_db_pwm_to_speaker": {
@@ -13,7 +13,7 @@
     "10000": -28.35,
     "32768": -44.42
   },
-  "not_run": [
+  "outside_this_check": [
     "KiCad native ERC",
     "PCB layout DRC",
     "Circuit simulation",
