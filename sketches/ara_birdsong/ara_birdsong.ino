@@ -5,7 +5,8 @@ static_assert(AUDIO_RATE == 16384, "This voice requires 16384 Hz audio.");
 static_assert(MOZZI_AUDIO_BIAS == 244, "High gain requires the default Uno PWM output range.");
 static_assert(MOZZI_PWM_RATE == 32768, "High gain requires the default Uno PWM carrier rate.");
 constexpr uint16_t CONTROL_RATE_HZ = 256;
-constexpr unsigned long SING_ATTEMPT_INTERVAL_MS = 18UL * 60UL * 1000UL;
+constexpr unsigned long MIN_SING_ATTEMPT_INTERVAL_MS = 9UL * 60UL * 1000UL;
+constexpr unsigned long MAX_SING_ATTEMPT_INTERVAL_MS = 180UL * 60UL * 1000UL;
 // 100 is the original preview level. Use the Uno's wider PWM output range.
 constexpr uint16_t OUTPUT_GAIN_PERCENT = 350;
 // Disable the experimental noisy onset while testing physical playback.
@@ -19,14 +20,16 @@ constexpr uint8_t MIDDLE_REGISTER_WEIGHT = 5;
 constexpr uint8_t UPPER_REGISTER_WEIGHT = 1;
 ara::BirdVoice voice;
 unsigned long lastAttempt = 0;
+unsigned long attemptInterval = 0;
 
 void scheduleAttempt(unsigned long now) {
   lastAttempt = now;
+  attemptInterval = random(MIN_SING_ATTEMPT_INTERVAL_MS, MAX_SING_ATTEMPT_INTERVAL_MS + 1UL);
 }
 
 void updateControl() {
   const unsigned long now = millis();
-  if (!voice.busy() && now - lastAttempt >= SING_ATTEMPT_INTERVAL_MS) {
+  if (!voice.busy() && now - lastAttempt >= attemptInterval) {
     scheduleAttempt(now);
     if (random(2) == 0) voice.triggerRandom();
   }
