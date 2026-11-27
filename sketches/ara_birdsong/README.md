@@ -12,6 +12,12 @@ Held notes now last 88 to 120 control ticks, approximately 0.34 to 0.47 seconds.
 
 The 9 to 25 minute waits, 50% singing chance, 60% exact repeat versus 40% new second melody, startup song and 350% gain remain unchanged. This revision has not been uploaded to Ara.
 
+The [third reel](../../output/birdsong-session-20261127-reel3/ara-melody-session-b50c10a82ea5.mp3) demonstrates ten examples over approximately 57 seconds. The opening uses preferred contour 38; the fifth example's second phrase also uses contour 38. Held notes can be heard around 0:05.8, 0:26.5 and 0:37.9. All ten examples use the lower register in this seed, with six exact repeats and four new second melodies. The profile order remains illustrative. The adjacent CSV includes active pitch target ranges and repeat details. Its held duration column totals held time across both phrases, rather than measuring one uninterrupted note. Reproduce it with:
+
+```sh
+python3 tools/audio/render.py --session --seed 2026112703 --output output/birdsong-session-20261127-reel3
+```
+
 ## Shorter waits, fewer high songs and melody repeats, 27 November
 
 Ara now draws a fresh wait uniformly between 9 and 25 minutes before each attempt to sing, keeping the 50% chance of singing. The average gap between songs is 34 minutes. Skipped attempts can make the gap longer than 25 minutes. She still sings once on startup.
