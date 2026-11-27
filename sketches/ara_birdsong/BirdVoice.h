@@ -327,7 +327,7 @@ class BirdVoice {
   bool variableRegister = false;
   bool weightedRegisters = false, frequencyLimited = false;
   uint8_t registerChoices[3] = {13, 15, 17};
-  uint8_t registerWeights[3] = {75, 23, 2};
+  uint8_t registerWeights[3] = {60, 38, 2};
   uint8_t melodyVariant = 0;
   uint8_t recentMotifs[3] = {255, 255, 255};
   bool repeatMelody = true;

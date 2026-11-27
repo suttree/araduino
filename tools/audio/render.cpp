@@ -122,7 +122,7 @@ void renderMelodySession(const std::string &directory, uint32_t seed) {
   ara::BirdVoice voice(seed);
   voice.setGainPercent(350);
   voice.setNoisyOnsets(false);
-  voice.setRegisterChoices(13, 15, 17, 75, 23, 2);
+  voice.setRegisterChoices(13, 15, 17, 60, 38, 2);
   std::vector<int16_t> samples;
   unsigned frame = 0;
   auto step = [&]() {
@@ -273,7 +273,7 @@ int main(int argc, char **argv) {
   ara::BirdVoice mixedVoice(20261122);
   mixedVoice.setGainPercent(350);
   mixedVoice.setNoisyOnsets(false);
-  mixedVoice.setRegisterChoices(13, 15, 17, 75, 23, 2);
+  mixedVoice.setRegisterChoices(13, 15, 17, 60, 38, 2);
   unsigned profilesSeen = 0;
   uint8_t recentMotifs[3] = {255, 255, 255};
   uint64_t motifsSeen = 0;
@@ -374,7 +374,7 @@ int main(int argc, char **argv) {
   unsigned favouriteContours = 0, plainSongs = 0;
   for (unsigned seed = 1; seed <= 5000; ++seed) {
     ara::BirdVoice voice(seed);
-    voice.setRegisterChoices(13, 15, 17, 75, 23, 2);
+    voice.setRegisterChoices(13, 15, 17, 60, 38, 2);
     voice.trigger(ara::BirdVoice::Song);
     const unsigned motif = voice.selectedMotif();
     if (motif == 44 || motif == 38 || motif == 27) ++favouriteContours;
@@ -387,7 +387,7 @@ int main(int argc, char **argv) {
     randomVoice.triggerRandom();
     plainSongs += randomVoice.selectedProfile() == ara::BirdVoice::Song;
   }
-  if (choices[0] < 3600 || choices[0] > 3900 || choices[1] < 1000 || choices[1] > 1300
+  if (choices[0] < 2850 || choices[0] > 3150 || choices[1] < 1750 || choices[1] > 2050
       || choices[2] < 60 || choices[2] > 140)
     throw std::runtime_error("Weighted register distribution is outside its expected range");
   std::cout << "5000 register choices: " << choices[0] << ", " << choices[1] << ", " << choices[2] << "\n";
