@@ -122,7 +122,7 @@ void renderMelodySession(const std::string &directory, uint32_t seed) {
   ara::BirdVoice voice(seed);
   voice.setGainPercent(350);
   voice.setNoisyOnsets(false);
-  voice.setRegisterChoices(13, 15, 17, 44, 54, 2);
+  voice.setRegisterChoices(13, 15, 17, 75, 23, 2);
   std::vector<int16_t> samples;
   unsigned frame = 0;
   auto step = [&]() {
@@ -133,7 +133,7 @@ void renderMelodySession(const std::string &directory, uint32_t seed) {
     ++frame;
   };
   std::ofstream report(directory + "/melody-session.csv");
-  report << "song,start_seconds,duration_seconds,profile,motif,register,max_rendition,seed,held_start_seconds,held_duration_seconds,repeats_melody,second_start_seconds,second_motif\n";
+  report << "song,start_seconds,duration_seconds,profile,motif,register,max_rendition,seed,held_start_seconds,held_duration_seconds,repeats_melody,second_start_seconds,second_motif,min_hz,max_hz\n";
   // Showcase the melodic repertoire; this order is illustrative, not a random-frequency sample.
   const ara::BirdVoice::Profile examples[] = {ara::BirdVoice::Song, ara::BirdVoice::TrillSong,
       ara::BirdVoice::Song, ara::BirdVoice::TrillSong, ara::BirdVoice::Song,
@@ -147,10 +147,15 @@ void renderMelodySession(const std::string &directory, uint32_t seed) {
     unsigned maximumRendition = 0;
     unsigned heldStart = 0, heldFrames = 0;
     unsigned secondStart = 0;
+    unsigned minimumHz = 7000, maximumHz = 0;
     do {
       if (!secondStart && voice.currentRendition() == 2) secondStart = frame;
       if (voice.busy()) maximumRendition = std::max(maximumRendition, unsigned(voice.currentRendition()));
       step();
+      if (frame % 64 == 1 && voice.targetLevelQ8()) {
+        minimumHz = std::min(minimumHz, unsigned(voice.targetFrequencyHz()));
+        maximumHz = std::max(maximumHz, unsigned(voice.targetFrequencyHz()));
+      }
       if (voice.longNoteActive()) {
         if (!heldFrames) heldStart = frame - 1;
         ++heldFrames;
@@ -162,7 +167,8 @@ void renderMelodySession(const std::string &directory, uint32_t seed) {
            << ',' << int(profile) << ',' << motif << ',' << pitch << ',' << maximumRendition
            << ',' << seed << ',' << (heldFrames ? double(heldStart) / 16384 : -1)
            << ',' << double(heldFrames) / 16384 << ',' << voice.repeatsMelody()
-           << ',' << double(secondStart) / 16384 << ',' << unsigned(voice.selectedMotif()) << '\n';
+           << ',' << double(secondStart) / 16384 << ',' << unsigned(voice.selectedMotif())
+           << ',' << minimumHz << ',' << maximumHz << '\n';
     if (song < 9) for (unsigned gap = 0; gap < 2 * 16384; ++gap) step();
   }
   for (unsigned tail = 0; tail < 16384; ++tail) step();
@@ -267,7 +273,7 @@ int main(int argc, char **argv) {
   ara::BirdVoice mixedVoice(20261122);
   mixedVoice.setGainPercent(350);
   mixedVoice.setNoisyOnsets(false);
-  mixedVoice.setRegisterChoices(13, 15, 17, 44, 54, 2);
+  mixedVoice.setRegisterChoices(13, 15, 17, 75, 23, 2);
   unsigned profilesSeen = 0;
   uint8_t recentMotifs[3] = {255, 255, 255};
   uint64_t motifsSeen = 0;
@@ -307,6 +313,8 @@ int main(int argc, char **argv) {
       if (tick == 0 && mixedVoice.longNoteActive() != expectedOpening)
         throw std::runtime_error("Held-note opening did not match the selected phrase");
       if (mixedVoice.longNoteActive()) {
+        if (std::abs(int(mixedVoice.targetFrequencyHz()) - int(mixedVoice.longNoteAnchorHz())) > 30)
+          throw std::runtime_error("Held note drifted too far from its neighbouring note");
         ++heldUpdates;
         if (!heldPreviously) ++heldEvents;
       }
@@ -339,7 +347,7 @@ int main(int argc, char **argv) {
       throw std::runtime_error("Mixed voice did not finish cleanly");
     if (heldUpdates != totalHeldTicks || heldEvents != totalHeldEvents)
       throw std::runtime_error("Held gestures did not match the selected repeat or new melody");
-    if (expectedHeldTicks && (expectedHeldTicks < 112 || expectedHeldTicks > 168))
+    if (expectedHeldTicks && (expectedHeldTicks < 88 || expectedHeldTicks > 120))
       throw std::runtime_error("Held note duration is outside its intended range");
   }
   const unsigned songProfiles = (1u << ara::BirdVoice::Song) | (1u << ara::BirdVoice::TrillSong) | (1u << ara::BirdVoice::Cascade);
@@ -363,20 +371,30 @@ int main(int argc, char **argv) {
             << ", +17=" << registerCounts[2] << "; pitch limit used on " << limitedTicks
             << "/" << activeTicks << " active control ticks\n";
   unsigned choices[3] = {};
+  unsigned favouriteContours = 0, plainSongs = 0;
   for (unsigned seed = 1; seed <= 5000; ++seed) {
     ara::BirdVoice voice(seed);
-    voice.setRegisterChoices(13, 15, 17, 44, 54, 2);
+    voice.setRegisterChoices(13, 15, 17, 75, 23, 2);
     voice.trigger(ara::BirdVoice::Song);
+    const unsigned motif = voice.selectedMotif();
+    if (motif == 44 || motif == 38 || motif == 27) ++favouriteContours;
     const unsigned selected = voice.selectedRegister();
     if (selected == 13) ++choices[0];
     else if (selected == 15) ++choices[1];
     else if (selected == 17) ++choices[2];
     else throw std::runtime_error("Register choice is outside the requested set");
+    ara::BirdVoice randomVoice(seed);
+    randomVoice.triggerRandom();
+    plainSongs += randomVoice.selectedProfile() == ara::BirdVoice::Song;
   }
-  if (choices[0] < 2050 || choices[0] > 2350 || choices[1] < 2550 || choices[1] > 2850
+  if (choices[0] < 3600 || choices[0] > 3900 || choices[1] < 1000 || choices[1] > 1300
       || choices[2] < 60 || choices[2] > 140)
     throw std::runtime_error("Weighted register distribution is outside its expected range");
   std::cout << "5000 register choices: " << choices[0] << ", " << choices[1] << ", " << choices[2] << "\n";
+  if (favouriteContours < 1550 || favouriteContours > 1950 || plainSongs < 3100 || plainSongs > 3400)
+    throw std::runtime_error("Favourite contours or Song voice did not receive their intended weight");
+  std::cout << "5000 choices: " << favouriteContours << " favourite Song contours; "
+            << plainSongs << " Song voices in random selection\n";
   unsigned repeats = 0;
   for (unsigned seed = 1; seed <= 5000; ++seed) {
     ara::BirdVoice voice(seed);

@@ -11,12 +11,12 @@ constexpr unsigned long MAX_SING_ATTEMPT_INTERVAL_MS = 25UL * 60UL * 1000UL;
 constexpr uint16_t OUTPUT_GAIN_PERCENT = 350;
 // Disable the experimental noisy onset while testing physical playback.
 constexpr bool NOISY_ONSETS = false;
-// +2, +4 or +6 above the previous +11 upper register, weighted 44%, 54%, 2%.
+// +2, +4 or +6 above the previous +11 upper register, weighted 75%, 23%, 2%.
 constexpr uint8_t LOWER_REGISTER_SEMITONES = 13;
 constexpr uint8_t MIDDLE_REGISTER_SEMITONES = 15;
 constexpr uint8_t UPPER_REGISTER_SEMITONES = 17;
-constexpr uint8_t LOWER_REGISTER_WEIGHT = 44;
-constexpr uint8_t MIDDLE_REGISTER_WEIGHT = 54;
+constexpr uint8_t LOWER_REGISTER_WEIGHT = 75;
+constexpr uint8_t MIDDLE_REGISTER_WEIGHT = 23;
 constexpr uint8_t UPPER_REGISTER_WEIGHT = 2;
 ara::BirdVoice voice;
 unsigned long lastAttempt = 0;

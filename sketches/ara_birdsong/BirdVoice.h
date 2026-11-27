@@ -24,6 +24,10 @@ class BirdVoice {
   bool pitchWasLimited() const { return frequencyLimited; }
   bool longNoteActive() const { return heldActive; }
   uint8_t longNoteTicks() const { return heldSyllable == 255 ? 0 : heldTicks; }
+  uint16_t longNoteAnchorHz() const {
+    const uint16_t hz = (int32_t(heldPitch) * pitchScale + 500) / 1000;
+    return hz > 7000 ? 7000 : hz;
+  }
   bool startsWithLongNote() const { return heldSyllable == 0; }
   void setNoisyOnsets(bool enabled) { noisyOnsets = enabled; }
   void setGainPercent(uint16_t percent) {
@@ -98,9 +102,15 @@ class BirdVoice {
     count = profile >= Song ? 6 + pick(3) : profile == Soft ? 4 : 5;
     if (profile >= Song) {
       // Twelve contours, each available forwards/backwards and rising/falling.
-      melodyVariant = pick(48);
-      while (melodyVariant == recentMotifs[0] || melodyVariant == recentMotifs[1]
-             || melodyVariant == recentMotifs[2]) melodyVariant = (melodyVariant + 1) % 48;
+      // Weight the three liked contours, excluding recent ones before drawing.
+      uint16_t totalWeight = 0;
+      for (uint8_t variant = 0; variant < 48; ++variant) totalWeight += motifWeight(profile, variant);
+      uint16_t choice = pick(totalWeight);
+      for (uint8_t variant = 0; variant < 48; ++variant) {
+        const uint8_t weight = motifWeight(profile, variant);
+        if (choice < weight) { melodyVariant = variant; break; }
+        choice -= weight;
+      }
       recentMotifs[2] = recentMotifs[1];
       recentMotifs[1] = recentMotifs[0];
       recentMotifs[0] = melodyVariant;
@@ -113,9 +123,9 @@ class BirdVoice {
         } else {
           heldSyllable = 1 + pick(count - 1);
         }
-        heldTicks = 112 + pick(57);
-        heldDrift = int16_t(pick(91)) - 45;
-        heldBend = int16_t(pick(51)) - 25;
+        heldTicks = 88 + pick(33);
+        heldDrift = int16_t(pick(13)) - 6;
+        heldBend = int16_t(pick(7)) - 3;
       }
     }
     const uint8_t firstTrill = profile >= Song ? pick(count) : 0;
@@ -187,6 +197,10 @@ class BirdVoice {
         }
       }
     }
+    if (heldSyllable != 255) {
+      // Continue the previous note's landing pitch; openings borrow the next note.
+      heldPitch = heldSyllable ? motif[heldSyllable - 1].end : motif[1].start;
+    }
     index = second ? count : 0;
     age = 0;
     active = true;
@@ -216,7 +230,7 @@ class BirdVoice {
         hz += int32_t(s.bend) * 4 * t * (255 - t) / 65025;
       }
       if (holding) {
-        hz = s.start + int32_t(heldDrift) * t / 255;
+        hz = heldPitch + int32_t(heldDrift) * t / 255;
         hz += int32_t(heldBend) * 4 * t * (255 - t) / 65025;
       }
       uint8_t level = s.level;
@@ -313,13 +327,14 @@ class BirdVoice {
   bool variableRegister = false;
   bool weightedRegisters = false, frequencyLimited = false;
   uint8_t registerChoices[3] = {13, 15, 17};
-  uint8_t registerWeights[3] = {44, 54, 2};
+  uint8_t registerWeights[3] = {75, 23, 2};
   uint8_t melodyVariant = 0;
   uint8_t recentMotifs[3] = {255, 255, 255};
   bool repeatMelody = true;
   uint8_t endingStyle = 0, phraseBreath = 55;
   uint8_t heldSyllable = 255, heldTicks = 128;
   int8_t heldDrift = 0, heldBend = 0;
+  int16_t heldPitch = 0;
   bool heldActive = false;
   int32_t incrementDelta = 0;
   int16_t amplitude = 0, amplitudeTarget = 0, amplitudeDelta = 0;
@@ -327,9 +342,13 @@ class BirdVoice {
   uint16_t age = 0;
   Profile mode = Soft;
   bool active = false;
+  uint8_t motifWeight(Profile profile, uint8_t variant) const {
+    if (variant == recentMotifs[0] || variant == recentMotifs[1] || variant == recentMotifs[2]) return 0;
+    return profile == Song && (variant == 44 || variant == 38 || variant == 27) ? 8 : 1;
+  }
   Profile randomProfile() {
     const uint8_t choice = pick(100);
-    return choice < 45 ? Song : choice < 90 ? TrillSong : choice < 97 ? Cascade
+    return choice < 65 ? Song : choice < 90 ? TrillSong : choice < 97 ? Cascade
                                                                : static_cast<Profile>(pick(6));
   }
   uint16_t pick(uint16_t upper) {
