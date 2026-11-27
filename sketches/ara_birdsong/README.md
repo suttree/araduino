@@ -4,7 +4,7 @@ This sketch experiments with shaped whistles and repeated calls on the existing 
 
 ## Lower register reduced to 60%, 27 November
 
-The register probabilities are now 60% lower, 38% middle and 2% highest. Preferred contour weights, held-note adjustments and the 60% exact repeat versus 40% new second melody remain unchanged. This revision has not been uploaded. The third reel below preserves the preceding 75% lower-register audition.
+The register probabilities are now 60% lower, 38% middle and 2% highest. Preferred contour weights, held-note adjustments and the 60% exact repeat versus 40% new second melody remain unchanged. Firmware from commit `aedc8c3` was uploaded to Ara on 27 November 2026. avrdude verified all 9510 bytes by flash readback. Physical listening to this upload remains unconfirmed. The third reel below preserves the preceding 75% lower-register audition.
 
 The [fourth reel](../../output/birdsong-session-20261127-reel4/ara-melody-session-a8394568cc39.mp3) contains ten fresh examples over approximately 59 seconds at the new register weights. This seed gives seven lower-register and three middle-register songs, with five exact repeats and five new second melodies. The third and fifth examples start with preferred contours 38 and 27 in the lower register; the last starts with preferred contour 44 in the middle register. Held notes occur around 0:05.8, 0:18.2, 0:35.8 and 0:52.1. The adjacent CSV records pitch ranges and phrase details. Reproduce it with:
 
@@ -306,7 +306,7 @@ The MP3 files use the same output scale, without loudness normalization, reverb 
 
 ## Validation
 
-The current Uno firmware uses 9510 bytes of flash and 928 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. This revision has not been uploaded. Sustained runtime timing remains unmeasured. Earlier verified uploads are recorded in the dated sections above.
+The current Uno firmware uses 9510 bytes of flash and 928 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. Firmware from commit `aedc8c3` was uploaded on 27 November 2026 and all 9510 bytes were verified by flash readback. Physical listening to this upload remains unconfirmed. Sustained runtime timing remains unmeasured. Earlier verified uploads are recorded in the dated sections above.
 
 The desktop renderer runs with address and undefined-behavior sanitizers. It checks output range, phrase completion, return to silence and restart across 100 seeds for all nine voices, with both fixed and variable registers. These 1800 phrases exercise every register in the default range and check that the register remains fixed during each song. Older calls must finish within six seconds; the longer songs must finish within twelve seconds. The oscillator is limited to 7000 Hz, below the 8192 Hz Nyquist limit. These checks do not assess how natural the birdsong sounds.
 
