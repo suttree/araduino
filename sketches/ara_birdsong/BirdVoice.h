@@ -20,10 +20,11 @@ class BirdVoice {
       : rng(seed ? seed : 1), pitchScale(pitchScale) {}
   bool busy() const { return active; }
   uint16_t targetFrequencyHz() const { return incrementTarget >> 18; }
+  uint16_t targetLevelQ8() const { return amplitudeTarget; }
   bool pitchWasLimited() const { return frequencyLimited; }
   bool longNoteActive() const { return heldActive; }
   uint8_t longNoteTicks() const { return heldSyllable == 255 ? 0 : heldTicks; }
-  bool startsWithLongNote() const { return heldSyllable == 0 && heldRendition == 0; }
+  bool startsWithLongNote() const { return heldSyllable == 0; }
   void setNoisyOnsets(bool enabled) { noisyOnsets = enabled; }
   void setGainPercent(uint16_t percent) {
     // Uno PWM accepts almost nine bits, wider than the oscillator's table.
@@ -32,6 +33,7 @@ class BirdVoice {
   }
   Profile selectedProfile() const { return mode; }
   uint8_t selectedMotif() const { return mode >= Song ? melodyVariant : 255; }
+  bool repeatsMelody() const { return repeatMelody; }
   uint8_t selectedRenditions() const { return 2; }
   uint8_t currentRendition() const { return count ? index / count + 1 : 0; }
   void triggerRandom() {
@@ -66,7 +68,12 @@ class BirdVoice {
   uint8_t selectedRegister() const { return selectedSemitones; }
   void trigger(Profile profile) {
     if (active) return;
-    if (variableRegister) {
+    repeatMelody = pick(5) < 3;
+    beginPhrase(profile, false);
+  }
+ private:
+  void beginPhrase(Profile profile, bool second) {
+    if (variableRegister && !second) {
       if (weightedRegisters) {
         const uint16_t total = uint16_t(registerWeights[0]) + registerWeights[1] + registerWeights[2];
         const uint16_t choice = pick(total);
@@ -97,20 +104,14 @@ class BirdVoice {
       recentMotifs[2] = recentMotifs[1];
       recentMotifs[1] = recentMotifs[0];
       recentMotifs[0] = melodyVariant;
-      phraseOrder = pick(4);
-      answerTempo = 90 + pick(21);
-      answerTranspose = int16_t(pick(241)) - 120;
       endingStyle = pick(4);
-      answerEnding = pick(3);
       phraseBreath = 20 + pick(65);
-      // One held gesture in roughly three out of ten melodic songs, in either rendition.
+      // A held gesture in roughly three out of ten melodic phrases.
       if ((profile == Song || profile == TrillSong) && pick(10) < 3) {
         if (pick(3) == 0) {
           heldSyllable = 0;
-          heldRendition = 0;
         } else {
-          heldRendition = pick(2);
-          heldSyllable = heldRendition == 0 ? 1 + pick(count - 1) : pick(count);
+          heldSyllable = 1 + pick(count - 1);
         }
         heldTicks = 112 + pick(57);
         heldDrift = int16_t(pick(91)) - 45;
@@ -120,7 +121,6 @@ class BirdVoice {
     const uint8_t firstTrill = profile >= Song ? pick(count) : 0;
     const uint8_t secondTrill = profile >= Song ? (firstTrill + 2 + pick(count - 2)) % count : 0;
     uint8_t groupRemaining = profile >= Song ? 1 + pick(4) : 1;
-    uint8_t answerGroupRemaining = profile >= Song ? 1 + pick(4) : 1;
     const uint8_t cascadeStep = profile >= Song ? 70 + pick(61) : 100;
     const int base = 1850 + pick(650);
     for (uint8_t i = 0; i < count; ++i) {
@@ -185,41 +185,23 @@ class BirdVoice {
           if (endingStyle == 1) { s.ticks = 24 + pick(24); s.trill = false; s.tailStyle = 2; }
           if (endingStyle == 2) { s.ticks = 48 + pick(48); s.trill = true; }
         }
-        // Each answering syllable gets its own timing, not just a global tempo shift.
-        s.answerTicks = (uint16_t(s.ticks) * (70 + pick(61)) + 50) / 100;
-        if (s.answerTicks > 140) s.answerTicks = 140;
-        if (--answerGroupRemaining == 0) {
-          s.answerGap = 18 + pick(29);
-          answerGroupRemaining = 1 + pick(4);
-        } else s.answerGap = 2 + pick(9);
       }
     }
-    index = 0;
+    index = second ? count : 0;
     age = 0;
-    repeatShift = pick(61) - 30;
     active = true;
   }
+ public:
   void control() {
     frequencyLimited = false;
     heldActive = false;
     if (!active) { ramp(0, increment); return; }
     uint8_t syllable = index % count;
-    if (mode >= Song && index >= count) {
-      if (phraseOrder == 1) syllable = (syllable + count / 2) % count;
-      if (phraseOrder == 2 && syllable >= count - 2)
-        syllable = count * 2 - 3 - syllable;
-      if (phraseOrder == 3 && (syllable % 2 || syllable + 1 < count)) syllable ^= 1;
-    }
     const Syllable &s = motif[syllable];
-    const bool answering = mode >= Song && index >= count;
-    const bool holding = mode >= Song && syllable == heldSyllable && index / count == heldRendition;
-    uint16_t ticks = answering ? (uint16_t(s.answerTicks) * answerTempo + 50) / 100 : s.ticks;
-    const uint16_t gap = answering ? (uint16_t(s.answerGap) * answerTempo + 50) / 100 : s.gap;
+    const bool holding = mode >= Song && syllable == heldSyllable;
+    uint16_t ticks = s.ticks;
+    const uint16_t gap = s.gap;
     uint8_t tailStyle = s.tailStyle;
-    if (answering && index % count == count - 1) {
-      if (answerEnding == 0) { if (ticks > 24) ticks = 24; tailStyle = 1; }
-      if (answerEnding == 1) tailStyle = 2;
-    }
     if (holding) { ticks = heldTicks; tailStyle = 0; }
     if (age < ticks) {
       heldActive = holding;
@@ -237,8 +219,6 @@ class BirdVoice {
         hz = s.start + int32_t(heldDrift) * t / 255;
         hz += int32_t(heldBend) * 4 * t * (255 - t) / 65025;
       }
-      if (index >= count) hz += repeatShift;
-      if (answering) hz += answerTranspose;
       uint8_t level = s.level;
       if (holding) level = uint16_t(level) * 88 / 100;
       const uint8_t attack = holding ? 6 : mode >= Song ? 2 : mode >= Chirps ? 1 : mode == Soft ? 7 : 4;
@@ -277,7 +257,11 @@ class BirdVoice {
         ? (mode >= Song ? phraseBreath : 90) : 0;
     if (++age >= ticks + gap + breath) {
       age = 0;
-      if (++index == count * renditions) active = false;
+      ++index;
+      if (index == count && !repeatMelody) {
+        // Generate a fresh melody without changing the voice or register.
+        beginPhrase(mode, true);
+      } else if (index == count * renditions) active = false;
     }
   }
   int16_t audio() {
@@ -316,7 +300,7 @@ class BirdVoice {
     uint8_t ticks, gap, level;
     bool trill;
     uint8_t trillRate;
-    uint8_t answerTicks, answerGap, tailStyle;
+    uint8_t tailStyle;
   } motif[8] = {};
   uint32_t rng, phase = 0, increment = 0, incrementTarget = 0;
   uint16_t pitchScale;
@@ -329,20 +313,18 @@ class BirdVoice {
   bool variableRegister = false;
   bool weightedRegisters = false, frequencyLimited = false;
   uint8_t registerChoices[3] = {13, 15, 17};
-  uint8_t registerWeights[3] = {4, 5, 1};
+  uint8_t registerWeights[3] = {44, 54, 2};
   uint8_t melodyVariant = 0;
   uint8_t recentMotifs[3] = {255, 255, 255};
-  uint8_t phraseOrder = 0, answerTempo = 100;
-  uint8_t endingStyle = 0, answerEnding = 0, phraseBreath = 55;
-  uint8_t heldSyllable = 255, heldRendition = 0, heldTicks = 128;
+  bool repeatMelody = true;
+  uint8_t endingStyle = 0, phraseBreath = 55;
+  uint8_t heldSyllable = 255, heldTicks = 128;
   int8_t heldDrift = 0, heldBend = 0;
   bool heldActive = false;
-  int16_t answerTranspose = 0;
   int32_t incrementDelta = 0;
   int16_t amplitude = 0, amplitudeTarget = 0, amplitudeDelta = 0;
   uint8_t remaining = 0, count = 0, index = 0;
   uint16_t age = 0;
-  int16_t repeatShift = 0;
   Profile mode = Soft;
   bool active = false;
   Profile randomProfile() {

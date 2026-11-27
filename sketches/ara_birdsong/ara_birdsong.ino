@@ -6,18 +6,18 @@ static_assert(MOZZI_AUDIO_BIAS == 244, "High gain requires the default Uno PWM o
 static_assert(MOZZI_PWM_RATE == 32768, "High gain requires the default Uno PWM carrier rate.");
 constexpr uint16_t CONTROL_RATE_HZ = 256;
 constexpr unsigned long MIN_SING_ATTEMPT_INTERVAL_MS = 9UL * 60UL * 1000UL;
-constexpr unsigned long MAX_SING_ATTEMPT_INTERVAL_MS = 30UL * 60UL * 1000UL;
+constexpr unsigned long MAX_SING_ATTEMPT_INTERVAL_MS = 25UL * 60UL * 1000UL;
 // 100 is the original preview level. Use the Uno's wider PWM output range.
 constexpr uint16_t OUTPUT_GAIN_PERCENT = 350;
 // Disable the experimental noisy onset while testing physical playback.
 constexpr bool NOISY_ONSETS = false;
-// +2, +4 or +6 above the previous +11 upper register, weighted 40%, 50%, 10%.
+// +2, +4 or +6 above the previous +11 upper register, weighted 44%, 54%, 2%.
 constexpr uint8_t LOWER_REGISTER_SEMITONES = 13;
 constexpr uint8_t MIDDLE_REGISTER_SEMITONES = 15;
 constexpr uint8_t UPPER_REGISTER_SEMITONES = 17;
-constexpr uint8_t LOWER_REGISTER_WEIGHT = 4;
-constexpr uint8_t MIDDLE_REGISTER_WEIGHT = 5;
-constexpr uint8_t UPPER_REGISTER_WEIGHT = 1;
+constexpr uint8_t LOWER_REGISTER_WEIGHT = 44;
+constexpr uint8_t MIDDLE_REGISTER_WEIGHT = 54;
+constexpr uint8_t UPPER_REGISTER_WEIGHT = 2;
 ara::BirdVoice voice;
 unsigned long lastAttempt = 0;
 unsigned long attemptInterval = 0;

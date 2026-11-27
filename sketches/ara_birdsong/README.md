@@ -2,6 +2,16 @@
 
 This sketch experiments with shaped whistles and repeated calls on the existing Uno hardware. The working sketch at `../araduino/araduino.ino` remains separate.
 
+## Shorter waits, fewer high songs and melody repeats, 27 November
+
+Ara now draws a fresh wait uniformly between 9 and 25 minutes before each attempt to sing, keeping the 50% chance of singing. The average gap between songs is 34 minutes. Skipped attempts can make the gap longer than 25 minutes. She still sings once on startup.
+
+The register weights are now 44% lower, 54% middle and 2% highest. The highest register was previously a 10% choice. Gain remains 350%.
+
+Each song has a 60% chance of repeating its first melody exactly, including note order, pitch, rhythm, trills, ending and held notes. The other 40% generates a fresh second melody in the same voice and register, avoiding the last three contours. Every song still contains two phrases. The earlier answering-phrase transformations have been removed. A held note in a repeated melody now occurs in both phrases; a new second melody chooses its own held-note gesture.
+
+This revision has not been uploaded to Ara. Earlier recordings below retain their original settings.
+
 ## Random waits of 9 to 30 minutes, 26 November
 
 Ara now draws a fresh wait uniformly between 9 and 30 minutes before each attempt to sing. Each attempt has a 50% chance of starting a song. After every attempt, including a skipped one, she draws another wait. She still sings once on startup.
@@ -200,12 +210,12 @@ The firmware chooses one of three registers per song. These constants near the t
 constexpr uint8_t LOWER_REGISTER_SEMITONES = 13;
 constexpr uint8_t MIDDLE_REGISTER_SEMITONES = 15;
 constexpr uint8_t UPPER_REGISTER_SEMITONES = 17;
-constexpr uint8_t LOWER_REGISTER_WEIGHT = 4;
-constexpr uint8_t MIDDLE_REGISTER_WEIGHT = 5;
-constexpr uint8_t UPPER_REGISTER_WEIGHT = 1;
+constexpr uint8_t LOWER_REGISTER_WEIGHT = 44;
+constexpr uint8_t MIDDLE_REGISTER_WEIGHT = 54;
+constexpr uint8_t UPPER_REGISTER_WEIGHT = 2;
 ```
 
-These are the auditioned two, four and six semitones above the preceding +11 upper register. Their probabilities are 40%, 50% and 10% respectively. Ara keeps the chosen register through the whole song and every repeat. `setRegisterChoices()` accepts the three registers and their relative weights; all-zero weights fall back to equal probabilities. The supported pitch table now covers 0 through 17 semitones. Out-of-range register values clamp to 17. The older `setRegisterRange()` method remains available for an equally weighted inclusive range.
+These are the auditioned two, four and six semitones above the preceding +11 upper register. Their probabilities are now 44%, 54% and 2% respectively. Ara keeps the chosen register through the whole song and every repeat. `setRegisterChoices()` accepts the three registers and their relative weights; all-zero weights fall back to equal probabilities. The supported pitch table now covers 0 through 17 semitones. Out-of-range register values clamp to 17. The older `setRegisterRange()` method remains available for an equally weighted inclusive range.
 
 Random motifs can exceed the pitch targets in the fixed auditions. The engine retains its 7000 Hz frequency limit; in the latest 200-song check it limited 831 of 191459 active control updates, approximately 0.4%. Those parts of the pitch contour flatten at the limit. This is not a claim of unlimited pitch headroom.
 
@@ -258,11 +268,13 @@ The MP3 files use the same output scale, without loudness normalization, reverb 
 
 ## Validation
 
-The Uno firmware uses 10162 bytes of flash and 949 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. The preceding variety revision was uploaded on 23 November 2026 and verified by flash readback. The current 350% version with a two-rendition maximum, melody-focused selection, looser cadence and shorter held notes including openings was uploaded on 24 November 2026 from commit `3ded42e`. avrdude verified all 10162 bytes by flash readback. Physical listening to this upload remains unconfirmed. Sustained runtime timing remains unmeasured.
+The current Uno firmware uses 9274 bytes of flash and 926 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. This revision has not been uploaded. Sustained runtime timing remains unmeasured. Earlier verified uploads are recorded in the dated sections above.
 
 The desktop renderer runs with address and undefined-behavior sanitizers. It checks output range, phrase completion, return to silence and restart across 100 seeds for all nine voices, with both fixed and variable registers. These 1800 phrases exercise every register in the default range and check that the register remains fixed during each song. Older calls must finish within six seconds; the longer songs must finish within twelve seconds. The oscillator is limited to 7000 Hz, below the 8192 Hz Nyquist limit. These checks do not assess how natural the birdsong sounds.
 
-An additional sequence of 200 random songs at 350% gain produced 183 melody/trill songs and six short calls, and exercised 47 melodic contour variations. Sixty-two songs included a held note, with 21 opening on it. The check measures active duration, requires exactly one held event in each selected song, verifies the 112 to 168 tick range and checks that planned openings are active at the start of the song. It also checks that none of the last three contours recurs, that voice, motif and register remain fixed during a song, that no motif plays more than twice, and that every song completes and returns to silence. The 7000 Hz limit and PWM bounds are checked. The measured output peak is 210 against a bias of 244. Register counts were 73, 106 and 21. A separate check of 5000 initial song choices selected registers 13, 15 and 17 respectively 1960, 2550 and 490 times, approximately 39%, 51% and 10%. Further comparisons at gains of 500 and 65535 check that excessive requests clamp without wrapping.
+The current sequence of 200 random songs at 350% gain produced 167 melody/trill songs and 15 short calls, and exercised all 48 melodic contour variations. Forty-eight first phrases contained a held note, with 15 opening on it. Held notes are checked against the chosen repeat or new melody behavior, including both occurrences in an exact repeat. Voice and register must remain fixed through both phrases. New contours must avoid the last three; songs must finish and return to silence. The measured output peak was 213 against a bias of 244. The 7000 Hz limit was reached on 592 of 192516 active control updates.
+
+A separate check of 5000 initial song choices selected registers 13, 15 and 17 respectively 2210, 2688 and 102 times, approximately 44%, 54% and 2%. Across 5000 song choices, 3020 selected exact repeats, approximately 60%. An additional 1800 melody-pair comparisons check that repeats preserve pitch, level, rhythm and held gestures at every control update, while new second melodies differ. Both phrases must finish within the existing duration limit. Further comparisons at gains of 500 and 65535 check that excessive requests clamp without wrapping.
 
 A one-off comparison against the preceding engine checked 589824 samples across all six voices at each of 100%, 125%, 150%, 175% and 200% gain. Every sample matched. Other percentage settings use a rounded fixed-point multiplier and can differ slightly. `tools/audio/check_avr_audio.py --compiler /path/to/avr-g++` compiles a sample wrapper for ATmega328P and rejects division helper calls in its assembly. This guards against the expensive arithmetic returning; it does not measure actual buffer underruns.
 

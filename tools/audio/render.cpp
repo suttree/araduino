@@ -1,5 +1,6 @@
 #include <cmath>
 #include <algorithm>
+#include <array>
 #include <cstdint>
 #include <fstream>
 #include <iostream>
@@ -121,7 +122,7 @@ void renderMelodySession(const std::string &directory, uint32_t seed) {
   ara::BirdVoice voice(seed);
   voice.setGainPercent(350);
   voice.setNoisyOnsets(false);
-  voice.setRegisterChoices(13, 15, 17, 4, 5, 1);
+  voice.setRegisterChoices(13, 15, 17, 44, 54, 2);
   std::vector<int16_t> samples;
   unsigned frame = 0;
   auto step = [&]() {
@@ -263,7 +264,7 @@ int main(int argc, char **argv) {
   ara::BirdVoice mixedVoice(20261122);
   mixedVoice.setGainPercent(350);
   mixedVoice.setNoisyOnsets(false);
-  mixedVoice.setRegisterChoices(13, 15, 17, 4, 5, 1);
+  mixedVoice.setRegisterChoices(13, 15, 17, 44, 54, 2);
   unsigned profilesSeen = 0;
   uint8_t recentMotifs[3] = {255, 255, 255};
   uint64_t motifsSeen = 0;
@@ -275,11 +276,13 @@ int main(int argc, char **argv) {
     unsigned heldUpdates = 0, heldEvents = 0;
     bool heldPreviously = false;
     const unsigned expectedHeldTicks = mixedVoice.longNoteTicks();
+    unsigned totalHeldTicks = expectedHeldTicks * (mixedVoice.repeatsMelody() ? 2 : 1);
+    unsigned totalHeldEvents = expectedHeldTicks ? (mixedVoice.repeatsMelody() ? 2 : 1) : 0;
     const bool expectedOpening = mixedVoice.startsWithLongNote();
     if (expectedOpening) ++heldOpenings;
     if (expectedHeldTicks) ++songsWithHeldNotes;
     const auto profile = mixedVoice.selectedProfile();
-    const uint8_t motif = mixedVoice.selectedMotif();
+    uint8_t motif = mixedVoice.selectedMotif();
     if (profile >= ara::BirdVoice::Song) {
       if (motif >= 48 || motif == recentMotifs[0] || motif == recentMotifs[1] || motif == recentMotifs[2])
         throw std::runtime_error("Song contour repeated or was outside the repertoire");
@@ -310,8 +313,17 @@ int main(int argc, char **argv) {
       if (mixedVoice.busy()) ++activeTicks;
       if (mixedVoice.pitchWasLimited()) ++limitedTicks;
       if (mixedVoice.targetFrequencyHz() > 7000) throw std::runtime_error("Pitch exceeds frequency limit");
-      if (mixedVoice.selectedProfile() != profile || mixedVoice.selectedRegister() != selected
-          || mixedVoice.selectedMotif() != motif)
+      if (mixedVoice.selectedMotif() != motif) {
+        if (mixedVoice.repeatsMelody() || mixedVoice.currentRendition() != 2)
+          throw std::runtime_error("Melody changed outside the new second phrase");
+        motif = mixedVoice.selectedMotif();
+        if (motif >= 48 || motif == recentMotifs[0] || motif == recentMotifs[1] || motif == recentMotifs[2])
+          throw std::runtime_error("Second melody reused a recent contour");
+        recentMotifs[2] = recentMotifs[1]; recentMotifs[1] = recentMotifs[0]; recentMotifs[0] = motif;
+        totalHeldTicks += mixedVoice.longNoteTicks();
+        totalHeldEvents += mixedVoice.longNoteTicks() ? 1 : 0;
+      }
+      if (mixedVoice.selectedProfile() != profile || mixedVoice.selectedRegister() != selected)
         throw std::runtime_error("Voice or register changed within a song");
       for (unsigned frame = 0; frame < 64; ++frame) {
         const int output = std::abs(int(mixedVoice.audio()));
@@ -322,8 +334,8 @@ int main(int argc, char **argv) {
     }
     if (mixedVoice.busy() || mixedVoice.audio() != 0)
       throw std::runtime_error("Mixed voice did not finish cleanly");
-    if (heldUpdates != expectedHeldTicks || heldEvents != (expectedHeldTicks ? 1u : 0u))
-      throw std::runtime_error("Held note was missing, shortened or repeated");
+    if (heldUpdates != totalHeldTicks || heldEvents != totalHeldEvents)
+      throw std::runtime_error("Held gestures did not match the selected repeat or new melody");
     if (expectedHeldTicks && (expectedHeldTicks < 112 || expectedHeldTicks > 168))
       throw std::runtime_error("Held note duration is outside its intended range");
   }
@@ -342,7 +354,7 @@ int main(int argc, char **argv) {
     throw std::runtime_error("Held-note placement lacks a mix of openings and later notes");
   std::cout << "Passed 200 random songs at 350% gain: " << melodicSongs << " melody/trill, "
             << 200 - longerSongs << " shorter calls, " << motifCount << " contours, peak " << mixedPeak << "/244\n";
-  std::cout << songsWithHeldNotes << "/200 songs had exactly one held gesture each; "
+  std::cout << songsWithHeldNotes << "/200 songs began with a phrase containing a held gesture; "
             << heldOpenings << " opened with it\n";
   std::cout << "Weighted registers: +13=" << registerCounts[0] << ", +15=" << registerCounts[1]
             << ", +17=" << registerCounts[2] << "; pitch limit used on " << limitedTicks
@@ -350,7 +362,7 @@ int main(int argc, char **argv) {
   unsigned choices[3] = {};
   for (unsigned seed = 1; seed <= 5000; ++seed) {
     ara::BirdVoice voice(seed);
-    voice.setRegisterChoices(13, 15, 17, 4, 5, 1);
+    voice.setRegisterChoices(13, 15, 17, 44, 54, 2);
     voice.trigger(ara::BirdVoice::Song);
     const unsigned selected = voice.selectedRegister();
     if (selected == 13) ++choices[0];
@@ -358,10 +370,45 @@ int main(int argc, char **argv) {
     else if (selected == 17) ++choices[2];
     else throw std::runtime_error("Register choice is outside the requested set");
   }
-  if (choices[0] < 1900 || choices[0] > 2100 || choices[1] < 2400 || choices[1] > 2600
-      || choices[2] < 400 || choices[2] > 600)
+  if (choices[0] < 2050 || choices[0] > 2350 || choices[1] < 2550 || choices[1] > 2850
+      || choices[2] < 60 || choices[2] > 140)
     throw std::runtime_error("Weighted register distribution is outside its expected range");
   std::cout << "5000 register choices: " << choices[0] << ", " << choices[1] << ", " << choices[2] << "\n";
+  unsigned repeats = 0;
+  for (unsigned seed = 1; seed <= 5000; ++seed) {
+    ara::BirdVoice voice(seed);
+    voice.trigger(ara::BirdVoice::Song);
+    repeats += voice.repeatsMelody();
+  }
+  if (repeats < 2850 || repeats > 3150)
+    throw std::runtime_error("Repeat probability differs from the requested 60 percent");
+  for (unsigned seed = 1; seed <= 200; ++seed) {
+    for (unsigned profile = 0; profile < ara::BirdVoice::ProfileCount; ++profile) {
+      ara::BirdVoice voice(seed);
+      voice.trigger(static_cast<ara::BirdVoice::Profile>(profile));
+      const bool repeat = voice.repeatsMelody();
+      const unsigned firstMotif = voice.selectedMotif();
+      std::vector<std::array<uint16_t, 3>> phrases[2];
+      for (unsigned tick = 0; voice.busy() && tick < 12 * 256; ++tick) {
+        const unsigned rendition = voice.currentRendition();
+        voice.control();
+        phrases[rendition - 1].push_back({{voice.targetFrequencyHz(), voice.targetLevelQ8(), voice.longNoteActive()}});
+        for (unsigned frame = 0; frame < 64; ++frame) voice.audio();
+      }
+      if (voice.busy()) throw std::runtime_error("Pair exceeded its duration limit");
+      // The breath between phrases is longer than the final silent tail.
+      for (auto &phrase : phrases)
+        while (!phrase.empty() && phrase.back()[1] == 0) phrase.pop_back();
+      if (phrases[0].empty() || phrases[1].empty())
+        throw std::runtime_error("Missing rendition in melody pair");
+      if (repeat && phrases[0] != phrases[1])
+        throw std::runtime_error("Repeat changed pitch, timing, level or held gestures");
+      if (!repeat && (phrases[0] == phrases[1]
+          || (profile >= ara::BirdVoice::Song && firstMotif == voice.selectedMotif())))
+        throw std::runtime_error("New second melody duplicated the first");
+    }
+  }
+  std::cout << "Passed 1800 melody-pair comparisons; " << repeats << "/5000 choices repeated exactly\n";
   // Requests beyond the gain limit must clamp, rather than wrap at 8 bits.
   for (int profile = 0; profile < ara::BirdVoice::ProfileCount; ++profile) {
     ara::BirdVoice maximum(20261122), excessive(20261122);
