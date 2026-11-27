@@ -16,6 +16,12 @@ The [new demo reel](../../output/birdsong-session-20261127/ara-melody-session-ef
 python3 tools/audio/render.py --session --seed 20261127 --output output/birdsong-session-20261127
 ```
 
+The [second reel](../../output/birdsong-session-20261127-reel2/ara-melody-session-c607294ce083.mp3) contains ten fresh examples over approximately 57 seconds. Six repeat exactly and four play a new second melody. The opening example changes melody around 0:02.8; the next example starts around 0:06.8 and repeats around 0:09.2. This seed also contains only lower and middle registers. Reproduce it with:
+
+```sh
+python3 tools/audio/render.py --session --seed 2026112702 --output output/birdsong-session-20261127-reel2
+```
+
 This revision has not been uploaded to Ara. Earlier recordings below retain their original settings.
 
 ## Random waits of 9 to 30 minutes, 26 November
