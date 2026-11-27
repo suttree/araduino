@@ -6,6 +6,12 @@ This sketch experiments with shaped whistles and repeated calls on the existing 
 
 The register probabilities are now 60% lower, 38% middle and 2% highest. Preferred contour weights, held-note adjustments and the 60% exact repeat versus 40% new second melody remain unchanged. This revision has not been uploaded. The third reel below preserves the preceding 75% lower-register audition.
 
+The [fourth reel](../../output/birdsong-session-20261127-reel4/ara-melody-session-a8394568cc39.mp3) contains ten fresh examples over approximately 59 seconds at the new register weights. This seed gives seven lower-register and three middle-register songs, with five exact repeats and five new second melodies. The third and fifth examples start with preferred contours 38 and 27 in the lower register; the last starts with preferred contour 44 in the middle register. Held notes occur around 0:05.8, 0:18.2, 0:35.8 and 0:52.1. The adjacent CSV records pitch ranges and phrase details. Reproduce it with:
+
+```sh
+python3 tools/audio/render.py --session --seed 2026112704 --output output/birdsong-session-20261127-reel4
+```
+
 ## Favour lower songs and steadier held notes, 27 November
 
 The owner preferred examples three and ten in the second reel. Both use the Song voice in register 13, the lower register. Their active pitch targets span 2818 to 4990 Hz and 3015 to 5524 Hz respectively. Example three repeats contour 44. Example ten uses contour 38 followed by contour 27. These are generated gliding melodies, so each has a range of frequencies rather than one fixed note.
