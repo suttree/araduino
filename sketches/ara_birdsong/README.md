@@ -10,6 +10,12 @@ The register weights are now 44% lower, 54% middle and 2% highest. The highest r
 
 Each song has a 60% chance of repeating its first melody exactly, including note order, pitch, rhythm, trills, ending and held notes. The other 40% generates a fresh second melody in the same voice and register, avoiding the last three contours. Every song still contains two phrases. The earlier answering-phrase transformations have been removed. A held note in a repeated melody now occurs in both phrases; a new second melody chooses its own held-note gesture.
 
+The [new demo reel](../../output/birdsong-session-20261127/ara-melody-session-ef25b4205a5c.mp3) contains ten examples over approximately 58 seconds, with two seconds between songs. Five repeat exactly and five play a new second melody. The first three examples repeat; the fourth, starting around 0:18.4, introduces a new second melody around 0:21.9. This seed contains only lower and middle registers. The small sample does not measure the 60% repeat probability or 2% highest-register probability. The adjacent `melody-session.csv` records repeat choices and second-phrase start times. Reproduce it with:
+
+```sh
+python3 tools/audio/render.py --session --seed 20261127 --output output/birdsong-session-20261127
+```
+
 This revision has not been uploaded to Ara. Earlier recordings below retain their original settings.
 
 ## Random waits of 9 to 30 minutes, 26 November

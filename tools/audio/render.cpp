@@ -133,7 +133,7 @@ void renderMelodySession(const std::string &directory, uint32_t seed) {
     ++frame;
   };
   std::ofstream report(directory + "/melody-session.csv");
-  report << "song,start_seconds,duration_seconds,profile,motif,register,max_rendition,seed,held_start_seconds,held_duration_seconds\n";
+  report << "song,start_seconds,duration_seconds,profile,motif,register,max_rendition,seed,held_start_seconds,held_duration_seconds,repeats_melody,second_start_seconds,second_motif\n";
   // Showcase the melodic repertoire; this order is illustrative, not a random-frequency sample.
   const ara::BirdVoice::Profile examples[] = {ara::BirdVoice::Song, ara::BirdVoice::TrillSong,
       ara::BirdVoice::Song, ara::BirdVoice::TrillSong, ara::BirdVoice::Song,
@@ -146,7 +146,9 @@ void renderMelodySession(const std::string &directory, uint32_t seed) {
     const unsigned motif = voice.selectedMotif(), pitch = voice.selectedRegister();
     unsigned maximumRendition = 0;
     unsigned heldStart = 0, heldFrames = 0;
+    unsigned secondStart = 0;
     do {
+      if (!secondStart && voice.currentRendition() == 2) secondStart = frame;
       if (voice.busy()) maximumRendition = std::max(maximumRendition, unsigned(voice.currentRendition()));
       step();
       if (voice.longNoteActive()) {
@@ -159,7 +161,8 @@ void renderMelodySession(const std::string &directory, uint32_t seed) {
     report << song + 1 << ',' << double(start) / 16384 << ',' << double(frame - start) / 16384
            << ',' << int(profile) << ',' << motif << ',' << pitch << ',' << maximumRendition
            << ',' << seed << ',' << (heldFrames ? double(heldStart) / 16384 : -1)
-           << ',' << double(heldFrames) / 16384 << '\n';
+           << ',' << double(heldFrames) / 16384 << ',' << voice.repeatsMelody()
+           << ',' << double(secondStart) / 16384 << ',' << unsigned(voice.selectedMotif()) << '\n';
     if (song < 9) for (unsigned gap = 0; gap < 2 * 16384; ++gap) step();
   }
   for (unsigned tail = 0; tail < 16384; ++tail) step();
