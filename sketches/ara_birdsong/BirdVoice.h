@@ -38,6 +38,11 @@ class BirdVoice {
   Profile selectedProfile() const { return mode; }
   uint8_t selectedMotif() const { return mode >= Song ? melodyVariant : 255; }
   bool repeatsMelody() const { return repeatMelody; }
+  bool phraseHasTrills() const {
+    for (uint8_t i = 0; i < count; ++i)
+      if (motif[i].trill && i != heldSyllable) return true;
+    return false;
+  }
   uint8_t selectedRenditions() const { return 2; }
   uint8_t currentRendition() const { return count ? index / count + 1 : 0; }
   void triggerRandom() {
@@ -98,6 +103,7 @@ class BirdVoice {
 #endif
     }
     mode = profile;
+    const bool allowTrills = profile >= Song && pick(100) < 33;
     heldSyllable = 255;
     count = profile >= Song ? 6 + pick(3) : profile == Soft ? 4 : 5;
     if (profile >= Song) {
@@ -179,7 +185,7 @@ class BirdVoice {
         s.end = s.start + (pick(2) ? -100 - int16_t(pick(121)) : 100 + int16_t(pick(121)));
         s.bend = pick(2) ? -80 - int16_t(pick(101)) : 80 + int16_t(pick(101));
         s.level = 100 + pick(16);
-        s.trill = i == firstTrill || i == secondTrill || (profile == TrillSong && pick(5) == 0);
+        s.trill = allowTrills && (i == firstTrill || i == secondTrill || (profile == TrillSong && pick(5) == 0));
         s.trillRate = 18 + pick(11);
         const uint8_t gesture = pick(4);
         s.ticks = s.trill ? 48 + pick(64) : gesture == 0 ? 10 + pick(10)
@@ -193,7 +199,7 @@ class BirdVoice {
         if (i == count - 1) {
           if (endingStyle == 0) { s.ticks = 10 + pick(14); s.trill = false; s.tailStyle = 1; }
           if (endingStyle == 1) { s.ticks = 24 + pick(24); s.trill = false; s.tailStyle = 2; }
-          if (endingStyle == 2) { s.ticks = 48 + pick(48); s.trill = true; }
+          if (endingStyle == 2 && allowTrills) { s.ticks = 48 + pick(48); s.trill = true; }
         }
       }
     }

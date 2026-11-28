@@ -395,6 +395,17 @@ int main(int argc, char **argv) {
     throw std::runtime_error("Favourite contours or Song voice did not receive their intended weight");
   std::cout << "5000 choices: " << favouriteContours << " favourite Song contours; "
             << plainSongs << " Song voices in random selection\n";
+  for (auto profile : {ara::BirdVoice::Song, ara::BirdVoice::TrillSong, ara::BirdVoice::Cascade}) {
+    unsigned trilledPhrases = 0;
+    for (unsigned seed = 1; seed <= 5000; ++seed) {
+      ara::BirdVoice voice(seed);
+      voice.trigger(profile);
+      trilledPhrases += voice.phraseHasTrills();
+    }
+    if (trilledPhrases < 1400 || trilledPhrases > 1850)
+      throw std::runtime_error("Trills are not occasional in a melodic profile");
+    std::cout << "Profile " << int(profile) << ": " << trilledPhrases << "/5000 phrases include trills\n";
+  }
   unsigned repeats = 0;
   for (unsigned seed = 1; seed <= 5000; ++seed) {
     ara::BirdVoice voice(seed);

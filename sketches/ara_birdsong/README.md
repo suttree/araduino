@@ -2,6 +2,14 @@
 
 This sketch experiments with shaped whistles and repeated calls on the existing Uno hardware. The working sketch at `../araduino/araduino.ino` remains separate.
 
+## Occasional trills, 28 November
+
+Each newly generated melodic phrase now has a 33% chance of allowing trills. This applies to Song, TrillSong and Cascade, including their endings. Previously, every melodic phrase planned two trill positions and could add a trilled ending. When allowed, trills keep their existing sound and placement rules. A held note can replace a planned trill, so the audible frequency can be slightly lower than 33%.
+
+An exact repeat preserves the first phrase's trill choice. A new second melody draws its own choice. The earlier rare Lively call remains unchanged. Waits, singing chance, register weights, favourite contours, held notes and the 60/40 melody split remain unchanged.
+
+Across 5000 initial phrases per melodic profile, 1662 Song, 1671 TrillSong and 1675 Cascade phrases contained audible trills, approximately one third each. This revision has not been uploaded to Ara.
+
 ## Lower register reduced to 60%, 27 November
 
 The register probabilities are now 60% lower, 38% middle and 2% highest. Preferred contour weights, held-note adjustments and the 60% exact repeat versus 40% new second melody remain unchanged. Firmware from commit `aedc8c3` was uploaded to Ara on 27 November 2026. avrdude verified all 9510 bytes by flash readback. Physical listening to this upload remains unconfirmed. The third reel below preserves the preceding 75% lower-register audition.
@@ -306,13 +314,13 @@ The MP3 files use the same output scale, without loudness normalization, reverb 
 
 ## Validation
 
-The current Uno firmware uses 9510 bytes of flash and 928 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. Firmware from commit `aedc8c3` was uploaded on 27 November 2026 and all 9510 bytes were verified by flash readback. Physical listening to this upload remains unconfirmed. Sustained runtime timing remains unmeasured. Earlier verified uploads are recorded in the dated sections above.
+The current Uno firmware uses 9542 bytes of flash and 928 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. This revision has not been uploaded. The previous verified upload is recorded above. Sustained runtime timing remains unmeasured. Earlier verified uploads are recorded in the dated sections above.
 
 The desktop renderer runs with address and undefined-behavior sanitizers. It checks output range, phrase completion, return to silence and restart across 100 seeds for all nine voices, with both fixed and variable registers. These 1800 phrases exercise every register in the default range and check that the register remains fixed during each song. Older calls must finish within six seconds; the longer songs must finish within twelve seconds. The oscillator is limited to 7000 Hz, below the 8192 Hz Nyquist limit. These checks do not assess how natural the birdsong sounds.
 
-The current sequence of 200 random songs at 350% gain produced 182 melody/trill songs and four short calls, and exercised 47 melodic contour variations. Sixty-six first phrases contained a held note, with 21 opening on it. Held notes are checked against the chosen repeat or new melody behavior, including both occurrences in an exact repeat. Voice and register must remain fixed through both phrases. New contours must avoid the last three; songs must finish and return to silence. The measured output peak was 213 against a bias of 244. The 7000 Hz limit was reached on 150 of 191166 active control updates.
+The current sequence of 200 random songs at 350% gain produced 178 melody/trill songs and six short calls, and exercised 47 melodic contour variations. Fifty-one first phrases contained a held note, with 15 opening on it. Held notes are checked against the chosen repeat or new melody behavior, including both occurrences in an exact repeat. Voice and register must remain fixed through both phrases. New contours must avoid the last three; songs must finish and return to silence. The measured output peak was 213 against a bias of 244. The 7000 Hz limit was reached on 138 of 165205 active control updates.
 
-A separate check of 5000 initial song choices selected registers 13, 15 and 17 respectively 2991, 1907 and 102 times, approximately 60%, 38% and 2%. The same 5000 seeds selected Song in 3213 random voice choices; 1809 initial Song contours were one of the three preferred contours. This is approximately 36%, compared with 6.25% for three of 48 equally weighted contours. Across 5000 song choices, 3020 selected exact repeats, approximately 60%. An additional 1800 melody-pair comparisons check that repeats preserve pitch, level, rhythm and held gestures at every control update, while new second melodies differ. Both phrases must finish within the existing duration limit. Further comparisons at gains of 500 and 65535 check that excessive requests clamp without wrapping.
+A separate check of 5000 initial song choices selected registers 13, 15 and 17 respectively 2991, 1907 and 102 times, approximately 60%, 38% and 2%. The same 5000 seeds selected Song in 3213 random voice choices; 1690 initial Song contours were one of the three preferred contours. This is approximately 34%, compared with 6.25% for three of 48 equally weighted contours. Across 5000 song choices, 3020 selected exact repeats, approximately 60%. An additional 1800 melody-pair comparisons check that repeats preserve pitch, level, rhythm and held gestures at every control update, while new second melodies differ. Both phrases must finish within the existing duration limit. Further comparisons at gains of 500 and 65535 check that excessive requests clamp without wrapping.
 
 A one-off comparison against the preceding engine checked 589824 samples across all six voices at each of 100%, 125%, 150%, 175% and 200% gain. Every sample matched. Other percentage settings use a rounded fixed-point multiplier and can differ slightly. `tools/audio/check_avr_audio.py --compiler /path/to/avr-g++` compiles a sample wrapper for ATmega328P and rejects division helper calls in its assembly. This guards against the expensive arithmetic returning; it does not measure actual buffer underruns.
 
