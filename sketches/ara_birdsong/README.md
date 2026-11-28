@@ -8,7 +8,7 @@ Each newly generated melodic phrase now has a 33% chance of allowing trills. Thi
 
 An exact repeat preserves the first phrase's trill choice. A new second melody draws its own choice. The earlier rare Lively call remains unchanged. Waits, singing chance, register weights, favourite contours, held notes and the 60/40 melody split remain unchanged.
 
-Across 5000 initial phrases per melodic profile, 1662 Song, 1671 TrillSong and 1675 Cascade phrases contained audible trills, approximately one third each. This revision has not been uploaded to Ara.
+Across 5000 initial phrases per melodic profile, 1662 Song, 1671 TrillSong and 1675 Cascade phrases contained audible trills, approximately one third each. Firmware from commit `f9360d1` was uploaded to Ara on 28 November 2026. avrdude verified all 9542 bytes by flash readback. Physical listening to this upload remains unconfirmed.
 
 ## Lower register reduced to 60%, 27 November
 
@@ -314,7 +314,7 @@ The MP3 files use the same output scale, without loudness normalization, reverb 
 
 ## Validation
 
-The current Uno firmware uses 9542 bytes of flash and 928 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. This revision has not been uploaded. The previous verified upload is recorded above. Sustained runtime timing remains unmeasured. Earlier verified uploads are recorded in the dated sections above.
+The current Uno firmware uses 9542 bytes of flash and 928 bytes of static RAM with the bundled Mozzi 2.0.2 and Arduino AVR core 1.8.6. Firmware from commit `f9360d1` was uploaded on 28 November 2026 and all 9542 bytes were verified by flash readback. Physical listening to this upload remains unconfirmed. Sustained runtime timing remains unmeasured. Earlier verified uploads are recorded in the dated sections above.
 
 The desktop renderer runs with address and undefined-behavior sanitizers. It checks output range, phrase completion, return to silence and restart across 100 seeds for all nine voices, with both fixed and variable registers. These 1800 phrases exercise every register in the default range and check that the register remains fixed during each song. Older calls must finish within six seconds; the longer songs must finish within twelve seconds. The oscillator is limited to 7000 Hz, below the 8192 Hz Nyquist limit. These checks do not assess how natural the birdsong sounds.
 
